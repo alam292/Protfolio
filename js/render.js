@@ -63,12 +63,23 @@ class PortfolioRenderer {
     return icons[type] || icons.code;
   }
 
-  // 1. Hero / Home Section
+  // 1. Hero / Home Section (Vercel / Linear Ultra-Clean Style)
   renderHero() {
     const mount = document.getElementById('heroMount');
     if (!mount) return;
 
-    const { profile } = this.data;
+    const { profile, stats } = this.data;
+
+    // Render 4 Bento Metrics dynamically
+    const metricsHtml = (stats || []).map(stat => `
+      <div class="bento-metric-card">
+        <div class="bento-metric-val">
+          <span>${stat.value}</span>
+          <span class="bento-metric-suffix">${stat.suffix || ''}</span>
+        </div>
+        <div class="bento-metric-label">${stat.label}</div>
+      </div>
+    `).join('');
 
     mount.innerHTML = `
       <div class="hero-top-row">
@@ -81,23 +92,28 @@ class PortfolioRenderer {
             <span class="status-badge-sub">${profile.statusSubtitle}</span>
           </div>
 
-          <!-- 2. Name & Job Title -->
-          <div class="hero-author-meta">
-            <span class="hero-greeting-intro">Hello, I'm</span>
-            <span class="hero-author-name">${profile.name}</span>
+          <!-- 2. Monospace Micro Tag -->
+          <div class="hero-code-tag" aria-hidden="true">
+            <span>//</span> SOFTWARE ARCHITECT &amp; UI ENGINEER
           </div>
 
-          <h1 class="hero-main-title">
-            Full Stack<br>
-            <span class="hero-title-accent">${profile.title.replace('Full Stack ', '')}</span>
+          <!-- 3. Primary Grand Name & Job Title -->
+          <h1 class="hero-name-title">
+            ${profile.name}
           </h1>
 
-          <!-- 3. Short Introduction -->
+          <div class="hero-subheading">
+            <span>Full Stack Developer</span>
+            <span style="color: #71717a;">&amp;</span>
+            <span class="hero-subheading-accent">UI Engineer</span>
+          </div>
+
+          <!-- 4. Short Introduction -->
           <p class="hero-intro-text">
             ${profile.heroTagline}
           </p>
 
-          <!-- 4. Hero CTA Actions (Download Resume & Contact Me) -->
+          <!-- 5. Hero CTA Actions (Download Resume, Contact Me & Socials) -->
           <div class="hero-actions-group">
             <a 
               href="${profile.resumeUrl}" 
@@ -106,7 +122,7 @@ class PortfolioRenderer {
               id="heroResumeBtn"
               aria-label="Download ${profile.name}'s verified resume (PDF)"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                 <polyline points="7 10 12 15 17 10"></polyline>
                 <line x1="12" y1="15" x2="12" y2="3"></line>
@@ -116,13 +132,21 @@ class PortfolioRenderer {
 
             <a href="#contact" class="hero-btn-contact" aria-label="Navigate to contact section">
               <span>Let's talk</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
             </a>
+
+            <!-- Social Links -->
+            <div class="hero-social-links" aria-label="Social Profiles">
+              <a href="${profile.githubUrl}" target="_blank" rel="noopener noreferrer" class="hero-social-icon" aria-label="GitHub Profile" title="GitHub">
+                ${this.getIconSvg('github')}
+              </a>
+              <a href="${profile.linkedinUrl}" target="_blank" rel="noopener noreferrer" class="hero-social-icon" aria-label="LinkedIn Profile" title="LinkedIn">
+                ${this.getIconSvg('linkedin')}
+              </a>
+            </div>
           </div>
         </div>
 
@@ -156,28 +180,9 @@ class PortfolioRenderer {
         </div>
       </div>
 
-      <!-- Hero Bottom Row: 4 Engineering Focus Pillars -->
-      <div class="hero-pillars-grid">
-        <div class="hero-pillar-card">
-          <span class="pillar-number">#01</span>
-          <h2 class="pillar-title">Frontend Engineering</h2>
-          <p class="pillar-desc">Next.js &bull; React &bull; Tailwind &bull; 60fps UI</p>
-        </div>
-        <div class="hero-pillar-card">
-          <span class="pillar-number">#02</span>
-          <h2 class="pillar-title">Backend Systems</h2>
-          <p class="pillar-desc">Node.js &bull; Express &bull; Microservices &bull; APIs</p>
-        </div>
-        <div class="hero-pillar-card">
-          <span class="pillar-number">#03</span>
-          <h2 class="pillar-title">Database &amp; Cloud</h2>
-          <p class="pillar-desc">PostgreSQL &bull; Redis &bull; MongoDB &bull; Docker</p>
-        </div>
-        <div class="hero-pillar-card">
-          <span class="pillar-number">#04</span>
-          <h2 class="pillar-title">Design Systems</h2>
-          <p class="pillar-desc">Figma &bull; WCAG 2.1 &bull; Design Tokens &bull; UI/UX</p>
-        </div>
+      <!-- Hero Bottom Row: Dynamic Bento Metrics Strip -->
+      <div class="hero-bento-metrics">
+        ${metricsHtml}
       </div>
     `;
   }

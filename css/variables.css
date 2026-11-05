@@ -8,12 +8,12 @@
      Color Palette
      ========================================================================== */
   /* Backgrounds */
-  --bg-dark: #030608;
-  --bg-deep: #070b10;
-  --bg-surface: #0c1117;
-  --bg-surface-elevated: #121822;
+  --bg-dark: #050507;
+  --bg-deep: #08090d;
+  --bg-surface: #0e1117;
+  --bg-surface-elevated: #141822;
 
-  /* Accent Colors (Electric Tangerine / Sunset Orange) */
+  /* Accent Colors (Electric Tangerine / Linear Cyan / Indigo) */
   --accent-orange: #ff5722;
   --accent-orange-hover: #ff6e3d;
   --accent-orange-light: #ff8a65;
@@ -23,17 +23,23 @@
   --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
   --accent-gradient-text: linear-gradient(135deg, #ffffff 30%, #ff6e3d 100%);
 
+  /* Vercel / Linear Modern Gradients */
+  --text-gradient-silver: linear-gradient(180deg, #FFFFFF 0%, #D4D4D8 60%, #9EA3B0 100%);
+  --text-gradient-accent: linear-gradient(135deg, #38BDF8 0%, #818CF8 50%, #C084FC 100%);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(56, 189, 248, 0.25);
+
   /* Neutrals & Typography */
-  --text-primary: #ffffff;
+  --text-primary: #ededed;
   --text-secondary: #9ea3b0;
   --text-muted: #646a78;
   --text-dim: #444a56;
 
   /* Glassmorphism System */
-  --glass-bg: rgba(14, 18, 24, 0.55);
-  --glass-bg-hover: rgba(20, 26, 36, 0.75);
+  --glass-bg: rgba(14, 17, 23, 0.65);
+  --glass-bg-hover: rgba(20, 25, 35, 0.82);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-hover: rgba(255, 87, 34, 0.4);
+  --glass-border-hover: rgba(255, 255, 255, 0.22);
   --glass-blur: 20px;
 
   /* Semantic Feedback */
@@ -45,9 +51,9 @@
   /* ==========================================================================
      Typography
      ========================================================================== */
-  --font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-display: 'Syne', 'Plus Jakarta Sans', sans-serif;
-  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Font Weights */
   --font-weight-regular: 400;
