@@ -1,0 +1,32 @@
+/**
+ * Master CSS Bundle - Folioblox Design System
+ * Modular imports for scalable architecture and maintainability.
+ */
+
+/* 1. Design Tokens & Base */
+@import url('variables.css');
+@import url('reset.css');
+@import url('layout.css');
+
+/* 2. Modular Components */
+@import url('components/navbar.css');
+@import url('components/drawer.css');
+@import url('components/buttons.css');
+@import url('components/cards.css');
+@import url('components/hero.css');
+@import url('components/brands.css');
+@import url('components/about.css');
+@import url('components/skills.css');
+@import url('components/projects.css');
+@import url('components/experience.css');
+@import url('components/education.css');
+@import url('components/certificates.css');
+@import url('components/contact.css');
+@import url('components/footer.css');
+
+/* 3. Animations & Micro-Interactions */
+@import url('animations.css');
+
+/* 4. Cross-Device Responsive Overrides */
+@import url('responsive.css');
+

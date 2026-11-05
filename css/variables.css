@@ -1,0 +1,124 @@
+/**
+ * Folioblox Design System - Design Tokens & Variables
+ * Consistent layout, typography, colors, spacing, breakpoints, and shadows.
+ */
+
+:root {
+  /* ==========================================================================
+     Color Palette
+     ========================================================================== */
+  /* Backgrounds */
+  --bg-dark: #030608;
+  --bg-deep: #070b10;
+  --bg-surface: #0c1117;
+  --bg-surface-elevated: #121822;
+
+  /* Accent Colors (Electric Tangerine / Sunset Orange) */
+  --accent-orange: #ff5722;
+  --accent-orange-hover: #ff6e3d;
+  --accent-orange-light: #ff8a65;
+  --accent-orange-subtle: rgba(255, 87, 34, 0.12);
+  --accent-orange-glow: rgba(255, 87, 34, 0.35);
+  --accent-orange-border: rgba(255, 87, 34, 0.45);
+  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  --accent-gradient-text: linear-gradient(135deg, #ffffff 30%, #ff6e3d 100%);
+
+  /* Neutrals & Typography */
+  --text-primary: #ffffff;
+  --text-secondary: #9ea3b0;
+  --text-muted: #646a78;
+  --text-dim: #444a56;
+
+  /* Glassmorphism System */
+  --glass-bg: rgba(14, 18, 24, 0.55);
+  --glass-bg-hover: rgba(20, 26, 36, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(255, 87, 34, 0.4);
+  --glass-blur: 20px;
+
+  /* Semantic Feedback */
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.12);
+  --color-success-border: rgba(16, 185, 129, 0.3);
+  --color-error: #ef4444;
+
+  /* ==========================================================================
+     Typography
+     ========================================================================== */
+  --font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Syne', 'Plus Jakarta Sans', sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Fluid Font Scale */
+  --font-size-hero: clamp(3.2rem, 7.5vw, 6.8rem);
+  --font-size-title: clamp(2.2rem, 4.2vw, 3.8rem);
+  --font-size-subhead: clamp(1.4rem, 2.2vw, 1.85rem);
+  --font-size-card-title: clamp(1.15rem, 1.6vw, 1.35rem);
+  --font-size-lead: clamp(1.05rem, 1.4vw, 1.35rem);
+  --font-size-body: 0.98rem;
+  --font-size-sm: 0.88rem;
+  --font-size-xs: 0.78rem;
+
+  /* ==========================================================================
+     Spacing System (4px / 8px incremental scale)
+     ========================================================================== */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-28: 112px;
+  --space-32: 128px;
+
+  /* Layout Containers & Spacing */
+  --container-max-width: 1360px;
+  --container-narrow-width: 880px;
+  --section-padding-x: clamp(18px, 4vw, 56px);
+  --section-padding-y: clamp(70px, 9vh, 120px);
+
+  /* Border Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  --card-radius: 28px;
+
+  /* Shadows */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 28px var(--accent-orange-glow);
+
+  /* Transitions & Animation Timings */
+  --transition-fast: 0.18s ease;
+  --transition-normal: 0.28s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --transition-slow: 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Z-Index Hierarchy */
+  --z-canvas: 1;
+  --z-vignette: 2;
+  --z-content: 10;
+  --z-floating: 50;
+  --z-drawer: 90;
+  --z-navbar: 100;
+  --z-modal: 200;
+  --z-toast: 300;
+}
+

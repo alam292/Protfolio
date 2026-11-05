@@ -1,0 +1,47 @@
+/**
+ * Glass Card Component System
+ * Reusable frosted surfaces with smooth interactive lift and subtle border glow.
+ */
+
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--card-radius);
+  padding: clamp(22px, 3.2vw, 36px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  transition: transform var(--transition-smooth),
+              border-color var(--transition-smooth),
+              box-shadow var(--transition-smooth),
+              background var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  pointer-events: none;
+}
+
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55), 0 0 30px rgba(255, 87, 34, 0.12);
+  transform: translateY(-4px);
+}
+
+/* Subtle Interactive Lift for lists */
+.glass-card-interactive {
+  cursor: pointer;
+}
+
+.glass-card-interactive:hover {
+  transform: translateY(-6px);
+}
+

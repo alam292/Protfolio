@@ -1,0 +1,129 @@
+/**
+ * Layout Architecture
+ * Canvas backdrop, fixed overlays, containers, sections, and grids.
+ */
+
+/* Fixed Background Canvas Animation */
+#canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-dark);
+  overflow: hidden;
+  pointer-events: none;
+  z-index: var(--z-canvas);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+canvas {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  will-change: transform;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+}
+
+/* Cinematic Vignette Overlay for maximum typography readability */
+.canvas-overlay-vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: var(--z-vignette);
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(3, 6, 8, 0.2) 0%,
+    rgba(3, 6, 8, 0.68) 72%,
+    rgba(3, 6, 8, 0.94) 100%
+  );
+}
+
+/* Scroll Content Wrapper */
+.scroll-content {
+  position: relative;
+  z-index: var(--z-content);
+  width: 100%;
+  pointer-events: auto;
+}
+
+/* Common Section Container */
+.portfolio-section {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--section-padding-y) var(--section-padding-x);
+  position: relative;
+}
+
+/* Air Spacer: spotlight pause allowing visual interaction with 3D model */
+.scroll-spacer {
+  width: 100%;
+  height: clamp(60px, 12vh, 160px);
+  pointer-events: none;
+}
+
+/* Section Header Standard */
+.section-header {
+  margin-bottom: clamp(36px, 6vh, 64px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: var(--container-narrow-width);
+}
+
+.section-header.text-center {
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section Tag Pill */
+.section-tag {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--accent-orange);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+}
+
+.section-tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  box-shadow: 0 0 10px var(--accent-orange);
+}
+
+/* Section Title */
+.section-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+/* Section Description */
+.section-desc {
+  font-size: clamp(0.98rem, 1.2vw, 1.15rem);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 680px;
+}
+

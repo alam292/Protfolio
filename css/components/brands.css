@@ -1,0 +1,73 @@
+/**
+ * Brands Section Component
+ * Floating glass capsule displaying trusted brand credentials.
+ */
+
+.brands-section {
+  padding: clamp(30px, 5vh, 60px) var(--section-padding-x);
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+.brands-wrapper {
+  background: rgba(14, 17, 23, 0.55);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius-full);
+  padding: 22px clamp(24px, 4vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  box-shadow: var(--shadow-md);
+  transition: border-color var(--transition-fast);
+}
+
+.brands-wrapper:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.brands-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.brands-list {
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  flex-wrap: wrap;
+}
+
+.brand-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 1.05rem;
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  opacity: 0.85;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), color var(--transition-fast);
+}
+
+.brand-item:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+  color: var(--accent-orange-light);
+}
+
+.brand-item svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+

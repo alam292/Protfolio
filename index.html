@@ -5,1479 +5,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Folioblox — Creative Director & Product Designer</title>
+  <meta name="description" content="Portfolio of Folioblox — Creative Director & Product Designer specializing in brand strategy, digital product engineering, and seamless web experiences.">
 
-  <!-- Google Fonts for modern typography matching reference -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23ff5722'/><text x='50%' y='68%' font-size='60' font-weight='800' fill='white' text-anchor='middle'>F</text></svg>">
+
+  <!-- Google Fonts for Modern Typography System -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg-dark: #030608;
-      --accent-orange: #ff5722;
-      --accent-orange-hover: #ff6e3d;
-      --accent-orange-glow: rgba(255, 87, 34, 0.35);
-      --text-primary: #ffffff;
-      --text-secondary: #9ea3b0;
-      --text-muted: #646a78;
-      --glass-bg: rgba(14, 18, 24, 0.45);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --card-radius: 28px;
-      --section-padding-x: clamp(18px, 2.5vw, 44px);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      width: 100%;
-      background-color: var(--bg-dark);
-      color: var(--text-primary);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      overflow-x: hidden;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      scroll-behavior: auto;
-    }
-
-    body::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Fixed Background Canvas Animation */
-    #canvas-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--bg-dark);
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 1;
-      will-change: transform;
-      transform-origin: center center;
-    }
-
-    canvas {
-      display: block;
-      width: 100vw;
-      height: 100vh;
-      will-change: transform;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: high-quality;
-    }
-
-    /* Subtle cinematic dark gradient overlay for crystal clear typography */
-    .canvas-overlay-vignette {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 2;
-      background: radial-gradient(circle at 50% 45%, rgba(3, 6, 8, 0.15) 0%, rgba(3, 6, 8, 0.65) 75%, rgba(3, 6, 8, 0.92) 100%);
-    }
-
-    /* Navigation Bar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px var(--section-padding-x);
-      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
-    }
-
-    .navbar.scrolled {
-      background: rgba(3, 6, 8, 0.82);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 14px var(--section-padding-x);
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: #fff;
-    }
-
-    .logo-text {
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      list-style: none;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: color 0.25s ease;
-      position: relative;
-      padding: 4px 0;
-    }
-
-    .nav-link:hover {
-      color: #ffffff;
-    }
-
-    .nav-link.active {
-      color: #ffffff;
-    }
-
-    .nav-link.active::after {
-      content: "";
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--accent-orange);
-      box-shadow: 0 0 8px var(--accent-orange);
-      border-radius: 999px;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    /* Mobile Hamburger Button */
-    .mobile-toggle {
-      display: none;
-      background: transparent;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 8px 10px;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      z-index: 110;
-      transition: border-color 0.25s;
-    }
-
-    .mobile-toggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: #ffffff;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .mobile-toggle.active span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .mobile-toggle.active span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .mobile-toggle.active span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    /* Mobile Drawer */
-    .mobile-drawer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      background: rgba(3, 6, 8, 0.96);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      z-index: 99;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 24px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-20px);
-      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
-    }
-
-    .mobile-drawer.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 22px;
-      text-align: center;
-    }
-
-    .mobile-nav-link {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s, transform 0.2s;
-      display: inline-block;
-    }
-
-    .mobile-nav-link:hover,
-    .mobile-nav-link.active {
-      color: var(--accent-orange);
-      transform: scale(1.05);
-    }
-
-    /* Common Button Styles */
-    .btn-touch {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: #ffffff;
-      color: #0c0e12;
-      font-size: 0.9rem;
-      font-weight: 600;
-      padding: 8px 10px 8px 20px;
-      border-radius: 999px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
-    }
-
-    .btn-touch:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-touch-orange {
-      background: var(--accent-orange);
-      color: #ffffff;
-      box-shadow: 0 4px 24px var(--accent-orange-glow);
-    }
-
-    .btn-touch-orange:hover {
-      background: var(--accent-orange-hover);
-      box-shadow: 0 8px 32px rgba(255, 87, 34, 0.5);
-    }
-
-    .btn-icon-circle {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: var(--accent-orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      transition: transform 0.25s ease;
-    }
-
-    .btn-touch-orange .btn-icon-circle {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-touch:hover .btn-icon-circle {
-      transform: translateX(3px);
-    }
-
-    /* Main Scroll Content Overlay */
-    .scroll-content {
-      position: relative;
-      z-index: 10;
-      width: 100%;
-      pointer-events: auto;
-    }
-
-    /* SECTION 1: HERO SECTION */
-    .hero-section {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 130px var(--section-padding-x) 60px;
-      position: relative;
-      will-change: transform, opacity;
-    }
-
-    .hero-top-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
-      width: 100%;
-    }
-
-    .hero-headline-block {
-      max-width: 60%;
-    }
-
-    .hero-greeting {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: #ffffff;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-greeting-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: var(--accent-orange);
-      display: inline-block;
-      box-shadow: 0 0 10px var(--accent-orange);
-    }
-
-    .hero-main-title {
-      font-size: clamp(3.6rem, 7.5vw, 7.2rem);
-      font-weight: 800;
-      line-height: 0.98;
-      letter-spacing: -0.035em;
-      color: #ffffff;
-      text-transform: none;
-    }
-
-    .hero-quote-block {
-      max-width: 360px;
-      padding-top: 18px;
-    }
-
-    .hero-quote-title {
-      font-size: clamp(1.3rem, 2vw, 1.75rem);
-      font-weight: 600;
-      line-height: 1.25;
-      color: #ffffff;
-      margin-bottom: 14px;
-      letter-spacing: -0.015em;
-    }
-
-    .hero-quote-desc {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    /* Hero Pillars Grid (#01 to #04) */
-    .hero-pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      width: 100%;
-      padding-top: 60px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      margin-top: 40px;
-    }
-
-    .pillar-card {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .pillar-num {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--accent-orange);
-      text-transform: uppercase;
-    }
-
-    .pillar-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-    }
-
-    /* SECTION 2: BRANDS STRIP */
-    .brands-section {
-      padding: 60px var(--section-padding-x);
-      width: 100%;
-      position: relative;
-    }
-
-    .brands-wrapper {
-      background: rgba(14, 17, 23, 0.5);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-radius: 999px;
-      padding: 24px 44px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .brands-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-    }
-
-    .brands-list {
-      display: flex;
-      align-items: center;
-      gap: 50px;
-      flex-wrap: wrap;
-    }
-
-    .brand-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: #ffffff;
-      opacity: 0.9;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .brand-item:hover {
-      opacity: 1;
-      transform: translateY(-2px);
-    }
-
-    .brand-item svg {
-      width: 22px;
-      height: 22px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-    }
-
-    /* SECTION 3: BEHIND THE DESIGNS */
-    .behind-section {
-      padding: 100px var(--section-padding-x) 120px;
-      position: relative;
-    }
-
-    .behind-header {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 50px;
-      align-items: flex-start;
-      margin-bottom: 70px;
-    }
-
-    .behind-header-left {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .behind-tag {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--accent-orange);
-      letter-spacing: 0.02em;
-    }
-
-    .behind-main-title {
-      font-size: clamp(2.4rem, 4.4vw, 4.4rem);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -0.03em;
-      color: #ffffff;
-    }
-
-    .behind-header-right {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      padding-top: 24px;
-    }
-
-    .behind-lead-text {
-      font-size: clamp(1.05rem, 1.4vw, 1.35rem);
-      font-weight: 500;
-      line-height: 1.6;
-      color: #d1d5db;
-    }
-
-    .behind-action-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      padding-top: 24px;
-    }
-
-    .behind-action-subtext {
-      font-size: 0.85rem;
-      line-height: 1.4;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    /* 3-Cards Visual Showcase */
-    .showcase-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      width: 100%;
-    }
-
-    .showcase-card {
-      position: relative;
-      border-radius: var(--card-radius);
-      overflow: hidden;
-      aspect-ratio: 3 / 4;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.45s ease, box-shadow 0.45s ease;
-      cursor: pointer;
-    }
-
-    .showcase-card:hover {
-      transform: translateY(-8px) scale(1.015);
-      border-color: rgba(255, 87, 34, 0.4);
-      box-shadow: 0 24px 50px rgba(255, 87, 34, 0.15), 0 12px 30px rgba(0, 0, 0, 0.6);
-    }
-
-    .showcase-card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: grayscale(15%) contrast(105%);
-      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.45s ease;
-    }
-
-    .showcase-card:hover .showcase-card-img {
-      transform: scale(1.06);
-      filter: grayscale(0%) contrast(110%);
-    }
-
-    .showcase-card-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 30px 24px 24px;
-      background: linear-gradient(to top, rgba(3, 6, 8, 0.85) 0%, rgba(3, 6, 8, 0) 100%);
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      pointer-events: none;
-    }
-
-    .showcase-card-category {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent-orange);
-    }
-
-    .showcase-card-name {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-    }
-
-    /* Subtle Footer */
-    .footer {
-      padding: 60px var(--section-padding-x);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    .footer a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer a:hover {
-      color: #ffffff;
-    }
-
-    /* ===================================================
-       REUSABLE PORTFOLIO COMPONENT SYSTEM
-       Clean, manual, modular CSS for all sections
-       =================================================== */
-    .portfolio-section {
-      padding: 100px var(--section-padding-x);
-      position: relative;
-      width: 100%;
-    }
-
-    .section-header {
-      margin-bottom: 56px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-width: 900px;
-    }
-
-    .section-header.text-center {
-      align-items: center;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .section-tag {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--accent-orange);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .section-tag::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent-orange);
-      box-shadow: 0 0 10px var(--accent-orange);
-    }
-
-    .section-title {
-      font-size: clamp(2.2rem, 4vw, 3.8rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: #ffffff;
-    }
-
-    .section-desc {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      max-width: 640px;
-    }
-
-    /* Reusable Glass Card Component */
-    .glass-card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: var(--card-radius);
-      padding: 34px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-      transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .glass-card:hover {
-      border-color: rgba(255, 87, 34, 0.35);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 87, 34, 0.12);
-    }
-
-    /* ---------------------------------------------------
-       1. ABOUT ME SECTION
-       --------------------------------------------------- */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
-      gap: 32px;
-      align-items: stretch;
-    }
-
-    .about-story-card {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .status-indicator {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 14px;
-      background: rgba(255, 87, 34, 0.08);
-      border: 1px solid rgba(255, 87, 34, 0.25);
-      border-radius: 999px;
-      width: fit-content;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 10px #10b981;
-      animation: pulseRadar 2s infinite ease-in-out;
-    }
-
-    @keyframes pulseRadar {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-
-      50% {
-        opacity: 0.4;
-        transform: scale(0.85);
-      }
-    }
-
-    .status-text {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: 0.02em;
-    }
-
-    .about-subheading {
-      font-size: clamp(1.4rem, 2.2vw, 1.85rem);
-      font-weight: 700;
-      line-height: 1.25;
-      color: #ffffff;
-      letter-spacing: -0.015em;
-    }
-
-    .about-text {
-      font-size: 0.98rem;
-      color: #d1d5db;
-      line-height: 1.68;
-    }
-
-    .about-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-    }
-
-    .stat-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 8px;
-      padding: 30px;
-    }
-
-    .stat-number {
-      font-size: clamp(2.4rem, 4vw, 3.6rem);
-      font-weight: 800;
-      color: #ffffff;
-      line-height: 1;
-      letter-spacing: -0.03em;
-      background: linear-gradient(135deg, #ffffff 40%, var(--accent-orange) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .stat-label {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      line-height: 1.4;
-    }
-
-    /* ---------------------------------------------------
-       2. SKILLS SECTION
-       --------------------------------------------------- */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-    }
-
-    .skill-card {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .skill-card-top {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .skill-icon-wrap {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: rgba(255, 87, 34, 0.12);
-      border: 1px solid rgba(255, 87, 34, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent-orange);
-      flex-shrink: 0;
-    }
-
-    .skill-category-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-    }
-
-    .skill-category-desc {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .skill-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 14px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: #e5e7eb;
-      transition: all 0.25s ease;
-    }
-
-    .skill-pill:hover {
-      background: rgba(255, 87, 34, 0.12);
-      border-color: rgba(255, 87, 34, 0.5);
-      color: #ffffff;
-      transform: translateY(-2px);
-    }
-
-    /* ---------------------------------------------------
-       3. EXPERIENCE SECTION
-       --------------------------------------------------- */
-    .experience-timeline {
-      position: relative;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px 0;
-    }
-
-    .timeline-line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 22px;
-      width: 2px;
-      background: linear-gradient(180deg, var(--accent-orange) 0%, rgba(255, 87, 34, 0.1) 95%);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 38px;
-      padding-left: 64px;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-dot {
-      position: absolute;
-      left: 15px;
-      top: 36px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--bg-dark);
-      border: 3px solid var(--accent-orange);
-      box-shadow: 0 0 12px var(--accent-orange);
-      transition: transform 0.25s ease;
-    }
-
-    .timeline-item:hover .timeline-dot {
-      transform: scale(1.3);
-      background: var(--accent-orange);
-    }
-
-    .timeline-card {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .timeline-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .timeline-date {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--accent-orange);
-      background: rgba(255, 87, 34, 0.12);
-      border: 1px solid rgba(255, 87, 34, 0.3);
-      border-radius: 999px;
-      padding: 4px 12px;
-      letter-spacing: 0.04em;
-    }
-
-    .timeline-company {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .timeline-role {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-    }
-
-    .timeline-desc {
-      font-size: 0.94rem;
-      color: #d1d5db;
-      line-height: 1.65;
-    }
-
-    .timeline-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding-top: 8px;
-    }
-
-    .timeline-tag {
-      font-size: 0.78rem;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 6px;
-      padding: 4px 10px;
-    }
-
-    /* ---------------------------------------------------
-       4. EDUCATION SECTION
-       --------------------------------------------------- */
-    .education-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 28px;
-    }
-
-    .edu-card {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .edu-year-badge {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--accent-orange);
-      letter-spacing: 0.04em;
-      width: fit-content;
-      background: rgba(255, 87, 34, 0.1);
-      border: 1px solid rgba(255, 87, 34, 0.25);
-      border-radius: 999px;
-      padding: 4px 12px;
-    }
-
-    .edu-degree {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-    }
-
-    .edu-institution {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-    }
-
-    .edu-desc {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .edu-meta-pill {
-      margin-top: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #10b981;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    /* ---------------------------------------------------
-       5. CERTIFICATES SECTION
-       --------------------------------------------------- */
-    .certificates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
-
-    .cert-card {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .cert-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .cert-badge-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(255, 87, 34, 0.12);
-      border: 1px solid rgba(255, 87, 34, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent-orange);
-    }
-
-    .cert-year {
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .cert-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.35;
-      letter-spacing: -0.01em;
-    }
-
-    .cert-issuer {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--accent-orange);
-    }
-
-    .cert-desc {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.55;
-    }
-
-    .cert-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      margin-top: auto;
-    }
-
-    .cert-id {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      font-family: monospace;
-    }
-
-    .cert-link {
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: #ffffff;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .cert-link:hover {
-      color: var(--accent-orange);
-      transform: translateX(3px);
-    }
-
-    /* ---------------------------------------------------
-       6. CONTACT SECTION & FORM
-       --------------------------------------------------- */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.25fr;
-      gap: 36px;
-      align-items: stretch;
-    }
-
-    .contact-info-card {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .contact-info-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.015em;
-    }
-
-    .contact-info-desc {
-      font-size: 0.95rem;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    .contact-info-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .contact-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(255, 87, 34, 0.12);
-      border: 1px solid rgba(255, 87, 34, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent-orange);
-      flex-shrink: 0;
-    }
-
-    .contact-label {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 4px;
-    }
-
-    .contact-value {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #ffffff;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .contact-value:hover {
-      color: var(--accent-orange);
-    }
-
-    .contact-socials {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: auto;
-      padding-top: 16px;
-    }
-
-    .social-circle {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-
-    .social-circle:hover {
-      background: var(--accent-orange);
-      border-color: var(--accent-orange);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px var(--accent-orange-glow);
-    }
-
-    .contact-form-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-label {
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: #d1d5db;
-      letter-spacing: 0.01em;
-    }
-
-    .form-input,
-    .form-textarea {
-      width: 100%;
-      background: rgba(8, 12, 16, 0.65);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
-      padding: 14px 18px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      color: #ffffff;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-      resize: vertical;
-    }
-
-    .form-input:focus,
-    .form-textarea:focus {
-      outline: none;
-      border-color: var(--accent-orange);
-      box-shadow: 0 0 16px rgba(255, 87, 34, 0.3);
-      background: rgba(14, 18, 24, 0.9);
-    }
-
-    .form-input::placeholder,
-    .form-textarea::placeholder {
-      color: var(--text-muted);
-    }
-
-    /* Responsive Adaptations */
-    @media (max-width: 1024px) {
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-toggle {
-        display: flex;
-      }
-
-      .hero-top-row {
-        flex-direction: column;
-        gap: 30px;
-      }
-
-      .hero-headline-block {
-        max-width: 100%;
-      }
-
-      .hero-quote-block {
-        max-width: 100%;
-      }
-
-      .hero-pillars-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 32px;
-      }
-
-      .brands-wrapper {
-        flex-direction: column;
-        border-radius: 28px;
-        padding: 24px;
-        align-items: flex-start;
-      }
-
-      .behind-header {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .showcase-grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .showcase-card {
-        aspect-ratio: 4 / 3;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-
-      .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 28px;
-      }
-
-      .education-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .navbar {
-        padding: 16px var(--section-padding-x);
-      }
-
-      .btn-touch {
-        padding: 6px 8px 6px 14px;
-        font-size: 0.82rem;
-      }
-
-      .hero-section {
-        padding: 110px var(--section-padding-x) 40px;
-      }
-
-      .hero-pillars-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .brands-list {
-        gap: 24px;
-      }
-
-      .portfolio-section {
-        padding: 60px var(--section-padding-x);
-      }
-
-      .behind-section {
-        padding: 60px var(--section-padding-x) 80px;
-      }
-
-      .behind-action-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .about-stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .timeline-item {
-        padding-left: 36px;
-      }
-
-      .timeline-line {
-        left: 8px;
-      }
-
-      .timeline-dot {
-        left: 1px;
-      }
-
-      .footer {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-      }
-    }
-  </style>
+  <!-- Modular Design System Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
+  <!-- Accessibility Skip Link -->
+  <a href="#hero" class="skip-to-content">Skip to content</a>
 
   <!-- Fixed 3D Canvas Background Stream -->
-  <div id="canvas-container">
+  <div id="canvas-container" aria-hidden="true">
     <canvas id="canvas"></canvas>
   </div>
 
-  <!-- Soft gradient vignette for maximum typographic contrast -->
-  <div class="canvas-overlay-vignette"></div>
+  <!-- Soft gradient vignette for typographic contrast -->
+  <div class="canvas-overlay-vignette" aria-hidden="true"></div>
 
   <!-- Fixed Header Navigation -->
   <header class="navbar" id="navbar">
-    <a href="#hero" class="logo-container">
-      <span class="logo-text">Folioblox</span>
+    <a href="#hero" class="logo-container" aria-label="Folioblox Home">
+      <span class="logo-badge">F</span>
+      <span class="logo-text">Folio<span class="logo-text-accent">blox</span></span>
     </a>
-    <ul class="nav-links">
-      <li><a href="#hero" class="nav-link active">Home</a></li>
-      <li><a href="#about" class="nav-link">About</a></li>
-      <li><a href="#skills" class="nav-link">Skills</a></li>
-      <li><a href="#projects" class="nav-link">Projects</a></li>
-      <li><a href="#experience" class="nav-link">Experience</a></li>
-      <li><a href="#education" class="nav-link">Education</a></li>
-      <li><a href="#certificates" class="nav-link">Certificates</a></li>
-      <li><a href="#contact" class="nav-link">Contact</a></li>
-    </ul>
+
+    <!-- Desktop Navigation Links -->
+    <nav aria-label="Primary Navigation">
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#certificates" class="nav-link">Certificates</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
     <div class="nav-actions">
       <a href="#contact" class="btn-touch">
         <span>Get in touch</span>
-        <span class="btn-icon-circle">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
+        <span class="btn-icon-circle" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </span>
       </a>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
         <span></span>
         <span></span>
         <span></span>
@@ -1486,28 +74,43 @@
   </header>
 
   <!-- Mobile Drawer Menu -->
-  <div class="mobile-drawer" id="mobileDrawer">
-    <ul class="mobile-nav-links">
-      <li><a href="#hero" class="mobile-nav-link">Home</a></li>
-      <li><a href="#about" class="mobile-nav-link">About</a></li>
-      <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-      <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
-      <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
-      <li><a href="#education" class="mobile-nav-link">Education</a></li>
-      <li><a href="#certificates" class="mobile-nav-link">Certificates</a></li>
-      <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-    </ul>
+  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <nav>
+      <ul class="mobile-nav-links">
+        <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+        <li><a href="#about" class="mobile-nav-link">About</a></li>
+        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+        <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
+        <li><a href="#education" class="mobile-nav-link">Education</a></li>
+        <li><a href="#certificates" class="mobile-nav-link">Certificates</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-drawer-cta">
+      <a href="#contact" class="btn-touch btn-touch-orange">
+        <span>Let's talk</span>
+        <span class="btn-icon-circle" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </span>
+      </a>
+    </div>
   </div>
 
   <!-- Interactive Scrollable Overlay Layers -->
-  <div class="scroll-content">
+  <main class="scroll-content">
 
-    <!-- HERO SECTION -->
-    <section class="hero-section" id="hero">
+    <!-- ===================================================
+         SECTION 1: HERO SECTION
+         =================================================== -->
+    <section class="hero-section" id="hero" aria-label="Hero section">
       <div class="hero-top-row">
         <div class="hero-headline-block">
           <div class="hero-greeting">
-            <span class="hero-greeting-dot"></span>
+            <span class="hero-greeting-dot" aria-hidden="true"></span>
             <span>Hey, I'm a</span>
           </div>
           <h1 class="hero-main-title">Creative<br>Director</h1>
@@ -1519,7 +122,7 @@
       </div>
 
       <!-- 4 Service Pillars Grid -->
-      <div class="hero-pillars-grid">
+      <div class="hero-pillars-grid" aria-label="Core disciplines">
         <div class="pillar-card">
           <span class="pillar-num">#01</span>
           <span class="pillar-title">Brand Strategy</span>
@@ -1540,30 +143,32 @@
     </section>
 
     <!-- Air spacer allowing canvas visual spotlight -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
-    <!-- CLIENT LOGOS / BRANDS SECTION -->
-    <section class="brands-section" id="brands">
+    <!-- ===================================================
+         CLIENT LOGOS / BRANDS SECTION
+         =================================================== -->
+    <section class="brands-section" id="brands" aria-label="Brands trusted by">
       <div class="brands-wrapper">
         <span class="brands-title">Trusted by Brands I've Helped Shape</span>
         <div class="brands-list">
           <!-- Supa Blox -->
           <div class="brand-item">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="9"></circle>
             </svg>
             <span>Supa Blox</span>
           </div>
           <!-- Hype Blox -->
           <div class="brand-item">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M6 3h12l-6 9 6 9H6l6-9-6-9z"></path>
             </svg>
             <span>Hype Blox</span>
           </div>
           <!-- Frame Blox -->
           <div class="brand-item">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor"></path>
               <circle cx="12" cy="12" r="9"></circle>
             </svg>
@@ -1571,7 +176,7 @@
           </div>
           <!-- Ultra Blox -->
           <div class="brand-item">
-            <svg viewBox="0 0 24 24">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M7 6a5 5 0 0 0 0 12h2a5 5 0 0 0 0-12H7z" fill="currentColor"></path>
               <path d="M15 6a5 5 0 0 1 0 12h2a5 5 0 0 0 0-12h-2z" fill="currentColor"></path>
             </svg>
@@ -1581,40 +186,38 @@
       </div>
     </section>
 
+    <!-- Air spacer -->
+    <div class="scroll-spacer" aria-hidden="true"></div>
+
     <!-- ===================================================
          SECTION 2: ABOUT ME
          =================================================== -->
-    <section class="portfolio-section" id="about">
+    <section class="portfolio-section" id="about" aria-labelledby="about-title">
       <div class="section-header">
         <span class="section-tag">About Me</span>
-        <h2 class="section-title">Designing &amp; Engineering<br>Modern Digital Experiences</h2>
-        <p class="section-desc">Passionate creator dedicated to crafting intuitive, performant, and memorable digital
-          products.</p>
+        <h2 class="section-title" id="about-title">Designing &amp; Engineering<br>Modern Digital Experiences</h2>
+        <p class="section-desc">Passionate creator dedicated to crafting intuitive, performant, and memorable digital products.</p>
       </div>
 
       <div class="about-grid">
         <!-- Story Card -->
         <div class="glass-card about-story-card">
           <div class="status-indicator">
-            <span class="status-dot"></span>
+            <span class="status-dot" aria-hidden="true"></span>
             <span class="status-text">Available for freelance &amp; full-time roles</span>
           </div>
           <h3 class="about-subheading">Bridging Aesthetic Innovation with Functional Precision</h3>
           <p class="about-text">
-            I specialize in turning complex problems into elegant, human-centric design solutions. From initial
-            wireframes to high-fidelity prototypes and pixel-perfect production code, my approach unites brand identity
-            with seamless engineering.
+            I specialize in turning complex problems into elegant, human-centric design solutions. From initial wireframes to high-fidelity prototypes and pixel-perfect production code, my approach unites brand identity with seamless engineering.
           </p>
           <p class="about-text">
-            Every interaction is designed to elevate user engagement, maintain accessibility, and drive real business
-            outcomes with cutting-edge web technologies.
+            Every interaction is designed to elevate user engagement, maintain accessibility, and drive real business outcomes with cutting-edge web technologies.
           </p>
           <div class="about-action-row">
             <a href="#contact" class="btn-touch btn-touch-orange">
               <span>Let's collaborate</span>
-              <span class="btn-icon-circle">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+              <span class="btn-icon-circle" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -1624,7 +227,7 @@
         </div>
 
         <!-- Metric Counter Grid -->
-        <div class="about-stats-grid">
+        <div class="about-stats-grid" aria-label="Key metrics">
           <div class="glass-card stat-card">
             <span class="stat-number">05+</span>
             <span class="stat-label">Years of Experience</span>
@@ -1646,23 +249,23 @@
     </section>
 
     <!-- Air spacer -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 3: SKILLS & TECH STACK
          =================================================== -->
-    <section class="portfolio-section" id="skills">
+    <section class="portfolio-section" id="skills" aria-labelledby="skills-title">
       <div class="section-header">
         <span class="section-tag">Core Capabilities</span>
-        <h2 class="section-title">Skills &amp; Technology Stack</h2>
+        <h2 class="section-title" id="skills-title">Skills &amp; Technology Stack</h2>
         <p class="section-desc">Tools, languages, and frameworks leveraged to build world-class products.</p>
       </div>
 
       <div class="skills-grid">
         <!-- Frontend Development -->
-        <div class="glass-card skill-card">
+        <article class="glass-card skill-card">
           <div class="skill-card-top">
-            <div class="skill-icon-wrap">
+            <div class="skill-icon-wrap" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="16 18 22 12 16 6"></polyline>
                 <polyline points="8 6 2 12 8 18"></polyline>
@@ -1680,12 +283,12 @@
             <span class="skill-pill">Tailwind CSS</span>
             <span class="skill-pill">GSAP / Motion</span>
           </div>
-        </div>
+        </article>
 
         <!-- UI/UX & Product Design -->
-        <div class="glass-card skill-card">
+        <article class="glass-card skill-card">
           <div class="skill-card-top">
-            <div class="skill-icon-wrap">
+            <div class="skill-icon-wrap" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="m4.93 4.93 4.24 4.24"></path>
@@ -1705,12 +308,12 @@
             <span class="skill-pill">Rapid Prototyping</span>
             <span class="skill-pill">3D &amp; Motion Assets</span>
           </div>
-        </div>
+        </article>
 
         <!-- Backend & APIs -->
-        <div class="glass-card skill-card">
+        <article class="glass-card skill-card">
           <div class="skill-card-top">
-            <div class="skill-icon-wrap">
+            <div class="skill-icon-wrap" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
                 <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
@@ -1729,16 +332,14 @@
             <span class="skill-pill">MongoDB</span>
             <span class="skill-pill">GraphQL</span>
           </div>
-        </div>
+        </article>
 
         <!-- DevOps & Workflow -->
-        <div class="glass-card skill-card">
+        <article class="glass-card skill-card">
           <div class="skill-card-top">
-            <div class="skill-icon-wrap">
+            <div class="skill-icon-wrap" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path
-                  d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z">
-                </path>
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
               </svg>
             </div>
             <h3 class="skill-category-title">DevOps &amp; Workflow</h3>
@@ -1752,34 +353,32 @@
             <span class="skill-pill">Vercel</span>
             <span class="skill-pill">Webpack</span>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- Air spacer -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 4: FEATURED PROJECTS
          =================================================== -->
-    <section class="portfolio-section" id="projects">
+    <section class="portfolio-section" id="projects" aria-labelledby="projects-title">
       <div class="behind-header">
         <div class="behind-header-left">
           <span class="behind-tag">Featured Works</span>
-          <h2 class="behind-main-title">Shaping Experiences That Make Life Simpler</h2>
+          <h2 class="behind-main-title" id="projects-title">Shaping Experiences That Make Life Simpler</h2>
         </div>
         <div class="behind-header-right">
-          <p class="behind-lead-text">A curated selection of industrial design, web applications, and brand identities
-            crafted with precision.</p>
+          <p class="behind-lead-text">A curated selection of industrial design, web applications, and brand identities crafted with precision.</p>
           <div class="behind-action-row">
             <div class="behind-action-subtext">
               Have a Project in Mind?<br>Let's Build It Together
             </div>
             <a href="#contact" class="btn-touch btn-touch-orange">
               <span>Start project</span>
-              <span class="btn-icon-circle">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+              <span class="btn-icon-circle" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -1789,57 +388,56 @@
         </div>
       </div>
 
-      <!-- 3 Gallery Showcase Cards Matching Reference Image -->
-      <div class="showcase-grid">
+      <!-- 3 Gallery Showcase Cards -->
+      <div class="showcase-grid" role="region" aria-label="Projects Showcase">
         <!-- Card 1: Minimalist Technical Outerwear -->
-        <div class="showcase-card">
-          <img class="showcase-card-img" src="assets/jacket.jpg" alt="Minimalist Jacket Industrial Form" loading="lazy">
+        <article class="showcase-card" tabindex="0">
+          <img class="showcase-card-img" src="assets/jacket.jpg" alt="Aether Form Jacket Minimalist Technical Outerwear" loading="lazy">
           <div class="showcase-card-overlay">
             <span class="showcase-card-category">Spatial &amp; Apparel</span>
-            <span class="showcase-card-name">Aether Form Jacket</span>
+            <h3 class="showcase-card-name">Aether Form Jacket</h3>
           </div>
-        </div>
+        </article>
 
         <!-- Card 2: Acoustic Audio Model Portrait -->
-        <div class="showcase-card">
-          <img class="showcase-card-img" src="assets/headphones.jpg" alt="Minimalist Audio Acoustic Design"
-            loading="lazy">
+        <article class="showcase-card" tabindex="0">
+          <img class="showcase-card-img" src="assets/headphones.jpg" alt="Soundcraft Studio Headset Minimalist Audio Hardware" loading="lazy">
           <div class="showcase-card-overlay">
             <span class="showcase-card-category">Acoustic &amp; Hardware</span>
-            <span class="showcase-card-name">Soundcraft Studio Headset</span>
+            <h3 class="showcase-card-name">Soundcraft Studio Headset</h3>
           </div>
-        </div>
+        </article>
 
         <!-- Card 3: Cosmetic Dropper Packaging -->
-        <div class="showcase-card">
-          <img class="showcase-card-img" src="assets/bottle.jpg" alt="Clean Cosmetic Packaging" loading="lazy">
+        <article class="showcase-card" tabindex="0">
+          <img class="showcase-card-img" src="assets/bottle.jpg" alt="Botanica Elixir Flask Clean Cosmetic Packaging Design" loading="lazy">
           <div class="showcase-card-overlay">
             <span class="showcase-card-category">Packaging &amp; Materials</span>
-            <span class="showcase-card-name">Botanica Elixir Flask</span>
+            <h3 class="showcase-card-name">Botanica Elixir Flask</h3>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- Air spacer -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 5: WORK EXPERIENCE
          =================================================== -->
-    <section class="portfolio-section" id="experience">
+    <section class="portfolio-section" id="experience" aria-labelledby="experience-title">
       <div class="section-header">
         <span class="section-tag">Career Journey</span>
-        <h2 class="section-title">Work Experience</h2>
+        <h2 class="section-title" id="experience-title">Work Experience</h2>
         <p class="section-desc">Key leadership roles, product initiatives, and frontend contributions.</p>
       </div>
 
-      <div class="experience-timeline">
-        <div class="timeline-line"></div>
+      <div class="experience-timeline" role="list">
+        <div class="timeline-line" aria-hidden="true"></div>
 
         <!-- Experience Item 1 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
           <div class="glass-card timeline-card">
             <div class="timeline-meta">
               <span class="timeline-date">2024 — Present</span>
@@ -1847,8 +445,7 @@
             </div>
             <h3 class="timeline-role">Lead Product Designer &amp; UI Architect</h3>
             <p class="timeline-desc">
-              Directing multi-disciplinary design systems and frontend architectures for enterprise SaaS applications,
-              scaling client engagement by 38% and establishing high-fidelity design standards.
+              Directing multi-disciplinary design systems and frontend architectures for enterprise SaaS applications, scaling client engagement by 38% and establishing high-fidelity design standards.
             </p>
             <div class="timeline-tags">
               <span class="timeline-tag">React.js</span>
@@ -1860,8 +457,8 @@
         </div>
 
         <!-- Experience Item 2 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
           <div class="glass-card timeline-card">
             <div class="timeline-meta">
               <span class="timeline-date">2022 — 2024</span>
@@ -1869,8 +466,7 @@
             </div>
             <h3 class="timeline-role">Senior UI/UX Engineer</h3>
             <p class="timeline-desc">
-              Developed high-fidelity micro-interactions, responsive web applications, and optimized asset delivery
-              pipelines for high-traffic e-commerce experiences.
+              Developed high-fidelity micro-interactions, responsive web applications, and optimized asset delivery pipelines for high-traffic e-commerce experiences.
             </p>
             <div class="timeline-tags">
               <span class="timeline-tag">Next.js</span>
@@ -1882,8 +478,8 @@
         </div>
 
         <!-- Experience Item 3 -->
-        <div class="timeline-item">
-          <div class="timeline-dot"></div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-dot" aria-hidden="true"></div>
           <div class="glass-card timeline-card">
             <div class="timeline-meta">
               <span class="timeline-date">2020 — 2022</span>
@@ -1891,8 +487,7 @@
             </div>
             <h3 class="timeline-role">Digital Product Designer</h3>
             <p class="timeline-desc">
-              Collaborated with product teams to conceptualize, prototype, and ship 12+ award-winning brand identity
-              websites and client portals.
+              Collaborated with product teams to conceptualize, prototype, and ship 12+ award-winning brand identity websites and client portals.
             </p>
             <div class="timeline-tags">
               <span class="timeline-tag">JavaScript</span>
@@ -1905,33 +500,32 @@
     </section>
 
     <!-- Air spacer -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 6: EDUCATION
          =================================================== -->
-    <section class="portfolio-section" id="education">
+    <section class="portfolio-section" id="education" aria-labelledby="education-title">
       <div class="section-header">
         <span class="section-tag">Academic Milestones</span>
-        <h2 class="section-title">Education &amp; Qualifications</h2>
+        <h2 class="section-title" id="education-title">Education &amp; Qualifications</h2>
         <p class="section-desc">Formal education in design science, engineering, and human-computer interaction.</p>
       </div>
 
       <div class="education-grid">
         <!-- Education Card 1 -->
-        <div class="glass-card edu-card">
+        <article class="glass-card edu-card">
           <div class="edu-year-badge">2020 — 2022</div>
           <h3 class="edu-degree">Master of Science in Human-Computer Interaction</h3>
           <span class="edu-institution">Institute of Design &amp; Technology</span>
           <p class="edu-desc">
-            Specialized in cognitive ergonomics, interactive systems, and spatial computing interfaces. Graduated with
-            Honors.
+            Specialized in cognitive ergonomics, interactive systems, and spatial computing interfaces. Graduated with Honors.
           </p>
           <div class="edu-meta-pill">GPA: 3.9 / 4.0 &bull; Magna Cum Laude</div>
-        </div>
+        </article>
 
         <!-- Education Card 2 -->
-        <div class="glass-card edu-card">
+        <article class="glass-card edu-card">
           <div class="edu-year-badge">2016 — 2020</div>
           <h3 class="edu-degree">Bachelor of Technology in Computer Science</h3>
           <span class="edu-institution">National Institute of Technology</span>
@@ -1939,28 +533,28 @@
             Core foundations in data structures, algorithms, computer graphics, and scalable web software architectures.
           </p>
           <div class="edu-meta-pill">Dean's Honor List &bull; Major in Software Engineering</div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- Air spacer -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 7: CERTIFICATES & LICENSES
          =================================================== -->
-    <section class="portfolio-section" id="certificates">
+    <section class="portfolio-section" id="certificates" aria-labelledby="certificates-title">
       <div class="section-header">
         <span class="section-tag">Credentials &amp; Honors</span>
-        <h2 class="section-title">Certificates &amp; Licenses</h2>
+        <h2 class="section-title" id="certificates-title">Certificates &amp; Licenses</h2>
         <p class="section-desc">Industry-standard certifications validating technical and design competencies.</p>
       </div>
 
       <div class="certificates-grid">
         <!-- Certificate 1 -->
-        <div class="glass-card cert-card">
+        <article class="glass-card cert-card">
           <div class="cert-header">
-            <div class="cert-badge-icon">
+            <div class="cert-badge-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="8" r="6"></circle>
                 <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
@@ -1970,18 +564,17 @@
           </div>
           <h3 class="cert-title">Google UX Design Professional Certificate</h3>
           <span class="cert-issuer">Google &bull; Coursera</span>
-          <p class="cert-desc">Rigorous program covering user empathy research, wireframing, usability tests, and design
-            system creation.</p>
+          <p class="cert-desc">Rigorous program covering user empathy research, wireframing, usability tests, and design system creation.</p>
           <div class="cert-footer">
             <span class="cert-id">ID: GUX-8942-VERIFIED</span>
-            <a href="#" class="cert-link">Verify &rarr;</a>
+            <a href="#certificates" class="cert-link" aria-label="Verify Google UX Design Certificate">Verify &rarr;</a>
           </div>
-        </div>
+        </article>
 
         <!-- Certificate 2 -->
-        <div class="glass-card cert-card">
+        <article class="glass-card cert-card">
           <div class="cert-header">
-            <div class="cert-badge-icon">
+            <div class="cert-badge-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="m18 16 4-4-4-4"></path>
                 <path d="m6 8-4 4 4 4"></path>
@@ -1992,18 +585,17 @@
           </div>
           <h3 class="cert-title">Meta Front-End Developer Specialization</h3>
           <span class="cert-issuer">Meta Platforms Inc.</span>
-          <p class="cert-desc">Advanced React, state management, test-driven development, and responsive web performance
-            standards.</p>
+          <p class="cert-desc">Advanced React, state management, test-driven development, and responsive web performance standards.</p>
           <div class="cert-footer">
             <span class="cert-id">ID: META-FE-5519</span>
-            <a href="#" class="cert-link">Verify &rarr;</a>
+            <a href="#certificates" class="cert-link" aria-label="Verify Meta Front-End Developer Certificate">Verify &rarr;</a>
           </div>
-        </div>
+        </article>
 
         <!-- Certificate 3 -->
-        <div class="glass-card cert-card">
+        <article class="glass-card cert-card">
           <div class="cert-header">
-            <div class="cert-badge-icon">
+            <div class="cert-badge-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
               </svg>
@@ -2012,40 +604,37 @@
           </div>
           <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
           <span class="cert-issuer">Amazon Web Services (AWS)</span>
-          <p class="cert-desc">Cloud infrastructure fundamentals, security protocols, distributed computing, and
-            serverless architectures.</p>
+          <p class="cert-desc">Cloud infrastructure fundamentals, security protocols, distributed computing, and serverless architectures.</p>
           <div class="cert-footer">
             <span class="cert-id">ID: AWS-CCP-7721</span>
-            <a href="#" class="cert-link">Verify &rarr;</a>
+            <a href="#certificates" class="cert-link" aria-label="Verify AWS Cloud Practitioner Certificate">Verify &rarr;</a>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
     <!-- Air spacer -->
-    <div class="scroll-spacer"></div>
+    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 8: CONTACT SECTION
          =================================================== -->
-    <section class="portfolio-section" id="contact">
+    <section class="portfolio-section" id="contact" aria-labelledby="contact-title">
       <div class="section-header">
         <span class="section-tag">Let's Connect</span>
-        <h2 class="section-title">Start a Conversation</h2>
-        <p class="section-desc">Have an upcoming project, freelance inquiry, or just want to discuss ideas? Reach out
-          directly.</p>
+        <h2 class="section-title" id="contact-title">Start a Conversation</h2>
+        <p class="section-desc">Have an upcoming project, freelance inquiry, or just want to discuss ideas? Reach out directly.</p>
       </div>
 
       <div class="contact-grid">
         <!-- Contact Details Card -->
         <div class="glass-card contact-info-card">
           <h3 class="contact-info-title">Contact Information</h3>
-          <p class="contact-info-desc">Feel free to reach out via email or through social platforms. I typically respond
-            within 24 hours.</p>
+          <p class="contact-info-desc">Feel free to reach out via email or through social platforms. I typically respond within 24 hours.</p>
 
           <div class="contact-info-list">
             <div class="contact-info-item">
-              <span class="contact-icon">
+              <span class="contact-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect width="20" height="16" x="2" y="4" rx="2"></rect>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
@@ -2058,11 +647,9 @@
             </div>
 
             <div class="contact-info-item">
-              <span class="contact-icon">
+              <span class="contact-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path
-                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-                  </path>
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
               </span>
               <div>
@@ -2072,7 +659,7 @@
             </div>
 
             <div class="contact-info-item">
-              <span class="contact-icon">
+              <span class="contact-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
                   <circle cx="12" cy="10" r="3"></circle>
@@ -2085,27 +672,23 @@
             </div>
           </div>
 
-          <!-- Social Links -->
-          <div class="contact-socials">
-            <a href="https://github.com" target="_blank" rel="noopener" class="social-circle" aria-label="GitHub">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
-                </path>
+          <!-- Social Channels -->
+          <div class="contact-socials" aria-label="Social Profiles">
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="GitHub Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
               </svg>
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-circle" aria-label="LinkedIn">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="LinkedIn Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
                 <rect width="4" height="12" x="2" y="9"></rect>
                 <circle cx="4" cy="4" r="2"></circle>
               </svg>
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener" class="social-circle" aria-label="Twitter">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path
-                  d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z">
-                </path>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="Twitter Profile">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
               </svg>
             </a>
           </div>
@@ -2113,32 +696,29 @@
 
         <!-- Contact Form -->
         <div class="glass-card contact-form-card">
-          <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+          <form class="contact-form" id="contactForm" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label class="form-label" for="userName">Your Name</label>
-                <input type="text" id="userName" class="form-input" placeholder="e.g. Alex Morgan" required>
+                <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. Alex Morgan" required autocomplete="name">
               </div>
               <div class="form-group">
                 <label class="form-label" for="userEmail">Your Email</label>
-                <input type="email" id="userEmail" class="form-input" placeholder="e.g. alex@company.com" required>
+                <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. alex@company.com" required autocomplete="email">
               </div>
             </div>
             <div class="form-group">
               <label class="form-label" for="userSubject">Subject / Project Type</label>
-              <input type="text" id="userSubject" class="form-input" placeholder="e.g. Web Application, Product Design"
-                required>
+              <input type="text" id="userSubject" name="subject" class="form-input" placeholder="e.g. Web Application, Product Design" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="userMessage">Message</label>
-              <textarea id="userMessage" class="form-textarea" rows="4"
-                placeholder="Tell me about your project goals, scope, and timeline..." required></textarea>
+              <textarea id="userMessage" name="message" class="form-textarea" rows="4" placeholder="Tell me about your project goals, scope, and timeline..." required></textarea>
             </div>
-            <button type="submit" class="btn-touch btn-touch-orange" style="width: 100%; justify-content: center;">
+            <button type="submit" class="btn-touch btn-touch-orange btn-submit">
               <span>Send Message</span>
-              <span class="btn-icon-circle">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                  stroke-linecap="round" stroke-linejoin="round">
+              <span class="btn-icon-circle" aria-hidden="true">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -2149,456 +729,45 @@
       </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Production Footer -->
     <footer class="footer">
-      <div>&copy; 2026 Folioblox Studio. All rights reserved.</div>
-      <div>Designed with precision &amp; smooth scroll animations.</div>
+      <div class="footer-left">
+        <div>&copy; 2026 Folioblox Studio. All rights reserved.</div>
+        <div>Crafted with precision &amp; smooth scroll kinematics.</div>
+      </div>
+      <div class="footer-right">
+        <a href="#hero">Back to Top &uarr;</a>
+      </div>
     </footer>
+  </main>
+
+  <!-- Floating Back to Top Button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top of page">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+
+  <!-- Floating Toast Notification -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="polite">
+    <div class="toast-icon" aria-hidden="true">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+    <span id="toastMessage">Thank you! Your message has been sent.</span>
   </div>
 
   <!-- GSAP & ScrollTrigger Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <script>
-    (() => {
-      'use strict';
-
-      const TOTAL_FRAMES = 300;
-      const FRAME_DIR = 'ezgif-8638738b594a7204-jpg';
-
-      function getFrameUrl(index) {
-        const paddedIndex = String(index).padStart(3, '0');
-        return `${FRAME_DIR}/ezgif-frame-${paddedIndex}.jpg`;
-      }
-
-      const canvas = document.getElementById('canvas');
-      const container = document.getElementById('canvas-container');
-      const navbar = document.getElementById('navbar');
-      const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
-
-      const frames = new Array(TOTAL_FRAMES);
-      const loaded = new Array(TOTAL_FRAMES).fill(false);
-
-      let currentFrame = 0;
-      let targetFrame = 0;
-      let lastRenderedFrame = -1;
-
-      // Parallax values
-      let mouseX = 0;
-      let mouseY = 0;
-      let currentParallaxX = 0;
-      let currentParallaxY = 0;
-
-      // Layout cached values
-      let dpr = 1;
-      let vw = 0;
-      let vh = 0;
-      let drawX = 0;
-      let drawY = 0;
-      let drawW = 0;
-      let drawH = 0;
-      let needsRedraw = true;
-
-      function updateDimensions() {
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
-        vw = window.innerWidth;
-        vh = window.innerHeight;
-
-        canvas.width = Math.round(vw * dpr);
-        canvas.height = Math.round(vh * dpr);
-
-        const iw = 1280;
-        const ih = 720;
-        const scale = Math.max(vw / iw, vh / ih);
-
-        drawW = Math.round(iw * scale * dpr);
-        drawH = Math.round(ih * scale * dpr);
-        drawX = Math.round(((vw - (iw * scale)) / 2) * dpr);
-        drawY = Math.round(((vh - (ih * scale)) / 2) * dpr);
-
-        needsRedraw = true;
-        renderFrame(Math.round(currentFrame));
-      }
-
-      window.addEventListener('resize', updateDimensions, { passive: true });
-
-      function onScroll() {
-        const docElem = document.documentElement;
-        const maxScroll = docElem.scrollHeight - window.innerHeight;
-        if (maxScroll <= 0) return;
-        const scrollY = window.pageYOffset || docElem.scrollTop || 0;
-        const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
-        targetFrame = progress * (TOTAL_FRAMES - 1);
-
-        // Navbar blur on scroll
-        if (scrollY > 40) {
-          navbar.classList.add('scrolled');
-        } else {
-          navbar.classList.remove('scrolled');
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      window.addEventListener('mousemove', (e) => {
-        const halfX = window.innerWidth / 2;
-        const halfY = window.innerHeight / 2;
-        mouseX = (e.clientX - halfX) / halfX;
-        mouseY = (e.clientY - halfY) / halfY;
-      }, { passive: true });
-
-      function getBestFrameIndex(requestedIndex) {
-        if (loaded[requestedIndex]) return requestedIndex;
-
-        // Efficient bidirectional search for closest loaded frame
-        for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
-          const prev = requestedIndex - offset;
-          if (prev >= 0 && loaded[prev]) return prev;
-          const next = requestedIndex + offset;
-          if (next < TOTAL_FRAMES && loaded[next]) return next;
-        }
-        return -1;
-      }
-
-      function renderFrame(index) {
-        const frameIdx = getBestFrameIndex(index);
-        if (frameIdx === -1) return;
-        if (frameIdx === lastRenderedFrame && !needsRedraw) return;
-
-        const img = frames[frameIdx];
-        if (!img || !img.complete || img.naturalWidth === 0) return;
-
-        ctx.drawImage(img, drawX, drawY, drawW, drawH);
-        lastRenderedFrame = frameIdx;
-        needsRedraw = false;
-      }
-
-      function loop() {
-        // High-precision smooth kinematic lerp
-        const diff = targetFrame - currentFrame;
-        if (Math.abs(diff) > 0.0001) {
-          currentFrame += diff * 0.085;
-        } else {
-          currentFrame = targetFrame;
-        }
-
-        // Natural parallax smoothing
-        currentParallaxX += (mouseX - currentParallaxX) * 0.05;
-        currentParallaxY += (mouseY - currentParallaxY) * 0.05;
-
-        const px = (currentParallaxX * -8).toFixed(2);
-        const py = (currentParallaxY * -6).toFixed(2);
-        const scrollProgress = currentFrame / (TOTAL_FRAMES - 1);
-        const zoom = (1 + scrollProgress * 0.035).toFixed(4);
-
-        container.style.transform = `translate3d(${px}px, ${py}px, 0) scale(${zoom})`;
-
-        renderFrame(Math.round(currentFrame));
-        requestAnimationFrame(loop);
-      }
-
-      function preload() {
-        // 1. Immediately load frame 1 for instant first paint
-        const firstImg = new Image();
-        firstImg.src = getFrameUrl(1);
-        frames[0] = firstImg;
-        firstImg.onload = () => {
-          loaded[0] = true;
-          needsRedraw = true;
-          renderFrame(0);
-        };
-
-        // 2. Preload remaining frames with decode() to avoid main-thread GPU stutters
-        for (let i = 2; i <= TOTAL_FRAMES; i++) {
-          const img = new Image();
-          const idx = i - 1;
-          img.src = getFrameUrl(i);
-          frames[idx] = img;
-
-          if (img.decode) {
-            img.decode().then(() => {
-              loaded[idx] = true;
-              if (Math.round(currentFrame) === idx) {
-                needsRedraw = true;
-                renderFrame(idx);
-              }
-            }).catch(() => {
-              loaded[idx] = true;
-            });
-          } else {
-            img.onload = () => {
-              loaded[idx] = true;
-              if (Math.round(currentFrame) === idx) {
-                needsRedraw = true;
-                renderFrame(idx);
-              }
-            };
-          }
-        }
-      }
-
-      // Mobile Drawer Navigation Handling
-      const mobileToggle = document.getElementById('mobileToggle');
-      const mobileDrawer = document.getElementById('mobileDrawer');
-      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-      if (mobileToggle && mobileDrawer) {
-        mobileToggle.addEventListener('click', () => {
-          mobileToggle.classList.toggle('active');
-          mobileDrawer.classList.toggle('open');
-          document.body.style.overflow = mobileDrawer.classList.contains('open') ? 'hidden' : '';
-        });
-
-        mobileNavLinks.forEach((link) => {
-          link.addEventListener('click', () => {
-            mobileToggle.classList.remove('active');
-            mobileDrawer.classList.remove('open');
-            document.body.style.overflow = '';
-          });
-        });
-      }
-
-      // Smooth Active Navigation (ScrollSpy)
-      const sections = document.querySelectorAll('section[id]');
-      const navLinks = document.querySelectorAll('.nav-link');
-
-      function updateActiveNav() {
-        const scrollPos = window.pageYOffset + 240;
-        sections.forEach((section) => {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          const id = section.getAttribute('id');
-          if (scrollPos >= top && scrollPos < top + height) {
-            navLinks.forEach((link) => {
-              if (link.getAttribute('href') === `#${id}`) {
-                link.classList.add('active');
-              } else {
-                link.classList.remove('active');
-              }
-            });
-            mobileNavLinks.forEach((link) => {
-              if (link.getAttribute('href') === `#${id}`) {
-                link.classList.add('active');
-              } else {
-                link.classList.remove('active');
-              }
-            });
-          }
-        });
-      }
-
-      window.addEventListener('scroll', updateActiveNav, { passive: true });
-
-      // GSAP ScrollTrigger Animations for Seamless Motion Integration
-      function initGSAPAnimations() {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Synchronize page scroll to targetFrame with ScrollTrigger
-        ScrollTrigger.create({
-          trigger: document.body,
-          start: 'top top',
-          end: 'bottom bottom',
-          onUpdate: (self) => {
-            targetFrame = self.progress * (TOTAL_FRAMES - 1);
-          }
-        });
-
-        // 1. Hero Load Entrance Animation
-        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.1 } });
-        heroTl.from('.navbar', { y: -30, opacity: 0, duration: 0.9 })
-          .from('.hero-greeting', { opacity: 0, y: 20 }, '-=0.6')
-          .from('.hero-main-title', { opacity: 0, y: 35 }, '-=0.8')
-          .from('.hero-quote-block', { opacity: 0, y: 25 }, '-=0.7')
-          .from('.pillar-card', { opacity: 0, y: 25, stagger: 0.1 }, '-=0.6');
-
-        // 2. Hero Parallax Fade on Scroll
-        gsap.to('.hero-top-row', {
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true
-          },
-          y: -120,
-          opacity: 0.15,
-          ease: 'none'
-        });
-
-        gsap.to('.hero-pillars-grid', {
-          scrollTrigger: {
-            trigger: '#hero',
-            start: 'center top',
-            end: 'bottom top',
-            scrub: true
-          },
-          y: -80,
-          opacity: 0,
-          ease: 'none'
-        });
-
-        // 3. Brands Ribbon Reveal
-        gsap.from('.brands-wrapper', {
-          scrollTrigger: {
-            trigger: '#brands',
-            start: 'top 85%',
-            toggleActions: 'play none none reverse'
-          },
-          y: 50,
-          opacity: 0,
-          duration: 1.1,
-          ease: 'power3.out'
-        });
-
-        // Reusable Helper to Animate Section Headers
-        const sectionHeaders = document.querySelectorAll('.portfolio-section .section-header');
-        sectionHeaders.forEach((header) => {
-          gsap.from(header.children, {
-            scrollTrigger: {
-              trigger: header,
-              start: 'top 82%'
-            },
-            y: 40,
-            opacity: 0,
-            stagger: 0.12,
-            duration: 1,
-            ease: 'power3.out'
-          });
-        });
-
-        // 4. About Section Reveal
-        gsap.from('.about-story-card', {
-          scrollTrigger: {
-            trigger: '#about .about-grid',
-            start: 'top 80%'
-          },
-          x: -50,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'power3.out'
-        });
-
-        gsap.from('.stat-card', {
-          scrollTrigger: {
-            trigger: '.about-stats-grid',
-            start: 'top 82%'
-          },
-          y: 45,
-          opacity: 0,
-          stagger: 0.14,
-          duration: 1.1,
-          ease: 'power3.out'
-        });
-
-        // 5. Skills Cards Staggered Reveal
-        gsap.from('.skill-card', {
-          scrollTrigger: {
-            trigger: '#skills .skills-grid',
-            start: 'top 82%'
-          },
-          y: 60,
-          opacity: 0,
-          stagger: 0.14,
-          duration: 1.1,
-          ease: 'power3.out'
-        });
-
-        // 6. Projects Showcase Header & Cards Reveal
-        gsap.from('.behind-header-left, .behind-header-right', {
-          scrollTrigger: {
-            trigger: '#projects .behind-header',
-            start: 'top 80%'
-          },
-          y: 50,
-          opacity: 0,
-          stagger: 0.16,
-          duration: 1.1,
-          ease: 'power3.out'
-        });
-
-        gsap.from('.showcase-card', {
-          scrollTrigger: {
-            trigger: '#projects .showcase-grid',
-            start: 'top 82%'
-          },
-          y: 80,
-          opacity: 0,
-          stagger: 0.18,
-          duration: 1.2,
-          ease: 'power3.out'
-        });
-
-        // 7. Experience Timeline Items Reveal
-        gsap.from('.timeline-item', {
-          scrollTrigger: {
-            trigger: '#experience .experience-timeline',
-            start: 'top 80%'
-          },
-          x: -40,
-          opacity: 0,
-          stagger: 0.22,
-          duration: 1.2,
-          ease: 'power3.out'
-        });
-
-        // 8. Education Cards Reveal
-        gsap.from('.edu-card', {
-          scrollTrigger: {
-            trigger: '#education .education-grid',
-            start: 'top 82%'
-          },
-          y: 60,
-          opacity: 0,
-          stagger: 0.18,
-          duration: 1.1,
-          ease: 'power3.out'
-        });
-
-        // 9. Certificates Cards Reveal
-        gsap.from('.cert-card', {
-          scrollTrigger: {
-            trigger: '#certificates .certificates-grid',
-            start: 'top 82%'
-          },
-          y: 60,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 1.1,
-          ease: 'power3.out'
-        });
-
-        // 10. Contact Section Reveal
-        gsap.from('.contact-info-card', {
-          scrollTrigger: {
-            trigger: '#contact .contact-grid',
-            start: 'top 82%'
-          },
-          x: -50,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'power3.out'
-        });
-
-        gsap.from('.contact-form-card', {
-          scrollTrigger: {
-            trigger: '#contact .contact-grid',
-            start: 'top 82%'
-          },
-          x: 50,
-          opacity: 0,
-          duration: 1.2,
-          ease: 'power3.out'
-        });
-      }
-
-      updateDimensions();
-      preload();
-      onScroll();
-      initGSAPAnimations();
-      requestAnimationFrame(loop);
-    })();
-  </script>
+  <!-- Modular Portfolio Application Scripts -->
+  <script src="js/canvas-stream.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/form.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>

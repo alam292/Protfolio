@@ -1,0 +1,110 @@
+/**
+ * About Section Component
+ * Biography story card, live availability radar pill, and animated metric counters.
+ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(24px, 3.5vw, 40px);
+  align-items: stretch;
+}
+
+.about-story-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  justify-content: center;
+}
+
+/* Status Indicator Pill */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 6px 16px;
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success-border);
+  border-radius: var(--radius-full);
+  width: fit-content;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-success);
+  box-shadow: 0 0 10px var(--color-success);
+  animation: pulseRadar 2s infinite ease-in-out;
+}
+
+.status-text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  letter-spacing: 0.03em;
+}
+
+.about-subheading {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-subhead);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.22;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.about-text {
+  font-size: var(--font-size-body);
+  color: #d1d5db;
+  line-height: 1.7;
+}
+
+.about-action-row {
+  margin-top: var(--space-2);
+}
+
+/* Metric Stats Grid */
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: clamp(20px, 3vw, 32px);
+  border-radius: var(--card-radius);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 87, 34, 0.35);
+}
+
+.stat-number {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  background: var(--accent-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+  font-size: clamp(0.85rem, 1vw, 0.94rem);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+

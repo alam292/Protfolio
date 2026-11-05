@@ -1,0 +1,86 @@
+/**
+ * Skills & Capabilities Component
+ * Modular cards categorizing frontend, UI/UX, backend, and DevOps toolchains.
+ */
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(20px, 2.5vw, 32px);
+}
+
+.skill-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.skill-card-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.skill-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-orange-subtle);
+  border: 1px solid var(--accent-orange-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-orange);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.skill-card:hover .skill-icon-wrap {
+  transform: scale(1.08) rotate(3deg);
+  background: rgba(255, 87, 34, 0.2);
+}
+
+.skill-category-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  letter-spacing: -0.015em;
+}
+
+.skill-category-desc {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: #e5e7eb;
+  transition: all var(--transition-fast);
+  cursor: default;
+}
+
+.skill-pill:hover {
+  background: var(--accent-orange-subtle);
+  border-color: var(--accent-orange);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.2);
+}
+

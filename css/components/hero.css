@@ -1,0 +1,130 @@
+/**
+ * Hero Section Component
+ * High-impact editorial header with fluid typography, live status, and 4 service pillars.
+ */
+
+.hero-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(120px, 16vh, 160px) var(--section-padding-x) clamp(40px, 6vh, 70px);
+  position: relative;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: clamp(24px, 4vw, 48px);
+  width: 100%;
+}
+
+.hero-headline-block {
+  max-width: 65%;
+  flex: 1 1 auto;
+}
+
+.hero-greeting {
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  font-weight: var(--font-weight-medium);
+  color: #ffffff;
+  margin-bottom: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 4px 12px 4px 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+}
+
+.hero-greeting-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-orange);
+  display: inline-block;
+  box-shadow: 0 0 10px var(--accent-orange);
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.hero-main-title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-hero);
+  font-weight: var(--font-weight-extrabold);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-top: var(--space-3);
+}
+
+.hero-quote-block {
+  max-width: 380px;
+  padding-top: var(--space-4);
+  flex-shrink: 0;
+}
+
+.hero-quote-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.25;
+  color: #ffffff;
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.015em;
+}
+
+.hero-quote-desc {
+  font-size: var(--font-size-body);
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* 4 Service Pillars Grid (#01 - #04) */
+.hero-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.5vw, 32px);
+  width: 100%;
+  padding-top: clamp(36px, 5vh, 60px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: clamp(36px, 5vh, 50px);
+}
+
+.pillar-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.pillar-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 87, 34, 0.3);
+  background: rgba(255, 87, 34, 0.04);
+}
+
+.pillar-num {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  color: var(--accent-orange);
+  text-transform: uppercase;
+}
+
+.pillar-title {
+  font-size: clamp(0.95rem, 1.1vw, 1.08rem);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+

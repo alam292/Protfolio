@@ -1,0 +1,308 @@
+/**
+ * Responsive Design Architecture
+ * Comprehensive breakpoint system covering Desktop, Laptop, Tablet, Phablet, and Mobile.
+ */
+
+/* ==========================================================================
+   1. Laptop & Desktop Refinements (1025px - 1440px)
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .hero-main-title {
+    font-size: clamp(3rem, 6.5vw, 5.2rem);
+  }
+
+  .behind-header {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
+
+/* ==========================================================================
+   2. Tablet Viewports (768px - 1024px)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  /* Navigation */
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-toggle {
+    display: flex;
+  }
+
+  /* Hero Section */
+  .hero-top-row {
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .hero-headline-block {
+    max-width: 100%;
+  }
+
+  .hero-quote-block {
+    max-width: 100%;
+    padding-top: 0;
+  }
+
+  .hero-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* Brands Ribbon */
+  .brands-wrapper {
+    flex-direction: column;
+    border-radius: var(--radius-xl);
+    padding: var(--space-6) var(--space-8);
+    align-items: flex-start;
+  }
+
+  .brands-list {
+    gap: var(--space-6);
+  }
+
+  /* Featured Projects */
+  .behind-header {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  .showcase-card:last-child {
+    grid-column: span 2;
+  }
+
+  /* About & Contact Grids */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  /* Education */
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   3. Mobile Landscape & Phablet (481px - 767px)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .navbar {
+    padding: 16px var(--section-padding-x);
+  }
+
+  .navbar.scrolled {
+    padding: 12px var(--section-padding-x);
+  }
+
+  .btn-touch {
+    padding: 7px 10px 7px 16px;
+    font-size: var(--font-size-xs);
+  }
+
+  .btn-icon-circle {
+    width: 28px;
+    height: 28px;
+  }
+
+  .hero-section {
+    padding-top: 110px;
+    padding-bottom: 40px;
+  }
+
+  .hero-pillars-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .showcase-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .showcase-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .showcase-card:last-child {
+    grid-column: span 1;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+
+  .behind-action-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .timeline-item {
+    padding-left: 48px;
+  }
+
+  .timeline-line {
+    left: 14px;
+  }
+
+  .timeline-dot {
+    left: 7px;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: var(--space-4);
+    text-align: center;
+  }
+
+  .footer-left {
+    align-items: center;
+  }
+
+  .footer-right {
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   4. Small Mobile Phones (< 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  :root {
+    --card-radius: 20px;
+    --section-padding-x: 18px;
+  }
+
+  .navbar {
+    padding: 14px 16px;
+  }
+
+  .nav-actions .btn-touch {
+    display: none; /* Keep clean space for brand logo and hamburger toggle */
+  }
+
+  .logo-text {
+    font-size: 1.15rem;
+  }
+
+  .logo-badge {
+    width: 30px;
+    height: 30px;
+    font-size: 0.95rem;
+  }
+
+  .hero-main-title {
+    font-size: 3rem;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-greeting {
+    font-size: 0.88rem;
+  }
+
+  .hero-quote-title {
+    font-size: 1.25rem;
+  }
+
+  .hero-pillars-grid {
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+  }
+
+  .brands-wrapper {
+    padding: var(--space-5) var(--space-5);
+  }
+
+  .brands-title {
+    font-size: 0.82rem;
+  }
+
+  .brands-list {
+    gap: var(--space-4);
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .brand-item {
+    font-size: 0.9rem;
+    gap: 6px;
+  }
+
+  .brand-item svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stat-card {
+    padding: var(--space-5);
+  }
+
+  .showcase-card {
+    aspect-ratio: 1 / 1;
+  }
+
+  .showcase-card-overlay {
+    padding: 20px 16px 16px;
+  }
+
+  .showcase-card-name {
+    font-size: 1.05rem;
+  }
+
+  .timeline-item {
+    padding-left: 36px;
+  }
+
+  .timeline-line {
+    left: 8px;
+  }
+
+  .timeline-dot {
+    left: 1px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .contact-info-item {
+    gap: var(--space-3);
+  }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .contact-socials {
+    justify-content: flex-start;
+  }
+
+  .back-to-top {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+

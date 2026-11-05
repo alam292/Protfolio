@@ -1,0 +1,90 @@
+/**
+ * Button Component System
+ * High-performance, tactile micro-interaction buttons.
+ */
+
+.btn-touch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  background: #ffffff;
+  color: #0c0e12;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: 8px 10px 8px 22px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal),
+              background-color var(--transition-fast),
+              color var(--transition-fast);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.btn-touch:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.22);
+}
+
+.btn-touch:active {
+  transform: translateY(0);
+}
+
+/* Orange Accent Variant */
+.btn-touch-orange {
+  background: var(--accent-orange);
+  color: #ffffff;
+  box-shadow: 0 4px 24px var(--accent-orange-glow);
+}
+
+.btn-touch-orange:hover {
+  background: var(--accent-orange-hover);
+  box-shadow: 0 8px 32px rgba(255, 87, 34, 0.55);
+}
+
+/* Secondary Ghost Button */
+.btn-touch-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.btn-touch-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Button Icon Circle Accent */
+.btn-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal), background-color var(--transition-fast);
+}
+
+.btn-touch-orange .btn-icon-circle {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.btn-touch:hover .btn-icon-circle {
+  transform: translateX(3px);
+}
+
+/* Full Width Utility */
+.btn-block {
+  width: 100%;
+}
+

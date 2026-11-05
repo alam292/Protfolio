@@ -1,0 +1,67 @@
+/**
+ * Animations & Micro-Interactions
+ * Fluid keyframes, radar pulses, glows, and accessibility overrides for reduced motion.
+ */
+
+/* Live Radar Pulse */
+@keyframes pulseRadar {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px var(--color-success);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.85);
+    box-shadow: 0 0 4px var(--color-success);
+  }
+}
+
+/* Hero Greeting Dot Pulse */
+@keyframes pulseDot {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px var(--accent-orange);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.85);
+    box-shadow: 0 0 4px var(--accent-orange);
+  }
+}
+
+/* Subtle Shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Accessibility: Prefers Reduced Motion Overrides */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  #canvas-container {
+    transform: none !important;
+  }
+
+  .showcase-card:hover .showcase-card-img {
+    transform: none !important;
+  }
+
+  .showcase-card:hover {
+    transform: none !important;
+  }
+}
+

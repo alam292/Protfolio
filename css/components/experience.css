@@ -1,0 +1,111 @@
+/**
+ * Experience Timeline Component
+ * Vertical timeline with luminous accent line and interactive role nodes.
+ */
+
+.experience-timeline {
+  position: relative;
+  max-width: var(--container-narrow-width);
+  margin: 0 auto;
+  padding: var(--space-4) 0;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 22px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-orange) 0%, rgba(255, 87, 34, 0.15) 95%);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: clamp(28px, 4.5vh, 44px);
+  padding-left: clamp(48px, 6vw, 68px);
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 15px;
+  top: 36px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 3px solid var(--accent-orange);
+  box-shadow: 0 0 12px var(--accent-orange);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.35);
+  background-color: var(--accent-orange);
+}
+
+.timeline-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.timeline-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.timeline-date {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--accent-orange);
+  background: var(--accent-orange-subtle);
+  border: 1px solid rgba(255, 87, 34, 0.3);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  letter-spacing: 0.04em;
+}
+
+.timeline-company {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.timeline-role {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  letter-spacing: -0.015em;
+}
+
+.timeline-desc {
+  font-size: var(--font-size-body);
+  color: #d1d5db;
+  line-height: 1.68;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-top: var(--space-2);
+}
+
+.timeline-tag {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xs);
+  padding: 4px 10px;
+}
+
