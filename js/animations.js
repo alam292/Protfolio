@@ -50,12 +50,15 @@ class AnimationsController {
   }
 
   initHeroEntrance() {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.1 } });
-    tl.from('.navbar', { y: -30, opacity: 0, duration: 0.9 })
-      .from('.hero-greeting', { opacity: 0, y: 20 }, '-=0.6')
-      .from('.hero-main-title', { opacity: 0, y: 35 }, '-=0.8')
-      .from('.hero-quote-block', { opacity: 0, y: 25 }, '-=0.7')
-      .from('.pillar-card', { opacity: 0, y: 25, stagger: 0.1 }, '-=0.6');
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.0 } });
+    tl.from('.navbar', { y: -30, opacity: 0, duration: 0.85 })
+      .from('.hero-status-badge', { opacity: 0, y: 18, duration: 0.75 }, '-=0.5')
+      .from('.hero-author-meta', { opacity: 0, y: 22, duration: 0.75 }, '-=0.6')
+      .from('.hero-main-title', { opacity: 0, y: 30, duration: 0.85 }, '-=0.65')
+      .from('.hero-intro-text', { opacity: 0, y: 20, duration: 0.75 }, '-=0.6')
+      .from('.hero-actions-group', { opacity: 0, y: 20, duration: 0.75 }, '-=0.6')
+      .from('.hero-visual-block', { opacity: 0, scale: 0.94, duration: 1.0, ease: 'back.out(1.3)' }, '-=0.8')
+      .from('.pillar-card', { opacity: 0, y: 25, stagger: 0.08, duration: 0.75 }, '-=0.6');
   }
 
   initHeroScrollEffects() {

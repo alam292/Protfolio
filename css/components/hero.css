@@ -1,6 +1,7 @@
 /**
  * Hero Section Component
- * High-impact editorial header with fluid typography, live status, and 4 service pillars.
+ * Modern editorial header featuring professional photo portrait, developer identity,
+ * live opportunity status, short introduction, dynamic CTA actions, and 4 core discipline pillars.
  */
 
 .hero-section {
@@ -9,107 +10,359 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: clamp(120px, 16vh, 160px) var(--section-padding-x) clamp(40px, 6vh, 70px);
+  padding: clamp(110px, 15vh, 150px) var(--section-padding-x) clamp(40px, 6vh, 60px);
   position: relative;
   max-width: var(--container-max-width);
   margin: 0 auto;
   width: 100%;
+  gap: clamp(32px, 5vh, 48px);
 }
 
+/* ==========================================================================
+   Hero Top Row (Two-Column Flex/Grid: Content + Photo Card)
+   ========================================================================== */
 .hero-top-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  gap: clamp(32px, 5vw, 64px);
   width: 100%;
 }
 
 .hero-headline-block {
-  max-width: 65%;
-  flex: 1 1 auto;
+  flex: 1 1 58%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 2vh, 22px);
 }
 
-.hero-greeting {
-  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
-  font-weight: var(--font-weight-medium);
-  color: #ffffff;
-  margin-bottom: var(--space-2);
+/* 1. Available for Opportunities Badge */
+.hero-status-badge {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: 4px 12px 4px 6px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 10px;
+  padding: 6px 14px 6px 10px;
+  background: rgba(0, 230, 118, 0.08);
+  border: 1px solid rgba(0, 230, 118, 0.28);
   border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: #a7f3d0;
+  letter-spacing: 0.01em;
+  box-shadow: 0 0 20px rgba(0, 230, 118, 0.12);
+  transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
 }
 
-.hero-greeting-dot {
-  width: 8px;
-  height: 8px;
+.hero-status-badge:hover {
+  background: rgba(0, 230, 118, 0.14);
+  border-color: rgba(0, 230, 118, 0.45);
+  transform: translateY(-1px);
+}
+
+.status-pulse-dot {
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
-  background-color: var(--accent-orange);
+  background-color: #00e676;
   display: inline-block;
-  box-shadow: 0 0 10px var(--accent-orange);
-  animation: pulseDot 2s infinite ease-in-out;
+  box-shadow: 0 0 10px #00e676;
+  animation: pulseDotGreen 2s infinite ease-in-out;
+}
+
+@keyframes pulseDotGreen {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7);
+  }
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 8px rgba(0, 230, 118, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 230, 118, 0);
+  }
+}
+
+.status-badge-text {
+  color: #ffffff;
+}
+
+.status-badge-sub {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: var(--font-weight-normal);
+  padding-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* 2. Developer Name & Job Title */
+.hero-author-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-greeting-intro {
+  font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  font-weight: var(--font-weight-medium);
+  color: var(--accent-orange);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hero-author-name {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .hero-main-title {
   font-family: var(--font-family-display);
   font-size: var(--font-size-hero);
   font-weight: var(--font-weight-extrabold);
-  line-height: 0.96;
+  line-height: 0.98;
   letter-spacing: -0.04em;
   color: #ffffff;
-  margin-top: var(--space-3);
+  margin: 0;
 }
 
-.hero-quote-block {
-  max-width: 380px;
-  padding-top: var(--space-4);
-  flex-shrink: 0;
+.hero-title-accent {
+  background: linear-gradient(135deg, #ff7a45 0%, #ff5722 50%, #ff9e80 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
-.hero-quote-title {
-  font-family: var(--font-family-display);
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.25;
-  color: #ffffff;
-  margin-bottom: var(--space-3);
-  letter-spacing: -0.015em;
-}
-
-.hero-quote-desc {
-  font-size: var(--font-size-body);
+/* 3. Short Introduction */
+.hero-intro-text {
+  font-size: clamp(0.98rem, 1.15vw, 1.125rem);
   color: var(--text-secondary);
-  line-height: 1.65;
+  line-height: 1.68;
+  max-width: 600px;
+  margin: 0;
 }
 
-/* 4 Service Pillars Grid (#01 - #04) */
+/* 4. Hero CTA Actions (Download Resume & Contact Me) */
+.hero-actions-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(12px, 1.8vw, 18px);
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.hero-btn-resume {
+  background: var(--accent-orange);
+  color: #ffffff;
+  box-shadow: 0 4px 20px var(--accent-orange-glow);
+  padding: 11px 22px 11px 20px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-fast);
+}
+
+.hero-btn-resume:hover {
+  background: var(--accent-orange-hover);
+  box-shadow: 0 8px 30px rgba(255, 87, 34, 0.55);
+  transform: translateY(-2px);
+}
+
+.hero-btn-resume svg {
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.hero-btn-resume:hover svg {
+  transform: translateY(2px);
+}
+
+.hero-btn-contact {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 10px 8px 22px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform var(--transition-normal), background-color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-btn-contact:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.hero-btn-contact .btn-icon-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+}
+
+.hero-btn-contact:hover .btn-icon-circle {
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   Hero Visual Block (Professional Photo Card)
+   ========================================================================== */
+.hero-visual-block {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.hero-photo-card {
+  position: relative;
+  width: clamp(270px, 26vw, 350px);
+  aspect-ratio: 1 / 1.05;
+  border-radius: var(--radius-2xl);
+  padding: 12px;
+  background: rgba(18, 21, 28, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45),
+              0 0 30px rgba(255, 87, 34, 0.12);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.hero-photo-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55),
+              0 0 45px rgba(255, 87, 34, 0.25);
+  border-color: rgba(255, 87, 34, 0.35);
+}
+
+/* Ambient Ambient Glow Behind Photo */
+.hero-photo-glow {
+  position: absolute;
+  inset: -15px;
+  border-radius: var(--radius-2xl);
+  background: radial-gradient(circle at 50% 50%, rgba(255, 87, 34, 0.22), transparent 70%);
+  filter: blur(24px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-photo-frame {
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--radius-2xl) - 4px);
+  overflow: hidden;
+  position: relative;
+  background: #0f1117;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-slow);
+}
+
+.hero-photo-card:hover .hero-photo {
+  transform: scale(1.03);
+}
+
+/* Floating Glass Badges on Photo Card */
+.hero-photo-badge {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(12, 14, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-photo-badge-top {
+  top: 24px;
+  right: -10px;
+}
+
+.badge-dot-green {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00e676;
+  box-shadow: 0 0 8px #00e676;
+}
+
+.hero-photo-badge-bottom {
+  bottom: 24px;
+  left: -10px;
+}
+
+.badge-role-icon {
+  color: var(--accent-orange);
+  font-family: monospace;
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   4 Service Pillars Grid (#01 - #04)
+   ========================================================================== */
 .hero-pillars-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: clamp(16px, 2.5vw, 32px);
   width: 100%;
-  padding-top: clamp(36px, 5vh, 60px);
+  padding-top: clamp(28px, 4vh, 48px);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  margin-top: clamp(36px, 5vh, 50px);
+  margin-top: clamp(24px, 3vh, 36px);
 }
 
 .pillar-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: 12px 14px;
+  padding: 14px 18px;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: transform var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
 }
 
 .pillar-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 87, 34, 0.3);
+  border-color: rgba(255, 87, 34, 0.35);
   background: rgba(255, 87, 34, 0.04);
 }
 
@@ -127,4 +380,3 @@
   color: #ffffff;
   letter-spacing: -0.01em;
 }
-

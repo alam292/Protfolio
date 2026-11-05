@@ -1,0 +1,124 @@
+%PDF-1.4
+1 0 obj
+<<
+  /Type /Catalog
+  /Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+  /Type /Pages
+  /Kids [3 0 R]
+  /Count 1
+>>
+endobj
+3 0 obj
+<<
+  /Type /Page
+  /Parent 2 0 R
+  /MediaBox [0 0 595.28 841.89]
+  /Contents 4 0 R
+  /Resources <<
+    /Font <<
+      /F1 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Helvetica-Bold
+      >>
+      /F2 <<
+        /Type /Font
+        /Subtype /Type1
+        /BaseFont /Helvetica
+      >>
+    >>
+  >>
+>>
+endobj
+4 0 obj
+<<
+  /Length 2247
+>>
+stream
+BT
+/F1 22 Tf
+50 740 Td
+(Md MatlooB Alam) Tj
+0 -26 Td
+/F2 12 Tf
+(Full Stack Developer & UI Engineer) Tj
+0 -18 Td
+/F1 10 Tf
+(Email: contact@matloob.dev  |  Portfolio: https://matloob.dev  |  GitHub: github.com) Tj
+0 -20 Td
+(------------------------------------------------------------------------------------------------------------------------) Tj
+0 -25 Td
+/F1 14 Tf
+(PROFESSIONAL SUMMARY) Tj
+0 -18 Td
+/F2 10 Tf
+(Results-driven Full Stack Developer & UI Engineer with 3+ years of experience engineering high-performance) Tj
+0 -14 Td
+(web applications, scalable REST APIs, and modern responsive user interfaces. Proven track record in) Tj
+0 -14 Td
+(React, Next.js, TypeScript, Node.js, and cloud deployments.) Tj
+0 -25 Td
+/F1 14 Tf
+(CORE COMPETENCIES & TECHNICAL SKILLS) Tj
+0 -18 Td
+/F2 10 Tf
+(Frontend:       React.js, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3, Tailwind CSS, GSAP) Tj
+0 -15 Td
+(Backend:        Node.js, Express.js, RESTful APIs, GraphQL, Microservices, Python) Tj
+0 -15 Td
+(Databases:      PostgreSQL, MongoDB, Redis, Prisma, Mongoose) Tj
+0 -15 Td
+(DevOps & Cloud: Docker, AWS (S3, EC2), CI/CD GitHub Actions, Vercel, Netlify) Tj
+0 -15 Td
+(Design & Tools: Figma, UI/UX Design Systems, Git, Webpack, Vite, Jest) Tj
+0 -25 Td
+/F1 14 Tf
+(PROFESSIONAL EXPERIENCE) Tj
+0 -18 Td
+/F1 11 Tf
+(Senior Full Stack Developer  |  Tech Innovations Ltd. (2023 - Present)) Tj
+0 -15 Td
+/F2 10 Tf
+(- Architected responsive web platforms serving 100K+ monthly active users with sub-second page loads.) Tj
+0 -14 Td
+(- Engineered secure Node.js microservices and RESTful API gateways handling high throughput.) Tj
+0 -14 Td
+(- Reduced bundle size by 40% through code splitting and asset optimization pipelines.) Tj
+0 -20 Td
+/F1 11 Tf
+(Frontend Engineer  |  Digital Web Solutions (2021 - 2023)) Tj
+0 -15 Td
+/F2 10 Tf
+(- Built high-conversion SaaS web applications with React, Next.js, and Tailwind CSS.) Tj
+0 -14 Td
+(- Implemented comprehensive design system components ensuring strict WCAG accessibility.) Tj
+0 -25 Td
+/F1 14 Tf
+(EDUCATION & CERTIFICATIONS) Tj
+0 -18 Td
+/F2 10 Tf
+(Bachelor of Technology in Computer Science & Engineering) Tj
+0 -15 Td
+(Certified AWS Solutions Architect - Associate  |  Meta Frontend Developer Specialization) Tj
+ET
+endstream
+endobj
+xref
+0 5
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000350 00000 n 
+trailer
+<<
+  /Size 5
+  /Root 1 0 R
+>>
+startxref
+2647
+%%EOF

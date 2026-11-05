@@ -40,9 +40,13 @@
     max-width: 100%;
   }
 
-  .hero-quote-block {
-    max-width: 100%;
-    padding-top: 0;
+  .hero-visual-block {
+    width: 100%;
+    margin-top: var(--space-2);
+  }
+
+  .hero-photo-card {
+    width: clamp(260px, 45vw, 330px);
   }
 
   .hero-pillars-grid {
@@ -210,16 +214,42 @@
   }
 
   .hero-main-title {
-    font-size: 3rem;
+    font-size: 2.85rem;
     letter-spacing: -0.03em;
   }
 
-  .hero-greeting {
-    font-size: 0.88rem;
+  .hero-status-badge {
+    font-size: 0.78rem;
+    padding: 5px 12px;
   }
 
-  .hero-quote-title {
-    font-size: 1.25rem;
+  .hero-author-name {
+    font-size: 1.35rem;
+  }
+
+  .hero-actions-group {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space-3);
+  }
+
+  .hero-btn-resume,
+  .hero-btn-contact {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-photo-card {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero-photo-badge-top {
+    right: 0;
+  }
+
+  .hero-photo-badge-bottom {
+    left: 0;
   }
 
   .hero-pillars-grid {

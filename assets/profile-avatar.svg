@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181b22" />
+      <stop offset="50%" stop-color="#0f1117" />
+      <stop offset="100%" stop-color="#07080b" />
+    </linearGradient>
+
+    <linearGradient id="accentGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff7a45" />
+      <stop offset="100%" stop-color="#ff5722" />
+    </linearGradient>
+
+    <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2b999" />
+      <stop offset="100%" stop-color="#d68f6d" />
+    </linearGradient>
+
+    <linearGradient id="clothGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2e39" />
+      <stop offset="100%" stop-color="#16181f" />
+    </linearGradient>
+
+    <radialGradient id="haloLight" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="rgba(255, 87, 34, 0.25)" />
+      <stop offset="70%" stop-color="rgba(255, 87, 34, 0.04)" />
+      <stop offset="100%" stop-color="transparent" />
+    </radialGradient>
+
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="400" height="400" rx="48" fill="url(#bgGradient)" />
+  <circle cx="200" cy="180" r="170" fill="url(#haloLight)" />
+
+  <!-- Outer Neon Tech Ring -->
+  <circle cx="200" cy="200" r="184" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="2" />
+  <circle cx="200" cy="200" r="184" fill="none" stroke="url(#accentGlow)" stroke-width="3" stroke-dasharray="140 380" stroke-linecap="round" />
+  <circle cx="200" cy="200" r="184" fill="none" stroke="url(#accentGlow)" stroke-width="3" stroke-dasharray="70 450" stroke-dashoffset="260" stroke-linecap="round" />
+
+  <!-- Tech Geometric Accents -->
+  <path d="M 40 40 L 70 40" stroke="rgba(255, 87, 34, 0.5)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 40 40 L 40 70" stroke="rgba(255, 87, 34, 0.5)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 360 40 L 330 40" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 360 40 L 360 70" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Developer Silhouette / Illustration -->
+  <g id="character" transform="translate(0, 10)">
+    <!-- Clothing & Shoulders -->
+    <path d="M 90 390 C 95 320, 140 295, 200 295 C 260 295, 305 320, 310 390 Z" fill="url(#clothGrad)" />
+    <!-- Modern Tech Hoodie Trim -->
+    <path d="M 160 300 Q 200 330 240 300 L 225 390 L 175 390 Z" fill="#1e2129" />
+    <path d="M 198 318 L 198 390" stroke="url(#accentGlow)" stroke-width="2.5" stroke-linecap="round" />
+
+    <!-- Neck -->
+    <path d="M 175 250 L 225 250 L 225 295 L 175 295 Z" fill="#cf8866" />
+    <path d="M 175 270 Q 200 288 225 270 L 225 295 L 175 295 Z" fill="#bf7957" />
+
+    <!-- Head & Face -->
+    <ellipse cx="200" cy="205" rx="55" ry="68" fill="url(#skinGrad)" />
+
+    <!-- Hair -->
+    <path d="M 142 190 C 138 135, 170 120, 200 120 C 240 120, 262 140, 258 190 C 250 180, 235 155, 200 155 C 165 155, 150 180, 142 190 Z" fill="#1b1c21" />
+    <path d="M 148 185 Q 190 145 252 175 C 245 150, 225 130, 195 130 C 160 130, 145 155, 148 185 Z" fill="#2d303b" />
+
+    <!-- Ears -->
+    <ellipse cx="143" cy="206" rx="9" ry="14" fill="#d68f6d" />
+    <ellipse cx="257" cy="206" rx="9" ry="14" fill="#d68f6d" />
+
+    <!-- Eyebrows -->
+    <path d="M 162 184 Q 178 178 190 184" stroke="#1b1c21" stroke-width="3.5" stroke-linecap="round" fill="none" />
+    <path d="M 210 184 Q 222 178 238 184" stroke="#1b1c21" stroke-width="3.5" stroke-linecap="round" fill="none" />
+
+    <!-- Modern Tech Glasses -->
+    <rect x="156" y="190" width="36" height="26" rx="6" fill="rgba(255, 255, 255, 0.08)" stroke="#ff5722" stroke-width="2.5" />
+    <rect x="208" y="190" width="36" height="26" rx="6" fill="rgba(255, 255, 255, 0.08)" stroke="#ff5722" stroke-width="2.5" />
+    <line x1="192" y1="202" x2="208" y2="202" stroke="#ff5722" stroke-width="2.5" />
+    <line x1="145" y1="198" x2="156" y2="200" stroke="#ff5722" stroke-width="2" />
+    <line x1="244" y1="200" x2="255" y2="198" stroke="#ff5722" stroke-width="2" />
+
+    <!-- Eyes (Friendly, Confident) -->
+    <circle cx="174" cy="203" r="4.5" fill="#1b1c21" />
+    <circle cx="226" cy="203" r="4.5" fill="#1b1c21" />
+    <circle cx="176" cy="201" r="1.5" fill="#ffffff" />
+    <circle cx="228" cy="201" r="1.5" fill="#ffffff" />
+
+    <!-- Nose -->
+    <path d="M 200 205 L 198 220 L 204 220" stroke="#bf7957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+
+    <!-- Smile -->
+    <path d="M 188 234 Q 200 244 212 234" stroke="#8e4a2c" stroke-width="2.5" stroke-linecap="round" fill="none" />
+
+    <!-- Beard / Stubble Accent -->
+    <path d="M 182 236 Q 200 256 218 236" stroke="#2d303b" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 3" fill="none" opacity="0.4" />
+  </g>
+
+  <!-- Floating Coding Monospace Badge -->
+  <g transform="translate(48, 320)">
+    <rect width="130" height="38" rx="10" fill="rgba(12, 14, 18, 0.88)" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" />
+    <circle cx="18" cy="19" r="4" fill="#00e676" />
+    <text x="32" y="23" font-family="monospace" font-size="12" font-weight="bold" fill="#ffffff">&lt;Dev/&gt; FullStack</text>
+  </g>
+</svg>
