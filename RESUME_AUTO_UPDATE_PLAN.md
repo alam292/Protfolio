@@ -204,7 +204,7 @@ sequenceDiagram
 
 ## 6. Implementation Milestones
 
-* [ ] **Milestone 1**: Create `data/portfolio.json` with initial portfolio data and write `js/render.js` to render content dynamically.
-* [ ] **Milestone 2**: Build `upload-modal.css` and `js/resume-uploader.js` for the direct drag-and-drop modal UI.
-* [ ] **Milestone 3**: Setup `server/parse-resume.js` with `pdf-parse` and Gemini API extraction logic.
-* [ ] **Milestone 4**: Wire the `/api/upload-resume` endpoint into `server.js` and test live upload with a real PDF resume.
+* [x] **Milestone 1**: Create `data/portfolio.json` with initial portfolio data and write `js/render.js` to render content dynamically. (Completed)
+* [x] **Milestone 2**: Build `upload-modal.css` and `js/resume-uploader.js` for the direct drag-and-drop modal UI. (Completed)
+* [x] **Milestone 3**: Setup `server/parse-resume.js` with `pdf-parse` and Gemini API extraction logic. (Completed)
+* [x] **Milestone 4**: Wire the `/api/upload-resume` endpoint into `server.js` and test live upload with a real PDF resume. (Completed — 87 automated test assertions passed)

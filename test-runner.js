@@ -1,6 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const { app } = require('./server');
+const { extractRawText, fallbackRuleBasedParser } = require('./server/parse-resume');
 
 let passed = 0;
 let failed = 0;
@@ -56,19 +58,53 @@ async function runTests() {
   assert(html.includes('toastNotification'), 'Toast notification container present');
   assert(html.includes('schema.org'), 'JSON-LD Person Schema present');
 
-  console.log('\n=== SUITE 4: LOCAL HTTP SERVER ENDPOINTS ===');
+  console.log('\n=== SUITE 4: AI RESUME MODAL & COMPONENT DOM INTEGRATION ===');
+  assert(html.includes('id="resumeUploadModal"'), 'Upload modal container present: #resumeUploadModal');
+  assert(html.includes('id="uploadDropzone"'), 'Drag & drop zone present: #uploadDropzone');
+  assert(html.includes('id="resumeFileInput"'), 'File input present: #resumeFileInput');
+  assert(html.includes('id="uploadProgressBarFill"'), 'Progress bar element present: #uploadProgressBarFill');
+  assert(html.includes('btn-nav-upload'), 'Navbar upload trigger button present');
+  assert(html.includes('js/resume-uploader.js'), 'Resume uploader script included in index.html');
+  const mainCss = fs.readFileSync('css/main.css', 'utf8');
+  assert(mainCss.includes('components/upload-modal.css'), 'upload-modal.css imported in main.css');
+  assert(fs.existsSync('css/components/upload-modal.css'), 'css/components/upload-modal.css exists on disk');
+
+  console.log('\n=== SUITE 5: IN-MEMORY TEXT EXTRACTION & RULE PARSER ===');
+  const samplePdfBuf = fs.readFileSync('assets/Md_MatlooB_Alam_Resume.pdf');
+  const extractedText = await extractRawText(samplePdfBuf, '.pdf');
+  assert(extractedText.length > 500, `PDF text successfully extracted (${extractedText.length} chars)`);
+  assert(extractedText.includes('Md MatlooB Alam'), 'Extracted text contains candidate name');
+  assert(extractedText.includes('contact@matloob.dev'), 'Extracted text contains candidate email');
+  const parsedLocal = fallbackRuleBasedParser(extractedText, data);
+  assert(parsedLocal.profile.name === 'Md MatlooB Alam', 'Rule-based parser accurately extracts candidate name');
+  assert(parsedLocal.profile.email === 'contact@matloob.dev', 'Rule-based parser accurately extracts email');
+
+  console.log('\n=== SUITE 6: LOCAL HTTP SERVER ENDPOINTS ===');
+  // Start ephemeral test server
+  const testServer = await new Promise((resolve) => {
+    const s = app.listen(0, () => {
+      resolve(s);
+    });
+  });
+  const testPort = testServer.address().port;
+  const baseUrl = `http://localhost:${testPort}`;
+
   const endpoints = [
     { path: '/', expectedStatus: 200, mime: 'text/html' },
     { path: '/data/portfolio.json', expectedStatus: 200, mime: 'application/json' },
     { path: '/assets/Md_MatlooB_Alam_Resume.pdf', expectedStatus: 200, mime: 'application/pdf' },
     { path: '/js/render.js', expectedStatus: 200, mime: 'text/javascript' },
+    { path: '/js/resume-uploader.js', expectedStatus: 200, mime: 'text/javascript' },
     { path: '/js/theme.js', expectedStatus: 200, mime: 'text/javascript' },
-    { path: '/css/main.css', expectedStatus: 200, mime: 'text/css' }
+    { path: '/css/main.css', expectedStatus: 200, mime: 'text/css' },
+    { path: '/api/health', expectedStatus: 200, mime: 'application/json' },
+    { path: '/api/portfolio', expectedStatus: 200, mime: 'application/json' },
+    { path: '/api/backups', expectedStatus: 200, mime: 'application/json' }
   ];
 
   for (const ep of endpoints) {
     await new Promise((resolve) => {
-      http.get('http://localhost:3000' + ep.path, (res) => {
+      http.get(baseUrl + ep.path, (res) => {
         assert(res.statusCode === ep.expectedStatus, `Endpoint ${ep.path} returned ${res.statusCode}`);
         assert(res.headers['content-type'] && res.headers['content-type'].includes(ep.mime), `Endpoint ${ep.path} MIME matches ${ep.mime}`);
         resolve();
@@ -79,7 +115,59 @@ async function runTests() {
     });
   }
 
-  console.log('\n=== SUITE 5: FORM VALIDATION ENGINE LOGIC ===');
+  console.log('\n=== SUITE 7: RESUME UPLOAD API ENDPOINT (POST /api/upload-resume) ===');
+  // Construct a multipart/form-data request body
+  const boundary = '----WebKitFormBoundaryTest' + Date.now();
+  const fileContent = fs.readFileSync('assets/Md_MatlooB_Alam_Resume.pdf');
+  const filename = 'Test_Resume.pdf';
+
+  const postDataHeader = Buffer.from(
+    `--${boundary}\r\n` +
+    `Content-Disposition: form-data; name="resume"; filename="${filename}"\r\n` +
+    `Content-Type: application/pdf\r\n\r\n`
+  );
+  const postDataFooter = Buffer.from(`\r\n--${boundary}--\r\n`);
+  const multipartBody = Buffer.concat([postDataHeader, fileContent, postDataFooter]);
+
+  const uploadResult = await new Promise((resolve) => {
+    const req = http.request(baseUrl + '/api/upload-resume', {
+      method: 'POST',
+      headers: {
+        'Content-Type': `multipart/form-data; boundary=${boundary}`,
+        'Content-Length': multipartBody.length
+      }
+    }, (res) => {
+      let responseBody = '';
+      res.on('data', chunk => responseBody += chunk);
+      res.on('end', () => {
+        try {
+          const json = JSON.parse(responseBody);
+          resolve({ status: res.statusCode, json });
+        } catch (e) {
+          resolve({ status: res.statusCode, error: responseBody });
+        }
+      });
+    });
+
+    req.on('error', (err) => {
+      resolve({ error: err.message });
+    });
+
+    req.write(multipartBody);
+    req.end();
+  });
+
+  assert(uploadResult.status === 200, `POST /api/upload-resume returned HTTP 200 (Got ${uploadResult.status})`);
+  assert(uploadResult.json && uploadResult.json.success === true, 'Upload API returned success: true');
+  assert(uploadResult.json && uploadResult.json.backup, `Automated backup created: ${uploadResult.json?.backup}`);
+  if (uploadResult.json?.backup) {
+    assert(fs.existsSync(uploadResult.json.backup), 'Backup file exists on file system');
+  }
+
+  // Close ephemeral server
+  testServer.close();
+
+  console.log('\n=== SUITE 8: FORM VALIDATION ENGINE LOGIC ===');
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   assert(emailRegex.test('contact@matloob.dev'), 'Valid domain email passes regex');
   assert(emailRegex.test('alex.mercer@enterprise.co.in'), 'Complex subdomain email passes regex');
@@ -91,8 +179,9 @@ async function runTests() {
   console.log(`TOTAL CHECKS: ${passed + failed} | PASSED: ${passed} | FAILED: ${failed}`);
   if (failed === 0) {
     console.log('>>> ALL AUTOMATED VERIFICATION SUITES PASSED! 100% PRODUCTION READY. <<<');
+  } else {
+    process.exitCode = 1;
   }
 }
 
 runTests();
-

@@ -9,6 +9,24 @@ class PortfolioRenderer {
     this.dataPath = 'data/portfolio.json';
     this.data = null;
     this.activeCertCategory = 'all';
+    this._certFiltersBound = false;
+
+    // Listen for live portfolio updates
+    window.addEventListener('portfolio:updated', (e) => {
+      if (e.detail) {
+        this.updateData(e.detail);
+      }
+    });
+  }
+
+  updateData(newData) {
+    if (!newData) return;
+    this.data = newData;
+    this.renderAll();
+    window.dispatchEvent(new CustomEvent('portfolio:rendered', { detail: this.data }));
+    if (typeof ScrollTrigger !== 'undefined') {
+      setTimeout(() => ScrollTrigger.refresh(), 200);
+    }
   }
 
   async init() {
@@ -137,6 +155,23 @@ class PortfolioRenderer {
                 <polyline points="12 5 19 12 12 19"></polyline>
               </svg>
             </a>
+
+            <!-- AI Resume Sync Button -->
+            <button 
+              type="button" 
+              class="hero-btn-contact btn-open-resume-modal" 
+              data-action="open-resume-modal"
+              aria-label="Upload resume and dynamically sync portfolio using AI"
+              title="AI Resume Auto-Sync"
+              style="cursor: pointer; background: rgba(255, 87, 34, 0.1); border-color: rgba(255, 87, 34, 0.35); color: #ff8a65;"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span>AI Sync</span>
+            </button>
 
             <!-- Social Links -->
             <div class="hero-social-links" aria-label="Social Profiles">
@@ -609,7 +644,8 @@ class PortfolioRenderer {
 
   bindCertFilters() {
     const mount = document.getElementById('certificatesMount');
-    if (!mount) return;
+    if (!mount || this._certFiltersBound) return;
+    this._certFiltersBound = true;
 
     mount.addEventListener('click', (e) => {
       const btn = e.target.closest('.cert-filter-btn');

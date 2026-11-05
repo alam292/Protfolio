@@ -103,6 +103,22 @@
 
     <!-- Header Actions (Theme Toggle, Contact CTA, Mobile Toggle) -->
     <div class="nav-actions">
+      <!-- AI Resume Upload / Update Trigger -->
+      <button 
+        type="button" 
+        class="btn-nav-upload btn-open-resume-modal" 
+        data-action="open-resume-modal"
+        aria-label="Upload resume to auto-sync portfolio"
+        title="AI Resume Auto-Sync"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <span>Update Resume</span>
+      </button>
+
       <!-- Theme Switcher Button -->
       <button 
         type="button" 
@@ -173,6 +189,20 @@
     </nav>
 
     <div class="mobile-drawer-cta">
+      <button 
+        type="button" 
+        class="btn-touch btn-open-resume-modal" 
+        data-action="open-resume-modal"
+        style="width: 100%; justify-content: center; margin-bottom: 0.75rem; background: rgba(255, 87, 34, 0.15); border-color: rgba(255, 87, 34, 0.4); color: #ff8a65;"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <span>Update Resume (AI)</span>
+      </button>
+
       <a href="#contact" class="btn-touch btn-touch-orange">
         <span>Let's talk</span>
         <span class="btn-icon-circle" aria-hidden="true">
@@ -289,6 +319,101 @@
     <span id="toastMessage">Thank you! Your message has been sent.</span>
   </div>
 
+  <!-- AI Resume Upload & Dynamic Sync Modal -->
+  <div class="upload-modal-overlay" id="resumeUploadModal" role="dialog" aria-modal="true" aria-labelledby="uploadModalTitle" aria-describedby="uploadModalSubtitle">
+    <div class="upload-modal-dialog">
+      <div class="upload-modal-glow" aria-hidden="true"></div>
+
+      <!-- Modal Header -->
+      <div class="upload-modal-header">
+        <div>
+          <div class="upload-modal-badge">
+            <span class="status-pulse-dot" style="width: 6px; height: 6px;" aria-hidden="true"></span>
+            <span>AI Resume Auto-Sync</span>
+          </div>
+          <h3 class="upload-modal-title" id="uploadModalTitle">Upload &amp; Refresh Portfolio</h3>
+          <p class="upload-modal-subtitle" id="uploadModalSubtitle">
+            Drop your updated PDF or DOCX resume. Gemini AI extracts text, restructures the JSON schema, and refreshes the portfolio live.
+          </p>
+        </div>
+
+        <button type="button" class="upload-modal-close-btn" id="uploadCloseBtn" aria-label="Close upload modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Drag & Drop Zone -->
+      <div class="upload-dropzone" id="uploadDropzone" tabindex="0" role="button" aria-label="Drop resume file here or click to browse">
+        <div class="upload-dropzone-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+        </div>
+        <div class="upload-dropzone-prompt">Drag &amp; drop your resume file here</div>
+        <div class="upload-dropzone-hint">Supports PDF, DOCX (up to 10MB) &bull; Zero manual data entry</div>
+        <input type="file" id="resumeFileInput" class="upload-file-input" accept=".pdf,.docx,.doc" aria-label="Choose resume file">
+      </div>
+
+      <!-- Selected File Pill -->
+      <div class="upload-file-preview" id="uploadFilePreview">
+        <div class="upload-file-info">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="upload-file-icon" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <div>
+            <div class="upload-file-name" id="uploadFileName">resume.pdf</div>
+            <div class="upload-file-size" id="uploadFileSize">0 KB</div>
+          </div>
+        </div>
+        <button type="button" class="upload-file-remove" id="uploadFileRemove" aria-label="Remove selected file">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Progress Indicator -->
+      <div class="upload-progress-container" id="uploadProgressContainer" aria-live="polite">
+        <div class="upload-progress-header">
+          <span class="upload-progress-status" id="uploadProgressStatus">
+            <span class="status-pulse-dot" style="width: 6px; height: 6px;" aria-hidden="true"></span>
+            <span>Uploading document...</span>
+          </span>
+          <span class="upload-progress-percent" id="uploadProgressPercent" style="font-family: var(--font-family-mono); font-size: 0.82rem; color: var(--text-secondary);">0%</span>
+        </div>
+        <div class="upload-progress-bar-bg">
+          <div class="upload-progress-bar-fill" id="uploadProgressBarFill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+        </div>
+      </div>
+
+      <!-- Status Banner -->
+      <div class="upload-status-banner" id="uploadStatusBanner" role="alert" aria-live="assertive"></div>
+
+      <!-- Modal Actions -->
+      <div class="upload-modal-actions">
+        <button type="button" class="btn-upload-cancel" id="btnUploadCancel">Cancel</button>
+        <button type="button" class="btn-upload-submit" id="btnUploadSubmit" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <span>Analyze &amp; Sync Portfolio</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- GSAP & ScrollTrigger Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -297,6 +422,7 @@
   <script src="js/theme.js"></script>
   <script src="js/canvas-stream.js"></script>
   <script src="js/render.js"></script>
+  <script src="js/resume-uploader.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/form.js"></script>

@@ -1,0 +1,454 @@
+/**
+ * Resume Upload & AI Sync Modal Styles (css/components/upload-modal.css)
+ * Folioblox Design System - Glassmorphism, Neon Orange Highlights & Kinetic States
+ */
+
+/* ==========================================================================
+   1. Modal Overlay & Container
+   ========================================================================== */
+.upload-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: rgba(3, 6, 8, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.upload-modal-overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.upload-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  background: var(--glass-bg, rgba(14, 18, 24, 0.92));
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  border-radius: var(--radius-xl, 18px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(255, 87, 34, 0.08);
+  padding: 2rem;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.upload-modal-overlay.is-active .upload-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+/* Modal Glow Flare */
+.upload-modal-glow {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 260px;
+  height: 140px;
+  background: radial-gradient(ellipse at center, rgba(255, 87, 34, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+/* ==========================================================================
+   2. Header & Close Button
+   ========================================================================== */
+.upload-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.upload-modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-orange, #ff5722);
+  background: var(--accent-orange-subtle, rgba(255, 87, 34, 0.12));
+  border: 1px solid var(--accent-orange-border, rgba(255, 87, 34, 0.3));
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  margin-bottom: 0.5rem;
+}
+
+.upload-modal-title {
+  font-family: var(--font-family-display, inherit);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--text-primary, #ffffff);
+  line-height: 1.25;
+  margin: 0;
+}
+
+.upload-modal-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-secondary, #9ea3b0);
+  line-height: 1.5;
+  margin-top: 0.4rem;
+}
+
+.upload-modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary, #9ea3b0);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.upload-modal-close-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+/* ==========================================================================
+   3. Drag & Drop Target Area
+   ========================================================================== */
+.upload-dropzone {
+  position: relative;
+  border: 2px dashed rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-lg, 14px);
+  padding: 2.2rem 1.5rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.is-dragover {
+  border-color: var(--accent-orange, #ff5722);
+  background: rgba(255, 87, 34, 0.05);
+  box-shadow: 0 0 25px rgba(255, 87, 34, 0.15) inset;
+  transform: translateY(-2px);
+}
+
+.upload-dropzone-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--accent-orange-subtle, rgba(255, 87, 34, 0.12));
+  color: var(--accent-orange, #ff5722);
+  margin-bottom: 1rem;
+  transition: transform 0.25s ease;
+}
+
+.upload-dropzone:hover .upload-dropzone-icon,
+.upload-dropzone.is-dragover .upload-dropzone-icon {
+  transform: scale(1.1) translateY(-3px);
+}
+
+.upload-dropzone-prompt {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #ffffff);
+  margin-bottom: 0.35rem;
+}
+
+.upload-dropzone-hint {
+  font-size: 0.8rem;
+  color: var(--text-muted, #646a78);
+}
+
+.upload-file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   4. Selected File Preview Pill
+   ========================================================================== */
+.upload-file-preview {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+  border-radius: 12px;
+  margin-top: 1rem;
+}
+
+.upload-file-preview.is-visible {
+  display: flex;
+}
+
+.upload-file-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  overflow: hidden;
+}
+
+.upload-file-icon {
+  color: var(--accent-orange, #ff5722);
+  flex-shrink: 0;
+}
+
+.upload-file-name {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text-primary, #ffffff);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.upload-file-size {
+  font-size: 0.76rem;
+  color: var(--text-muted, #646a78);
+  flex-shrink: 0;
+}
+
+.upload-file-remove {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #646a78);
+  cursor: pointer;
+  padding: 0.35rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+}
+
+.upload-file-remove:hover {
+  color: var(--color-error, #ef4444);
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* ==========================================================================
+   5. Live Progress Bar & Processing States
+   ========================================================================== */
+.upload-progress-container {
+  display: none;
+  margin-top: 1.25rem;
+}
+
+.upload-progress-container.is-visible {
+  display: block;
+}
+
+.upload-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  margin-bottom: 0.5rem;
+}
+
+.upload-progress-status {
+  color: var(--accent-orange-light, #ff8a65);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.upload-progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.upload-progress-bar-fill {
+  width: 0%;
+  height: 100%;
+  background: var(--accent-gradient, linear-gradient(135deg, #ff5722 0%, #ff8a65 100%));
+  border-radius: 9999px;
+  transition: width 0.35s ease;
+  position: relative;
+}
+
+.upload-progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  animation: progressShimmer 1.5s infinite;
+}
+
+@keyframes progressShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ==========================================================================
+   6. Feedback Status Banners
+   ========================================================================== */
+.upload-status-banner {
+  display: none;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  margin-top: 1rem;
+  font-size: 0.86rem;
+}
+
+.upload-status-banner.is-visible {
+  display: flex;
+}
+
+.upload-status-banner.is-success {
+  background: var(--color-success-bg, rgba(16, 185, 129, 0.12));
+  border: 1px solid var(--color-success-border, rgba(16, 185, 129, 0.3));
+  color: #34d399;
+}
+
+.upload-status-banner.is-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+/* ==========================================================================
+   7. Action Buttons
+   ========================================================================== */
+.upload-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.btn-upload-cancel {
+  padding: 0.65rem 1.15rem;
+  background: transparent;
+  border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.12));
+  border-radius: 9999px;
+  color: var(--text-secondary, #9ea3b0);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-upload-cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.btn-upload-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 1.4rem;
+  background: var(--accent-gradient, linear-gradient(135deg, #ff5722 0%, #ff8a65 100%));
+  border: none;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--accent-orange-glow, rgba(255, 87, 34, 0.35));
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-upload-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(255, 87, 34, 0.5);
+}
+
+.btn-upload-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.btn-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Navbar Trigger Button */
+.btn-nav-upload {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.95rem;
+  background: rgba(255, 87, 34, 0.12);
+  border: 1px solid var(--accent-orange-border, rgba(255, 87, 34, 0.4));
+  border-radius: 9999px;
+  color: var(--accent-orange-light, #ff8a65);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-nav-upload:hover {
+  background: rgba(255, 87, 34, 0.22);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   8. Mobile Adaptations
+   ========================================================================== */
+@media (max-width: 640px) {
+  .upload-modal-dialog {
+    padding: 1.5rem;
+  }
+  .upload-dropzone {
+    padding: 1.6rem 1rem;
+  }
+  .upload-modal-actions {
+    flex-direction: column-reverse;
+    width: 100%;
+  }
+  .btn-upload-cancel,
+  .btn-upload-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

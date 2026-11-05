@@ -98,12 +98,36 @@
         "icon": "code",
         "description": "Primary daily languages with deep focus on enterprise TypeScript and ECMAScript standards.",
         "items": [
-          { "name": "TypeScript", "level": "Advanced", "badge": "Primary" },
-          { "name": "JavaScript (ES6+)", "level": "Advanced", "badge": "Expert" },
-          { "name": "Python", "level": "Proficient", "badge": "Backend & Scripts" },
-          { "name": "HTML5 & Semantic ARIA", "level": "Advanced", "badge": "Accessibility" },
-          { "name": "CSS3 & Modern Layouts", "level": "Advanced", "badge": "Grid & Flexbox" },
-          { "name": "SQL", "level": "Proficient", "badge": "Queries & Optimization" }
+          {
+            "name": "TypeScript",
+            "level": "Advanced",
+            "badge": "Primary"
+          },
+          {
+            "name": "JavaScript (ES6+)",
+            "level": "Advanced",
+            "badge": "Expert"
+          },
+          {
+            "name": "Python",
+            "level": "Proficient",
+            "badge": "Backend & Scripts"
+          },
+          {
+            "name": "HTML5 & Semantic ARIA",
+            "level": "Advanced",
+            "badge": "Accessibility"
+          },
+          {
+            "name": "CSS3 & Modern Layouts",
+            "level": "Advanced",
+            "badge": "Grid & Flexbox"
+          },
+          {
+            "name": "SQL",
+            "level": "Proficient",
+            "badge": "Queries & Optimization"
+          }
         ]
       },
       {
@@ -112,12 +136,36 @@
         "icon": "layers",
         "description": "Building high-performance, responsive interfaces, fluid animations, and scalable design systems.",
         "items": [
-          { "name": "React.js", "level": "Advanced", "badge": "Hooks & Context" },
-          { "name": "Next.js (App Router)", "level": "Advanced", "badge": "SSR & Edge" },
-          { "name": "Tailwind CSS", "level": "Advanced", "badge": "Utility-first" },
-          { "name": "Redux Toolkit / Zustand", "level": "Proficient", "badge": "State Management" },
-          { "name": "GSAP & Web Animations", "level": "Proficient", "badge": "60fps Motion" },
-          { "name": "HTML5 Canvas API", "level": "Proficient", "badge": "Stream Visuals" }
+          {
+            "name": "React.js",
+            "level": "Advanced",
+            "badge": "Hooks & Context"
+          },
+          {
+            "name": "Next.js (App Router)",
+            "level": "Advanced",
+            "badge": "SSR & Edge"
+          },
+          {
+            "name": "Tailwind CSS",
+            "level": "Advanced",
+            "badge": "Utility-first"
+          },
+          {
+            "name": "Redux Toolkit / Zustand",
+            "level": "Proficient",
+            "badge": "State Management"
+          },
+          {
+            "name": "GSAP & Web Animations",
+            "level": "Proficient",
+            "badge": "60fps Motion"
+          },
+          {
+            "name": "HTML5 Canvas API",
+            "level": "Proficient",
+            "badge": "Stream Visuals"
+          }
         ]
       },
       {
@@ -126,12 +174,36 @@
         "icon": "server",
         "description": "Scalable REST & GraphQL services, microservices, and secure token authentication pipelines.",
         "items": [
-          { "name": "Node.js", "level": "Advanced", "badge": "Runtime Core" },
-          { "name": "Express.js", "level": "Advanced", "badge": "Microservices" },
-          { "name": "RESTful APIs", "level": "Advanced", "badge": "API Architecture" },
-          { "name": "GraphQL", "level": "Proficient", "badge": "Queries & Schemas" },
-          { "name": "Authentication (JWT & OAuth)", "level": "Advanced", "badge": "Security" },
-          { "name": "Microservices", "level": "Proficient", "badge": "Distributed" }
+          {
+            "name": "Node.js",
+            "level": "Advanced",
+            "badge": "Runtime Core"
+          },
+          {
+            "name": "Express.js",
+            "level": "Advanced",
+            "badge": "Microservices"
+          },
+          {
+            "name": "RESTful APIs",
+            "level": "Advanced",
+            "badge": "API Architecture"
+          },
+          {
+            "name": "GraphQL",
+            "level": "Proficient",
+            "badge": "Queries & Schemas"
+          },
+          {
+            "name": "Authentication (JWT & OAuth)",
+            "level": "Advanced",
+            "badge": "Security"
+          },
+          {
+            "name": "Microservices",
+            "level": "Proficient",
+            "badge": "Distributed"
+          }
         ]
       },
       {
@@ -140,12 +212,36 @@
         "icon": "database",
         "description": "Relational data modeling, high-throughput caching, NoSQL flexibility, and ORM pipelines.",
         "items": [
-          { "name": "PostgreSQL", "level": "Advanced", "badge": "Relational / Indexing" },
-          { "name": "MongoDB", "level": "Advanced", "badge": "Document Store" },
-          { "name": "Redis", "level": "Proficient", "badge": "In-Memory Cache" },
-          { "name": "Prisma ORM", "level": "Advanced", "badge": "Type-safe ORM" },
-          { "name": "Mongoose", "level": "Advanced", "badge": "Schema Modeling" },
-          { "name": "MySQL", "level": "Proficient", "badge": "Relational Schemas" }
+          {
+            "name": "PostgreSQL",
+            "level": "Advanced",
+            "badge": "Relational / Indexing"
+          },
+          {
+            "name": "MongoDB",
+            "level": "Advanced",
+            "badge": "Document Store"
+          },
+          {
+            "name": "Redis",
+            "level": "Proficient",
+            "badge": "In-Memory Cache"
+          },
+          {
+            "name": "Prisma ORM",
+            "level": "Advanced",
+            "badge": "Type-safe ORM"
+          },
+          {
+            "name": "Mongoose",
+            "level": "Advanced",
+            "badge": "Schema Modeling"
+          },
+          {
+            "name": "MySQL",
+            "level": "Proficient",
+            "badge": "Relational Schemas"
+          }
         ]
       },
       {
@@ -154,12 +250,36 @@
         "icon": "cpu",
         "description": "Automated testing, containerization, modern build tooling, and continuous integration.",
         "items": [
-          { "name": "Git & GitHub", "level": "Advanced", "badge": "VCS & GitFlow" },
-          { "name": "Docker", "level": "Proficient", "badge": "Containers" },
-          { "name": "Vite & Webpack", "level": "Advanced", "badge": "Build Optimization" },
-          { "name": "Jest & RTL", "level": "Proficient", "badge": "Unit Testing" },
-          { "name": "Figma", "level": "Advanced", "badge": "UI/UX Design Systems" },
-          { "name": "CI/CD (GitHub Actions)", "level": "Proficient", "badge": "Automated Deploy" }
+          {
+            "name": "Git & GitHub",
+            "level": "Advanced",
+            "badge": "VCS & GitFlow"
+          },
+          {
+            "name": "Docker",
+            "level": "Proficient",
+            "badge": "Containers"
+          },
+          {
+            "name": "Vite & Webpack",
+            "level": "Advanced",
+            "badge": "Build Optimization"
+          },
+          {
+            "name": "Jest & RTL",
+            "level": "Proficient",
+            "badge": "Unit Testing"
+          },
+          {
+            "name": "Figma",
+            "level": "Advanced",
+            "badge": "UI/UX Design Systems"
+          },
+          {
+            "name": "CI/CD (GitHub Actions)",
+            "level": "Proficient",
+            "badge": "Automated Deploy"
+          }
         ]
       }
     ]
@@ -176,7 +296,15 @@
         "category": "Enterprise SaaS & Cloud Ops",
         "description": "Engineered a multi-tenant cloud operations dashboard providing automated infrastructure health analytics, real-time load distribution, and sub-second page loads for high-concurrency environments.",
         "metrics": "Serving 100K+ monthly active requests with 99.98% uptime and 40% reduced payload.",
-        "techStack": ["Next.js 14", "TypeScript", "Node.js", "PostgreSQL", "Prisma", "Docker", "Tailwind CSS"],
+        "techStack": [
+          "Next.js 14",
+          "TypeScript",
+          "Node.js",
+          "PostgreSQL",
+          "Prisma",
+          "Docker",
+          "Tailwind CSS"
+        ],
         "githubUrl": "https://github.com/mdmatloob/cloudscale-saas-platform",
         "liveDemoUrl": "https://cloudscale.matloob.dev",
         "featured": true,
@@ -190,7 +318,14 @@
         "category": "Design System & Frontend Architecture",
         "description": "Zero-dependency, accessible design system containing 45+ headless components, design token pipelines, kinetic 60fps micro-interactions, and comprehensive WCAG 2.1 AA compliance.",
         "metrics": "Cut frontend sprint delivery cycles by 35% with centralized token updates.",
-        "techStack": ["React 18", "TypeScript", "Tailwind CSS", "GSAP", "Storybook", "Vite"],
+        "techStack": [
+          "React 18",
+          "TypeScript",
+          "Tailwind CSS",
+          "GSAP",
+          "Storybook",
+          "Vite"
+        ],
         "githubUrl": "https://github.com/mdmatloob/nexus-ui-system",
         "liveDemoUrl": "https://nexusui.matloob.dev",
         "featured": true,
@@ -204,7 +339,14 @@
         "category": "Distributed Systems & Telemetry",
         "description": "High-throughput real-time performance telemetry dashboard streaming server vitals, latency percentiles, and request graphs using WebSockets and HTML5 high-DPI canvas charts.",
         "metrics": "Streams 5,000+ events/sec with sub-50ms round-trip latency.",
-        "techStack": ["Node.js", "Express.js", "Redis", "WebSockets", "HTML5 Canvas", "PostgreSQL"],
+        "techStack": [
+          "Node.js",
+          "Express.js",
+          "Redis",
+          "WebSockets",
+          "HTML5 Canvas",
+          "PostgreSQL"
+        ],
         "githubUrl": "https://github.com/mdmatloob/pulse-metrics-dashboard",
         "liveDemoUrl": "https://pulsemetrics.matloob.dev",
         "featured": true,
@@ -218,7 +360,13 @@
         "category": "DevOps & Pipeline Automation",
         "description": "Visual directed acyclic graph (DAG) pipeline orchestrator that coordinates automated test suites, container builds, and deployment verification across multiple environments.",
         "metrics": "Decreased pipeline deployment execution duration by 42%.",
-        "techStack": ["TypeScript", "Docker", "GitHub Actions API", "MongoDB", "GraphQL"],
+        "techStack": [
+          "TypeScript",
+          "Docker",
+          "GitHub Actions API",
+          "MongoDB",
+          "GraphQL"
+        ],
         "githubUrl": "https://github.com/mdmatloob/devflow-pipeline-engine",
         "liveDemoUrl": "https://devflow.matloob.dev",
         "featured": true,
@@ -245,7 +393,15 @@
           "Reduced client-side bundle size by 40% through route-based code splitting, dynamic asset pipelines, and memoization.",
           "Implemented comprehensive design system components ensuring strict WCAG 2.1 AA accessibility across products."
         ],
-        "techStack": ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "Docker", "Tailwind CSS"]
+        "techStack": [
+          "React",
+          "Next.js",
+          "TypeScript",
+          "Node.js",
+          "PostgreSQL",
+          "Docker",
+          "Tailwind CSS"
+        ]
       },
       {
         "id": "exp-2",
@@ -260,7 +416,14 @@
           "Integrated robust RESTful APIs, caching pipelines, and real-time event notifications.",
           "Standardized automated component testing with Jest and React Testing Library, maintaining 90%+ code coverage."
         ],
-        "techStack": ["React", "TypeScript", "Redux Toolkit", "REST APIs", "Jest", "Tailwind CSS"]
+        "techStack": [
+          "React",
+          "TypeScript",
+          "Redux Toolkit",
+          "REST APIs",
+          "Jest",
+          "Tailwind CSS"
+        ]
       },
       {
         "id": "exp-3",
@@ -274,7 +437,14 @@
           "Partnered with UI/UX designers to translate Figma design systems into responsive, fluid front-end code.",
           "Collaborated on database schema updates and query optimization for PostgreSQL and MongoDB backends."
         ],
-        "techStack": ["JavaScript (ES6+)", "React", "Node.js", "Express", "MongoDB", "CSS3"]
+        "techStack": [
+          "JavaScript (ES6+)",
+          "React",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "CSS3"
+        ]
       },
       {
         "id": "exp-4",
@@ -288,7 +458,14 @@
           "Assisted in crafting REST API endpoints, input validation routines, and automated integration tests.",
           "Received outstanding intern distinction for delivering the internal metrics logger sprint ahead of schedule."
         ],
-        "techStack": ["JavaScript", "HTML5", "CSS3", "REST APIs", "Git", "PostgreSQL"]
+        "techStack": [
+          "JavaScript",
+          "HTML5",
+          "CSS3",
+          "REST APIs",
+          "Git",
+          "PostgreSQL"
+        ]
       }
     ]
   },
@@ -310,7 +487,13 @@
           "Capstone Research: Architected and benchmarked a distributed real-time state synchronization engine for collaborative browser applications.",
           "Academic Excellence Honor Roll across final 4 consecutive semesters."
         ],
-        "skillsGained": ["Algorithms", "Distributed Systems", "Database Design", "Software Engineering", "Computer Networks"]
+        "skillsGained": [
+          "Algorithms",
+          "Distributed Systems",
+          "Database Design",
+          "Software Engineering",
+          "Computer Networks"
+        ]
       },
       {
         "id": "edu-2",
@@ -324,7 +507,12 @@
           "Focused Curriculum: Advanced Mathematics, Physics, Chemistry, and Computer Science fundamentals.",
           "Elected Student Technology Club Lead, organizing intra-school programming symposiums and algorithmic quizzes."
         ],
-        "skillsGained": ["Discrete Mathematics", "Physics", "Computer Science Fundamentals", "Logic Design"]
+        "skillsGained": [
+          "Discrete Mathematics",
+          "Physics",
+          "Computer Science Fundamentals",
+          "Logic Design"
+        ]
       }
     ]
   },
@@ -333,10 +521,22 @@
     "title": "Certifications & Professional Achievements",
     "subtitle": "Industry vendor credentials, continuous specialized technical training, and competitive engineering milestones.",
     "categories": [
-      { "id": "all", "name": "All Credentials" },
-      { "id": "technical", "name": "Technical Certifications" },
-      { "id": "training", "name": "Specialized Training" },
-      { "id": "achievements", "name": "Honors & Achievements" }
+      {
+        "id": "all",
+        "name": "All Credentials"
+      },
+      {
+        "id": "technical",
+        "name": "Technical Certifications"
+      },
+      {
+        "id": "training",
+        "name": "Specialized Training"
+      },
+      {
+        "id": "achievements",
+        "name": "Honors & Achievements"
+      }
     ],
     "items": [
       {
@@ -436,9 +636,18 @@
       "Performance Optimization"
     ],
     "timezoneMatrix": [
-      { "region": "Americas (EST/PST)", "overlap": "3 - 4 Hours Daily" },
-      { "region": "Europe & UK (CET/GMT)", "overlap": "5 - 6 Hours Daily" },
-      { "region": "Asia-Pacific (IST/SGT/AEST)", "overlap": "Full Working Day" }
+      {
+        "region": "Americas (EST/PST)",
+        "overlap": "3 - 4 Hours Daily"
+      },
+      {
+        "region": "Europe & UK (CET/GMT)",
+        "overlap": "5 - 6 Hours Daily"
+      },
+      {
+        "region": "Asia-Pacific (IST/SGT/AEST)",
+        "overlap": "Full Working Day"
+      }
     ]
   }
 }

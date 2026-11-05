@@ -1,15 +1,55 @@
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
+/**
+ * High-Performance Static & API Server (server.js)
+ * Serves portfolio assets and hosts AI resume upload & dynamic portfolio endpoints.
+ */
 
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+require('dotenv').config();
+
+const {
+  handleResumeUpload,
+  handleGetPortfolio,
+  handleListBackups
+} = require('./server/resume-controller');
+
+const app = express();
 const PORT = parseInt(process.env.PORT, 10) || 3000;
 const PUBLIC_DIR = __dirname;
 
+// Global Middleware & CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+  next();
+});
+app.use(express.json());
+
+// API Endpoints
+app.post('/api/upload-resume', handleResumeUpload);
+app.get('/api/portfolio', handleGetPortfolio);
+app.get('/api/backups', handleListBackups);
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    geminiKeyConfigured: Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE')
+  });
+});
+
+// Custom Static File Handler to guarantee optimal caching & exact MIME types
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8',
-  '.json': 'application/json',
+  '.json': 'application/json; charset=utf-8',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
@@ -20,69 +60,49 @@ const MIME_TYPES = {
   '.pdf': 'application/pdf'
 };
 
-process.on('uncaughtException', (err) => {
-  // Catch ECONNRESET / EPIPE / premature close quietly without exiting
-  if (err.code === 'ECONNRESET' || err.code === 'EPIPE' || err.code === 'ERR_STREAM_PREMATURE_CLOSE') {
-    return;
-  }
-  console.error('[Process Error]', err.message);
-});
-
-process.on('unhandledRejection', (reason) => {
-  console.error('[Unhandled Rejection]', reason);
-});
-
-const server = http.createServer((req, res) => {
-  req.on('error', () => {});
-  res.on('error', () => {});
-
+app.use((req, res, next) => {
   let decodedUrl;
   try {
-    decodedUrl = decodeURIComponent(req.url.split('?')[0]);
+    decodedUrl = decodeURIComponent(req.path);
   } catch (e) {
-    res.writeHead(400);
-    return res.end('Bad Request');
+    return res.status(400).send('Bad Request');
   }
 
-  if (decodedUrl === '/' || decodedUrl.endsWith('.html') || decodedUrl.endsWith('-001.jpg') || decodedUrl.endsWith('-300.jpg')) {
-    console.log(`[HTTP] ${req.method} ${decodedUrl}`);
+  // Skip API routes
+  if (decodedUrl.startsWith('/api/')) {
+    return next();
   }
 
-  let filePath = path.join(PUBLIC_DIR, decodedUrl === '/' ? 'index.html' : decodedUrl);
+  const relativePath = decodedUrl === '/' ? 'index.html' : decodedUrl.replace(/^\/+/, '');
+  const filePath = path.join(PUBLIC_DIR, relativePath);
 
+  // Security check: prevent path traversal
   if (!filePath.startsWith(PUBLIC_DIR)) {
-    res.writeHead(403);
-    return res.end('Forbidden');
+    return res.status(403).send('Forbidden');
   }
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
-      res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-      return res.end('404 Not Found');
+      return next();
     }
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
-    const headers = {
-      'Content-Type': contentType,
-      'Content-Length': stats.size,
-      'Access-Control-Allow-Origin': '*',
-      'Accept-Ranges': 'bytes'
-    };
+    res.setHeader('Content-Type', contentType);
+    res.setHeader('Content-Length', stats.size);
+    res.setHeader('Accept-Ranges', 'bytes');
 
     if (ext === '.jpg' || ext === '.png' || ext === '.webp') {
-      headers['Cache-Control'] = 'public, max-age=86400, immutable';
+      res.setHeader('Cache-Control', 'public, max-age=86400, immutable');
     } else {
-      headers['Cache-Control'] = 'no-cache, no-store, must-revalidate';
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
     }
 
     if (req.method === 'HEAD') {
-      res.writeHead(200, headers);
-      return res.end();
+      return res.status(200).end();
     }
 
-    res.writeHead(200, headers);
     const stream = fs.createReadStream(filePath);
     stream.on('error', () => {
       try { res.end(); } catch (e) {}
@@ -90,49 +110,44 @@ const server = http.createServer((req, res) => {
     res.on('close', () => {
       stream.destroy();
     });
-    req.on('close', () => {
-      stream.destroy();
-    });
     stream.pipe(res);
   });
 });
 
-server.on('clientError', (err, socket) => {
-  if (err.code === 'ECONNRESET' || !socket.writable) return;
-  try {
-    socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
-  } catch (e) {
-    socket.destroy();
-  }
+// 404 Fallback
+app.use((req, res) => {
+  res.status(404).type('text/plain').send('404 Not Found');
 });
 
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error('[Server Error]', err.stack || err);
+  res.status(500).json({ success: false, error: 'Internal Server Error' });
+});
+
+// Server Starter with automatic port increment if in use
 let currentPort = PORT;
 
 function startServer(port) {
-  server.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  const server = app.listen(port, () => {
+    console.log(`[HTTP Server] Portfolio server running at http://localhost:${port}`);
+    console.log(`[HTTP Server] AI Resume Upload active at POST http://localhost:${port}/api/upload-resume`);
   });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${port} in use, trying ${port + 1}...`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+
+  return server;
 }
 
-server.on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.log(`Port ${currentPort} in use, attempting port ${currentPort + 1}...`);
-    currentPort += 1;
-    setTimeout(() => {
-      startServer(currentPort);
-    }, 500);
-  } else {
-    console.error('Server error:', err);
-  }
-});
+if (require.main === module) {
+  startServer(currentPort);
+}
 
-process.on('uncaughtException', (err) => {
-  console.error('Uncaught Exception:', err);
-});
-
-process.on('unhandledRejection', (reason) => {
-  console.error('Unhandled Rejection:', reason);
-});
-
-startServer(currentPort);
-
+module.exports = { app, startServer };

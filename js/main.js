@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 6. Initialize Contact Form & Real-time IST clock
   const form = new FormController();
 
+  // 6.5. Initialize AI Resume Uploader & Sync Controller
+  const resumeUploader = new ResumeUploader();
+
   // 7. Bind Resume Download Feedback Toast
   const heroResumeBtn = document.getElementById('heroResumeBtn');
   if (heroResumeBtn) {
@@ -54,6 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     canvasStream,
     navigation,
     animations,
-    form
+    form,
+    resumeUploader
   };
 });

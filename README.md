@@ -33,6 +33,7 @@
   - [2. Navigation & ScrollSpy Workflow](#2-navigation--scrollspy-workflow)
   - [3. Interactive Form Submission & Toast Workflow](#3-interactive-form-submission--toast-workflow)
   - [4. Node.js Asset Streaming & Caching Workflow](#4-nodejs-asset-streaming--caching-workflow)
+  - [5. AI Resume Auto-Sync & Dynamic Update Workflow](#5-ai-resume-auto-sync--dynamic-update-workflow)
 - [📂 Directory & Module Structure](#-directory--module-structure)
 - [🚀 Quick Start & Installation](#-quick-start--installation)
 - [📌 Versioning & Release History](#-versioning--release-history)
@@ -225,6 +226,17 @@ The server implementation in `server.js` provides:
    - High-volume binary frames & images (`.jpg`, `.png`, `.webp`): `Cache-Control: public, max-age=86400, immutable`
    - Dynamic documents (`.html`, `.js`, `.css`): `Cache-Control: no-cache, no-store, must-revalidate`
 4. **Stream Piping**: Uses `fs.createReadStream()` with automatic error and close handling to prevent memory leaks during rapid scrubbing.
+
+### 5. AI Resume Auto-Sync & Dynamic Update Workflow
+
+The portfolio features direct resume ingestion and Google Gemini AI transformation:
+1. **User Upload Trigger**: User drops a PDF or DOCX resume into the drag-and-drop modal.
+2. **Automated Backup**: `server/resume-controller.js` creates a timestamped snapshot in `data/backups/`.
+3. **In-Memory Text Extraction**: `server/parse-resume.js` parses the file buffer using `pdf-parse` or `mammoth`.
+4. **Intelligent Schema Transformation**: Google Gemini Flash API (`@google/genai`) populates the 8-section portfolio schema (with automatic fallback to local rule-based parser if offline).
+5. **Atomic Save & Live Dispatch**: Updates `data/portfolio.json`, emits `portfolio:updated` event, and `js/render.js` re-renders the live DOM with refreshed scroll triggers.
+
+For detailed architecture and configuration, see [RESUME_AUTO_UPDATE_GUIDE.md](RESUME_AUTO_UPDATE_GUIDE.md).
 
 ---
 

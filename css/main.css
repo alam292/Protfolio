@@ -23,6 +23,7 @@
 @import url('components/certificates.css');
 @import url('components/contact.css');
 @import url('components/footer.css');
+@import url('components/upload-modal.css');
 
 /* 3. Animations & Micro-Interactions */
 @import url('animations.css');

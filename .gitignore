@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables & secrets
+.env
+.env.local
+
+# Automated runtime backups & uploads
+data/backups/*
+!data/backups/.gitkeep
+uploads/*
+!uploads/.gitkeep
+
+# Temporary test files
+assets/Test_Resume.pdf
+
+# OS generated files
+.DS_Store
+Thumbs.db
