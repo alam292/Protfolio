@@ -93,9 +93,13 @@
     gap: var(--space-8);
   }
 
-  /* Education */
+  /* Education & Certificates */
   .education-grid {
     grid-template-columns: 1fr;
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -175,6 +179,11 @@
 
   .timeline-dot {
     left: 7px;
+  }
+
+  /* Certificates & Achievements */
+  .certificates-grid {
+    grid-template-columns: 1fr;
   }
 
   .footer {

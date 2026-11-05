@@ -65,6 +65,41 @@ document.addEventListener('DOMContentLoaded', () => {
       // Graceful silent fallback to statically configured HTML values
     });
 
+  // 6. Certifications & Achievements Category Filter Controller
+  const certFilterBtns = document.querySelectorAll('.cert-filter-btn');
+  const certCards = document.querySelectorAll('.cert-card');
+
+  if (certFilterBtns.length > 0 && certCards.length > 0) {
+    certFilterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active button state & ARIA attributes
+        certFilterBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        // Filter cards
+        certCards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.classList.remove('is-hidden');
+          } else {
+            card.classList.add('is-hidden');
+          }
+        });
+
+        // Refresh ScrollTrigger layout calculations if available
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
+      });
+    });
+  }
+
   // Expose on window for debugging/inspection if needed
   window.__FOLIOBLOX__ = {
     canvasStream,

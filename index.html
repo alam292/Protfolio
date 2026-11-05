@@ -1026,73 +1026,463 @@
     <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
-         SECTION 7: CERTIFICATES & LICENSES
+         SECTION 7: CERTIFICATES & ACHIEVEMENTS
          =================================================== -->
     <section class="portfolio-section" id="certificates" aria-labelledby="certificates-title">
       <div class="section-header">
-        <span class="section-tag">Credentials &amp; Honors</span>
-        <h2 class="section-title" id="certificates-title">Certificates &amp; Licenses</h2>
-        <p class="section-desc">Industry-recognized certifications validating technical and web development competencies.</p>
+        <span class="section-tag">Credentials &amp; Milestones</span>
+        <h2 class="section-title" id="certificates-title">Certifications &amp; Achievements</h2>
+        <p class="section-desc">Industry-accredited vendor credentials, specialized software engineering bootcamps, and competitive professional honors.</p>
+      </div>
+
+      <!-- Category Filter Tabs -->
+      <div class="cert-filter-bar" role="tablist" aria-label="Certifications &amp; Achievements Filter">
+        <button type="button" class="cert-filter-btn active" role="tab" aria-selected="true" data-filter="all">
+          <span class="cert-filter-dot" aria-hidden="true"></span>
+          All Credentials
+          <span class="cert-filter-count">10</span>
+        </button>
+        <button type="button" class="cert-filter-btn" role="tab" aria-selected="false" data-filter="technical">
+          <span class="cert-filter-dot" aria-hidden="true"></span>
+          Technical Certifications
+          <span class="cert-filter-count">4</span>
+        </button>
+        <button type="button" class="cert-filter-btn" role="tab" aria-selected="false" data-filter="training">
+          <span class="cert-filter-dot" aria-hidden="true"></span>
+          Specialized Training
+          <span class="cert-filter-count">3</span>
+        </button>
+        <button type="button" class="cert-filter-btn" role="tab" aria-selected="false" data-filter="achievement">
+          <span class="cert-filter-dot" aria-hidden="true"></span>
+          Professional Achievements
+          <span class="cert-filter-count">3</span>
+        </button>
       </div>
 
       <div class="certificates-grid">
-        <!-- Certificate 1 -->
-        <article class="glass-card cert-card">
+        <!-- 1. Technical: AWS Cloud Practitioner -->
+        <article class="glass-card cert-card" data-category="technical">
           <div class="cert-header">
-            <div class="cert-badge-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="6"></circle>
-                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-              </svg>
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Technical</span>
             </div>
-            <span class="cert-year">2024</span>
+            <span class="cert-year">2023 — 2026</span>
           </div>
-          <h3 class="cert-title">Google UX &amp; Web Design Professional</h3>
-          <span class="cert-issuer">Google &bull; Coursera</span>
-          <p class="cert-desc">Comprehensive program covering responsive user interfaces, accessible web architectures, and modern design systems.</p>
+          <div class="cert-body">
+            <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
+            <span class="cert-issuer">Amazon Web Services (AWS)</span>
+            <p class="cert-desc">Cloud infrastructure design, IAM security governance, distributed storage (S3/EBS), VPC architecture, and serverless compute models.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">AWS Cloud</span>
+              <span class="cert-tag">Lambda</span>
+              <span class="cert-tag">IAM Security</span>
+              <span class="cert-tag">VPC</span>
+            </div>
+          </div>
           <div class="cert-footer">
-            <span class="cert-id">Status: Verified Credential</span>
-            <a href="#certificates" class="cert-link" aria-label="Verify Google UX Design Certificate">Verify &rarr;</a>
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Credential ID</span>
+              <span class="cert-id-code">AWS-98421074-ARCH</span>
+            </div>
+            <a href="https://aws.amazon.com/verification" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Verify AWS Cloud Practitioner Credential">
+              Verify
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
           </div>
         </article>
 
-        <!-- Certificate 2 -->
-        <article class="glass-card cert-card">
+        <!-- 2. Technical: Meta Front-End Developer -->
+        <article class="glass-card cert-card" data-category="technical">
           <div class="cert-header">
-            <div class="cert-badge-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="m18 16 4-4-4-4"></path>
-                <path d="m6 8-4 4 4 4"></path>
-                <path d="m14.5 4-5 16"></path>
-              </svg>
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m18 16 4-4-4-4"></path>
+                  <path d="m6 8-4 4 4 4"></path>
+                  <path d="m14.5 4-5 16"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Technical</span>
             </div>
-            <span class="cert-year">2023</span>
+            <span class="cert-year">2023 &bull; Lifetime</span>
           </div>
-          <h3 class="cert-title">Meta Front-End Developer Specialization</h3>
-          <span class="cert-issuer">Meta Platforms Inc.</span>
-          <p class="cert-desc">Advanced React, state architecture, test-driven development, and responsive performance standards.</p>
+          <div class="cert-body">
+            <h3 class="cert-title">Meta Front-End Developer Specialization</h3>
+            <span class="cert-issuer">Meta Platforms Inc.</span>
+            <p class="cert-desc">Modern React application architecture, advanced state patterns, Jest unit testing, WCAG 2.1 accessibility compliance, and performance profiling.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">React.js</span>
+              <span class="cert-tag">JavaScript (ES6+)</span>
+              <span class="cert-tag">Jest</span>
+              <span class="cert-tag">WCAG 2.1</span>
+            </div>
+          </div>
           <div class="cert-footer">
-            <span class="cert-id">Status: Verified Credential</span>
-            <a href="#certificates" class="cert-link" aria-label="Verify Meta Front-End Developer Certificate">Verify &rarr;</a>
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Credential ID</span>
+              <span class="cert-id-code">META-DEV-6619024</span>
+            </div>
+            <a href="https://coursera.org/verify/professional-cert/meta" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Verify Meta Front-End Developer Credential">
+              Verify
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
           </div>
         </article>
 
-        <!-- Certificate 3 -->
-        <article class="glass-card cert-card">
+        <!-- 3. Technical: Google UX Design -->
+        <article class="glass-card cert-card" data-category="technical">
           <div class="cert-header">
-            <div class="cert-badge-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
-              </svg>
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="8" r="6"></circle>
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Technical</span>
             </div>
-            <span class="cert-year">2023</span>
+            <span class="cert-year">2024 &bull; Lifetime</span>
           </div>
-          <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
-          <span class="cert-issuer">Amazon Web Services (AWS)</span>
-          <p class="cert-desc">Cloud infrastructure fundamentals, distributed systems, microservices, and modern deployment architectures.</p>
+          <div class="cert-body">
+            <h3 class="cert-title">Google UX &amp; Web Design Professional</h3>
+            <span class="cert-issuer">Google &bull; Coursera</span>
+            <p class="cert-desc">Design thinking fundamentals, interactive Figma prototyping, responsive layout hierarchies, accessibility audits, and design-to-code bridging.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">UX Architecture</span>
+              <span class="cert-tag">Figma</span>
+              <span class="cert-tag">Design Systems</span>
+              <span class="cert-tag">Usability</span>
+            </div>
+          </div>
           <div class="cert-footer">
-            <span class="cert-id">Status: Verified Credential</span>
-            <a href="#certificates" class="cert-link" aria-label="Verify AWS Cloud Practitioner Certificate">Verify &rarr;</a>
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Credential ID</span>
+              <span class="cert-id-code">GOOG-UX-8837190</span>
+            </div>
+            <a href="https://coursera.org/verify/professional-cert/google" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Verify Google UX Design Credential">
+              Verify
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 4. Technical: PostgreSQL Architecture -->
+        <article class="glass-card cert-card" data-category="technical">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Technical</span>
+            </div>
+            <span class="cert-year">2023 &bull; Lifetime</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">PostgreSQL Architecture &amp; Query Optimization</h3>
+            <span class="cert-issuer">EnterpriseDB Alliance</span>
+            <p class="cert-desc">Advanced index strategy (B-Tree, GIN, BRIN), query execution plan analysis, transaction isolation levels, connection pooling, and sub-50ms latency tuning.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">PostgreSQL</span>
+              <span class="cert-tag">Index Tuning</span>
+              <span class="cert-tag">EXPLAIN ANALYZE</span>
+              <span class="cert-tag">ACID</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Credential ID</span>
+              <span class="cert-id-code">PG-OPT-441208</span>
+            </div>
+            <a href="#certificates" class="cert-link-btn" aria-label="Verify PostgreSQL Optimization Credential">
+              Verified
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 5. Training: Microservices Immersion -->
+        <article class="glass-card cert-card" data-category="training">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="7" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="7" x="14" y="14" rx="1"></rect>
+                  <rect width="7" height="7" x="3" y="14" rx="1"></rect>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Training</span>
+            </div>
+            <span class="cert-year">2024 &bull; 12-Week</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">Microservices &amp; Event-Driven Architecture</h3>
+            <span class="cert-issuer">Cloud Native Architecture Institute</span>
+            <p class="cert-desc">Hands-on immersion in Docker microservices, Kubernetes orchestration, Kafka event messaging, CQRS patterns, and resilient distributed state replication.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">Docker</span>
+              <span class="cert-tag">Kubernetes</span>
+              <span class="cert-tag">Apache Kafka</span>
+              <span class="cert-tag">CQRS</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Bootcamp Track</span>
+              <span class="cert-id-code">CNAI-MS-2024-912</span>
+            </div>
+            <a href="#certificates" class="cert-link-btn" aria-label="View Microservices Bootcamp Credential">
+              Completed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 6. Training: React & TypeScript Masterclass -->
+        <article class="glass-card cert-card" data-category="training">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="16 18 22 12 16 6"></polyline>
+                  <polyline points="8 6 2 12 8 18"></polyline>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Training</span>
+            </div>
+            <span class="cert-year">2023 &bull; 8-Week</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">Enterprise React &amp; TypeScript Masterclass</h3>
+            <span class="cert-issuer">Frontend Masters &bull; Epic Web</span>
+            <p class="cert-desc">Rigorous masterclass in generic types, AST transforms, React Concurrency &amp; Suspense, memoization architectures, and client bundle reduction.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">TypeScript</span>
+              <span class="cert-tag">React Concurrency</span>
+              <span class="cert-tag">Profiler</span>
+              <span class="cert-tag">Tree Shaking</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Masterclass Track</span>
+              <span class="cert-id-code">FEM-TS-830114</span>
+            </div>
+            <a href="#certificates" class="cert-link-btn" aria-label="View TypeScript Masterclass Credential">
+              Completed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 7. Training: DevOps & Cloud Security Pipeline -->
+        <article class="glass-card cert-card" data-category="training">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Training</span>
+            </div>
+            <span class="cert-year">2022 &bull; 6-Week</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">Automated DevOps &amp; DevSecOps Pipelines</h3>
+            <span class="cert-issuer">Linux Foundation &bull; DevOps Academy</span>
+            <p class="cert-desc">End-to-end CI/CD automation with GitHub Actions, multi-stage Docker build minimization, automated security scanning (Trivy), and zero-downtime deployment.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">GitHub Actions</span>
+              <span class="cert-tag">CI/CD</span>
+              <span class="cert-tag">DevSecOps</span>
+              <span class="cert-tag">Security Scans</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Pipeline Track</span>
+              <span class="cert-id-code">DOA-PIPE-33019</span>
+            </div>
+            <a href="#certificates" class="cert-link-btn" aria-label="View DevOps Pipeline Credential">
+              Completed
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 8. Achievement: National Hackathon Winner -->
+        <article class="glass-card cert-card" data-category="achievement">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path>
+                  <path d="M10 14.66V17c0 .55-.45 1-1 1H7"></path>
+                  <path d="M14 14.66V17c0 .55.45 1 1 1h2"></path>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Honor</span>
+            </div>
+            <span class="cert-year">2023 &bull; Winner</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">1st Place Champion &bull; National Tech Hackathon</h3>
+            <span class="cert-issuer">National Smart City Innovation Forum</span>
+            <div class="cert-metric-banner">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+              </svg>
+              <span>1st Place / 120+ Teams &bull; $5,000 Grand Prize</span>
+            </div>
+            <p class="cert-desc">Engineered <em>CivicPulse</em>, an AI-assisted real-time civic grievance routing PWA with offline-first local cache and zero-crash latency during live jury stress testing.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">Hackathon Winner</span>
+              <span class="cert-tag">PWA</span>
+              <span class="cert-tag">Geospatial UI</span>
+              <span class="cert-tag">Live Stress Test</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Recognition</span>
+              <span class="cert-id-code">Champion Trophy &bull; Grand Prize</span>
+            </div>
+            <a href="#certificates" class="cert-link-btn" aria-label="View Hackathon Winner Recognition">
+              Awarded
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 9. Achievement: Enterprise Innovation Honor -->
+        <article class="glass-card cert-card" data-category="achievement">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Honor</span>
+            </div>
+            <span class="cert-year">2024 &bull; Corporate</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">Engineering Performance Excellence Honor</h3>
+            <span class="cert-issuer">Tech Innovations Labs</span>
+            <div class="cert-metric-banner">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                <polyline points="16 7 22 7 22 13"></polyline>
+              </svg>
+              <span>-42% Query Latency &bull; 99.98% Service Uptime</span>
+            </div>
+            <p class="cert-desc">Awarded company-wide for driving the core API microservice re-indexing initiative, dropping p95 query latency from 320ms to 185ms across 500k monthly active users.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">Performance Honor</span>
+              <span class="cert-tag">Latency Tuning</span>
+              <span class="cert-tag">High Availability</span>
+              <span class="cert-tag">Architecture</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Recognition</span>
+              <span class="cert-id-code">Company Excellence Award</span>
+            </div>
+            <a href="#certificates" class="cert-link-btn" aria-label="View Engineering Excellence Honor">
+              Awarded
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 10. Achievement: Open Source & Community Leadership -->
+        <article class="glass-card cert-card" data-category="achievement">
+          <div class="cert-header">
+            <div class="cert-header-left">
+              <div class="cert-badge-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <span class="cert-category-pill">Honor</span>
+            </div>
+            <span class="cert-year">2022 — Present</span>
+          </div>
+          <div class="cert-body">
+            <h3 class="cert-title">Open-Source Impact &amp; Community Leadership</h3>
+            <span class="cert-issuer">GitHub Community &bull; University Technical Society</span>
+            <div class="cert-metric-banner">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+              </svg>
+              <span>1,500+ Community Stars &bull; 15+ Engineers Mentored</span>
+            </div>
+            <p class="cert-desc">Published open-source developer tooling and accessible UI kits adopted globally. Conducted weekend technical bootcamps on Git branching, clean architecture, and modern JavaScript.</p>
+            <div class="cert-tags">
+              <span class="cert-tag">Open Source</span>
+              <span class="cert-tag">Mentorship</span>
+              <span class="cert-tag">Developer Advocacy</span>
+              <span class="cert-tag">GitHub Stars</span>
+            </div>
+          </div>
+          <div class="cert-footer">
+            <div class="cert-id-badge">
+              <span class="cert-id-label">Recognition</span>
+              <span class="cert-id-code">Community Leader &bull; Open Contributor</span>
+            </div>
+            <a href="https://github.com/mdmatloob" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Visit Md MatlooB GitHub Profile">
+              GitHub Profile
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
           </div>
         </article>
       </div>
