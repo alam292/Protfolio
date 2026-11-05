@@ -466,32 +466,297 @@
         </div>
       </div>
 
-      <!-- 3 Gallery Showcase Cards -->
-      <div class="showcase-grid" role="region" aria-label="Projects Showcase">
-        <!-- Card 1: SaaS Web Platform -->
-        <article class="showcase-card" tabindex="0">
-          <img class="showcase-card-img" src="assets/jacket.jpg" alt="Enterprise SaaS Web Platform" loading="lazy">
-          <div class="showcase-card-overlay">
-            <span class="showcase-card-category">Web Application &amp; Cloud</span>
-            <h3 class="showcase-card-name">Enterprise SaaS Platform</h3>
+      <!-- 4 Flagship Engineering Showcase Cards -->
+      <div class="projects-grid" role="region" aria-label="Featured Projects Showcase">
+        <!-- Project 1: CloudScale AI -->
+        <article class="glass-card project-card" tabindex="0">
+          <div class="project-browser-bar">
+            <div class="project-traffic-lights" aria-hidden="true">
+              <span class="traffic-light traffic-red"></span>
+              <span class="traffic-light traffic-yellow"></span>
+              <span class="traffic-light traffic-green"></span>
+            </div>
+            <div class="project-address-bar">
+              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span class="project-url">cloudscale.matloobalam.dev</span>
+            </div>
+            <div class="project-status-pill">
+              <span class="pulse-indicator" aria-hidden="true"></span>
+              <span>Live Demo Ready</span>
+            </div>
+          </div>
+
+          <div class="project-preview-wrap">
+            <img class="project-preview-img" src="assets/project-cloudscale.svg" alt="CloudScale AI Enterprise SaaS Platform Mockup Screenshot" loading="lazy">
+            <div class="project-preview-overlay">
+              <a href="https://cloudscale.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch CloudScale AI interactive sandbox">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Interactive Sandbox</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-category-tag">Enterprise SaaS &amp; Cloud</span>
+              <span class="project-latency-tag">99.98% SLA &bull; 42ms p95</span>
+            </div>
+            <h3 class="project-title">CloudScale AI &mdash; Enterprise Multi-Tenant Platform</h3>
+            <p class="project-desc">
+              Architected a high-concurrency SaaS management platform featuring strict schema-per-tenant isolation, real-time cloud resource metering, and automated subscription billing via Stripe webhooks. Designed with Next.js 14 App Router for sub-100ms first paint.
+            </p>
+
+            <div class="project-tech-stack" aria-label="Technologies used in CloudScale AI">
+              <span class="tech-badge">Next.js 14</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">Prisma ORM</span>
+              <span class="tech-badge">Docker</span>
+              <span class="tech-badge">Tailwind CSS</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="https://github.com/matloobalam/cloudscale-saas-platform" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View CloudScale AI source code on GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub Repo</span>
+              </a>
+              <a href="https://cloudscale.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch CloudScale AI live demo">
+                <span>Live Demo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
           </div>
         </article>
 
-        <!-- Card 2: Interactive UI & Component Kit -->
-        <article class="showcase-card" tabindex="0">
-          <img class="showcase-card-img" src="assets/headphones.jpg" alt="Interactive Design System &amp; UI Components" loading="lazy">
-          <div class="showcase-card-overlay">
-            <span class="showcase-card-category">Frontend &amp; Architecture</span>
-            <h3 class="showcase-card-name">Interactive Design System</h3>
+        <!-- Project 2: NexusUI Studio -->
+        <article class="glass-card project-card" tabindex="0">
+          <div class="project-browser-bar">
+            <div class="project-traffic-lights" aria-hidden="true">
+              <span class="traffic-light traffic-red"></span>
+              <span class="traffic-light traffic-yellow"></span>
+              <span class="traffic-light traffic-green"></span>
+            </div>
+            <div class="project-address-bar">
+              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span class="project-url">nexusui.matloobalam.dev</span>
+            </div>
+            <div class="project-status-pill">
+              <span class="pulse-indicator" aria-hidden="true"></span>
+              <span>Live Demo Ready</span>
+            </div>
+          </div>
+
+          <div class="project-preview-wrap">
+            <img class="project-preview-img" src="assets/project-nexusui.svg" alt="NexusUI Design System and Kinetic Studio Screenshot" loading="lazy">
+            <div class="project-preview-overlay">
+              <a href="https://nexusui.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch NexusUI interactive playground">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Interactive Sandbox</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-category-tag">Design Systems &amp; Frontend</span>
+              <span class="project-latency-tag">100% WCAG 2.1 AA &bull; 0 CLS</span>
+            </div>
+            <h3 class="project-title">NexusUI Studio &mdash; Kinetic Design System</h3>
+            <p class="project-desc">
+              Engineered an accessible enterprise component system with automated Figma-to-CSS design token pipelines, fluid 60fps micro-interactions powered by GSAP, and 100% accessibility compliance. Core package clocks in at just 4.2kB gzipped.
+            </p>
+
+            <div class="project-tech-stack" aria-label="Technologies used in NexusUI Studio">
+              <span class="tech-badge">React 18</span>
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">GSAP Motion</span>
+              <span class="tech-badge">Tailwind CSS</span>
+              <span class="tech-badge">Storybook</span>
+              <span class="tech-badge">Vite</span>
+              <span class="tech-badge">Vitest</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="https://github.com/matloobalam/nexus-ui-system" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View NexusUI source code on GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub Repo</span>
+              </a>
+              <a href="https://nexusui.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch NexusUI live demo">
+                <span>Live Demo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
           </div>
         </article>
 
-        <!-- Card 3: Real-Time Data & API Dashboard -->
-        <article class="showcase-card" tabindex="0">
-          <img class="showcase-card-img" src="assets/bottle.jpg" alt="Real-Time Analytics &amp; API Dashboard" loading="lazy">
-          <div class="showcase-card-overlay">
-            <span class="showcase-card-category">Full Stack &amp; APIs</span>
-            <h3 class="showcase-card-name">Real-Time Data Dashboard</h3>
+        <!-- Project 3: PulseMetrics -->
+        <article class="glass-card project-card" tabindex="0">
+          <div class="project-browser-bar">
+            <div class="project-traffic-lights" aria-hidden="true">
+              <span class="traffic-light traffic-red"></span>
+              <span class="traffic-light traffic-yellow"></span>
+              <span class="traffic-light traffic-green"></span>
+            </div>
+            <div class="project-address-bar">
+              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span class="project-url">pulsemetrics.matloobalam.dev</span>
+            </div>
+            <div class="project-status-pill">
+              <span class="pulse-indicator" aria-hidden="true"></span>
+              <span>Live Demo Ready</span>
+            </div>
+          </div>
+
+          <div class="project-preview-wrap">
+            <img class="project-preview-img" src="assets/project-pulsemetrics.svg" alt="PulseMetrics Real-Time Distributed Telemetry Dashboard Screenshot" loading="lazy">
+            <div class="project-preview-overlay">
+              <a href="https://pulsemetrics.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch PulseMetrics live telemetry dashboard">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Interactive Sandbox</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-category-tag">Distributed Systems &amp; APIs</span>
+              <span class="project-latency-tag">54k ops/s &bull; 2.4ms p50</span>
+            </div>
+            <h3 class="project-title">PulseMetrics &mdash; Real-Time Observability Engine</h3>
+            <p class="project-desc">
+              Developed a high-throughput server telemetry dashboard capable of ingesting 50,000+ events per second. Leverages persistent WebSockets, Redis pub/sub messaging, and low-latency HTML5 Canvas charts maintaining a smooth 60fps frame budget.
+            </p>
+
+            <div class="project-tech-stack" aria-label="Technologies used in PulseMetrics">
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">Express.js</span>
+              <span class="tech-badge">WebSockets</span>
+              <span class="tech-badge">Redis</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">HTML5 Canvas</span>
+              <span class="tech-badge">Docker</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="https://github.com/matloobalam/pulse-metrics-dashboard" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View PulseMetrics source code on GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub Repo</span>
+              </a>
+              <a href="https://pulsemetrics.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch PulseMetrics live demo">
+                <span>Live Demo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: DevFlow Orchestrator -->
+        <article class="glass-card project-card" tabindex="0">
+          <div class="project-browser-bar">
+            <div class="project-traffic-lights" aria-hidden="true">
+              <span class="traffic-light traffic-red"></span>
+              <span class="traffic-light traffic-yellow"></span>
+              <span class="traffic-light traffic-green"></span>
+            </div>
+            <div class="project-address-bar">
+              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              <span class="project-url">devflow.matloobalam.dev</span>
+            </div>
+            <div class="project-status-pill">
+              <span class="pulse-indicator" aria-hidden="true"></span>
+              <span>Live Demo Ready</span>
+            </div>
+          </div>
+
+          <div class="project-preview-wrap">
+            <img class="project-preview-img" src="assets/project-devflow.svg" alt="DevFlow CI/CD Pipeline Orchestrator Screenshot" loading="lazy">
+            <div class="project-preview-overlay">
+              <a href="https://devflow.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch DevFlow pipeline sandbox">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+                <span>Interactive Sandbox</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="project-category-tag">DevOps &amp; Automation</span>
+              <span class="project-latency-tag">-65% Build Duration &bull; 95% Cache</span>
+            </div>
+            <h3 class="project-title">DevFlow &mdash; Cloud CI/CD Automation Orchestrator</h3>
+            <p class="project-desc">
+              Created an automated build and containerization workflow engine featuring an interactive visual DAG pipeline builder, live ANSI log streaming, and zero-downtime rolling container deployments on Docker and Kubernetes.
+            </p>
+
+            <div class="project-tech-stack" aria-label="Technologies used in DevFlow Orchestrator">
+              <span class="tech-badge">TypeScript</span>
+              <span class="tech-badge">Docker</span>
+              <span class="tech-badge">GraphQL</span>
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">MongoDB</span>
+              <span class="tech-badge">GitHub Actions</span>
+              <span class="tech-badge">Tailwind CSS</span>
+            </div>
+
+            <div class="project-actions">
+              <a href="https://github.com/matloobalam/devflow-pipeline-engine" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View DevFlow source code on GitHub">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                </svg>
+                <span>GitHub Repo</span>
+              </a>
+              <a href="https://devflow.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch DevFlow live demo">
+                <span>Live Demo</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </a>
+            </div>
           </div>
         </article>
       </div>

@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="pulseBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080c14"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f2fe"/>
+      <stop offset="100%" stop-color="#4facfe"/>
+    </linearGradient>
+    <linearGradient id="heatOrange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff5722" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff5722" stop-opacity="0.0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#pulseBg)"/>
+
+  <!-- Top Real-Time Status Header -->
+  <rect x="0" y="0" width="800" height="56" fill="#0b101a"/>
+  <line x1="0" y1="56" x2="800" y2="56" stroke="#ffffff" stroke-opacity="0.08"/>
+  <circle cx="28" cy="28" r="6" fill="#22c55e">
+    <animate attributeName="opacity" values="1;0.4;1" dur="1.8s" repeatCount="indefinite"/>
+  </circle>
+  <text x="44" y="33" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="700">PulseMetrics Engine</text>
+  <text x="195" y="33" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600">● LIVE WEBSOCKET (52,480 msgs/s)</text>
+  
+  <rect x="640" y="16" width="135" height="26" rx="13" fill="#151e2c" stroke="#ff5722" stroke-width="1"/>
+  <text x="656" y="33" fill="#ff8a50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">REDIS PUB/SUB</text>
+
+  <!-- Real-Time Stats Grid -->
+  <g transform="translate(24, 76)">
+    <!-- Metric 1 -->
+    <rect x="0" y="0" width="175" height="75" rx="8" fill="#0d1422" stroke="#ffffff" stroke-opacity="0.06"/>
+    <text x="16" y="24" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10">Event Ingestion Rate</text>
+    <text x="16" y="50" fill="#00f2fe" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="800">54.2k <tspan font-size="12" fill="#9ca3af">ops</tspan></text>
+    <text x="16" y="66" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">▲ 4.1% over nominal</text>
+
+    <!-- Metric 2 -->
+    <rect x="192" y="0" width="175" height="75" rx="8" fill="#0d1422" stroke="#ffffff" stroke-opacity="0.06"/>
+    <text x="208" y="24" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10">Median Latency (p50)</text>
+    <text x="208" y="50" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="800">2.4 <tspan font-size="12" fill="#9ca3af">ms</tspan></text>
+    <text x="208" y="66" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">Ultra-low packet roundtrip</text>
+
+    <!-- Metric 3 -->
+    <rect x="384" y="0" width="175" height="75" rx="8" fill="#0d1422" stroke="#ffffff" stroke-opacity="0.06"/>
+    <text x="400" y="24" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10">Tail Latency (p99)</text>
+    <text x="400" y="50" fill="#ff5722" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="800">11.8 <tspan font-size="12" fill="#9ca3af">ms</tspan></text>
+    <text x="400" y="66" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">SLA Guarantee: &lt; 50ms</text>
+
+    <!-- Metric 4 -->
+    <rect x="576" y="0" width="175" height="75" rx="8" fill="#0d1422" stroke="#ffffff" stroke-opacity="0.06"/>
+    <text x="592" y="24" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10">Connected Sockets</text>
+    <text x="592" y="50" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="800">12,410</text>
+    <text x="592" y="66" fill="#00f2fe" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">Load Balanced on 6 Nodes</text>
+  </g>
+
+  <!-- High-Frequency Canvas Stream Oscilloscope Chart -->
+  <g transform="translate(24, 170)">
+    <rect x="0" y="0" width="510" height="305" rx="10" fill="#090f1a" stroke="#ffffff" stroke-opacity="0.07"/>
+    <text x="20" y="30" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600">Dynamic Throughput Stream (60fps Canvas)</text>
+    
+    <!-- Oscilloscope Grid Lines -->
+    <g stroke="#ffffff" stroke-opacity="0.04" stroke-dasharray="4,4">
+      <line x1="20" y1="80" x2="490" y2="80"/>
+      <line x1="20" y1="140" x2="490" y2="140"/>
+      <line x1="20" y1="200" x2="490" y2="200"/>
+      <line x1="20" y1="260" x2="490" y2="260"/>
+    </g>
+
+    <!-- Multi-Series Waveform -->
+    <path d="M 20,240 C 60,210 90,250 140,160 C 180,90 220,180 270,110 C 320,60 360,190 410,130 C 450,90 470,120 490,70 L 490,280 L 20,280 Z" fill="url(#heatOrange)"/>
+    <path d="M 20,240 C 60,210 90,250 140,160 C 180,90 220,180 270,110 C 320,60 360,190 410,130 C 450,90 470,120 490,70" fill="none" stroke="#ff5722" stroke-width="2.5"/>
+
+    <path d="M 20,260 C 70,240 110,230 160,210 C 210,190 260,240 310,170 C 360,120 400,160 450,140 L 490,130" fill="none" stroke="#00f2fe" stroke-width="2" stroke-opacity="0.8"/>
+  </g>
+
+  <!-- Live Terminal / Packet Stream -->
+  <g transform="translate(550, 170)">
+    <rect x="0" y="0" width="225" height="305" rx="10" fill="#080c14" stroke="#ffffff" stroke-opacity="0.08"/>
+    <rect x="0" y="0" width="225" height="34" rx="10 10 0 0" fill="#0f1522"/>
+    <text x="16" y="22" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600">LIVE WEBSOCKET STREAM</text>
+
+    <!-- Terminal logs -->
+    <g font-family="Courier, monospace" font-size="10" fill="#9ca3af">
+      <text x="14" y="60"><tspan fill="#22c55e">[CONN]</tspan> ws://node-01:8080</text>
+      <text x="14" y="80"><tspan fill="#00f2fe">[PUB]</tspan> chan:telemetry.p99</text>
+      <text x="14" y="100"><tspan fill="#ff8a50">[BATCH]</tspan> 1,200 events</text>
+      <text x="14" y="120"><tspan fill="#22c55e">[ACK]</tspan> latency 1.8ms</text>
+      <text x="14" y="140"><tspan fill="#00f2fe">[PUB]</tspan> chan:edge.us-east</text>
+      <text x="14" y="160"><tspan fill="#22c55e">[FLUSH]</tspan> Postgres Buffer</text>
+      <text x="14" y="180"><tspan fill="#ff8a50">[CACHE]</tspan> Redis HIT (99.4%)</text>
+      <text x="14" y="200"><tspan fill="#22c55e">[CONN]</tspan> ws://node-04:8080</text>
+      <text x="14" y="220"><tspan fill="#00f2fe">[PUB]</tspan> chan:telemetry.cpu</text>
+      <text x="14" y="240"><tspan fill="#22c55e">[HEALTH]</tspan> 0 packet drop</text>
+      <text x="14" y="260"><tspan fill="#ff5722">[ALERT]</tspan> CPU spike cleared</text>
+    </g>
+  </g>
+</svg>
+

@@ -72,6 +72,7 @@
     gap: var(--space-6);
   }
 
+  .projects-grid,
   .showcase-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-6);
@@ -130,6 +131,7 @@
     gap: var(--space-4);
   }
 
+  .projects-grid,
   .showcase-grid {
     grid-template-columns: 1fr;
     gap: var(--space-6);
@@ -141,6 +143,10 @@
 
   .showcase-card:last-child {
     grid-column: span 1;
+  }
+
+  .project-actions {
+    grid-template-columns: 1fr 1fr;
   }
 
   .about-stats-grid {
@@ -287,6 +293,26 @@
 
   .stat-card {
     padding: var(--space-5);
+  }
+
+  .project-browser-bar {
+    padding: 10px 14px;
+  }
+
+  .project-address-bar {
+    max-width: 170px;
+  }
+
+  .project-body {
+    padding: 18px 16px;
+  }
+
+  .project-title {
+    font-size: 1.18rem;
+  }
+
+  .project-actions {
+    grid-template-columns: 1fr;
   }
 
   .showcase-card {

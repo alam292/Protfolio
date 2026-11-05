@@ -1,0 +1,151 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0d14"/>
+      <stop offset="100%" stop-color="#030608"/>
+    </linearGradient>
+    <linearGradient id="orangeGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff5722"/>
+      <stop offset="100%" stop-color="#ff8a50"/>
+    </linearGradient>
+    <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff5722" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff5722" stop-opacity="0.0"/>
+    </linearGradient>
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#0072ff"/>
+    </linearGradient>
+    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Grid -->
+  <g stroke="#ffffff" stroke-opacity="0.03" stroke-width="1">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="0" y1="450" x2="800" y2="450"/>
+    <line x1="100" y1="0" x2="100" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="500"/>
+    <line x1="300" y1="0" x2="300" y2="500"/>
+    <line x1="400" y1="0" x2="400" y2="500"/>
+    <line x1="500" y1="0" x2="500" y2="500"/>
+    <line x1="600" y1="0" x2="600" y2="500"/>
+    <line x1="700" y1="0" x2="700" y2="500"/>
+  </g>
+
+  <!-- SaaS Navigation Sidebar Mock -->
+  <rect x="0" y="0" width="70" height="500" fill="#06090f" opacity="0.95"/>
+  <rect x="23" y="24" width="24" height="24" rx="6" fill="url(#orangeGlow)"/>
+  <circle cx="35" cy="90" r="14" fill="#151b26"/>
+  <circle cx="35" cy="140" r="14" fill="#ff5722" fill-opacity="0.15" stroke="#ff5722" stroke-width="1.5"/>
+  <circle cx="35" cy="190" r="14" fill="#151b26"/>
+  <circle cx="35" cy="240" r="14" fill="#151b26"/>
+  <circle cx="35" cy="460" r="14" fill="#151b26"/>
+
+  <!-- Top App Header -->
+  <rect x="70" y="0" width="730" height="60" fill="#080c14" opacity="0.8"/>
+  <line x1="70" y1="60" x2="800" y2="60" stroke="#ffffff" stroke-opacity="0.06"/>
+  <text x="96" y="36" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700">CloudScale Platform</text>
+  <rect x="250" y="20" width="85" height="22" rx="11" fill="#ff5722" fill-opacity="0.15"/>
+  <text x="262" y="35" fill="#ff8a50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600">PRODUCTION</text>
+  <circle cx="750" cy="30" r="15" fill="#1a2232"/>
+  <circle cx="710" cy="30" r="12" fill="#121722"/>
+
+  <!-- Dashboard Content -->
+  <!-- Stat Cards -->
+  <g transform="translate(96, 80)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="155" height="85" rx="10" fill="#0f1520" stroke="#ffffff" stroke-opacity="0.08"/>
+    <text x="16" y="28" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">Total Revenue</text>
+    <text x="16" y="56" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700">$128,450</text>
+    <text x="16" y="74" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600">+24.5% vs last mo</text>
+
+    <!-- Card 2 -->
+    <rect x="175" y="0" width="155" height="85" rx="10" fill="#0f1520" stroke="#ffffff" stroke-opacity="0.08"/>
+    <text x="191" y="28" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">Active Tenants</text>
+    <text x="191" y="56" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700">1,842</text>
+    <text x="191" y="74" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600">+12% new orgs</text>
+
+    <!-- Card 3 -->
+    <rect x="350" y="0" width="155" height="85" rx="10" fill="#0f1520" stroke="#ffffff" stroke-opacity="0.08"/>
+    <text x="366" y="28" fill="#9ca3af" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">API Throughput</text>
+    <text x="366" y="56" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700">4.8M req/d</text>
+    <text x="366" y="74" fill="#00d2ff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600">p95: 42ms</text>
+
+    <!-- Card 4 -->
+    <rect x="525" y="0" width="155" height="85" rx="10" fill="#0f1520" stroke="#ff5722" stroke-opacity="0.3"/>
+    <text x="541" y="28" fill="#ff8a50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11">System Health</text>
+    <text x="541" y="56" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="18" font-weight="700">99.98%</text>
+    <text x="541" y="74" fill="#22c55e" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="600">All Nodes Optimal</text>
+  </g>
+
+  <!-- Big Interactive Chart Card -->
+  <g transform="translate(96, 185)">
+    <rect x="0" y="0" width="455" height="285" rx="12" fill="#0c111a" stroke="#ffffff" stroke-opacity="0.07" filter="url(#cardShadow)"/>
+    <text x="20" y="32" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600">Tenant Workload &amp; Request Latency</text>
+    <text x="20" y="48" fill="#6b7280" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10">Real-time edge telemetry aggregation across 12 regions</text>
+    
+    <!-- Chart Area -->
+    <path d="M 20,230 Q 80,180 130,200 T 230,130 T 320,160 T 400,90 L 435,110 L 435,240 L 20,240 Z" fill="url(#chartGrad)"/>
+    <path d="M 20,230 Q 80,180 130,200 T 230,130 T 320,160 T 400,90 L 435,110" fill="none" stroke="#ff5722" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Data Points -->
+    <circle cx="130" cy="200" r="4" fill="#ff5722" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="230" cy="130" r="4" fill="#ff5722" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="320" cy="160" r="4" fill="#ff5722" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="400" cy="90" r="5" fill="#ff5722" stroke="#ffffff" stroke-width="2"/>
+    <text x="380" y="75" fill="#ff8a50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700">32ms peak</text>
+
+    <!-- X Axis labels -->
+    <g fill="#4b5563" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10">
+      <text x="20" y="260">00:00</text>
+      <text x="100" y="260">04:00</text>
+      <text x="180" y="260">08:00</text>
+      <text x="260" y="260">12:00</text>
+      <text x="340" y="260">16:00</text>
+      <text x="415" y="260">20:00</text>
+    </g>
+  </g>
+
+  <!-- Right Side Panel: Live Deployments & Microservices -->
+  <g transform="translate(571, 185)">
+    <rect x="0" y="0" width="205" height="285" rx="12" fill="#0c111a" stroke="#ffffff" stroke-opacity="0.07"/>
+    <text x="18" y="32" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600">Active Clusters</text>
+
+    <!-- Node 1 -->
+    <g transform="translate(18, 55)">
+      <circle cx="8" cy="12" r="5" fill="#22c55e"/>
+      <text x="22" y="12" fill="#e5e7eb" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600">us-east-1 (Edge)</text>
+      <text x="22" y="26" fill="#6b7280" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">24 pods · 100% healthy</text>
+    </g>
+    <!-- Node 2 -->
+    <g transform="translate(18, 105)">
+      <circle cx="8" cy="12" r="5" fill="#22c55e"/>
+      <text x="22" y="12" fill="#e5e7eb" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600">eu-west-1 (Primary)</text>
+      <text x="22" y="26" fill="#6b7280" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">18 pods · 100% healthy</text>
+    </g>
+    <!-- Node 3 -->
+    <g transform="translate(18, 155)">
+      <circle cx="8" cy="12" r="5" fill="#00d2ff"/>
+      <text x="22" y="12" fill="#e5e7eb" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600">ap-south-1 (Mumbai)</text>
+      <text x="22" y="26" fill="#6b7280" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">12 pods · Auto-scaling</text>
+    </g>
+
+    <!-- Quick Action Badge -->
+    <rect x="18" y="215" width="169" height="42" rx="8" fill="#151d2a" stroke="#ff5722" stroke-opacity="0.4"/>
+    <text x="32" y="235" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="700">MULTI-TENANT ISOLATION</text>
+    <text x="32" y="248" fill="#ff8a50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9">PostgreSQL Schemas Active</text>
+  </g>
+</svg>
+

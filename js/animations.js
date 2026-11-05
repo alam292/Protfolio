@@ -170,9 +170,9 @@ class AnimationsController {
       ease: 'power3.out'
     });
 
-    gsap.from('.showcase-card', {
+    gsap.from('.project-card, .showcase-card', {
       scrollTrigger: {
-        trigger: '#projects .showcase-grid',
+        trigger: '#projects .projects-grid, #projects .showcase-grid',
         start: 'top 82%'
       },
       y: 70,
