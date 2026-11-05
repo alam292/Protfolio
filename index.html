@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #030608;
+      overflow-x: hidden;
+      overscroll-behavior-y: none;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    #canvas-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #030608;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      will-change: transform;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: high-quality;
+    }
+
+    #scroll-track {
+      position: relative;
+      width: 100%;
+      height: 600vh;
+      z-index: 2;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas-container">
+    <canvas id="canvas"></canvas>
+  </div>
+  <div id="scroll-track"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+    (() => {
+      'use strict';
+
+      const TOTAL_FRAMES = 300;
+      const FRAME_DIR = 'ezgif-8638738b594a7204-jpg';
+
+      function getFrameUrl(index) {
+        const paddedIndex = String(index).padStart(3, '0');
+        return `${FRAME_DIR}/ezgif-frame-${paddedIndex}.jpg`;
+      }
+
+      const canvas = document.getElementById('canvas');
+      const container = document.getElementById('canvas-container');
+      const scrollTrack = document.getElementById('scroll-track');
+      const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+
+      const frames = new Array(TOTAL_FRAMES);
+      const loaded = new Array(TOTAL_FRAMES).fill(false);
+
+      let currentFrame = 0;
+      let targetFrame = 0;
+      let lastRenderedFrame = -1;
+
+      // Parallax values
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentParallaxX = 0;
+      let currentParallaxY = 0;
+
+      // Layout cached values
+      let dpr = 1;
+      let vw = 0;
+      let vh = 0;
+      let drawX = 0;
+      let drawY = 0;
+      let drawW = 0;
+      let drawH = 0;
+      let needsRedraw = true;
+
+      function updateDimensions() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        vw = window.innerWidth;
+        vh = window.innerHeight;
+
+        canvas.width = Math.round(vw * dpr);
+        canvas.height = Math.round(vh * dpr);
+
+        const iw = 1280;
+        const ih = 720;
+        const scale = Math.max(vw / iw, vh / ih);
+
+        drawW = Math.round(iw * scale * dpr);
+        drawH = Math.round(ih * scale * dpr);
+        drawX = Math.round(((vw - (iw * scale)) / 2) * dpr);
+        drawY = Math.round(((vh - (ih * scale)) / 2) * dpr);
+
+        needsRedraw = true;
+        renderFrame(Math.round(currentFrame));
+      }
+
+      window.addEventListener('resize', updateDimensions, { passive: true });
+
+      function onScroll() {
+        const maxScroll = scrollTrack.offsetHeight - window.innerHeight;
+        if (maxScroll <= 0) return;
+        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
+        targetFrame = progress * (TOTAL_FRAMES - 1);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      window.addEventListener('mousemove', (e) => {
+        const halfX = window.innerWidth / 2;
+        const halfY = window.innerHeight / 2;
+        mouseX = (e.clientX - halfX) / halfX;
+        mouseY = (e.clientY - halfY) / halfY;
+      }, { passive: true });
+
+      function getBestFrameIndex(requestedIndex) {
+        if (loaded[requestedIndex]) return requestedIndex;
+
+        // Efficient bidirectional search for closest loaded frame
+        for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+          const prev = requestedIndex - offset;
+          if (prev >= 0 && loaded[prev]) return prev;
+          const next = requestedIndex + offset;
+          if (next < TOTAL_FRAMES && loaded[next]) return next;
+        }
+        return -1;
+      }
+
+      function renderFrame(index) {
+        const frameIdx = getBestFrameIndex(index);
+        if (frameIdx === -1) return;
+        if (frameIdx === lastRenderedFrame && !needsRedraw) return;
+
+        const img = frames[frameIdx];
+        if (!img || !img.complete || img.naturalWidth === 0) return;
+
+        ctx.drawImage(img, drawX, drawY, drawW, drawH);
+        lastRenderedFrame = frameIdx;
+        needsRedraw = false;
+      }
+
+      function loop() {
+        // High-precision smooth kinematic lerp
+        const diff = targetFrame - currentFrame;
+        if (Math.abs(diff) > 0.0001) {
+          currentFrame += diff * 0.085;
+        } else {
+          currentFrame = targetFrame;
+        }
+
+        // Natural parallax smoothing
+        currentParallaxX += (mouseX - currentParallaxX) * 0.05;
+        currentParallaxY += (mouseY - currentParallaxY) * 0.05;
+
+        const px = (currentParallaxX * -8).toFixed(2);
+        const py = (currentParallaxY * -6).toFixed(2);
+        const scrollProgress = currentFrame / (TOTAL_FRAMES - 1);
+        const zoom = (1 + scrollProgress * 0.035).toFixed(4);
+
+        container.style.transform = `translate3d(${px}px, ${py}px, 0) scale(${zoom})`;
+
+        renderFrame(Math.round(currentFrame));
+        requestAnimationFrame(loop);
+      }
+
+      function preload() {
+        // 1. Immediately load frame 1 for instant first paint
+        const firstImg = new Image();
+        firstImg.src = getFrameUrl(1);
+        frames[0] = firstImg;
+        firstImg.onload = () => {
+          loaded[0] = true;
+          needsRedraw = true;
+          renderFrame(0);
+        };
+
+        // 2. Preload remaining frames with decode() to avoid main-thread GPU stutters
+        for (let i = 2; i <= TOTAL_FRAMES; i++) {
+          const img = new Image();
+          const idx = i - 1;
+          img.src = getFrameUrl(i);
+          frames[idx] = img;
+
+          if (img.decode) {
+            img.decode().then(() => {
+              loaded[idx] = true;
+              if (Math.round(currentFrame) === idx) {
+                needsRedraw = true;
+                renderFrame(idx);
+              }
+            }).catch(() => {
+              // Fallback if decode promise rejects
+              loaded[idx] = true;
+            });
+          } else {
+            img.onload = () => {
+              loaded[idx] = true;
+              if (Math.round(currentFrame) === idx) {
+                needsRedraw = true;
+                renderFrame(idx);
+              }
+            };
+          }
+        }
+      }
+
+      function initGSAP() {
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          ScrollTrigger.create({
+            trigger: scrollTrack,
+            start: 'top top',
+            end: 'bottom bottom',
+            onUpdate: (self) => {
+              targetFrame = self.progress * (TOTAL_FRAMES - 1);
+            }
+          });
+        }
+      }
+
+      updateDimensions();
+      preload();
+      onScroll();
+      initGSAP();
+      requestAnimationFrame(loop);
+    })();
+  </script>
+</body>
+</html>
