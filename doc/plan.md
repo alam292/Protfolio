@@ -9,5 +9,6 @@ This directory contains architectural blueprints, content strategies, and implem
 - [Section 5: Experience & Internship Plan](EXPERIENCE_PLAN.md) — Career progression matrix (company name, job designation, duration, bulleted responsibilities with STAR metrics) and 6-month structured internship onboarding framework.
 - [Section 6: Education & Academic Qualifications Plan](EDUCATION_PLAN.md) — Comprehensive educational matrix (degree, college/university name, graduation year, marks & CGPA distinctions, capstone research, and academic honors).
 - [Section 7: Certifications & Professional Achievements Plan](CERTIFICATIONS_ACHIEVEMENTS_PLAN.md) — Three-pillar credential framework (Technical Certificates, Training & Bootcamps, and Professional Achievements Plan with STAR metrics and verification IDs).
+- [Section 8: Contact Section & Global Location Plan](CONTACT_SECTION_PLAN.md) — Direct email clipboard utility, LinkedIn and GitHub connection cards, accessible interactive contact form, and real-time IST location plan with timezone overlap matrix.
 - [Resume Auto-Update Architecture](../RESUME_AUTO_UPDATE_PLAN.md) — Technical blueprint for AI resume extraction and live dynamic rendering.
 - [Design System Specs](../DESIGN_SYSTEM.md) — Typography, color tokens, and visual standards.

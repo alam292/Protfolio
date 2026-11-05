@@ -1492,114 +1492,256 @@
     <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
-         SECTION 8: CONTACT SECTION
+         SECTION 8: CONTACT SECTION & GLOBAL COLLABORATION
          =================================================== -->
     <section class="portfolio-section" id="contact" aria-labelledby="contact-title">
       <div class="section-header">
         <span class="section-tag">Let's Connect</span>
         <h2 class="section-title" id="contact-title">Start a Conversation</h2>
-        <p class="section-desc">Have an upcoming project, freelance inquiry, or just want to discuss ideas? Reach out directly.</p>
+        <p class="section-desc">Have an upcoming software engineering project, contract inquiry, or full-time opportunity? Reach out directly or dispatch a brief below.</p>
       </div>
 
-      <div class="contact-grid">
-        <!-- Contact Details Card -->
-        <div class="glass-card contact-info-card">
-          <h3 class="contact-info-title">Contact Information</h3>
-          <p class="contact-info-desc">Feel free to reach out via email or through social platforms. I typically respond within 24 hours.</p>
-
-          <div class="contact-info-list">
-            <div class="contact-info-item">
-              <span class="contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                </svg>
-              </span>
-              <div>
-                <div class="contact-label">Email</div>
-                <a href="mailto:mdmatloobgaya@gmail.com" class="contact-value">mdmatloobgaya@gmail.com</a>
+      <div class="contact-master-container">
+        <!-- Contact Grid: Left Column (Channels & Location Plan) | Right Column (Interactive Form) -->
+        <div class="contact-grid">
+          
+          <!-- LEFT COLUMN: Verified Channels & Global Location Plan -->
+          <div class="contact-channels-column">
+            
+            <!-- 1. Direct Email Card with 1-Click Copy & Quick Send -->
+            <div class="glass-card contact-channel-card email-highlight-card">
+              <div class="channel-card-top">
+                <div class="channel-icon-wrap" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                  </svg>
+                </div>
+                <span class="contact-sla-badge">
+                  <span class="sla-dot"></span>
+                  Replies &lt; 24h
+                </span>
+              </div>
+              <div class="channel-card-body">
+                <div class="channel-label">Direct Email Address</div>
+                <a href="mailto:mdmatloobgaya@gmail.com" class="channel-main-value" id="contactEmailAddress">mdmatloobgaya@gmail.com</a>
+                <p class="channel-subtext">Ideal for project briefs, engineering proposals, and direct job inquiries.</p>
+              </div>
+              <div class="channel-card-actions">
+                <a href="mailto:mdmatloobgaya@gmail.com?subject=Project%20Inquiry%20-%20Md%20MatlooB%20Alam" class="btn-channel-action btn-send-email" aria-label="Send email to Md MatlooB Alam">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                  </svg>
+                  <span>Send Email</span>
+                </a>
+                <button type="button" class="btn-channel-action btn-copy-email" id="copyEmailBtn" data-copy="mdmatloobgaya@gmail.com" aria-label="Copy email address to clipboard">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="copy-icon">
+                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                  </svg>
+                  <span class="copy-text">Copy Email</span>
+                </button>
               </div>
             </div>
 
-            <div class="contact-info-item">
-              <span class="contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-              </span>
-              <div>
-                <div class="contact-label">Availability</div>
-                <span class="contact-value">Full-time &bull; Freelance Projects</span>
+            <!-- 2. Dual Professional Socials (LinkedIn & GitHub) -->
+            <div class="contact-social-row">
+              <!-- LinkedIn Profile Card -->
+              <a href="https://linkedin.com/in/mdmatloob" target="_blank" rel="noopener noreferrer" class="contact-profile-card linkedin-card" aria-label="Connect with Md MatlooB Alam on LinkedIn">
+                <div class="profile-card-header">
+                  <div class="profile-icon-wrap linkedin-icon-wrap" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect width="4" height="12" x="2" y="9"></rect>
+                      <circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                  </div>
+                  <span class="profile-arrow-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                </div>
+                <div class="profile-card-content">
+                  <span class="profile-network-badge">LinkedIn</span>
+                  <div class="profile-name">Md MatlooB Alam</div>
+                  <p class="profile-status">Network &bull; Career &bull; Endorsements</p>
+                </div>
+              </a>
+
+              <!-- GitHub Profile Card -->
+              <a href="https://github.com/mdmatloob" target="_blank" rel="noopener noreferrer" class="contact-profile-card github-card" aria-label="Explore Md MatlooB Alam's GitHub repositories">
+                <div class="profile-card-header">
+                  <div class="profile-icon-wrap github-icon-wrap" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                    </svg>
+                  </div>
+                  <span class="profile-arrow-icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                </div>
+                <div class="profile-card-content">
+                  <span class="profile-network-badge">GitHub</span>
+                  <div class="profile-name">@mdmatloob</div>
+                  <p class="profile-status">Open Source &bull; CI/CD &bull; Repos</p>
+                </div>
+              </a>
+            </div>
+
+            <!-- 3. Comprehensive Location Plan & Global Collaboration Matrix -->
+            <div class="glass-card location-plan-card">
+              <div class="location-card-header">
+                <div class="location-header-title-wrap">
+                  <div class="location-radar-pin" aria-hidden="true">
+                    <span class="radar-ping-wave"></span>
+                    <span class="radar-dot"></span>
+                  </div>
+                  <div>
+                    <h3 class="location-card-title">Location Plan &amp; Availability</h3>
+                    <p class="location-card-subtitle">Gaya, Bihar, India &bull; 24.7955&deg; N, 85.0002&deg; E</p>
+                  </div>
+                </div>
+                <!-- Dynamic Live Clock -->
+                <div class="live-clock-badge" id="locationLiveClockBadge" title="Current Local Time in Indian Standard Time (IST)">
+                  <span class="clock-icon" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                  </span>
+                  <span id="liveLocalClock" class="clock-digits">Loading IST...</span>
+                  <span class="clock-tz">IST</span>
+                </div>
+              </div>
+
+              <!-- Location Strategy Metrics & Relocation Plan -->
+              <div class="location-plan-details">
+                <div class="location-metric-item">
+                  <span class="location-metric-label">Work Arrangement</span>
+                  <span class="location-metric-value text-accent-green">100% Remote &bull; Hybrid Ready</span>
+                </div>
+                <div class="location-metric-item">
+                  <span class="location-metric-label">Relocation Readiness</span>
+                  <span class="location-metric-value">Bengaluru, Hyderabad, Pune, NCR</span>
+                </div>
+              </div>
+
+              <!-- Global Timezone Overlap Matrix -->
+              <div class="timezone-overlap-section">
+                <div class="timezone-header">
+                  <span class="timezone-title">Global Timezone Sync Overlap</span>
+                  <span class="timezone-sub">Standard daily collaboration window</span>
+                </div>
+                <div class="timezone-chips-grid">
+                  <div class="tz-chip">
+                    <span class="tz-region">Americas (EST/PST)</span>
+                    <span class="tz-hours">3 &ndash; 4 Hours Overlap</span>
+                  </div>
+                  <div class="tz-chip">
+                    <span class="tz-region">Europe &amp; UK (CET/GMT)</span>
+                    <span class="tz-hours">5 &ndash; 6 Hours Overlap</span>
+                  </div>
+                  <div class="tz-chip">
+                    <span class="tz-region">Asia-Pacific (SGT/AEST)</span>
+                    <span class="tz-hours">6 &ndash; 8 Hours Overlap</span>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div class="contact-info-item">
-              <span class="contact-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </span>
-              <div>
-                <div class="contact-label">Location</div>
-                <span class="contact-value">India &bull; Available Worldwide (Remote)</span>
-              </div>
-            </div>
           </div>
 
-          <!-- Social Channels -->
-          <div class="contact-socials" aria-label="Social Profiles">
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="GitHub Profile">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="LinkedIn Profile">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                <rect width="4" height="12" x="2" y="9"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-circle" aria-label="Twitter Profile">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
+          <!-- RIGHT COLUMN: Glassmorphic Interactive Contact Form -->
+          <div class="glass-card contact-form-card">
+            <div class="form-header-intro">
+              <h3 class="form-title">Send a Direct Message</h3>
+              <p class="form-desc">Fill out your inquiry details and I'll review and respond promptly.</p>
+            </div>
 
-        <!-- Contact Form -->
-        <div class="glass-card contact-form-card">
-          <form class="contact-form" id="contactForm" novalidate>
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label" for="userName">Your Name</label>
-                <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. John Doe" required autocomplete="name">
+            <form class="contact-form" id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="userName">
+                    Your Name <span class="required-mark" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                      </svg>
+                    </span>
+                    <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. John Doe" required autocomplete="name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="userEmail">
+                    Your Email <span class="required-mark" aria-hidden="true">*</span>
+                  </label>
+                  <div class="input-with-icon">
+                    <span class="input-icon" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                      </svg>
+                    </span>
+                    <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. name@company.com" required autocomplete="email">
+                  </div>
+                </div>
               </div>
+
+              <!-- Interactive Project / Service Selector Tags -->
               <div class="form-group">
-                <label class="form-label" for="userEmail">Your Email</label>
-                <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. name@company.com" required autocomplete="email">
+                <label class="form-label" id="serviceSelectLabel">I'm interested in</label>
+                <div class="service-selector-chips" role="group" aria-labelledby="serviceSelectLabel">
+                  <button type="button" class="service-chip active" data-service="Full Stack Web App">
+                    <span>Full-Stack Development</span>
+                  </button>
+                  <button type="button" class="service-chip" data-service="Frontend & UI Architecture">
+                    <span>Frontend &amp; UI Architecture</span>
+                  </button>
+                  <button type="button" class="service-chip" data-service="Cloud & APIs">
+                    <span>Cloud &amp; Backend APIs</span>
+                  </button>
+                  <button type="button" class="service-chip" data-service="Technical Consultation">
+                    <span>Technical Consultation</span>
+                  </button>
+                </div>
+                <input type="hidden" id="selectedServiceInput" name="service" value="Full Stack Web App">
               </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="userSubject">Subject / Project Type</label>
-              <input type="text" id="userSubject" name="subject" class="form-input" placeholder="e.g. Web Application, Frontend Development" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="userMessage">Message</label>
-              <textarea id="userMessage" name="message" class="form-textarea" rows="4" placeholder="Tell me about your project goals, scope, and timeline..." required></textarea>
-            </div>
-            <button type="submit" class="btn-touch btn-touch-orange btn-submit">
-              <span>Send Message</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </button>
-          </form>
+
+              <div class="form-group">
+                <label class="form-label" for="userSubject">
+                  Subject / Project Scope <span class="required-mark" aria-hidden="true">*</span>
+                </label>
+                <input type="text" id="userSubject" name="subject" class="form-input" placeholder="e.g. Enterprise Web Platform, Frontend Overhaul" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="userMessage">
+                  Message Details <span class="required-mark" aria-hidden="true">*</span>
+                </label>
+                <textarea id="userMessage" name="message" class="form-textarea" rows="4" placeholder="Briefly describe your objectives, scope, or timeline..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn-touch btn-touch-orange btn-submit" id="contactSubmitBtn">
+                <span class="btn-submit-text">Send Message</span>
+                <span class="btn-icon-circle" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </span>
+              </button>
+            </form>
+          </div>
+
         </div>
       </div>
     </section>

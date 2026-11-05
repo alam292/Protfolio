@@ -186,6 +186,15 @@
     grid-template-columns: 1fr;
   }
 
+  /* Contact Section Adaptations */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .timezone-chips-grid {
+    grid-template-columns: 1fr;
+  }
+
   .footer {
     flex-direction: column;
     gap: var(--space-4);
@@ -361,17 +370,21 @@
     height: 14px;
   }
 
-  .contact-info-item {
-    gap: var(--space-3);
+  .contact-social-row {
+    grid-template-columns: 1fr;
   }
 
-  .contact-icon {
-    width: 36px;
-    height: 36px;
+  .location-plan-details {
+    grid-template-columns: 1fr;
   }
 
-  .contact-socials {
-    justify-content: flex-start;
+  .channel-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-channel-action {
+    justify-content: center;
   }
 
   .back-to-top {
