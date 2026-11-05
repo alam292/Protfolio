@@ -327,6 +327,17 @@
     font-size: 1.05rem;
   }
 
+  .timeline-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+  }
+
+  .timeline-responsibilities li {
+    font-size: 0.9rem;
+    padding-left: 20px;
+  }
+
   .timeline-item {
     padding-left: 36px;
   }

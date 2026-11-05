@@ -47,10 +47,34 @@
   background-color: var(--accent-orange);
 }
 
+.timeline-dot.is-active {
+  background-color: var(--accent-orange);
+  box-shadow: 0 0 16px var(--accent-orange), 0 0 24px rgba(255, 87, 34, 0.4);
+  animation: pulse-glow 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 12px var(--accent-orange);
+  }
+  50% {
+    transform: scale(1.25);
+    box-shadow: 0 0 20px var(--accent-orange), 0 0 30px rgba(255, 87, 34, 0.6);
+  }
+}
+
 .timeline-card {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  transition: transform var(--transition-medium), border-color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.timeline-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 87, 34, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 87, 34, 0.08);
 }
 
 .timeline-meta {
@@ -58,6 +82,13 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.timeline-meta-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
@@ -72,10 +103,30 @@
   letter-spacing: 0.04em;
 }
 
+.timeline-type-badge {
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  letter-spacing: 0.03em;
+}
+
+.timeline-badge-internship {
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
 .timeline-company {
   font-size: var(--font-size-body);
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .timeline-role {
@@ -90,6 +141,34 @@
   font-size: var(--font-size-body);
   color: #d1d5db;
   line-height: 1.68;
+}
+
+.timeline-responsibilities {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2) 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeline-responsibilities li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.95rem;
+  color: #d1d5db;
+  line-height: 1.62;
+}
+
+.timeline-responsibilities li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-orange);
+  font-size: 1.05rem;
+  font-weight: bold;
+  line-height: 1.5;
 }
 
 .timeline-tags {
