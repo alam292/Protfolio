@@ -1,11 +1,11 @@
 /**
  * Skills & Capabilities Component
- * Modular cards categorizing frontend, UI/UX, backend, and DevOps toolchains.
+ * Modular cards categorizing Programming Languages, Frontend, Backend, Databases, and Developer Tools.
  */
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: clamp(20px, 2.5vw, 32px);
 }
 
@@ -13,12 +13,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  position: relative;
+  transition: transform var(--transition-medium), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .skill-card-top {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  position: relative;
 }
 
 .skill-icon-wrap {
@@ -48,6 +51,25 @@
   letter-spacing: -0.015em;
 }
 
+.skill-card-badge {
+  margin-left: auto;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.skill-card:hover .skill-card-badge {
+  color: var(--accent-orange-light);
+  border-color: rgba(255, 87, 34, 0.3);
+}
+
 .skill-category-desc {
   font-size: var(--font-size-sm);
   color: var(--text-muted);
@@ -58,7 +80,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-top: var(--space-1);
+  margin-top: auto;
+  padding-top: var(--space-2);
 }
 
 .skill-pill {
@@ -74,6 +97,7 @@
   color: #e5e7eb;
   transition: all var(--transition-fast);
   cursor: default;
+  user-select: none;
 }
 
 .skill-pill:hover {
@@ -81,6 +105,5 @@
   border-color: var(--accent-orange);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.2);
+  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.25);
 }
-
