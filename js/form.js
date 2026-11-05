@@ -11,6 +11,7 @@ class FormController {
     this.toast = document.getElementById('toastNotification');
     this.toastMessage = document.getElementById('toastMessage');
     this.toastTimeout = null;
+    this.clockInterval = null;
 
     this.init();
     this.initClipboardCopy();
@@ -19,11 +20,25 @@ class FormController {
   }
 
   init() {
+    this.form = document.getElementById('contactForm');
     if (!this.form) return;
+
+    // Remove any previously bound listeners by cloning
+    const newForm = this.form.cloneNode(true);
+    this.form.parentNode.replaceChild(newForm, this.form);
+    this.form = newForm;
 
     this.form.addEventListener('submit', (e) => {
       e.preventDefault();
       this.handleSubmit();
+    });
+
+    // Real-time input validation clear
+    const inputs = this.form.querySelectorAll('.form-input, .form-textarea');
+    inputs.forEach((input) => {
+      input.addEventListener('input', () => {
+        input.classList.remove('input-error');
+      });
     });
   }
 
@@ -35,15 +50,14 @@ class FormController {
     if (!copyBtn) return;
 
     copyBtn.addEventListener('click', async () => {
-      const emailToCopy = copyBtn.getAttribute('data-copy') || 'mdmatloobgaya@gmail.com';
+      const emailToCopy = copyBtn.getAttribute('data-copy') || 'contact@matloob.dev';
       const copyTextEl = copyBtn.querySelector('.copy-text');
-      const originalText = copyTextEl ? copyTextEl.textContent : 'Copy Email';
+      const originalText = copyTextEl ? copyTextEl.textContent : 'Copy';
 
       try {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           await navigator.clipboard.writeText(emailToCopy);
         } else {
-          // Fallback execCommand
           const tempInput = document.createElement('input');
           tempInput.value = emailToCopy;
           document.body.appendChild(tempInput);
@@ -52,18 +66,16 @@ class FormController {
           document.body.removeChild(tempInput);
         }
 
-        // Visual feedback on button
         copyBtn.classList.add('copied');
         if (copyTextEl) copyTextEl.textContent = 'Copied!';
-
-        this.showToast(`Email copied: ${emailToCopy}`);
+        this.showToast(`Email copied to clipboard: ${emailToCopy}`);
 
         setTimeout(() => {
           copyBtn.classList.remove('copied');
           if (copyTextEl) copyTextEl.textContent = originalText;
         }, 2200);
       } catch (err) {
-        this.showToast(`Email address: ${emailToCopy}`);
+        this.showToast(`Email: ${emailToCopy}`);
       }
     });
   }
@@ -78,13 +90,13 @@ class FormController {
 
     if (chips.length === 0) return;
 
-    chips.forEach(chip => {
+    chips.forEach((chip) => {
       chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
+        chips.forEach((c) => c.classList.remove('active'));
         chip.classList.add('active');
 
-        const serviceName = chip.getAttribute('data-service');
-        if (serviceInput && serviceName) {
+        const serviceName = chip.getAttribute('data-service') || chip.textContent.trim();
+        if (serviceInput) {
           serviceInput.value = serviceName;
         }
 
@@ -99,6 +111,10 @@ class FormController {
    * Real-time ticking clock for Location Plan (Indian Standard Time - Asia/Kolkata)
    */
   initLiveClock() {
+    if (this.clockInterval) {
+      clearInterval(this.clockInterval);
+    }
+
     const clockEl = document.getElementById('liveLocalClock');
     if (!clockEl) return;
 
@@ -112,15 +128,15 @@ class FormController {
           second: '2-digit',
           hour12: true
         });
-        clockEl.textContent = formatter.format(now);
+        clockEl.textContent = `${formatter.format(now)} IST`;
       } catch (e) {
         const now = new Date();
-        clockEl.textContent = now.toLocaleTimeString();
+        clockEl.textContent = `${now.toLocaleTimeString()} IST`;
       }
     };
 
     updateClock();
-    setInterval(updateClock, 1000);
+    this.clockInterval = setInterval(updateClock, 1000);
   }
 
   handleSubmit() {
@@ -128,16 +144,46 @@ class FormController {
     const emailInput = document.getElementById('userEmail');
     const subjectInput = document.getElementById('userSubject');
     const messageInput = document.getElementById('userMessage');
-    const submitBtn = this.form.querySelector('button[type="submit"]');
+    const submitBtn = document.getElementById('contactSubmitBtn') || this.form.querySelector('button[type="submit"]');
 
-    if (!this.form.checkValidity()) {
-      this.form.reportValidity();
+    let isValid = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validate Name
+    if (!nameInput || !nameInput.value.trim()) {
+      if (nameInput) nameInput.classList.add('input-error');
+      this.showToast('Please enter your name.', true);
+      isValid = false;
       return;
     }
 
-    // Interactive button loading state
-    const submitTextEl = submitBtn ? submitBtn.querySelector('.btn-submit-text') || submitBtn.querySelector('span:first-child') : null;
-    const originalText = submitTextEl ? submitTextEl.textContent : 'Send Message';
+    // Validate Email
+    if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
+      if (emailInput) emailInput.classList.add('input-error');
+      this.showToast('Please provide a valid email address.', true);
+      isValid = false;
+      return;
+    }
+
+    // Validate Subject
+    if (!subjectInput || !subjectInput.value.trim()) {
+      if (subjectInput) subjectInput.classList.add('input-error');
+      this.showToast('Please enter a project subject or purpose.', true);
+      isValid = false;
+      return;
+    }
+
+    // Validate Message
+    if (!messageInput || messageInput.value.trim().length < 8) {
+      if (messageInput) messageInput.classList.add('input-error');
+      this.showToast('Message must be at least 8 characters long.', true);
+      isValid = false;
+      return;
+    }
+
+    // Submit state animation
+    const submitTextEl = submitBtn ? submitBtn.querySelector('.btn-submit-text') : null;
+    const originalText = submitTextEl ? submitTextEl.textContent : 'Transmit Message';
 
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -145,13 +191,12 @@ class FormController {
     }
 
     setTimeout(() => {
-      const senderName = nameInput ? nameInput.value.trim() : 'there';
-      this.showToast(`Thank you, ${senderName}! Your message has been received.`);
+      const senderName = nameInput.value.trim();
+      this.showToast(`Thank you, ${senderName}! Your transmission has been dispatched.`);
 
-      // Reset form
       this.form.reset();
 
-      // Reset service chips to default
+      // Reset service chips
       const chips = document.querySelectorAll('.service-chip');
       chips.forEach((c, index) => {
         if (index === 0) c.classList.add('active');
@@ -166,14 +211,24 @@ class FormController {
         submitBtn.disabled = false;
         if (submitTextEl) submitTextEl.textContent = originalText;
       }
-    }, 700);
+    }, 750);
   }
 
-  showToast(message) {
+  showToast(message, isError = false) {
+    if (!this.toast) {
+      this.toast = document.getElementById('toastNotification');
+      this.toastMessage = document.getElementById('toastMessage');
+    }
     if (!this.toast) return;
 
     if (this.toastMessage) {
       this.toastMessage.textContent = message;
+    }
+
+    if (isError) {
+      this.toast.style.borderColor = 'rgba(239, 68, 68, 0.6)';
+    } else {
+      this.toast.style.borderColor = 'rgba(0, 230, 118, 0.5)';
     }
 
     this.toast.classList.add('active');

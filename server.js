@@ -20,6 +20,18 @@ const MIME_TYPES = {
   '.pdf': 'application/pdf'
 };
 
+process.on('uncaughtException', (err) => {
+  // Catch ECONNRESET / EPIPE / premature close quietly without exiting
+  if (err.code === 'ECONNRESET' || err.code === 'EPIPE' || err.code === 'ERR_STREAM_PREMATURE_CLOSE') {
+    return;
+  }
+  console.error('[Process Error]', err.message);
+});
+
+process.on('unhandledRejection', (reason) => {
+  console.error('[Unhandled Rejection]', reason);
+});
+
 const server = http.createServer((req, res) => {
   req.on('error', () => {});
   res.on('error', () => {});
@@ -32,14 +44,12 @@ const server = http.createServer((req, res) => {
     return res.end('Bad Request');
   }
 
-  // Quiet logging for verification
   if (decodedUrl === '/' || decodedUrl.endsWith('.html') || decodedUrl.endsWith('-001.jpg') || decodedUrl.endsWith('-300.jpg')) {
     console.log(`[HTTP] ${req.method} ${decodedUrl}`);
   }
 
   let filePath = path.join(PUBLIC_DIR, decodedUrl === '/' ? 'index.html' : decodedUrl);
 
-  // Security check: ensure filePath is within PUBLIC_DIR
   if (!filePath.startsWith(PUBLIC_DIR)) {
     res.writeHead(403);
     return res.end('Forbidden');
@@ -75,7 +85,10 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, headers);
     const stream = fs.createReadStream(filePath);
     stream.on('error', () => {
-      res.end();
+      try { res.end(); } catch (e) {}
+    });
+    res.on('close', () => {
+      stream.destroy();
     });
     req.on('close', () => {
       stream.destroy();
@@ -84,18 +97,42 @@ const server = http.createServer((req, res) => {
   });
 });
 
+server.on('clientError', (err, socket) => {
+  if (err.code === 'ECONNRESET' || !socket.writable) return;
+  try {
+    socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
+  } catch (e) {
+    socket.destroy();
+  }
+});
+
+let currentPort = PORT;
+
+function startServer(port) {
+  server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
+}
+
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
-    console.error(`Port ${PORT} is in use. Waiting to retry...`);
+    console.log(`Port ${currentPort} in use, attempting port ${currentPort + 1}...`);
+    currentPort += 1;
     setTimeout(() => {
-      server.close();
-      server.listen(PORT);
-    }, 1000);
+      startServer(currentPort);
+    }, 500);
   } else {
     console.error('Server error:', err);
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
 });
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
+});
+
+startServer(currentPort);
+

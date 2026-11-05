@@ -3,20 +3,69 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  
+  <!-- Primary Meta Tags -->
   <title>Md MatlooB Alam — Full Stack Developer & UI Engineer</title>
-  <meta name="description" content="Portfolio of Md MatlooB Alam — Full Stack Developer & UI Engineer specializing in scalable web architectures, design systems, and seamless digital experiences.">
+  <meta name="title" content="Md MatlooB Alam — Full Stack Developer & UI Engineer">
+  <meta name="description" content="Official portfolio of Md MatlooB Alam — Full Stack Developer & UI Engineer specializing in scalable web systems, Next.js, Node.js, and high-performance user interfaces.">
+  <meta name="author" content="Md MatlooB Alam">
+  <meta name="keywords" content="Md MatlooB Alam, Full Stack Developer, UI Engineer, React, Next.js, Node.js, TypeScript, PostgreSQL, Portfolio, Software Engineer">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#030608">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://matloob.dev">
+  <meta property="og:title" content="Md MatlooB Alam — Full Stack Developer & UI Engineer">
+  <meta property="og:description" content="Results-driven Full Stack Developer with 3+ years experience engineering high-performance web platforms, microservices, and design systems.">
+  <meta property="og:image" content="https://matloob.dev/assets/profile-avatar.svg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://matloob.dev">
+  <meta property="twitter:title" content="Md MatlooB Alam — Full Stack Developer & UI Engineer">
+  <meta property="twitter:description" content="Results-driven Full Stack Developer with 3+ years experience engineering high-performance web platforms, microservices, and design systems.">
+  <meta property="twitter:image" content="https://matloob.dev/assets/profile-avatar.svg">
 
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23ff5722'/><text x='50%' y='68%' font-size='60' font-weight='800' fill='white' text-anchor='middle'>M</text></svg>">
 
-  <!-- Google Fonts for Modern Typography System -->
+  <!-- Typography: Syne (Display) & Plus Jakarta Sans (Body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
-  <!-- Modular Design System Stylesheets -->
+  <!-- Master Design System Stylesheets -->
   <link rel="stylesheet" href="css/main.css">
+
+  <!-- JSON-LD Structured Data Schema for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Md MatlooB Alam",
+    "jobTitle": "Full Stack Developer & UI Engineer",
+    "url": "https://matloob.dev",
+    "email": "contact@matloob.dev",
+    "sameAs": [
+      "https://github.com/mdmatloob",
+      "https://linkedin.com/in/mdmatloob"
+    ],
+    "knowsAbout": [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+      "PostgreSQL",
+      "Docker",
+      "Tailwind CSS",
+      "RESTful APIs",
+      "UI/UX Design Systems"
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -28,7 +77,7 @@
     <canvas id="canvas"></canvas>
   </div>
 
-  <!-- Soft gradient vignette for typographic contrast -->
+  <!-- Soft gradient vignette for contrast -->
   <div class="canvas-overlay-vignette" aria-hidden="true"></div>
 
   <!-- Fixed Header Navigation -->
@@ -38,7 +87,7 @@
       <span class="logo-text">Matloob<span class="logo-text-accent">.dev</span></span>
     </a>
 
-    <!-- Desktop Navigation Links -->
+    <!-- Desktop Navigation Links (All 8 Sections) -->
     <nav aria-label="Primary Navigation">
       <ul class="nav-links">
         <li><a href="#hero" class="nav-link active">Home</a></li>
@@ -52,8 +101,22 @@
       </ul>
     </nav>
 
-    <!-- Header Actions -->
+    <!-- Header Actions (Theme Toggle, Contact CTA, Mobile Toggle) -->
     <div class="nav-actions">
+      <!-- Theme Switcher Button -->
+      <button 
+        type="button" 
+        class="theme-toggle-btn" 
+        aria-label="Switch Theme" 
+        title="Toggle Hacker Dark / Slate Light Theme"
+      >
+        <span class="theme-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+
       <a href="#contact" class="btn-touch">
         <span>Get in touch</span>
         <span class="btn-icon-circle" aria-hidden="true">
@@ -65,7 +128,13 @@
       </a>
 
       <!-- Mobile Hamburger Toggle -->
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileDrawer">
+      <button 
+        class="mobile-toggle" 
+        id="mobileToggle" 
+        aria-label="Toggle navigation menu" 
+        aria-expanded="false" 
+        aria-controls="mobileDrawer"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -75,6 +144,21 @@
 
   <!-- Mobile Drawer Menu -->
   <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-top" style="display: flex; justify-content: flex-end; padding: 16px 24px;">
+      <button 
+        type="button" 
+        class="theme-toggle-btn" 
+        aria-label="Switch Theme" 
+        title="Toggle Theme"
+      >
+        <span class="theme-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+
     <nav>
       <ul class="mobile-nav-links">
         <li><a href="#hero" class="mobile-nav-link">Home</a></li>
@@ -87,6 +171,7 @@
         <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
       </ul>
     </nav>
+
     <div class="mobile-drawer-cta">
       <a href="#contact" class="btn-touch btn-touch-orange">
         <span>Let's talk</span>
@@ -100,1649 +185,78 @@
     </div>
   </div>
 
-  <!-- Interactive Scrollable Overlay Layers -->
+  <!-- Interactive Scrollable Main Content -->
   <main class="scroll-content">
 
     <!-- ===================================================
-         SECTION 1: HERO SECTION
+         SECTION 1: HERO / HOME SECTION
          =================================================== -->
     <section class="hero-section" id="hero" aria-label="Hero section">
-      <div class="hero-top-row">
-        <!-- Left: Identity, Headline, Intro & Dynamic CTAs -->
-        <div class="hero-headline-block">
-          <!-- 1. Live Opportunity Status Badge -->
-          <div class="hero-status-badge" role="status" aria-label="Current availability status">
-            <span class="status-pulse-dot" aria-hidden="true"></span>
-            <span class="status-badge-text">Available for opportunities</span>
-            <span class="status-badge-sub">Freelance &amp; Full-time</span>
-          </div>
-
-          <!-- 2. Name & Job Title -->
-          <div class="hero-author-meta">
-            <span class="hero-greeting-intro">Hello, I'm</span>
-            <h2 class="hero-author-name">Md MatlooB Alam</h2>
-          </div>
-          <h1 class="hero-main-title">Full Stack<br><span class="hero-title-accent">Developer</span> &amp; UI Engineer</h1>
-
-          <!-- 3. Short Introduction -->
-          <p class="hero-intro-text">
-            Specializing in engineering high-performance web applications, scalable cloud architectures, and intuitive digital interfaces. Turning complex challenges into sleek, production-ready code.
-          </p>
-
-          <!-- 4. Dynamic Action Buttons (Resume Download & Contact) -->
-          <div class="hero-actions-group">
-            <a href="assets/Md_MatlooB_Alam_Resume.pdf" class="btn-touch hero-btn-resume" id="heroResumeBtn" download="Md_MatlooB_Alam_Resume.pdf" aria-label="Download Md MatlooB Alam's Resume">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-              <span>Download Resume</span>
-            </a>
-            <a href="#contact" class="btn-touch hero-btn-contact" aria-label="Contact Md MatlooB Alam">
-              <span>Let's Talk</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Professional Photo Presentation -->
-        <div class="hero-visual-block">
-          <div class="hero-photo-card glass-card">
-            <div class="hero-photo-glow" aria-hidden="true"></div>
-            <div class="hero-photo-frame">
-              <img src="assets/profile.jpg" onerror="this.onerror=null; this.src='assets/profile-avatar.svg';" alt="Md MatlooB Alam — Full Stack Developer" class="hero-photo" width="340" height="340">
-            </div>
-            <!-- Interactive Floating Badges -->
-            <div class="hero-photo-badge hero-photo-badge-top">
-              <span class="badge-dot-green" aria-hidden="true"></span>
-              <span>Open to Work</span>
-            </div>
-            <div class="hero-photo-badge hero-photo-badge-bottom">
-              <span class="badge-role-icon">&lt;/&gt;</span>
-              <span>Full Stack &amp; UI</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 Service Pillars Grid -->
-      <div class="hero-pillars-grid" aria-label="Core disciplines">
-        <div class="pillar-card">
-          <span class="pillar-num">#01</span>
-          <span class="pillar-title">Frontend Engineering</span>
-        </div>
-        <div class="pillar-card">
-          <span class="pillar-num">#02</span>
-          <span class="pillar-title">Backend Systems</span>
-        </div>
-        <div class="pillar-card">
-          <span class="pillar-num">#03</span>
-          <span class="pillar-title">UI/UX Design</span>
-        </div>
-        <div class="pillar-card">
-          <span class="pillar-num">#04</span>
-          <span class="pillar-title">Cloud &amp; DevOps</span>
-        </div>
+      <div id="heroMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
-
-    <!-- Air spacer allowing canvas visual spotlight -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
-
-    <!-- ===================================================
-         CLIENT LOGOS / BRANDS SECTION
-         =================================================== -->
-    <section class="brands-section" id="brands" aria-label="Core technologies">
-      <div class="brands-wrapper">
-        <span class="brands-title">Core Technologies &amp; Frameworks</span>
-        <div class="brands-list">
-          <!-- React / Next -->
-          <div class="brand-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="9"></circle>
-            </svg>
-            <span>React &amp; Next.js</span>
-          </div>
-          <!-- Node.js -->
-          <div class="brand-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M6 3h12l-6 9 6 9H6l6-9-6-9z"></path>
-            </svg>
-            <span>Node.js / Express</span>
-          </div>
-          <!-- TypeScript -->
-          <div class="brand-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor"></path>
-              <circle cx="12" cy="12" r="9"></circle>
-            </svg>
-            <span>TypeScript</span>
-          </div>
-          <!-- Cloud / DB -->
-          <div class="brand-item">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M7 6a5 5 0 0 0 0 12h2a5 5 0 0 0 0-12H7z" fill="currentColor"></path>
-              <path d="M15 6a5 5 0 0 1 0 12h2a5 5 0 0 0 0-12h-2z" fill="currentColor"></path>
-            </svg>
-            <span>PostgreSQL &amp; Cloud</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 2: ABOUT ME
          =================================================== -->
     <section class="portfolio-section" id="about" aria-labelledby="about-title">
-      <div class="section-header">
-        <span class="section-tag">About Me</span>
-        <h2 class="section-title" id="about-title">Designing &amp; Engineering<br>Modern Digital Experiences</h2>
-        <p class="section-desc">Passionate creator dedicated to crafting intuitive, performant, and memorable digital products.</p>
-      </div>
-
-      <div class="about-grid">
-        <!-- Story Card -->
-        <div class="glass-card about-story-card">
-          <div class="status-indicator">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span class="status-text">Available for freelance &amp; full-time roles</span>
-          </div>
-          <h3 class="about-subheading">Bridging Creative UI with Scalable Full Stack Engineering</h3>
-          <p class="about-text">
-            I am <strong>Md MatlooB Alam</strong>, a Full Stack Developer &amp; UI Architect with a Master’s in Computer Applications (MCA). My professional journey started with foundational software engineering and evolved into architecting resilient full-stack systems, modular component libraries, and cloud-native solutions.
-          </p>
-          <p class="about-text">
-            With over <strong>3+ years</strong> of hands-on experience delivering 25+ web and application projects, my career goal is to architect large-scale distributed systems and lead design-engineering initiatives that set new standards in software quality.
-          </p>
-          <p class="about-text">
-            I am deeply passionate about the intersection of design precision and technical performance: fluid 60fps micro-interactions, clean TypeScript architecture, accessible UX, and blazing-fast load times.
-          </p>
-          <div class="about-action-row">
-            <a href="#contact" class="btn-touch btn-touch-orange">
-              <span>Let's collaborate</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Metric Counter Grid -->
-        <div class="about-stats-grid" aria-label="Key metrics">
-          <div class="glass-card stat-card">
-            <span class="stat-number">03+</span>
-            <span class="stat-label">Years of Experience</span>
-          </div>
-          <div class="glass-card stat-card">
-            <span class="stat-number">25+</span>
-            <span class="stat-label">Web &amp; App Projects</span>
-          </div>
-          <div class="glass-card stat-card">
-            <span class="stat-number">10+</span>
-            <span class="stat-label">Modern Tech Stacks</span>
-          </div>
-          <div class="glass-card stat-card">
-            <span class="stat-number">99%</span>
-            <span class="stat-label">Code Quality &amp; Uptime</span>
-          </div>
-        </div>
+      <div id="aboutMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
-
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
-         SECTION 3: SKILLS & TECH STACK
+         SECTION 3: TECHNICAL SKILLS
          =================================================== -->
     <section class="portfolio-section" id="skills" aria-labelledby="skills-title">
-      <div class="section-header">
-        <span class="section-tag">Core Capabilities</span>
-        <h2 class="section-title" id="skills-title">Skills &amp; Technology Stack</h2>
-        <p class="section-desc">Tools, languages, and frameworks leveraged to build world-class products.</p>
-      </div>
-
-      <div class="skills-grid">
-        <!-- 1. Programming Languages -->
-        <article class="glass-card skill-card">
-          <div class="skill-card-top">
-            <div class="skill-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            </div>
-            <h3 class="skill-category-title">Programming Languages</h3>
-            <span class="skill-card-badge">6 Languages</span>
-          </div>
-          <p class="skill-category-desc">Foundational, type-safe syntax powering robust logic and performant apps.</p>
-          <div class="skill-pills">
-            <span class="skill-pill">TypeScript</span>
-            <span class="skill-pill">JavaScript ES6+</span>
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">HTML5</span>
-            <span class="skill-pill">CSS3</span>
-            <span class="skill-pill">SQL</span>
-          </div>
-        </article>
-
-        <!-- 2. Frontend Technologies -->
-        <article class="glass-card skill-card">
-          <div class="skill-card-top">
-            <div class="skill-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                <path d="M3 9h18"></path>
-                <path d="M9 21V9"></path>
-              </svg>
-            </div>
-            <h3 class="skill-category-title">Frontend Technologies</h3>
-            <span class="skill-card-badge">6 Frameworks</span>
-          </div>
-          <p class="skill-category-desc">Reactive state management, design systems, and 60fps cinematic animations.</p>
-          <div class="skill-pills">
-            <span class="skill-pill">React.js</span>
-            <span class="skill-pill">Next.js</span>
-            <span class="skill-pill">Redux Toolkit</span>
-            <span class="skill-pill">Tailwind CSS</span>
-            <span class="skill-pill">GSAP / Motion</span>
-            <span class="skill-pill">HTML5 Canvas</span>
-          </div>
-        </article>
-
-        <!-- 3. Backend Technologies -->
-        <article class="glass-card skill-card">
-          <div class="skill-card-top">
-            <div class="skill-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect width="20" height="8" x="2" y="2" rx="2" ry="2"></rect>
-                <rect width="20" height="8" x="2" y="14" rx="2" ry="2"></rect>
-                <line x1="6" x2="6.01" y1="6" y2="6"></line>
-                <line x1="6" x2="6.01" y1="18" y2="18"></line>
-              </svg>
-            </div>
-            <h3 class="skill-category-title">Backend Technologies</h3>
-            <span class="skill-card-badge">6 Technologies</span>
-          </div>
-          <p class="skill-category-desc">Modular server architectures, asynchronous data streaming, and REST/GraphQL APIs.</p>
-          <div class="skill-pills">
-            <span class="skill-pill">Node.js</span>
-            <span class="skill-pill">Express.js</span>
-            <span class="skill-pill">RESTful APIs</span>
-            <span class="skill-pill">GraphQL</span>
-            <span class="skill-pill">JWT &amp; OAuth</span>
-            <span class="skill-pill">Serverless</span>
-          </div>
-        </article>
-
-        <!-- 4. Databases -->
-        <article class="glass-card skill-card">
-          <div class="skill-card-top">
-            <div class="skill-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"></path>
-              </svg>
-            </div>
-            <h3 class="skill-category-title">Databases</h3>
-            <span class="skill-card-badge">6 Engines</span>
-          </div>
-          <p class="skill-category-desc">Relational schemas, NoSQL document persistence, caching, and ORM abstractions.</p>
-          <div class="skill-pills">
-            <span class="skill-pill">PostgreSQL</span>
-            <span class="skill-pill">MongoDB</span>
-            <span class="skill-pill">MySQL</span>
-            <span class="skill-pill">Redis</span>
-            <span class="skill-pill">Prisma ORM</span>
-            <span class="skill-pill">Mongoose ODM</span>
-          </div>
-        </article>
-
-        <!-- 5. Developer Tools -->
-        <article class="glass-card skill-card">
-          <div class="skill-card-top">
-            <div class="skill-icon-wrap" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-              </svg>
-            </div>
-            <h3 class="skill-category-title">Developer Tools</h3>
-            <span class="skill-card-badge">6 Tools</span>
-          </div>
-          <p class="skill-category-desc">Version control, containerization, build workflows, and automated CI/CD pipelines.</p>
-          <div class="skill-pills">
-            <span class="skill-pill">Git &amp; GitHub</span>
-            <span class="skill-pill">Docker</span>
-            <span class="skill-pill">Postman</span>
-            <span class="skill-pill">Vite / Webpack</span>
-            <span class="skill-pill">CI/CD Pipelines</span>
-            <span class="skill-pill">Linux &amp; Bash</span>
-          </div>
-        </article>
+      <div id="skillsMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
-
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 4: FEATURED PROJECTS
          =================================================== -->
     <section class="portfolio-section" id="projects" aria-labelledby="projects-title">
-      <div class="behind-header">
-        <div class="behind-header-left">
-          <span class="behind-tag">Featured Works</span>
-          <h2 class="behind-main-title" id="projects-title">Shaping Experiences That Make Life Simpler</h2>
-        </div>
-        <div class="behind-header-right">
-          <p class="behind-lead-text">A curated selection of full-stack web applications, modern interfaces, and scalable software solutions.</p>
-          <div class="behind-action-row">
-            <div class="behind-action-subtext">
-              Have a Project in Mind?<br>Let's Build It Together
-            </div>
-            <a href="#contact" class="btn-touch btn-touch-orange">
-              <span>Start project</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 Flagship Engineering Showcase Cards -->
-      <div class="projects-grid" role="region" aria-label="Featured Projects Showcase">
-        <!-- Project 1: CloudScale AI -->
-        <article class="glass-card project-card" tabindex="0">
-          <div class="project-browser-bar">
-            <div class="project-traffic-lights" aria-hidden="true">
-              <span class="traffic-light traffic-red"></span>
-              <span class="traffic-light traffic-yellow"></span>
-              <span class="traffic-light traffic-green"></span>
-            </div>
-            <div class="project-address-bar">
-              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span class="project-url">cloudscale.matloobalam.dev</span>
-            </div>
-            <div class="project-status-pill">
-              <span class="pulse-indicator" aria-hidden="true"></span>
-              <span>Live Demo Ready</span>
-            </div>
-          </div>
-
-          <div class="project-preview-wrap">
-            <img class="project-preview-img" src="assets/project-cloudscale.svg" alt="CloudScale AI Enterprise SaaS Platform Mockup Screenshot" loading="lazy">
-            <div class="project-preview-overlay">
-              <a href="https://cloudscale.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch CloudScale AI interactive sandbox">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                <span>Interactive Sandbox</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <div class="project-meta-row">
-              <span class="project-category-tag">Enterprise SaaS &amp; Cloud</span>
-              <span class="project-latency-tag">99.98% SLA &bull; 42ms p95</span>
-            </div>
-            <h3 class="project-title">CloudScale AI &mdash; Enterprise Multi-Tenant Platform</h3>
-            <p class="project-desc">
-              Architected a high-concurrency SaaS management platform featuring strict schema-per-tenant isolation, real-time cloud resource metering, and automated subscription billing via Stripe webhooks. Designed with Next.js 14 App Router for sub-100ms first paint.
-            </p>
-
-            <div class="project-tech-stack" aria-label="Technologies used in CloudScale AI">
-              <span class="tech-badge">Next.js 14</span>
-              <span class="tech-badge">TypeScript</span>
-              <span class="tech-badge">Node.js</span>
-              <span class="tech-badge">PostgreSQL</span>
-              <span class="tech-badge">Prisma ORM</span>
-              <span class="tech-badge">Docker</span>
-              <span class="tech-badge">Tailwind CSS</span>
-            </div>
-
-            <div class="project-actions">
-              <a href="https://github.com/matloobalam/cloudscale-saas-platform" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View CloudScale AI source code on GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-                <span>GitHub Repo</span>
-              </a>
-              <a href="https://cloudscale.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch CloudScale AI live demo">
-                <span>Live Demo</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2: NexusUI Studio -->
-        <article class="glass-card project-card" tabindex="0">
-          <div class="project-browser-bar">
-            <div class="project-traffic-lights" aria-hidden="true">
-              <span class="traffic-light traffic-red"></span>
-              <span class="traffic-light traffic-yellow"></span>
-              <span class="traffic-light traffic-green"></span>
-            </div>
-            <div class="project-address-bar">
-              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span class="project-url">nexusui.matloobalam.dev</span>
-            </div>
-            <div class="project-status-pill">
-              <span class="pulse-indicator" aria-hidden="true"></span>
-              <span>Live Demo Ready</span>
-            </div>
-          </div>
-
-          <div class="project-preview-wrap">
-            <img class="project-preview-img" src="assets/project-nexusui.svg" alt="NexusUI Design System and Kinetic Studio Screenshot" loading="lazy">
-            <div class="project-preview-overlay">
-              <a href="https://nexusui.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch NexusUI interactive playground">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                <span>Interactive Sandbox</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <div class="project-meta-row">
-              <span class="project-category-tag">Design Systems &amp; Frontend</span>
-              <span class="project-latency-tag">100% WCAG 2.1 AA &bull; 0 CLS</span>
-            </div>
-            <h3 class="project-title">NexusUI Studio &mdash; Kinetic Design System</h3>
-            <p class="project-desc">
-              Engineered an accessible enterprise component system with automated Figma-to-CSS design token pipelines, fluid 60fps micro-interactions powered by GSAP, and 100% accessibility compliance. Core package clocks in at just 4.2kB gzipped.
-            </p>
-
-            <div class="project-tech-stack" aria-label="Technologies used in NexusUI Studio">
-              <span class="tech-badge">React 18</span>
-              <span class="tech-badge">TypeScript</span>
-              <span class="tech-badge">GSAP Motion</span>
-              <span class="tech-badge">Tailwind CSS</span>
-              <span class="tech-badge">Storybook</span>
-              <span class="tech-badge">Vite</span>
-              <span class="tech-badge">Vitest</span>
-            </div>
-
-            <div class="project-actions">
-              <a href="https://github.com/matloobalam/nexus-ui-system" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View NexusUI source code on GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-                <span>GitHub Repo</span>
-              </a>
-              <a href="https://nexusui.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch NexusUI live demo">
-                <span>Live Demo</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3: PulseMetrics -->
-        <article class="glass-card project-card" tabindex="0">
-          <div class="project-browser-bar">
-            <div class="project-traffic-lights" aria-hidden="true">
-              <span class="traffic-light traffic-red"></span>
-              <span class="traffic-light traffic-yellow"></span>
-              <span class="traffic-light traffic-green"></span>
-            </div>
-            <div class="project-address-bar">
-              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span class="project-url">pulsemetrics.matloobalam.dev</span>
-            </div>
-            <div class="project-status-pill">
-              <span class="pulse-indicator" aria-hidden="true"></span>
-              <span>Live Demo Ready</span>
-            </div>
-          </div>
-
-          <div class="project-preview-wrap">
-            <img class="project-preview-img" src="assets/project-pulsemetrics.svg" alt="PulseMetrics Real-Time Distributed Telemetry Dashboard Screenshot" loading="lazy">
-            <div class="project-preview-overlay">
-              <a href="https://pulsemetrics.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch PulseMetrics live telemetry dashboard">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                <span>Interactive Sandbox</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <div class="project-meta-row">
-              <span class="project-category-tag">Distributed Systems &amp; APIs</span>
-              <span class="project-latency-tag">54k ops/s &bull; 2.4ms p50</span>
-            </div>
-            <h3 class="project-title">PulseMetrics &mdash; Real-Time Observability Engine</h3>
-            <p class="project-desc">
-              Developed a high-throughput server telemetry dashboard capable of ingesting 50,000+ events per second. Leverages persistent WebSockets, Redis pub/sub messaging, and low-latency HTML5 Canvas charts maintaining a smooth 60fps frame budget.
-            </p>
-
-            <div class="project-tech-stack" aria-label="Technologies used in PulseMetrics">
-              <span class="tech-badge">Node.js</span>
-              <span class="tech-badge">Express.js</span>
-              <span class="tech-badge">WebSockets</span>
-              <span class="tech-badge">Redis</span>
-              <span class="tech-badge">PostgreSQL</span>
-              <span class="tech-badge">HTML5 Canvas</span>
-              <span class="tech-badge">Docker</span>
-            </div>
-
-            <div class="project-actions">
-              <a href="https://github.com/matloobalam/pulse-metrics-dashboard" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View PulseMetrics source code on GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-                <span>GitHub Repo</span>
-              </a>
-              <a href="https://pulsemetrics.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch PulseMetrics live demo">
-                <span>Live Demo</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 4: DevFlow Orchestrator -->
-        <article class="glass-card project-card" tabindex="0">
-          <div class="project-browser-bar">
-            <div class="project-traffic-lights" aria-hidden="true">
-              <span class="traffic-light traffic-red"></span>
-              <span class="traffic-light traffic-yellow"></span>
-              <span class="traffic-light traffic-green"></span>
-            </div>
-            <div class="project-address-bar">
-              <svg class="padlock-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span class="project-url">devflow.matloobalam.dev</span>
-            </div>
-            <div class="project-status-pill">
-              <span class="pulse-indicator" aria-hidden="true"></span>
-              <span>Live Demo Ready</span>
-            </div>
-          </div>
-
-          <div class="project-preview-wrap">
-            <img class="project-preview-img" src="assets/project-devflow.svg" alt="DevFlow CI/CD Pipeline Orchestrator Screenshot" loading="lazy">
-            <div class="project-preview-overlay">
-              <a href="https://devflow.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="preview-zoom-btn" aria-label="Launch DevFlow pipeline sandbox">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
-                </svg>
-                <span>Interactive Sandbox</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="project-body">
-            <div class="project-meta-row">
-              <span class="project-category-tag">DevOps &amp; Automation</span>
-              <span class="project-latency-tag">-65% Build Duration &bull; 95% Cache</span>
-            </div>
-            <h3 class="project-title">DevFlow &mdash; Cloud CI/CD Automation Orchestrator</h3>
-            <p class="project-desc">
-              Created an automated build and containerization workflow engine featuring an interactive visual DAG pipeline builder, live ANSI log streaming, and zero-downtime rolling container deployments on Docker and Kubernetes.
-            </p>
-
-            <div class="project-tech-stack" aria-label="Technologies used in DevFlow Orchestrator">
-              <span class="tech-badge">TypeScript</span>
-              <span class="tech-badge">Docker</span>
-              <span class="tech-badge">GraphQL</span>
-              <span class="tech-badge">Node.js</span>
-              <span class="tech-badge">MongoDB</span>
-              <span class="tech-badge">GitHub Actions</span>
-              <span class="tech-badge">Tailwind CSS</span>
-            </div>
-
-            <div class="project-actions">
-              <a href="https://github.com/matloobalam/devflow-pipeline-engine" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-code" aria-label="View DevFlow source code on GitHub">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                </svg>
-                <span>GitHub Repo</span>
-              </a>
-              <a href="https://devflow.matloobalam.dev" target="_blank" rel="noopener noreferrer" class="project-btn project-btn-demo" aria-label="Launch DevFlow live demo">
-                <span>Live Demo</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </a>
-            </div>
-          </div>
-        </article>
+      <div id="projectsMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
-
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
 
     <!-- ===================================================
          SECTION 5: WORK EXPERIENCE
          =================================================== -->
     <section class="portfolio-section" id="experience" aria-labelledby="experience-title">
-      <div class="section-header">
-        <span class="section-tag">Career Journey</span>
-        <h2 class="section-title" id="experience-title">Work Experience</h2>
-        <p class="section-desc">Key leadership roles, product initiatives, and frontend contributions.</p>
-      </div>
-
-      <div class="experience-timeline" role="list">
-        <div class="timeline-line" aria-hidden="true"></div>
-
-        <!-- Experience Item 1 -->
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-dot is-active" aria-hidden="true"></div>
-          <div class="glass-card timeline-card">
-            <div class="timeline-meta">
-              <div class="timeline-meta-left">
-                <span class="timeline-date">2024 — Present</span>
-                <span class="timeline-type-badge">Full-Time</span>
-              </div>
-              <span class="timeline-company">Tech Innovations Labs</span>
-            </div>
-            <h3 class="timeline-role">Lead Full Stack Developer &amp; UI Architect</h3>
-            <ul class="timeline-responsibilities">
-              <li>Architect and maintain enterprise SaaS architectures using React, Next.js, and Node.js, delivering 99.98% uptime across 500k+ MAU.</li>
-              <li>Engineered a modular design system standardizing 45+ components and reducing UI delivery sprint cycles by 35%.</li>
-              <li>Optimized REST &amp; GraphQL backend services in Node.js/PostgreSQL, reducing p95 database query latency by 42%.</li>
-              <li>Mentored 6 engineers on TypeScript design patterns, automated CI/CD pipelines, and code review governance.</li>
-            </ul>
-            <div class="timeline-tags">
-              <span class="timeline-tag">React.js</span>
-              <span class="timeline-tag">TypeScript</span>
-              <span class="timeline-tag">Node.js</span>
-              <span class="timeline-tag">Next.js</span>
-              <span class="timeline-tag">PostgreSQL</span>
-              <span class="timeline-tag">Docker</span>
-              <span class="timeline-tag">AWS</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience Item 2 -->
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="glass-card timeline-card">
-            <div class="timeline-meta">
-              <div class="timeline-meta-left">
-                <span class="timeline-date">2022 — 2024</span>
-                <span class="timeline-type-badge">Full-Time</span>
-              </div>
-              <span class="timeline-company">Digital Systems Corp</span>
-            </div>
-            <h3 class="timeline-role">Senior Frontend Engineer</h3>
-            <ul class="timeline-responsibilities">
-              <li>Spearheaded frontend architecture for high-density telemetric analytics dashboards with fluid 60fps rendering.</li>
-              <li>Centralized state management with Redux Toolkit and React Query, cutting redundant API roundtrips by 50%.</li>
-              <li>Enforced 100% WCAG 2.1 AA accessibility compliance across all UI components and client-facing flows.</li>
-            </ul>
-            <div class="timeline-tags">
-              <span class="timeline-tag">Next.js</span>
-              <span class="timeline-tag">React.js</span>
-              <span class="timeline-tag">Redux Toolkit</span>
-              <span class="timeline-tag">Tailwind CSS</span>
-              <span class="timeline-tag">REST APIs</span>
-              <span class="timeline-tag">Git</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience Item 3 -->
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="glass-card timeline-card">
-            <div class="timeline-meta">
-              <div class="timeline-meta-left">
-                <span class="timeline-date">2021 — 2022</span>
-                <span class="timeline-type-badge">Full-Time</span>
-              </div>
-              <span class="timeline-company">Interactive Web Solutions</span>
-            </div>
-            <h3 class="timeline-role">Software Developer</h3>
-            <ul class="timeline-responsibilities">
-              <li>Built and deployed responsive, mobile-first web applications and interactive portals for 14+ commercial clients.</li>
-              <li>Developed backend CRUD services and authentication middlewares using Node.js, Express, and PostgreSQL/MongoDB.</li>
-              <li>Refactored legacy monolithic stylesheets into modular CSS architecture, reducing asset load times and improving FCP.</li>
-            </ul>
-            <div class="timeline-tags">
-              <span class="timeline-tag">HTML5 / CSS3</span>
-              <span class="timeline-tag">JavaScript (ES6+)</span>
-              <span class="timeline-tag">Node.js</span>
-              <span class="timeline-tag">Express.js</span>
-              <span class="timeline-tag">PostgreSQL</span>
-              <span class="timeline-tag">Git</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Experience Item 4 (Internship) -->
-        <div class="timeline-item" role="listitem">
-          <div class="timeline-dot" aria-hidden="true"></div>
-          <div class="glass-card timeline-card">
-            <div class="timeline-meta">
-              <div class="timeline-meta-left">
-                <span class="timeline-date">Jan 2021 — Jun 2021</span>
-                <span class="timeline-type-badge timeline-badge-internship">Internship</span>
-              </div>
-              <span class="timeline-company">Apex CyberTech Solutions</span>
-            </div>
-            <h3 class="timeline-role">Software Engineering Intern (Full Stack)</h3>
-            <ul class="timeline-responsibilities">
-              <li>Developed responsive UI components for the enterprise resource portal using JavaScript, HTML5, and modern CSS3.</li>
-              <li>Implemented secure JWT token authentication workflows and database queries with Express.js and PostgreSQL.</li>
-              <li>Authored unit test suites achieving 85% branch coverage, earning full-time software developer conversion.</li>
-            </ul>
-            <div class="timeline-tags">
-              <span class="timeline-tag">JavaScript</span>
-              <span class="timeline-tag">HTML5 / CSS3</span>
-              <span class="timeline-tag">Node.js</span>
-              <span class="timeline-tag">Express.js</span>
-              <span class="timeline-tag">PostgreSQL</span>
-              <span class="timeline-tag">Git</span>
-            </div>
-          </div>
-        </div>
+      <div id="experienceMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
 
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
-
     <!-- ===================================================
-         SECTION 6: EDUCATION
+         SECTION 6: EDUCATION & ACADEMIC QUALIFICATIONS
          =================================================== -->
     <section class="portfolio-section" id="education" aria-labelledby="education-title">
-      <div class="section-header">
-        <span class="section-tag">Academic Milestones</span>
-        <h2 class="section-title" id="education-title">Education &amp; Qualifications</h2>
-        <p class="section-desc">Formal academic degrees, rigorous computer science foundations, and honors distinctions.</p>
-      </div>
-
-      <div class="education-grid">
-        <!-- Education Card 1: MCA -->
-        <article class="glass-card edu-card">
-          <div class="edu-card-top">
-            <span class="edu-year-badge">2020 — 2023 (Graduated)</span>
-            <span class="edu-score-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <circle cx="12" cy="8" r="6"></circle>
-                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-              </svg>
-              8.85 CGPA &bull; Distinction
-            </span>
-          </div>
-
-          <h3 class="edu-degree">Master of Computer Applications (MCA)</h3>
-
-          <div class="edu-institution">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-              <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
-            </svg>
-            <span>University Department of Computer Applications</span>
-          </div>
-
-          <p class="edu-desc">
-            Advanced specialization in distributed software architectures, cloud computing platforms, high-throughput database systems, and modern web application frameworks.
-          </p>
-
-          <ul class="edu-achievements" aria-label="Academic Achievements">
-            <li class="edu-achievement-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span><strong>Top 5% Cohort Rank:</strong> Graduated First Class with Distinction (8.85 / 10.0 CGPA).</span>
-            </li>
-            <li class="edu-achievement-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span><strong>Capstone Research Award:</strong> Best Postgraduate Project for resilient event-driven microservices architecture.</span>
-            </li>
-            <li class="edu-achievement-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span><strong>Leadership:</strong> Head of Student Technical Society &amp; Lead Hackathon Coordinator.</span>
-            </li>
-          </ul>
-
-          <div class="edu-tags">
-            <span class="edu-tag">Distributed Systems</span>
-            <span class="edu-tag">Cloud Architecture</span>
-            <span class="edu-tag">ADBMS</span>
-            <span class="edu-tag">Software Engineering</span>
-          </div>
-        </article>
-
-        <!-- Education Card 2: BCA -->
-        <article class="glass-card edu-card">
-          <div class="edu-card-top">
-            <span class="edu-year-badge">2017 — 2020 (Graduated)</span>
-            <span class="edu-score-badge">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <circle cx="12" cy="8" r="6"></circle>
-                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-              </svg>
-              8.42 CGPA &bull; Honors
-            </span>
-          </div>
-
-          <h3 class="edu-degree">Bachelor of Computer Applications (BCA)</h3>
-
-          <div class="edu-institution">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-              <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"></path>
-            </svg>
-            <span>College of Information Technology</span>
-          </div>
-
-          <p class="edu-desc">
-            Rigorous foundations in data structures and algorithms, object-oriented design, relational databases, computer networks, and full-stack web engineering.
-          </p>
-
-          <ul class="edu-achievements" aria-label="Academic Achievements">
-            <li class="edu-achievement-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span><strong>Scholastic Honors:</strong> First Class with Honors (8.42 / 10.0 CGPA) with consistent Dean's Merit recognition.</span>
-            </li>
-            <li class="edu-achievement-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span><strong>Code Sprint Winner:</strong> 1st place in Inter-College Algorithmic Problem Solving in C++ &amp; Java.</span>
-            </li>
-            <li class="edu-achievement-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <span><strong>Capstone Portal:</strong> Developed complete campus resource scheduling system with RBAC security.</span>
-            </li>
-          </ul>
-
-          <div class="edu-tags">
-            <span class="edu-tag">Data Structures &amp; Algorithms</span>
-            <span class="edu-tag">OOP (Java/C++)</span>
-            <span class="edu-tag">RDBMS</span>
-            <span class="edu-tag">Web Technologies</span>
-          </div>
-        </article>
+      <div id="educationMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
 
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
-
     <!-- ===================================================
-         SECTION 7: CERTIFICATES & ACHIEVEMENTS
+         SECTION 7: CERTIFICATIONS & ACHIEVEMENTS
          =================================================== -->
     <section class="portfolio-section" id="certificates" aria-labelledby="certificates-title">
-      <div class="section-header">
-        <span class="section-tag">Credentials &amp; Milestones</span>
-        <h2 class="section-title" id="certificates-title">Certifications &amp; Achievements</h2>
-        <p class="section-desc">Industry-accredited vendor credentials, specialized software engineering bootcamps, and competitive professional honors.</p>
-      </div>
-
-      <!-- Category Filter Tabs -->
-      <div class="cert-filter-bar" role="tablist" aria-label="Certifications &amp; Achievements Filter">
-        <button type="button" class="cert-filter-btn active" role="tab" aria-selected="true" data-filter="all">
-          <span class="cert-filter-dot" aria-hidden="true"></span>
-          All Credentials
-          <span class="cert-filter-count">10</span>
-        </button>
-        <button type="button" class="cert-filter-btn" role="tab" aria-selected="false" data-filter="technical">
-          <span class="cert-filter-dot" aria-hidden="true"></span>
-          Technical Certifications
-          <span class="cert-filter-count">4</span>
-        </button>
-        <button type="button" class="cert-filter-btn" role="tab" aria-selected="false" data-filter="training">
-          <span class="cert-filter-dot" aria-hidden="true"></span>
-          Specialized Training
-          <span class="cert-filter-count">3</span>
-        </button>
-        <button type="button" class="cert-filter-btn" role="tab" aria-selected="false" data-filter="achievement">
-          <span class="cert-filter-dot" aria-hidden="true"></span>
-          Professional Achievements
-          <span class="cert-filter-count">3</span>
-        </button>
-      </div>
-
-      <div class="certificates-grid">
-        <!-- 1. Technical: AWS Cloud Practitioner -->
-        <article class="glass-card cert-card" data-category="technical">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Technical</span>
-            </div>
-            <span class="cert-year">2023 — 2026</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">AWS Certified Cloud Practitioner</h3>
-            <span class="cert-issuer">Amazon Web Services (AWS)</span>
-            <p class="cert-desc">Cloud infrastructure design, IAM security governance, distributed storage (S3/EBS), VPC architecture, and serverless compute models.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">AWS Cloud</span>
-              <span class="cert-tag">Lambda</span>
-              <span class="cert-tag">IAM Security</span>
-              <span class="cert-tag">VPC</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Credential ID</span>
-              <span class="cert-id-code">AWS-98421074-ARCH</span>
-            </div>
-            <a href="https://aws.amazon.com/verification" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Verify AWS Cloud Practitioner Credential">
-              Verify
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 2. Technical: Meta Front-End Developer -->
-        <article class="glass-card cert-card" data-category="technical">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="m18 16 4-4-4-4"></path>
-                  <path d="m6 8-4 4 4 4"></path>
-                  <path d="m14.5 4-5 16"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Technical</span>
-            </div>
-            <span class="cert-year">2023 &bull; Lifetime</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Meta Front-End Developer Specialization</h3>
-            <span class="cert-issuer">Meta Platforms Inc.</span>
-            <p class="cert-desc">Modern React application architecture, advanced state patterns, Jest unit testing, WCAG 2.1 accessibility compliance, and performance profiling.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">React.js</span>
-              <span class="cert-tag">JavaScript (ES6+)</span>
-              <span class="cert-tag">Jest</span>
-              <span class="cert-tag">WCAG 2.1</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Credential ID</span>
-              <span class="cert-id-code">META-DEV-6619024</span>
-            </div>
-            <a href="https://coursera.org/verify/professional-cert/meta" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Verify Meta Front-End Developer Credential">
-              Verify
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 3. Technical: Google UX Design -->
-        <article class="glass-card cert-card" data-category="technical">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="8" r="6"></circle>
-                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Technical</span>
-            </div>
-            <span class="cert-year">2024 &bull; Lifetime</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Google UX &amp; Web Design Professional</h3>
-            <span class="cert-issuer">Google &bull; Coursera</span>
-            <p class="cert-desc">Design thinking fundamentals, interactive Figma prototyping, responsive layout hierarchies, accessibility audits, and design-to-code bridging.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">UX Architecture</span>
-              <span class="cert-tag">Figma</span>
-              <span class="cert-tag">Design Systems</span>
-              <span class="cert-tag">Usability</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Credential ID</span>
-              <span class="cert-id-code">GOOG-UX-8837190</span>
-            </div>
-            <a href="https://coursera.org/verify/professional-cert/google" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Verify Google UX Design Credential">
-              Verify
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 4. Technical: PostgreSQL Architecture -->
-        <article class="glass-card cert-card" data-category="technical">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
-                  <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
-                  <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Technical</span>
-            </div>
-            <span class="cert-year">2023 &bull; Lifetime</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">PostgreSQL Architecture &amp; Query Optimization</h3>
-            <span class="cert-issuer">EnterpriseDB Alliance</span>
-            <p class="cert-desc">Advanced index strategy (B-Tree, GIN, BRIN), query execution plan analysis, transaction isolation levels, connection pooling, and sub-50ms latency tuning.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">PostgreSQL</span>
-              <span class="cert-tag">Index Tuning</span>
-              <span class="cert-tag">EXPLAIN ANALYZE</span>
-              <span class="cert-tag">ACID</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Credential ID</span>
-              <span class="cert-id-code">PG-OPT-441208</span>
-            </div>
-            <a href="#certificates" class="cert-link-btn" aria-label="Verify PostgreSQL Optimization Credential">
-              Verified
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 5. Training: Microservices Immersion -->
-        <article class="glass-card cert-card" data-category="training">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect width="7" height="7" x="3" y="3" rx="1"></rect>
-                  <rect width="7" height="7" x="14" y="3" rx="1"></rect>
-                  <rect width="7" height="7" x="14" y="14" rx="1"></rect>
-                  <rect width="7" height="7" x="3" y="14" rx="1"></rect>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Training</span>
-            </div>
-            <span class="cert-year">2024 &bull; 12-Week</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Microservices &amp; Event-Driven Architecture</h3>
-            <span class="cert-issuer">Cloud Native Architecture Institute</span>
-            <p class="cert-desc">Hands-on immersion in Docker microservices, Kubernetes orchestration, Kafka event messaging, CQRS patterns, and resilient distributed state replication.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">Docker</span>
-              <span class="cert-tag">Kubernetes</span>
-              <span class="cert-tag">Apache Kafka</span>
-              <span class="cert-tag">CQRS</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Bootcamp Track</span>
-              <span class="cert-id-code">CNAI-MS-2024-912</span>
-            </div>
-            <a href="#certificates" class="cert-link-btn" aria-label="View Microservices Bootcamp Credential">
-              Completed
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 6. Training: React & TypeScript Masterclass -->
-        <article class="glass-card cert-card" data-category="training">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="16 18 22 12 16 6"></polyline>
-                  <polyline points="8 6 2 12 8 18"></polyline>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Training</span>
-            </div>
-            <span class="cert-year">2023 &bull; 8-Week</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Enterprise React &amp; TypeScript Masterclass</h3>
-            <span class="cert-issuer">Frontend Masters &bull; Epic Web</span>
-            <p class="cert-desc">Rigorous masterclass in generic types, AST transforms, React Concurrency &amp; Suspense, memoization architectures, and client bundle reduction.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">TypeScript</span>
-              <span class="cert-tag">React Concurrency</span>
-              <span class="cert-tag">Profiler</span>
-              <span class="cert-tag">Tree Shaking</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Masterclass Track</span>
-              <span class="cert-id-code">FEM-TS-830114</span>
-            </div>
-            <a href="#certificates" class="cert-link-btn" aria-label="View TypeScript Masterclass Credential">
-              Completed
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 7. Training: DevOps & Cloud Security Pipeline -->
-        <article class="glass-card cert-card" data-category="training">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Training</span>
-            </div>
-            <span class="cert-year">2022 &bull; 6-Week</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Automated DevOps &amp; DevSecOps Pipelines</h3>
-            <span class="cert-issuer">Linux Foundation &bull; DevOps Academy</span>
-            <p class="cert-desc">End-to-end CI/CD automation with GitHub Actions, multi-stage Docker build minimization, automated security scanning (Trivy), and zero-downtime deployment.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">GitHub Actions</span>
-              <span class="cert-tag">CI/CD</span>
-              <span class="cert-tag">DevSecOps</span>
-              <span class="cert-tag">Security Scans</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Pipeline Track</span>
-              <span class="cert-id-code">DOA-PIPE-33019</span>
-            </div>
-            <a href="#certificates" class="cert-link-btn" aria-label="View DevOps Pipeline Credential">
-              Completed
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 8. Achievement: National Hackathon Winner -->
-        <article class="glass-card cert-card" data-category="achievement">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                  <path d="M4 22h16"></path>
-                  <path d="M10 14.66V17c0 .55-.45 1-1 1H7"></path>
-                  <path d="M14 14.66V17c0 .55.45 1 1 1h2"></path>
-                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Honor</span>
-            </div>
-            <span class="cert-year">2023 &bull; Winner</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">1st Place Champion &bull; National Tech Hackathon</h3>
-            <span class="cert-issuer">National Smart City Innovation Forum</span>
-            <div class="cert-metric-banner">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-              </svg>
-              <span>1st Place / 120+ Teams &bull; $5,000 Grand Prize</span>
-            </div>
-            <p class="cert-desc">Engineered <em>CivicPulse</em>, an AI-assisted real-time civic grievance routing PWA with offline-first local cache and zero-crash latency during live jury stress testing.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">Hackathon Winner</span>
-              <span class="cert-tag">PWA</span>
-              <span class="cert-tag">Geospatial UI</span>
-              <span class="cert-tag">Live Stress Test</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Recognition</span>
-              <span class="cert-id-code">Champion Trophy &bull; Grand Prize</span>
-            </div>
-            <a href="#certificates" class="cert-link-btn" aria-label="View Hackathon Winner Recognition">
-              Awarded
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 9. Achievement: Enterprise Innovation Honor -->
-        <article class="glass-card cert-card" data-category="achievement">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Honor</span>
-            </div>
-            <span class="cert-year">2024 &bull; Corporate</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Engineering Performance Excellence Honor</h3>
-            <span class="cert-issuer">Tech Innovations Labs</span>
-            <div class="cert-metric-banner">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                <polyline points="16 7 22 7 22 13"></polyline>
-              </svg>
-              <span>-42% Query Latency &bull; 99.98% Service Uptime</span>
-            </div>
-            <p class="cert-desc">Awarded company-wide for driving the core API microservice re-indexing initiative, dropping p95 query latency from 320ms to 185ms across 500k monthly active users.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">Performance Honor</span>
-              <span class="cert-tag">Latency Tuning</span>
-              <span class="cert-tag">High Availability</span>
-              <span class="cert-tag">Architecture</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Recognition</span>
-              <span class="cert-id-code">Company Excellence Award</span>
-            </div>
-            <a href="#certificates" class="cert-link-btn" aria-label="View Engineering Excellence Honor">
-              Awarded
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- 10. Achievement: Open Source & Community Leadership -->
-        <article class="glass-card cert-card" data-category="achievement">
-          <div class="cert-header">
-            <div class="cert-header-left">
-              <div class="cert-badge-icon" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="9" cy="7" r="4"></circle>
-                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                </svg>
-              </div>
-              <span class="cert-category-pill">Honor</span>
-            </div>
-            <span class="cert-year">2022 — Present</span>
-          </div>
-          <div class="cert-body">
-            <h3 class="cert-title">Open-Source Impact &amp; Community Leadership</h3>
-            <span class="cert-issuer">GitHub Community &bull; University Technical Society</span>
-            <div class="cert-metric-banner">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="2" y1="12" x2="22" y2="12"></line>
-                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-              </svg>
-              <span>1,500+ Community Stars &bull; 15+ Engineers Mentored</span>
-            </div>
-            <p class="cert-desc">Published open-source developer tooling and accessible UI kits adopted globally. Conducted weekend technical bootcamps on Git branching, clean architecture, and modern JavaScript.</p>
-            <div class="cert-tags">
-              <span class="cert-tag">Open Source</span>
-              <span class="cert-tag">Mentorship</span>
-              <span class="cert-tag">Developer Advocacy</span>
-              <span class="cert-tag">GitHub Stars</span>
-            </div>
-          </div>
-          <div class="cert-footer">
-            <div class="cert-id-badge">
-              <span class="cert-id-label">Recognition</span>
-              <span class="cert-id-code">Community Leader &bull; Open Contributor</span>
-            </div>
-            <a href="https://github.com/mdmatloob" target="_blank" rel="noopener noreferrer" class="cert-link-btn" aria-label="Visit Md MatlooB GitHub Profile">
-              GitHub Profile
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </article>
+      <div id="certificatesMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
 
-    <!-- Air spacer -->
-    <div class="scroll-spacer" aria-hidden="true"></div>
-
     <!-- ===================================================
-         SECTION 8: CONTACT SECTION & GLOBAL COLLABORATION
+         SECTION 8: CONTACT & GLOBAL COLLABORATION
          =================================================== -->
     <section class="portfolio-section" id="contact" aria-labelledby="contact-title">
-      <div class="section-header">
-        <span class="section-tag">Let's Connect</span>
-        <h2 class="section-title" id="contact-title">Start a Conversation</h2>
-        <p class="section-desc">Have an upcoming software engineering project, contract inquiry, or full-time opportunity? Reach out directly or dispatch a brief below.</p>
-      </div>
-
-      <div class="contact-master-container">
-        <!-- Contact Grid: Left Column (Channels & Location Plan) | Right Column (Interactive Form) -->
-        <div class="contact-grid">
-          
-          <!-- LEFT COLUMN: Verified Channels & Global Location Plan -->
-          <div class="contact-channels-column">
-            
-            <!-- 1. Direct Email Card with 1-Click Copy & Quick Send -->
-            <div class="glass-card contact-channel-card email-highlight-card">
-              <div class="channel-card-top">
-                <div class="channel-icon-wrap" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                  </svg>
-                </div>
-                <span class="contact-sla-badge">
-                  <span class="sla-dot"></span>
-                  Replies &lt; 24h
-                </span>
-              </div>
-              <div class="channel-card-body">
-                <div class="channel-label">Direct Email Address</div>
-                <a href="mailto:mdmatloobgaya@gmail.com" class="channel-main-value" id="contactEmailAddress">mdmatloobgaya@gmail.com</a>
-                <p class="channel-subtext">Ideal for project briefs, engineering proposals, and direct job inquiries.</p>
-              </div>
-              <div class="channel-card-actions">
-                <a href="mailto:mdmatloobgaya@gmail.com?subject=Project%20Inquiry%20-%20Md%20MatlooB%20Alam" class="btn-channel-action btn-send-email" aria-label="Send email to Md MatlooB Alam">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                  </svg>
-                  <span>Send Email</span>
-                </a>
-                <button type="button" class="btn-channel-action btn-copy-email" id="copyEmailBtn" data-copy="mdmatloobgaya@gmail.com" aria-label="Copy email address to clipboard">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" class="copy-icon">
-                    <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
-                  </svg>
-                  <span class="copy-text">Copy Email</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 2. Dual Professional Socials (LinkedIn & GitHub) -->
-            <div class="contact-social-row">
-              <!-- LinkedIn Profile Card -->
-              <a href="https://linkedin.com/in/mdmatloob" target="_blank" rel="noopener noreferrer" class="contact-profile-card linkedin-card" aria-label="Connect with Md MatlooB Alam on LinkedIn">
-                <div class="profile-card-header">
-                  <div class="profile-icon-wrap linkedin-icon-wrap" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                      <rect width="4" height="12" x="2" y="9"></rect>
-                      <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                  </div>
-                  <span class="profile-arrow-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="7" y1="17" x2="17" y2="7"></line>
-                      <polyline points="7 7 17 7 17 17"></polyline>
-                    </svg>
-                  </span>
-                </div>
-                <div class="profile-card-content">
-                  <span class="profile-network-badge">LinkedIn</span>
-                  <div class="profile-name">Md MatlooB Alam</div>
-                  <p class="profile-status">Network &bull; Career &bull; Endorsements</p>
-                </div>
-              </a>
-
-              <!-- GitHub Profile Card -->
-              <a href="https://github.com/mdmatloob" target="_blank" rel="noopener noreferrer" class="contact-profile-card github-card" aria-label="Explore Md MatlooB Alam's GitHub repositories">
-                <div class="profile-card-header">
-                  <div class="profile-icon-wrap github-icon-wrap" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
-                  </div>
-                  <span class="profile-arrow-icon" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <line x1="7" y1="17" x2="17" y2="7"></line>
-                      <polyline points="7 7 17 7 17 17"></polyline>
-                    </svg>
-                  </span>
-                </div>
-                <div class="profile-card-content">
-                  <span class="profile-network-badge">GitHub</span>
-                  <div class="profile-name">@mdmatloob</div>
-                  <p class="profile-status">Open Source &bull; CI/CD &bull; Repos</p>
-                </div>
-              </a>
-            </div>
-
-            <!-- 3. Comprehensive Location Plan & Global Collaboration Matrix -->
-            <div class="glass-card location-plan-card">
-              <div class="location-card-header">
-                <div class="location-header-title-wrap">
-                  <div class="location-radar-pin" aria-hidden="true">
-                    <span class="radar-ping-wave"></span>
-                    <span class="radar-dot"></span>
-                  </div>
-                  <div>
-                    <h3 class="location-card-title">Location Plan &amp; Availability</h3>
-                    <p class="location-card-subtitle">Gaya, Bihar, India &bull; 24.7955&deg; N, 85.0002&deg; E</p>
-                  </div>
-                </div>
-                <!-- Dynamic Live Clock -->
-                <div class="live-clock-badge" id="locationLiveClockBadge" title="Current Local Time in Indian Standard Time (IST)">
-                  <span class="clock-icon" aria-hidden="true">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <circle cx="12" cy="12" r="10"></circle>
-                      <polyline points="12 6 12 12 16 14"></polyline>
-                    </svg>
-                  </span>
-                  <span id="liveLocalClock" class="clock-digits">Loading IST...</span>
-                  <span class="clock-tz">IST</span>
-                </div>
-              </div>
-
-              <!-- Location Strategy Metrics & Relocation Plan -->
-              <div class="location-plan-details">
-                <div class="location-metric-item">
-                  <span class="location-metric-label">Work Arrangement</span>
-                  <span class="location-metric-value text-accent-green">100% Remote &bull; Hybrid Ready</span>
-                </div>
-                <div class="location-metric-item">
-                  <span class="location-metric-label">Relocation Readiness</span>
-                  <span class="location-metric-value">Bengaluru, Hyderabad, Pune, NCR</span>
-                </div>
-              </div>
-
-              <!-- Global Timezone Overlap Matrix -->
-              <div class="timezone-overlap-section">
-                <div class="timezone-header">
-                  <span class="timezone-title">Global Timezone Sync Overlap</span>
-                  <span class="timezone-sub">Standard daily collaboration window</span>
-                </div>
-                <div class="timezone-chips-grid">
-                  <div class="tz-chip">
-                    <span class="tz-region">Americas (EST/PST)</span>
-                    <span class="tz-hours">3 &ndash; 4 Hours Overlap</span>
-                  </div>
-                  <div class="tz-chip">
-                    <span class="tz-region">Europe &amp; UK (CET/GMT)</span>
-                    <span class="tz-hours">5 &ndash; 6 Hours Overlap</span>
-                  </div>
-                  <div class="tz-chip">
-                    <span class="tz-region">Asia-Pacific (SGT/AEST)</span>
-                    <span class="tz-hours">6 &ndash; 8 Hours Overlap</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- RIGHT COLUMN: Glassmorphic Interactive Contact Form -->
-          <div class="glass-card contact-form-card">
-            <div class="form-header-intro">
-              <h3 class="form-title">Send a Direct Message</h3>
-              <p class="form-desc">Fill out your inquiry details and I'll review and respond promptly.</p>
-            </div>
-
-            <form class="contact-form" id="contactForm" novalidate>
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" for="userName">
-                    Your Name <span class="required-mark" aria-hidden="true">*</span>
-                  </label>
-                  <div class="input-with-icon">
-                    <span class="input-icon" aria-hidden="true">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                      </svg>
-                    </span>
-                    <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. John Doe" required autocomplete="name">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="userEmail">
-                    Your Email <span class="required-mark" aria-hidden="true">*</span>
-                  </label>
-                  <div class="input-with-icon">
-                    <span class="input-icon" aria-hidden="true">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                      </svg>
-                    </span>
-                    <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. name@company.com" required autocomplete="email">
-                  </div>
-                </div>
-              </div>
-
-              <!-- Interactive Project / Service Selector Tags -->
-              <div class="form-group">
-                <label class="form-label" id="serviceSelectLabel">I'm interested in</label>
-                <div class="service-selector-chips" role="group" aria-labelledby="serviceSelectLabel">
-                  <button type="button" class="service-chip active" data-service="Full Stack Web App">
-                    <span>Full-Stack Development</span>
-                  </button>
-                  <button type="button" class="service-chip" data-service="Frontend & UI Architecture">
-                    <span>Frontend &amp; UI Architecture</span>
-                  </button>
-                  <button type="button" class="service-chip" data-service="Cloud & APIs">
-                    <span>Cloud &amp; Backend APIs</span>
-                  </button>
-                  <button type="button" class="service-chip" data-service="Technical Consultation">
-                    <span>Technical Consultation</span>
-                  </button>
-                </div>
-                <input type="hidden" id="selectedServiceInput" name="service" value="Full Stack Web App">
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="userSubject">
-                  Subject / Project Scope <span class="required-mark" aria-hidden="true">*</span>
-                </label>
-                <input type="text" id="userSubject" name="subject" class="form-input" placeholder="e.g. Enterprise Web Platform, Frontend Overhaul" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="userMessage">
-                  Message Details <span class="required-mark" aria-hidden="true">*</span>
-                </label>
-                <textarea id="userMessage" name="message" class="form-textarea" rows="4" placeholder="Briefly describe your objectives, scope, or timeline..." required></textarea>
-              </div>
-
-              <button type="submit" class="btn-touch btn-touch-orange btn-submit" id="contactSubmitBtn">
-                <span class="btn-submit-text">Send Message</span>
-                <span class="btn-icon-circle" aria-hidden="true">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                    <polyline points="12 5 19 12 12 19"></polyline>
-                  </svg>
-                </span>
-              </button>
-            </form>
-          </div>
-
-        </div>
+      <div id="contactMount">
+        <!-- Dynamically rendered via js/render.js from data/portfolio.json -->
       </div>
     </section>
 
@@ -1760,7 +274,7 @@
 
   <!-- Floating Back to Top Button -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top of page">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <polyline points="18 15 12 9 6 15"></polyline>
     </svg>
   </button>
@@ -1779,8 +293,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <!-- Modular Portfolio Application Scripts -->
+  <!-- Dynamic Application Scripts -->
+  <script src="js/theme.js"></script>
   <script src="js/canvas-stream.js"></script>
+  <script src="js/render.js"></script>
   <script src="js/navigation.js"></script>
   <script src="js/animations.js"></script>
   <script src="js/form.js"></script>

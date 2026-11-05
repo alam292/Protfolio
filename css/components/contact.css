@@ -641,6 +641,14 @@
   background: rgba(14, 18, 24, 0.95);
 }
 
+.form-input.input-error,
+.form-textarea.input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.35) !important;
+  background: rgba(239, 68, 68, 0.05) !important;
+}
+
+
 .form-input::placeholder,
 .form-textarea::placeholder {
   color: var(--text-muted);

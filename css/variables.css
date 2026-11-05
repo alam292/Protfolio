@@ -122,3 +122,38 @@
   --z-toast: 300;
 }
 
+/* ==========================================================================
+   Clean Slate Light Theme
+   ========================================================================== */
+[data-theme="light"] {
+  --bg-dark: #0f172a;
+  --bg-deep: #1e293b;
+  --bg-surface: #1e293b;
+  --bg-surface-elevated: #334155;
+
+  --accent-orange: #ff5722;
+  --accent-orange-hover: #f4511e;
+  --accent-orange-light: #ff7043;
+  --accent-orange-subtle: rgba(255, 87, 34, 0.15);
+  --accent-orange-glow: rgba(255, 87, 34, 0.3);
+  --accent-orange-border: rgba(255, 87, 34, 0.5);
+  --accent-gradient: linear-gradient(135deg, #ff5722 0%, #ff8a65 100%);
+  --accent-gradient-text: linear-gradient(135deg, #00e676 0%, #ff5722 100%);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --glass-bg: rgba(30, 41, 59, 0.75);
+  --glass-bg-hover: rgba(51, 65, 85, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(255, 87, 34, 0.5);
+  --glass-blur: 20px;
+
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+
