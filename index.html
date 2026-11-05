@@ -22,6 +22,7 @@
       --glass-bg: rgba(14, 18, 24, 0.45);
       --glass-border: rgba(255, 255, 255, 0.08);
       --card-radius: 28px;
+      --section-padding-x: clamp(18px, 2.5vw, 44px);
     }
 
     * {
@@ -94,7 +95,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 24px 6vw;
+      padding: 24px var(--section-padding-x);
       transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
     }
 
@@ -103,7 +104,7 @@
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding: 16px 6vw;
+      padding: 16px var(--section-padding-x);
     }
 
     .logo-container {
@@ -213,7 +214,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 130px 6vw 60px;
+      padding: 130px var(--section-padding-x) 60px;
       position: relative;
       will-change: transform, opacity;
     }
@@ -312,7 +313,7 @@
 
     /* SECTION 2: BRANDS STRIP */
     .brands-section {
-      padding: 60px 6vw;
+      padding: 60px var(--section-padding-x);
       width: 100%;
       position: relative;
     }
@@ -372,7 +373,7 @@
 
     /* SECTION 3: BEHIND THE DESIGNS */
     .behind-section {
-      padding: 100px 6vw 120px;
+      padding: 100px var(--section-padding-x) 120px;
       position: relative;
     }
 
@@ -507,7 +508,7 @@
 
     /* Subtle Footer */
     .footer {
-      padding: 60px 6vw;
+      padding: 60px var(--section-padding-x);
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       display: flex;
       justify-content: space-between;
@@ -569,13 +570,13 @@
 
     @media (max-width: 640px) {
       .navbar {
-        padding: 18px 5vw;
+        padding: 18px var(--section-padding-x);
       }
       .nav-links {
         display: none;
       }
       .hero-section {
-        padding: 110px 5vw 40px;
+        padding: 110px var(--section-padding-x) 40px;
       }
       .hero-pillars-grid {
         grid-template-columns: 1fr;
@@ -585,7 +586,7 @@
         gap: 24px;
       }
       .behind-section {
-        padding: 60px 5vw 80px;
+        padding: 60px var(--section-padding-x) 80px;
       }
       .behind-action-row {
         flex-direction: column;
