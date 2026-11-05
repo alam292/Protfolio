@@ -1,6 +1,6 @@
 /**
  * Education Component
- * Academic qualifications and degrees with honors badges.
+ * Academic qualifications and degrees with honors badges, marks metrics, and achievements.
  */
 
 .education-grid {
@@ -10,9 +10,34 @@
 }
 
 .edu-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  padding: clamp(24px, 3vw, 32px);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: transform var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.edu-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 87, 34, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 24px rgba(255, 87, 34, 0.12);
+}
+
+.edu-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 4px;
 }
 
 .edu-year-badge {
@@ -27,9 +52,27 @@
   padding: 4px 12px;
 }
 
+.edu-score-badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: #10b981;
+  letter-spacing: 0.03em;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edu-score-badge svg {
+  color: #10b981;
+}
+
 .edu-degree {
   font-family: var(--font-family-display);
-  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
   font-weight: var(--font-weight-bold);
   color: #ffffff;
   line-height: 1.3;
@@ -37,15 +80,48 @@
 }
 
 .edu-institution {
-  font-size: var(--font-size-body);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--text-secondary);
+}
+
+.edu-institution svg {
+  color: var(--accent-orange);
+  flex-shrink: 0;
 }
 
 .edu-desc {
   font-size: var(--font-size-sm);
   color: var(--text-muted);
   line-height: 1.6;
+}
+
+.edu-achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.edu-achievement-item {
+  position: relative;
+  font-size: var(--font-size-xs);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.edu-achievement-item svg {
+  color: var(--accent-orange);
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
 .edu-meta-pill {
@@ -58,3 +134,26 @@
   gap: 6px;
 }
 
+.edu-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: var(--space-2);
+}
+
+.edu-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  transition: color var(--duration-fast), border-color var(--duration-fast);
+}
+
+.edu-card:hover .edu-tag {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-secondary);
+}
