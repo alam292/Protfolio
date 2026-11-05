@@ -3,8 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Portfolio</title>
+  <title>Folioblox — Creative Director & Product Designer</title>
+
+  <!-- Google Fonts for modern typography matching reference -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg-dark: #030608;
+      --accent-orange: #ff5722;
+      --accent-orange-hover: #ff6e3d;
+      --accent-orange-glow: rgba(255, 87, 34, 0.35);
+      --text-primary: #ffffff;
+      --text-secondary: #9ea3b0;
+      --text-muted: #646a78;
+      --glass-bg: rgba(14, 18, 24, 0.45);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --card-radius: 28px;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -13,18 +32,20 @@
 
     html, body {
       width: 100%;
-      height: 100%;
-      background-color: #030608;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       overflow-x: hidden;
-      overscroll-behavior-y: none;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      scroll-behavior: auto;
     }
 
     body::-webkit-scrollbar {
       display: none;
     }
 
+    /* Fixed Background Canvas Animation */
     #canvas-container {
       position: fixed;
       top: 0;
@@ -34,7 +55,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #030608;
+      background-color: var(--bg-dark);
       overflow: hidden;
       pointer-events: none;
       z-index: 1;
@@ -51,23 +72,717 @@
       image-rendering: high-quality;
     }
 
-    #scroll-track {
-      position: relative;
-      width: 100%;
-      height: 600vh;
-      z-index: 2;
+    /* Subtle cinematic dark gradient overlay for crystal clear typography */
+    .canvas-overlay-vignette {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       pointer-events: none;
+      z-index: 2;
+      background: radial-gradient(circle at 50% 45%, rgba(3, 6, 8, 0.15) 0%, rgba(3, 6, 8, 0.65) 75%, rgba(3, 6, 8, 0.92) 100%);
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 6vw;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, padding 0.3s ease;
+    }
+
+    .navbar.scrolled {
+      background: rgba(3, 6, 8, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 16px 6vw;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .logo-text {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.25s ease;
+      position: relative;
+    }
+
+    .nav-link:hover {
+      color: #ffffff;
+    }
+
+    .nav-link.active {
+      color: #ffffff;
+    }
+
+    /* Common Button Styles */
+    .btn-touch {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #0c0e12;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 10px 8px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+    }
+
+    .btn-touch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-touch-orange {
+      background: var(--accent-orange);
+      color: #ffffff;
+      box-shadow: 0 4px 24px var(--accent-orange-glow);
+    }
+
+    .btn-touch-orange:hover {
+      background: var(--accent-orange-hover);
+      box-shadow: 0 8px 32px rgba(255, 87, 34, 0.5);
+    }
+
+    .btn-icon-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: transform 0.25s ease;
+    }
+
+    .btn-touch-orange .btn-icon-circle {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-touch:hover .btn-icon-circle {
+      transform: translateX(3px);
+    }
+
+    /* Main Scroll Content Overlay */
+    .scroll-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      pointer-events: auto;
+    }
+
+    /* SECTION 1: HERO SECTION */
+    .hero-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 130px 6vw 60px;
+      position: relative;
+      will-change: transform, opacity;
+    }
+
+    .hero-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 40px;
+      width: 100%;
+    }
+
+    .hero-headline-block {
+      max-width: 60%;
+    }
+
+    .hero-greeting {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-greeting-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--accent-orange);
+      display: inline-block;
+      box-shadow: 0 0 10px var(--accent-orange);
+    }
+
+    .hero-main-title {
+      font-size: clamp(3.6rem, 7.5vw, 7.2rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      color: #ffffff;
+      text-transform: none;
+    }
+
+    .hero-quote-block {
+      max-width: 360px;
+      padding-top: 18px;
+    }
+
+    .hero-quote-title {
+      font-size: clamp(1.3rem, 2vw, 1.75rem);
+      font-weight: 600;
+      line-height: 1.25;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.015em;
+    }
+
+    .hero-quote-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Hero Pillars Grid (#01 to #04) */
+    .hero-pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      width: 100%;
+      padding-top: 60px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 40px;
+    }
+
+    .pillar-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pillar-num {
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--accent-orange);
+      text-transform: uppercase;
+    }
+
+    .pillar-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    /* SECTION 2: BRANDS STRIP */
+    .brands-section {
+      padding: 60px 6vw;
+      width: 100%;
+      position: relative;
+    }
+
+    .brands-wrapper {
+      background: rgba(14, 17, 23, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 999px;
+      padding: 24px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .brands-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    .brands-list {
+      display: flex;
+      align-items: center;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .brand-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #ffffff;
+      opacity: 0.9;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .brand-item:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+
+    .brand-item svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* SECTION 3: BEHIND THE DESIGNS */
+    .behind-section {
+      padding: 100px 6vw 120px;
+      position: relative;
+    }
+
+    .behind-header {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: flex-start;
+      margin-bottom: 70px;
+    }
+
+    .behind-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .behind-tag {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-orange);
+      letter-spacing: 0.02em;
+    }
+
+    .behind-main-title {
+      font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #ffffff;
+    }
+
+    .behind-header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-top: 24px;
+    }
+
+    .behind-lead-text {
+      font-size: clamp(1.05rem, 1.4vw, 1.35rem);
+      font-weight: 500;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    .behind-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+
+    .behind-action-subtext {
+      font-size: 0.85rem;
+      line-height: 1.4;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* 3-Cards Visual Showcase */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      width: 100%;
+    }
+
+    .showcase-card {
+      position: relative;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+      transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.45s ease, box-shadow 0.45s ease;
+      cursor: pointer;
+    }
+
+    .showcase-card:hover {
+      transform: translateY(-8px) scale(1.015);
+      border-color: rgba(255, 87, 34, 0.4);
+      box-shadow: 0 24px 50px rgba(255, 87, 34, 0.15), 0 12px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    .showcase-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%) contrast(105%);
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.45s ease;
+    }
+
+    .showcase-card:hover .showcase-card-img {
+      transform: scale(1.06);
+      filter: grayscale(0%) contrast(110%);
+    }
+
+    .showcase-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 30px 24px 24px;
+      background: linear-gradient(to top, rgba(3, 6, 8, 0.85) 0%, rgba(3, 6, 8, 0) 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      pointer-events: none;
+    }
+
+    .showcase-card-category {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+    }
+
+    .showcase-card-name {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    /* Subtle Footer */
+    .footer {
+      padding: 60px 6vw;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .footer a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer a:hover {
+      color: #ffffff;
+    }
+
+    /* Spacing spacer to let the 3D canvas animation breathe */
+    .scroll-spacer {
+      height: 25vh;
+      pointer-events: none;
+    }
+
+    /* Responsive Adaptations */
+    @media (max-width: 1024px) {
+      .hero-top-row {
+        flex-direction: column;
+        gap: 30px;
+      }
+      .hero-headline-block {
+        max-width: 100%;
+      }
+      .hero-quote-block {
+        max-width: 100%;
+      }
+      .hero-pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+      .brands-wrapper {
+        flex-direction: column;
+        border-radius: 28px;
+        padding: 24px;
+        align-items: flex-start;
+      }
+      .behind-header {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .showcase-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .showcase-card {
+        aspect-ratio: 4 / 3;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 18px 5vw;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-section {
+        padding: 110px 5vw 40px;
+      }
+      .hero-pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .brands-list {
+        gap: 24px;
+      }
+      .behind-section {
+        padding: 60px 5vw 80px;
+      }
+      .behind-action-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .footer {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
     }
   </style>
 </head>
 <body>
+
+  <!-- Fixed 3D Canvas Background Stream -->
   <div id="canvas-container">
     <canvas id="canvas"></canvas>
   </div>
-  <div id="scroll-track"></div>
 
+  <!-- Soft gradient vignette for maximum typographic contrast -->
+  <div class="canvas-overlay-vignette"></div>
+
+  <!-- Fixed Header Navigation -->
+  <header class="navbar" id="navbar">
+    <a href="#" class="logo-container">
+      <span class="logo-text">Folioblox</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#hero" class="nav-link active">Home</a></li>
+      <li><a href="#brands" class="nav-link">About</a></li>
+      <li><a href="#behind" class="nav-link">Projects</a></li>
+    </ul>
+    <a href="#contact" class="btn-touch">
+      <span>Get in touch</span>
+      <span class="btn-icon-circle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </span>
+    </a>
+  </header>
+
+  <!-- Interactive Scrollable Overlay Layers -->
+  <div class="scroll-content">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="hero-top-row">
+        <div class="hero-headline-block">
+          <div class="hero-greeting">
+            <span class="hero-greeting-dot"></span>
+            <span>Hey, I'm a</span>
+          </div>
+          <h1 class="hero-main-title">Creative<br>Director</h1>
+        </div>
+        <div class="hero-quote-block">
+          <h2 class="hero-quote-title">Great design should feel invisible.</h2>
+          <p class="hero-quote-desc">From logo to language, I build brands that connect and convert.</p>
+        </div>
+      </div>
+
+      <!-- 4 Service Pillars Grid -->
+      <div class="hero-pillars-grid">
+        <div class="pillar-card">
+          <span class="pillar-num">#01</span>
+          <span class="pillar-title">Brand Strategy</span>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-num">#02</span>
+          <span class="pillar-title">Brand Identity Design</span>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-num">#03</span>
+          <span class="pillar-title">Packaging Design</span>
+        </div>
+        <div class="pillar-card">
+          <span class="pillar-num">#04</span>
+          <span class="pillar-title">Creative Direction</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Air spacer allowing canvas visual spotlight -->
+    <div class="scroll-spacer"></div>
+
+    <!-- CLIENT LOGOS / BRANDS SECTION -->
+    <section class="brands-section" id="brands">
+      <div class="brands-wrapper">
+        <span class="brands-title">Trusted by Brands I've Helped Shape</span>
+        <div class="brands-list">
+          <!-- Supa Blox -->
+          <div class="brand-item">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"></circle>
+            </svg>
+            <span>Supa Blox</span>
+          </div>
+          <!-- Hype Blox -->
+          <div class="brand-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 3h12l-6 9 6 9H6l6-9-6-9z"></path>
+            </svg>
+            <span>Hype Blox</span>
+          </div>
+          <!-- Frame Blox -->
+          <div class="brand-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3a9 9 0 0 0 0 18V3z" fill="currentColor"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+            </svg>
+            <span>Frame Blox</span>
+          </div>
+          <!-- Ultra Blox -->
+          <div class="brand-item">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 6a5 5 0 0 0 0 12h2a5 5 0 0 0 0-12H7z" fill="currentColor"></path>
+              <path d="M15 6a5 5 0 0 1 0 12h2a5 5 0 0 0 0-12h-2z" fill="currentColor"></path>
+            </svg>
+            <span>Ultra Blox</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Air spacer -->
+    <div class="scroll-spacer"></div>
+
+    <!-- BEHIND THE DESIGNS SECTION -->
+    <section class="behind-section" id="behind">
+      <div class="behind-header">
+        <div class="behind-header-left">
+          <span class="behind-tag">Behind the Designs</span>
+          <h2 class="behind-main-title">Shaping Experiences That Make Life Simpler</h2>
+        </div>
+        <div class="behind-header-right">
+          <p class="behind-lead-text">I'm a product designer focused on building clean, intuitive interfaces that solve real-world problems.</p>
+          <div class="behind-action-row">
+            <div class="behind-action-subtext">
+              Let's Build Something<br>Meaningful Together
+            </div>
+            <a href="#contact" class="btn-touch btn-touch-orange">
+              <span>Get in touch</span>
+              <span class="btn-icon-circle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Gallery Showcase Cards Matching Reference Image -->
+      <div class="showcase-grid">
+        <!-- Card 1: Minimalist Technical Outerwear -->
+        <div class="showcase-card">
+          <img class="showcase-card-img" src="assets/jacket.jpg" alt="Minimalist Jacket Industrial Form" loading="lazy">
+          <div class="showcase-card-overlay">
+            <span class="showcase-card-category">Spatial & Apparel</span>
+            <span class="showcase-card-name">Aether Form Jacket</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Acoustic Audio Model Portrait -->
+        <div class="showcase-card">
+          <img class="showcase-card-img" src="assets/headphones.jpg" alt="Minimalist Audio Acoustic Design" loading="lazy">
+          <div class="showcase-card-overlay">
+            <span class="showcase-card-category">Acoustic & Hardware</span>
+            <span class="showcase-card-name">Soundcraft Studio Headset</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Cosmetic Dropper Packaging -->
+        <div class="showcase-card">
+          <img class="showcase-card-img" src="assets/bottle.jpg" alt="Clean Cosmetic Packaging" loading="lazy">
+          <div class="showcase-card-overlay">
+            <span class="showcase-card-category">Packaging & Materials</span>
+            <span class="showcase-card-name">Botanica Elixir Flask</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div>© 2026 Folioblox Studio. All rights reserved.</div>
+      <div>Crafted with precision &amp; scroll motion.</div>
+    </footer>
+  </div>
+
+  <!-- GSAP & ScrollTrigger Libraries -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
   <script>
     (() => {
       'use strict';
@@ -82,7 +797,7 @@
 
       const canvas = document.getElementById('canvas');
       const container = document.getElementById('canvas-container');
-      const scrollTrack = document.getElementById('scroll-track');
+      const navbar = document.getElementById('navbar');
       const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
 
       const frames = new Array(TOTAL_FRAMES);
@@ -132,11 +847,19 @@
       window.addEventListener('resize', updateDimensions, { passive: true });
 
       function onScroll() {
-        const maxScroll = scrollTrack.offsetHeight - window.innerHeight;
+        const docElem = document.documentElement;
+        const maxScroll = docElem.scrollHeight - window.innerHeight;
         if (maxScroll <= 0) return;
-        const scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+        const scrollY = window.pageYOffset || docElem.scrollTop || 0;
         const progress = Math.max(0, Math.min(1, scrollY / maxScroll));
         targetFrame = progress * (TOTAL_FRAMES - 1);
+
+        // Navbar blur on scroll
+        if (scrollY > 40) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
@@ -224,7 +947,6 @@
                 renderFrame(idx);
               }
             }).catch(() => {
-              // Fallback if decode promise rejects
               loaded[idx] = true;
             });
           } else {
@@ -239,24 +961,110 @@
         }
       }
 
-      function initGSAP() {
-        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-          gsap.registerPlugin(ScrollTrigger);
-          ScrollTrigger.create({
-            trigger: scrollTrack,
+      // GSAP ScrollTrigger Animations for Seamless Motion Integration
+      function initGSAPAnimations() {
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Synchronize page scroll to targetFrame with ScrollTrigger
+        ScrollTrigger.create({
+          trigger: document.body,
+          start: 'top top',
+          end: 'bottom bottom',
+          onUpdate: (self) => {
+            targetFrame = self.progress * (TOTAL_FRAMES - 1);
+          }
+        });
+
+        // 1. Hero Load Entrance Animation
+        const heroTl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 1.1 } });
+        heroTl.from('.navbar', { y: -30, opacity: 0, duration: 0.9 })
+              .from('.hero-greeting', { opacity: 0, y: 20 }, '-=0.6')
+              .from('.hero-main-title', { opacity: 0, y: 35 }, '-=0.8')
+              .from('.hero-quote-block', { opacity: 0, y: 25 }, '-=0.7')
+              .from('.pillar-card', { opacity: 0, y: 25, stagger: 0.1 }, '-=0.6');
+
+        // 2. Hero Parallax Fade on Scroll
+        gsap.to('.hero-top-row', {
+          scrollTrigger: {
+            trigger: '#hero',
             start: 'top top',
-            end: 'bottom bottom',
-            onUpdate: (self) => {
-              targetFrame = self.progress * (TOTAL_FRAMES - 1);
-            }
-          });
-        }
+            end: 'bottom top',
+            scrub: true
+          },
+          y: -120,
+          opacity: 0.15,
+          ease: 'none'
+        });
+
+        gsap.to('.hero-pillars-grid', {
+          scrollTrigger: {
+            trigger: '#hero',
+            start: 'center top',
+            end: 'bottom top',
+            scrub: true
+          },
+          y: -80,
+          opacity: 0,
+          ease: 'none'
+        });
+
+        // 3. Brands Ribbon Reveal
+        gsap.from('.brands-wrapper', {
+          scrollTrigger: {
+            trigger: '#brands',
+            start: 'top 85%',
+            toggleActions: 'play none none reverse'
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1.2,
+          ease: 'power3.out'
+        });
+
+        // 4. "Behind the Designs" Section Reveal
+        gsap.from('.behind-tag, .behind-main-title', {
+          scrollTrigger: {
+            trigger: '#behind',
+            start: 'top 75%'
+          },
+          y: 50,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1.1,
+          ease: 'power3.out'
+        });
+
+        gsap.from('.behind-lead-text, .behind-action-row', {
+          scrollTrigger: {
+            trigger: '#behind',
+            start: 'top 70%'
+          },
+          y: 40,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1.1,
+          ease: 'power3.out'
+        });
+
+        // 5. Showcase Cards Staggered Cascading Reveal
+        gsap.from('.showcase-card', {
+          scrollTrigger: {
+            trigger: '.showcase-grid',
+            start: 'top 82%'
+          },
+          y: 90,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 1.3,
+          ease: 'power3.out'
+        });
       }
 
       updateDimensions();
       preload();
       onScroll();
-      initGSAP();
+      initGSAPAnimations();
       requestAnimationFrame(loop);
     })();
   </script>
