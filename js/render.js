@@ -38,7 +38,7 @@ class PortfolioRenderer {
       this.data = await response.json();
       this.renderAll();
       this.bindCertFilters();
-      
+
       // Dispatch event to announce rendering completion
       window.dispatchEvent(new CustomEvent('portfolio:rendered', { detail: this.data }));
       return this.data;
@@ -86,6 +86,21 @@ class PortfolioRenderer {
     return icons[type] || icons.code;
   }
 
+  // Helper to render name with character-by-character animation spans
+  renderAnimatedName(name) {
+    if (!name) return 'MD MATLOOB ALAM';
+    const words = name.trim().split(/\s+/);
+    let charIdx = 0;
+    return words.map(word => {
+      const charsHtml = Array.from(word).map(char => {
+        const span = `<span class="hero-char" style="--char-idx: ${charIdx};" data-char="${char}">${char}</span>`;
+        charIdx++;
+        return span;
+      }).join('');
+      return `<span class="hero-name-word" aria-hidden="true">${charsHtml}</span>`;
+    }).join('<span class="hero-char-space" aria-hidden="true">&nbsp;</span>');
+  }
+
   // 1. Hero / Home Section (Vercel / Linear Ultra-Clean Style)
   renderHero() {
     const mount = document.getElementById('heroMount');
@@ -116,10 +131,9 @@ class PortfolioRenderer {
             ${profile.statusSubtitle ? `<span class="status-badge-sub">${profile.statusSubtitle}</span>` : ''}
           </div>` : ''}
 
-
-          <!-- 3. Primary Grand Name & Job Title -->
-          <h1 class="hero-name-title">
-            ${profile.name}
+          <!-- 2. Primary Grand Name: Character-by-Character Animated Headline -->
+          <h1 class="hero-name-title" aria-label="${profile.name}">
+            ${this.renderAnimatedName(profile.name)}
           </h1>
 
           <div class="hero-subheading">
@@ -128,12 +142,12 @@ class PortfolioRenderer {
             <span class="hero-subheading-accent">UI Engineer</span>
           </div>
 
-          <!-- 4. Short Introduction -->
+          <!-- 3. Short Introduction -->
           <p class="hero-intro-text">
             ${profile.heroTagline}
           </p>
 
-          <!-- 5. Hero CTA Actions (Download Resume, Contact Me & Socials) -->
+          <!-- 4. Hero CTA Actions (Download Resume, Contact Me & Socials) -->
           <div class="hero-actions-group">
             <a 
               href="${profile.resumeUrl}" 
@@ -158,23 +172,6 @@ class PortfolioRenderer {
               </svg>
             </a>
 
-            <!-- AI Resume Sync Button -->
-            <button 
-              type="button" 
-              class="hero-btn-contact btn-open-resume-modal" 
-              data-action="open-resume-modal"
-              aria-label="Upload resume and dynamically sync portfolio using AI"
-              title="AI Resume Auto-Sync"
-              style="cursor: pointer; background: rgba(255, 87, 34, 0.1); border-color: rgba(255, 87, 34, 0.35); color: #ff8a65;"
-            >
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="17 8 12 3 7 8"></polyline>
-                <line x1="12" y1="3" x2="12" y2="15"></line>
-              </svg>
-              <span>AI Sync</span>
-            </button>
-
             <!-- Social Links -->
             <div class="hero-social-links" aria-label="Social Profiles">
               <a href="${profile.githubUrl}" target="_blank" rel="noopener noreferrer" class="hero-social-icon" aria-label="GitHub Profile" title="GitHub">
@@ -187,30 +184,37 @@ class PortfolioRenderer {
           </div>
         </div>
 
-        <!-- Right: Professional Portrait Card with Ambient Glow -->
-        <div class="hero-visual-block">
-          <div class="hero-photo-wrapper">
-            <div class="hero-photo-glow" aria-hidden="true"></div>
-            <div class="hero-photo-card">
-              <img 
-                src="${profile.avatarUrl}" 
-                alt="${profile.name} — ${profile.title}" 
-                class="hero-photo" 
-                width="340" 
-                height="340" 
-                loading="eager"
-                onerror="this.onerror=null; this.src='assets/profile-avatar.svg';"
-              />
-              <div class="hero-photo-overlay" aria-hidden="true"></div>
-              
-              <!-- Floating Pill Badges -->
-              <div class="hero-photo-badge" aria-hidden="true">
-                <span class="badge-dot"></span>
-                <span>Open to Work</span>
+        <!-- Right: 3D Animated Motion Showcase Card with Dynamic Ambient Glow -->
+        <div class="hero-visual-block" id="heroVisualBlock">
+          <div class="hero-3d-stage" id="hero3DStage">
+            <!-- Dynamic Ambient Pulsing Neon Glow -->
+            <div class="hero-visual-glow" aria-hidden="true"></div>
+
+            <!-- Master 3D Showcase Card Window (Frameless Clean View) -->
+            <div class="hero-showcase-window" id="hero3DCard">
+              <!-- Animated Motion Viewport (GIF) -->
+              <div class="hero-photo-viewport">
+                <img 
+                  src="assets/gemini_generated_video_ebe17827.gif" 
+                  alt="${profile.name} — Interactive Motion Visual" 
+                  class="hero-portrait-image"
+                  id="heroPortraitImage"
+                  loading="eager"
+                  onerror="this.onerror=null; this.src='assets/profile-avatar.svg';"
+                />
+                <!-- Subtle Cinematic Edge Vignette & Warm Light Reflections -->
+                <div class="hero-photo-cinematic-overlay" aria-hidden="true"></div>
               </div>
-              <div class="hero-photo-badge hero-photo-badge-left" aria-hidden="true">
-                <span class="badge-icon">&lt;/&gt;</span>
-                <span>Full Stack &amp; UI</span>
+
+              <!-- Floating 3D Tech Badges -->
+              <div class="hero-badge-tag hero-badge-tag-status" data-depth="35">
+                <span class="status-pulse-dot" aria-hidden="true"></span>
+                <span>Open for Opportunities</span>
+              </div>
+
+              <div class="hero-badge-tag hero-badge-tag-stack" data-depth="45">
+                <span class="badge-role-icon">&lt;/&gt;</span>
+                <span>Python · React · Cloud</span>
               </div>
             </div>
           </div>
@@ -222,6 +226,125 @@ class PortfolioRenderer {
         ${metricsHtml}
       </div>
     `;
+
+    // Initialize 3D Parallax, Media Switcher & Video Controls
+    this.initHeroVisual3D();
+  }
+
+  // 3D Parallax & Video Playback Controller for Hero Visual
+  initHeroVisual3D() {
+    const stage = document.getElementById('hero3DStage');
+    const card = document.getElementById('hero3DCard');
+    const video = document.getElementById('heroVideo');
+    if (!stage || !card) return;
+
+    // 1. Optimize video playback with seamless autoplay
+    if (video) {
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+
+      const playVideo = () => {
+        const promise = video.play();
+        if (promise !== undefined) {
+          promise.catch(() => {
+            // Document interaction fallback
+            const resumeOnInteraction = () => {
+              video.play().catch(() => { });
+              window.removeEventListener('click', resumeOnInteraction);
+              window.removeEventListener('touchstart', resumeOnInteraction);
+            };
+            window.addEventListener('click', resumeOnInteraction, { once: true });
+            window.addEventListener('touchstart', resumeOnInteraction, { once: true });
+          });
+        }
+      };
+
+      if (video.readyState >= 2) {
+        playVideo();
+      } else {
+        video.addEventListener('loadeddata', playVideo, { once: true });
+      }
+
+      // Continuous loop assurance
+      video.addEventListener('ended', () => {
+        video.currentTime = 0;
+        video.play().catch(() => { });
+      });
+    }
+
+    // 2. 3D Tilt & Optical Depth Parallax Engine
+    let rect = card.getBoundingClientRect();
+    let isHovering = false;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+    let rafId = null;
+
+    const parallaxLayers = card.querySelectorAll('[data-depth]');
+
+    const updateRect = () => {
+      rect = card.getBoundingClientRect();
+    };
+    window.addEventListener('resize', updateRect, { passive: true });
+
+    const onMouseMove = (e) => {
+      isHovering = true;
+      card.classList.remove('is-floating');
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const mouseX = e.clientX - centerX;
+      const mouseY = e.clientY - centerY;
+
+      // Gentle, luxury tilt (+/- 10 degrees max)
+      targetY = (mouseX / (rect.width / 2)) * 10;
+      targetX = -(mouseY / (rect.height / 2)) * 10;
+    };
+
+    const onMouseEnter = () => {
+      updateRect();
+      isHovering = true;
+      card.classList.remove('is-floating');
+    };
+
+    const onMouseLeave = () => {
+      isHovering = false;
+      targetX = 0;
+      targetY = 0;
+      setTimeout(() => {
+        if (!isHovering) card.classList.add('is-floating');
+      }, 350);
+    };
+
+    stage.addEventListener('mousemove', onMouseMove, { passive: true });
+    stage.addEventListener('mouseenter', onMouseEnter);
+    stage.addEventListener('mouseleave', onMouseLeave);
+
+    // Smooth Lerp Rendering Loop
+    const renderLoop = () => {
+      currentX += (targetX - currentX) * 0.1;
+      currentY += (targetY - currentY) * 0.1;
+
+      if (isHovering || Math.abs(currentX) > 0.04 || Math.abs(currentY) > 0.04) {
+        card.style.transform = `perspective(1200px) rotateX(${currentY.toFixed(2)}deg) rotateY(${currentX.toFixed(2)}deg) translateZ(10px)`;
+
+        // Optical parallax on foreground portrait card & tech badges
+        parallaxLayers.forEach((layer) => {
+          const depth = parseFloat(layer.getAttribute('data-depth')) || 35;
+          const px = (currentX * (depth / 35) * 1.2).toFixed(1);
+          const py = (-currentY * (depth / 35) * 1.2).toFixed(1);
+          layer.style.transform = `translate3d(${px}px, ${py}px, ${depth}px)`;
+        });
+      }
+
+      rafId = requestAnimationFrame(renderLoop);
+    };
+
+    // Start with floating idle animation
+    card.classList.add('is-floating');
+    renderLoop();
   }
 
   // 2. About Me Section

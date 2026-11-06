@@ -263,6 +263,12 @@
     justify-content: center;
   }
 
+  .hero-social-links {
+    margin-left: 0;
+    margin-top: 6px;
+    justify-content: center;
+  }
+
   .hero-photo-card {
     width: 100%;
     max-width: 280px;
