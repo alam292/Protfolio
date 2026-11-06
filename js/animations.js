@@ -95,20 +95,13 @@ class AnimationsController {
     tl.from('.hero-subheading', { opacity: 0, y: 16, duration: 0.65 }, '-=0.5')
       .from('.hero-intro-text', { opacity: 0, y: 16, duration: 0.65 }, '-=0.5')
       .from('.hero-actions-group', { opacity: 0, y: 16, duration: 0.65 }, '-=0.5')
-      .from('.hero-showcase-window', {
+      .from('#heroProfileImg', {
         opacity: 0,
-        scale: 0.94,
-        y: 24,
-        duration: 0.9,
+        scale: 0.92,
+        y: 35,
+        duration: 0.95,
         ease: 'power2.out'
       }, '-=0.65')
-      .from('.hero-badge-tag', {
-        opacity: 0,
-        scale: 0.85,
-        stagger: 0.1,
-        duration: 0.55,
-        ease: 'back.out(1.6)'
-      }, '-=0.4')
       .from('.bento-metric-card', {
         opacity: 0,
         y: 18,
@@ -131,6 +124,24 @@ class AnimationsController {
       opacity: 0.45,
       ease: 'none'
     });
+
+    // Dedicated smooth scroll animation for the transparent profile image
+    const profileImg = document.querySelector('#heroProfileImg');
+    if (profileImg) {
+      gsap.to(profileImg, {
+        scrollTrigger: {
+          trigger: '#hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2, // Ultra-smooth inertia damping
+        },
+        y: 90, // Smooth vertical glide as page scrolls
+        scale: 0.94, // Subtle depth scale
+        opacity: 0.35, // Natural exit fade
+        ease: 'power1.out',
+        force3D: true
+      });
+    }
 
     gsap.to('.hero-bento-metrics', {
       scrollTrigger: {

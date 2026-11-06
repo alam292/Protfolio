@@ -302,39 +302,16 @@ class PortfolioRenderer {
           </div>
         </div>
 
-        <!-- Right: 3D Animated Motion Showcase Card with Dynamic Ambient Glow -->
+        <!-- Right: Pure Transparent Profile Cutout with Smooth Scroll Animation (Zero Extra Elements) -->
         <div class="hero-visual-block" id="heroVisualBlock">
-          <div class="hero-3d-stage" id="hero3DStage">
-            <!-- Dynamic Ambient Pulsing Neon Glow -->
-            <div class="hero-visual-glow" aria-hidden="true"></div>
-
-            <!-- Master 3D Showcase Card Window (Frameless Clean View) -->
-            <div class="hero-showcase-window" id="hero3DCard">
-              <!-- Animated Motion Viewport (GIF) -->
-              <div class="hero-photo-viewport">
-                <img 
-                  src="${profile.avatarUrl || 'assets/gemini_generated_video_ebe17827.gif'}" 
-                  alt="${profile.name} — Interactive Motion Visual" 
-                  class="hero-portrait-image"
-                  id="heroPortraitImage"
-                  loading="eager"
-                  onerror="this.onerror=null; this.src='assets/profile-avatar.svg';"
-                />
-                <!-- Subtle Cinematic Edge Vignette & Warm Light Reflections -->
-                <div class="hero-photo-cinematic-overlay" aria-hidden="true"></div>
-              </div>
-
-              <!-- Floating 3D Tech Badges -->
-              <div class="hero-badge-tag hero-badge-tag-status" data-depth="35">
-                <span class="status-pulse-dot" aria-hidden="true"></span>
-                <span>Open for Opportunities</span>
-              </div>
-
-              <div class="hero-badge-tag hero-badge-tag-stack" data-depth="45">
-                <span class="badge-role-icon">&lt;/&gt;</span>
-                <span>Python · React · Cloud</span>
-              </div>
-            </div>
+          <div class="hero-image-stage" id="heroImageStage">
+            <img 
+              src="assets/profile-matloob-transparent.png" 
+              alt="${profile.name}" 
+              class="hero-transparent-profile-img hero-float-idle"
+              id="heroProfileImg"
+              loading="eager"
+            />
           </div>
         </div>
       </div>
@@ -349,14 +326,14 @@ class PortfolioRenderer {
     this.initHeroVisual3D();
   }
 
-  // 3D Parallax & Floating Motion Controller for Hero Visual
+  // 3D Parallax & Floating Motion Controller for Hero Transparent Visual
   initHeroVisual3D() {
-    const stage = document.getElementById('hero3DStage');
-    const card = document.getElementById('hero3DCard');
-    if (!stage || !card) return;
+    const stage = document.getElementById('heroImageStage') || document.getElementById('heroVisualBlock');
+    const img = document.getElementById('heroProfileImg');
+    if (!stage || !img) return;
 
-    // 3D Tilt & Optical Depth Parallax Engine
-    let rect = card.getBoundingClientRect();
+    // Smooth Lerp Tilt for Transparent Cutout
+    let rect = stage.getBoundingClientRect();
     let isHovering = false;
     let targetRotateX = 0;
     let targetRotateY = 0;
@@ -364,30 +341,28 @@ class PortfolioRenderer {
     let currentRotateY = 0;
     let rafId = null;
 
-    const parallaxLayers = card.querySelectorAll('[data-depth]');
-
     const updateRect = () => {
-      rect = card.getBoundingClientRect();
+      rect = stage.getBoundingClientRect();
     };
     window.addEventListener('resize', updateRect, { passive: true });
 
     const onMouseMove = (e) => {
       isHovering = true;
-      card.classList.remove('is-floating');
+      img.classList.remove('hero-float-idle');
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       const mouseX = e.clientX - centerX;
       const mouseY = e.clientY - centerY;
 
-      // Ergonomic 3D tilt: mouse horizontal shifts rotateY, mouse vertical shifts rotateX
-      targetRotateY = (mouseX / (rect.width / 2)) * 8;
-      targetRotateX = -(mouseY / (rect.height / 2)) * 8;
+      // Subtle, refined 3D tilt without clipping
+      targetRotateY = (mouseX / (rect.width / 2)) * 6;
+      targetRotateX = -(mouseY / (rect.height / 2)) * 6;
     };
 
     const onMouseEnter = () => {
       updateRect();
       isHovering = true;
-      card.classList.remove('is-floating');
+      img.classList.remove('hero-float-idle');
     };
 
     const onMouseLeave = () => {
@@ -409,33 +384,19 @@ class PortfolioRenderer {
       currentRotateY += (targetRotateY - currentRotateY) * 0.1;
 
       if (isHovering || Math.abs(currentRotateX) > 0.04 || Math.abs(currentRotateY) > 0.04) {
-        card.style.transform = `perspective(1200px) rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) translateZ(10px)`;
-
-        // Optical parallax on foreground portrait card & tech badges
-        parallaxLayers.forEach((layer) => {
-          const depth = parseFloat(layer.getAttribute('data-depth')) || 35;
-          const px = (currentRotateY * (depth / 35) * 1.2).toFixed(1);
-          const py = (-currentRotateX * (depth / 35) * 1.2).toFixed(1);
-          layer.style.transform = `translate3d(${px}px, ${py}px, ${depth}px)`;
-        });
+        img.style.transform = `perspective(1000px) rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) translateZ(8px)`;
       } else if (!isHovering) {
-        // Clear inline transforms when idle so CSS float keyframes can seamlessly run
-        if (card.style.transform) {
-          card.style.transform = '';
-          parallaxLayers.forEach((layer) => {
-            layer.style.transform = '';
-          });
+        if (img.style.transform) {
+          img.style.transform = '';
         }
-        if (!card.classList.contains('is-floating')) {
-          card.classList.add('is-floating');
+        if (!img.classList.contains('hero-float-idle')) {
+          img.classList.add('hero-float-idle');
         }
       }
 
       rafId = requestAnimationFrame(renderLoop);
     };
 
-    // Start with floating idle animation
-    card.classList.add('is-floating');
     renderLoop();
   }
 
