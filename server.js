@@ -125,6 +125,14 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, error: 'Internal Server Error' });
 });
 
+// Process-level error protection
+process.on('uncaughtException', (err) => {
+  console.error('[Uncaught Exception]', err.stack || err);
+});
+process.on('unhandledRejection', (reason) => {
+  console.error('[Unhandled Rejection]', reason);
+});
+
 // Server Starter with automatic port increment if in use
 let currentPort = PORT;
 
