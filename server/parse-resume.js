@@ -53,7 +53,7 @@ async function extractRawText(buffer, ext) {
  * @returns {Promise<object>} Structured portfolio JSON
  */
 async function structureResumeWithAI(rawText, basePortfolio = {}) {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = (process.env.GEMINI_API_KEY || '').trim();
 
   if (apiKey && apiKey !== 'YOUR_GEMINI_API_KEY_HERE') {
     try {
@@ -261,25 +261,52 @@ ${rawText}
 
   let responseText = '';
 
-  // Try @google/genai first
+  // 1. Primary: Direct REST call with gemini-3.8-flash (fast, reliable, native JSON mode)
   try {
-    const { GoogleGenAI } = require('@google/genai');
-    const ai = new GoogleGenAI({ apiKey });
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
-      config: {
-        responseMimeType: 'application/json'
-      }
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          responseMimeType: 'application/json'
+        }
+      })
     });
-    responseText = response.text || (response.candidates && response.candidates[0]?.content?.parts[0]?.text) || '';
-  } catch (err1) {
-    // Try @google/generative-ai
-    const { GoogleGenerativeAI } = require('@google/generative-ai');
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
-    const result = await model.generateContent(prompt);
-    responseText = result.response.text();
+    const data = await res.json();
+    if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+      responseText = data.candidates[0].content.parts[0].text;
+    } else if (data.error) {
+      throw new Error(`Gemini API Error: ${data.error.message || JSON.stringify(data.error)}`);
+    }
+  } catch (restErr) {
+    console.warn('[AI Parser] REST call failed, trying SDK fallback:', restErr.message);
+
+    // 2. Secondary fallback: @google/genai SDK
+    try {
+      const { GoogleGenAI } = require('@google/genai');
+      const ai = new GoogleGenAI({ apiKey });
+      const response = await ai.models.generateContent({
+        model: 'gemini-3.8-flash',
+        contents: prompt,
+        config: {
+          responseMimeType: 'application/json'
+        }
+      });
+      responseText = response.text || (response.candidates && response.candidates[0]?.content?.parts[0]?.text) || '';
+    } catch (sdkErr) {
+      // 3. Tertiary fallback: @google/generative-ai SDK
+      try {
+        const { GoogleGenerativeAI } = require('@google/generative-ai');
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-3.8-flash' });
+        const result = await model.generateContent(prompt);
+        responseText = result.response.text();
+      } catch (genAiErr) {
+        console.warn('[AI Parser] Gemini AI call failed, switching to deterministic fallback parser:', genAiErr.message);
+        return fallbackRuleBasedParser(rawText, basePortfolio);
+      }
+    }
   }
 
   // Sanitize JSON
@@ -288,8 +315,13 @@ ${rawText}
   if (cleaned.startsWith('```')) cleaned = cleaned.replace(/^```\s*/i, '');
   if (cleaned.endsWith('```')) cleaned = cleaned.replace(/\s*```$/i, '');
 
-  const parsed = JSON.parse(cleaned);
-  return validateAndMergePortfolio(parsed, basePortfolio);
+  try {
+    const parsed = JSON.parse(cleaned);
+    return validateAndMergePortfolio(parsed, basePortfolio);
+  } catch (jsonErr) {
+    console.warn('[AI Parser] JSON parse error, falling back to rule-based parser:', jsonErr.message);
+    return fallbackRuleBasedParser(rawText, basePortfolio);
+  }
 }
 
 /**

@@ -1,88 +1,88 @@
 {
   "profile": {
-    "name": "Md MatlooB Alam",
-    "shortName": "Matloob",
-    "title": "Full Stack Developer & UI Engineer",
-    "heroTagline": "Specializing in engineering high-performance web applications, scalable cloud architectures, and intuitive digital interfaces. Turning complex challenges into sleek, production-ready code.",
+    "name": "MD MATLOOB ALAM",
+    "shortName": "MD",
+    "title": "Software Developer with hands-on experience in frontend and backend web application development. Skilled in",
+    "heroTagline": "Specializing in developing responsive web applications, robust RESTful APIs, and scalable backend services with React, Next.js, FastAPI, and Django. Turning complex requirements into clean, production-ready code.",
     "status": "Available for opportunities",
-    "statusSubtitle": "Full-time & High-Impact Contracts",
-    "email": "contact@matloob.dev",
+    "statusSubtitle": "Full-time & High-Impact Software Engineering Roles",
+    "email": "mdmatloobgaya@gmail.com",
     "fallbackEmail": "mdmatloobgaya@gmail.com",
     "portfolioUrl": "https://matloob.dev",
     "githubUrl": "https://github.com/mdmatloob",
     "githubUser": "mdmatloob",
     "linkedinUrl": "https://linkedin.com/in/mdmatloob",
-    "resumeUrl": "assets/Md_MatlooB_Alam_Resume.pdf",
-    "resumeFilename": "Md_MatlooB_Alam_Resume.pdf",
+    "resumeUrl": "assets/Md_Matloob_Alam_Software_Developer_Resume.pdf",
+    "resumeFilename": "Md_Matloob_Alam_Software_Developer_Resume.pdf",
     "avatarUrl": "assets/profile-avatar.svg",
     "location": {
-      "city": "Gaya",
-      "state": "Bihar",
+      "city": "New Delhi",
+      "state": "Delhi",
       "country": "India",
-      "coordinates": "24.7955° N, 85.0002° E",
+      "coordinates": "28.6139° N, 77.2090° E",
       "timezone": "Asia/Kolkata",
       "timezoneOffset": "IST (UTC+5:30)",
       "remoteReadiness": "Global Remote Available",
-      "relocationReadiness": "Open to Bengaluru, Hyderabad, Pune, Delhi-NCR"
+      "relocationReadiness": "Open to Noida, Gurugram, Delhi-NCR, Bengaluru, Hyderabad"
     }
   },
   "stats": [
     {
-      "value": "3+",
+      "value": "2+",
       "suffix": "Years",
-      "label": "Commercial Experience",
-      "description": "Engineering full-stack web applications and UI design systems"
+      "label": "Engineering Experience",
+      "description": "Building full-stack web applications and robust backend architectures"
     },
     {
-      "value": "100K+",
-      "suffix": "MAU",
-      "label": "Users Scaled",
-      "description": "Architected platforms serving 100,000+ monthly active users"
+      "value": "15+",
+      "suffix": "APIs",
+      "label": "REST Endpoints Built",
+      "description": "Designed high-speed FastAPI and Django REST services with zero downtime"
     },
     {
-      "value": "40%",
-      "suffix": "Faster",
-      "label": "Performance Gains",
-      "description": "Reduced bundle sizes and latency through code splitting"
+      "value": "3+",
+      "suffix": "Systems",
+      "label": "Full-Stack Products",
+      "description": "Production-grade SaaS, management dashboards, and developer tools"
     },
     {
-      "value": "25+",
-      "suffix": "Shipped",
-      "label": "Production Projects",
-      "description": "Shipped SaaS apps, dashboards, and enterprise systems"
+      "value": "99.9%",
+      "suffix": "Uptime",
+      "label": "Cloud Reliability",
+      "description": "Ensuring high availability, reliability, and smooth database operations"
     }
   ],
   "about": {
     "sectionTag": "WHO I AM",
-    "title": "Engineering High-Performance Web Systems with Pixel-Perfect Precision",
-    "lead": "I am a multidisciplinary Full Stack Developer & UI Engineer with 3+ years of professional experience bridging elegant interface aesthetics with scalable, rock-solid backend infrastructure.",
+    "title": "Crafting Scalable Backends and Fluid User Interfaces with Precision",
+    "lead": "I am a Software Developer with hands-on experience bridging responsive frontend development with robust, high-performance backend systems using Python, JavaScript, React, Next.js, and relational databases.",
     "pillars": [
       {
         "id": "identity",
         "tag": "01. IDENTITY & CRAFT",
-        "title": "Full Stack Developer & UI Engineer",
-        "content": "I specialize in architecting responsive web applications, zero-dependency design systems, and robust backend services. My work focuses on sub-second render performance, seamless user experiences, and rigorous type safety.",
+        "title": "Full-Stack Software Developer",
+        "content": "Specializing in end-to-end web engineering, integrating responsive React frontends with high-throughput FastAPI and Django backends. Driven by clean code architecture, modular design, and reliable CRUD workflows.",
         "icon": "terminal"
       },
       {
         "id": "journey",
         "tag": "02. THE JOURNEY",
-        "title": "From Core Fundamentals to Enterprise Cloud",
-        "content": "Starting with fundamental computer science principles, algorithms, and relational data structures, I evolved into building distributed microservices, scalable REST APIs, and production Next.js frontends supporting heavy concurrent traffic.",
+        "title": "From Core Engineering to Scalable Web Systems",
+        "content": "With an engineering foundation in Electronics & Communications, I transitioned into software development, mastering data structures, algorithms, relational database modeling, and scalable modern web stacks.",
         "icon": "git-branch"
       },
       {
         "id": "goals",
         "tag": "03. TRACK RECORD & IMPACT",
-        "title": "Proven Production Delivery",
-        "content": "Engineered web platforms handling 100K+ monthly active users with sub-second page loads, reduced client-side bundle sizes by 40%, and standardized accessible design tokens across fast-paced development cycles.",
+        "title": "Production Deployment & API Integration",
+        "content": "Engineered enterprise management dashboards, deployed cloud-hosted web applications, and integrated complex third-party APIs to deliver seamless user experiences and operational automation.",
         "icon": "zap"
       },
       {
         "id": "philosophy",
         "tag": "04. PASSION & STANDARDS",
-        "title": "60fps Motion & Accessible Architecture",
-        "content": "I believe engineering excellence lives at the intersection of fluid 60fps kinematics, strict WCAG 2.1 AA accessibility, comprehensive test coverage with Jest, and resilient cloud architectures.",
+        "title": "Performance, Reliability & Clean Schemas",
+        "content": "I advocate for structured object-oriented programming, normalized relational schemas with PostgreSQL and SQLAlchemy, rigorous API contract testing in Postman, and responsive, accessible interfaces.",
         "icon": "shield"
       }
     ]
@@ -90,43 +90,38 @@
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",
     "title": "Core Competencies & Technology Matrix",
-    "subtitle": "Carefully selected languages, frameworks, databases, and developer tools battle-tested across enterprise production systems.",
+    "subtitle": "Comprehensive technical stack spanning full-stack frameworks, relational database management, and cloud deployment tooling.",
     "categories": [
       {
         "id": "languages",
         "name": "Programming Languages",
         "icon": "code",
-        "description": "Primary daily languages with deep focus on enterprise TypeScript and ECMAScript standards.",
+        "description": "Core languages utilized for full-stack engineering, scripting, and relational data querying.",
         "items": [
           {
-            "name": "TypeScript",
+            "name": "Python",
             "level": "Advanced",
-            "badge": "Primary"
+            "badge": "Primary Backend"
           },
           {
             "name": "JavaScript (ES6+)",
             "level": "Advanced",
-            "badge": "Expert"
-          },
-          {
-            "name": "Python",
-            "level": "Proficient",
-            "badge": "Backend & Scripts"
-          },
-          {
-            "name": "HTML5 & Semantic ARIA",
-            "level": "Advanced",
-            "badge": "Accessibility"
-          },
-          {
-            "name": "CSS3 & Modern Layouts",
-            "level": "Advanced",
-            "badge": "Grid & Flexbox"
+            "badge": "Frontend Core"
           },
           {
             "name": "SQL",
-            "level": "Proficient",
-            "badge": "Queries & Optimization"
+            "level": "Advanced",
+            "badge": "Relational Queries"
+          },
+          {
+            "name": "HTML5",
+            "level": "Advanced",
+            "badge": "Semantic Markup"
+          },
+          {
+            "name": "CSS3",
+            "level": "Advanced",
+            "badge": "Responsive Styling"
           }
         ]
       },
@@ -134,75 +129,65 @@
         "id": "frontend",
         "name": "Frontend Technologies",
         "icon": "layers",
-        "description": "Building high-performance, responsive interfaces, fluid animations, and scalable design systems.",
+        "description": "Building interactive, accessible, and high-performance user interfaces and dashboards.",
         "items": [
           {
             "name": "React.js",
             "level": "Advanced",
-            "badge": "Hooks & Context"
+            "badge": "SPA & Dashboards"
           },
           {
-            "name": "Next.js (App Router)",
-            "level": "Advanced",
-            "badge": "SSR & Edge"
+            "name": "Next.js",
+            "level": "Proficient",
+            "badge": "SSR & Routing"
           },
           {
             "name": "Tailwind CSS",
             "level": "Advanced",
-            "badge": "Utility-first"
+            "badge": "Modern Styling"
           },
           {
-            "name": "Redux Toolkit / Zustand",
-            "level": "Proficient",
-            "badge": "State Management"
+            "name": "Bootstrap",
+            "level": "Advanced",
+            "badge": "Rapid UI Layouts"
           },
           {
-            "name": "GSAP & Web Animations",
+            "name": "Markdown Rendering",
             "level": "Proficient",
-            "badge": "60fps Motion"
-          },
-          {
-            "name": "HTML5 Canvas API",
-            "level": "Proficient",
-            "badge": "Stream Visuals"
+            "badge": "Live Preview Workflows"
           }
         ]
       },
       {
         "id": "backend",
-        "name": "Backend Technologies",
+        "name": "Backend & API Technologies",
         "icon": "server",
-        "description": "Scalable REST & GraphQL services, microservices, and secure token authentication pipelines.",
+        "description": "Developing robust RESTful services, server-side business logic, and API integrations.",
         "items": [
           {
-            "name": "Node.js",
+            "name": "FastAPI",
             "level": "Advanced",
-            "badge": "Runtime Core"
+            "badge": "Async REST APIs"
           },
           {
-            "name": "Express.js",
+            "name": "Django",
             "level": "Advanced",
-            "badge": "Microservices"
+            "badge": "Full-Featured Web"
           },
           {
             "name": "RESTful APIs",
             "level": "Advanced",
-            "badge": "API Architecture"
+            "badge": "Architecture & CRUD"
           },
           {
-            "name": "GraphQL",
-            "level": "Proficient",
-            "badge": "Queries & Schemas"
-          },
-          {
-            "name": "Authentication (JWT & OAuth)",
+            "name": "SQLAlchemy (ORM)",
             "level": "Advanced",
-            "badge": "Security"
+            "badge": "Data Modeling"
           },
           {
-            "name": "Microservices",
+            "name": "Third-Party API Integration",
             "level": "Proficient",
-            "badge": "Distributed"
+            "badge": "External Services"
           }
         ]
       },
@@ -210,75 +195,65 @@
         "id": "databases",
         "name": "Databases & Storage",
         "icon": "database",
-        "description": "Relational data modeling, high-throughput caching, NoSQL flexibility, and ORM pipelines.",
+        "description": "Structured schema design, query optimization, and persistent relational data storage.",
         "items": [
           {
             "name": "PostgreSQL",
             "level": "Advanced",
-            "badge": "Relational / Indexing"
-          },
-          {
-            "name": "MongoDB",
-            "level": "Advanced",
-            "badge": "Document Store"
-          },
-          {
-            "name": "Redis",
-            "level": "Proficient",
-            "badge": "In-Memory Cache"
-          },
-          {
-            "name": "Prisma ORM",
-            "level": "Advanced",
-            "badge": "Type-safe ORM"
-          },
-          {
-            "name": "Mongoose",
-            "level": "Advanced",
-            "badge": "Schema Modeling"
+            "badge": "Relational DB"
           },
           {
             "name": "MySQL",
-            "level": "Proficient",
+            "level": "Advanced",
             "badge": "Relational Schemas"
+          },
+          {
+            "name": "CRUD Optimization",
+            "level": "Advanced",
+            "badge": "Query Performance"
+          },
+          {
+            "name": "Database Migrations",
+            "level": "Proficient",
+            "badge": "Schema Versioning"
           }
         ]
       },
       {
         "id": "tools",
-        "name": "Developer Tools & DevOps",
+        "name": "Developer Tools & Core Concepts",
         "icon": "cpu",
-        "description": "Automated testing, containerization, modern build tooling, and continuous integration.",
+        "description": "Software engineering fundamentals, testing tools, and continuous collaborative workflows.",
         "items": [
           {
             "name": "Git & GitHub",
             "level": "Advanced",
-            "badge": "VCS & GitFlow"
+            "badge": "Version Control"
           },
           {
-            "name": "Docker",
-            "level": "Proficient",
-            "badge": "Containers"
-          },
-          {
-            "name": "Vite & Webpack",
+            "name": "Postman",
             "level": "Advanced",
-            "badge": "Build Optimization"
+            "badge": "API Testing"
           },
           {
-            "name": "Jest & RTL",
-            "level": "Proficient",
-            "badge": "Unit Testing"
-          },
-          {
-            "name": "Figma",
+            "name": "OOPs Concepts",
             "level": "Advanced",
-            "badge": "UI/UX Design Systems"
+            "badge": "System Design"
           },
           {
-            "name": "CI/CD (GitHub Actions)",
+            "name": "Data Structures & Algorithms",
             "level": "Proficient",
-            "badge": "Automated Deploy"
+            "badge": "Problem Solving"
+          },
+          {
+            "name": "VS Code",
+            "level": "Advanced",
+            "badge": "IDE & Extensions"
+          },
+          {
+            "name": "Jupyter Notebook",
+            "level": "Proficient",
+            "badge": "Prototyping"
           }
         ]
       }
@@ -287,90 +262,68 @@
   "projects": {
     "sectionTag": "FEATURED WORK",
     "title": "Selected Engineering Projects",
-    "subtitle": "Production-grade applications built with attention to performance, modern system design, and responsive user interfaces.",
+    "subtitle": "Production-tested web applications, full-stack systems, and developer productivity tools.",
     "items": [
       {
-        "id": "cloudscale-saas",
+        "id": "hospital-management-system",
         "number": "01",
-        "title": "CloudScale AI — Enterprise Multi-Tenant SaaS",
-        "category": "Enterprise SaaS & Cloud Ops",
-        "description": "Engineered a multi-tenant cloud operations dashboard providing automated infrastructure health analytics, real-time load distribution, and sub-second page loads for high-concurrency environments.",
-        "metrics": "Serving 100K+ monthly active requests with 99.98% uptime and 40% reduced payload.",
+        "title": "Hospital Management System",
+        "category": "Full-Stack Healthcare Operations",
+        "description": "Engineered a hospital management platform designed to streamline patient registration, medical personnel management, and appointment scheduling. Integrated robust backend services to orchestrate doctor availability and patient histories through a unified interface.",
+        "metrics": "Streamlined patient intake and booking workflows with real-time appointment status tracking.",
         "techStack": [
-          "Next.js 14",
-          "TypeScript",
-          "Node.js",
+          "React.js",
+          "FastAPI",
           "PostgreSQL",
-          "Prisma",
-          "Docker",
+          "SQLAlchemy",
+          "REST APIs",
           "Tailwind CSS"
         ],
-        "githubUrl": "https://github.com/mdmatloob/cloudscale-saas-platform",
-        "liveDemoUrl": "https://cloudscale.matloob.dev",
+        "githubUrl": "https://github.com/mdmatloob/hospital-management-system",
+        "liveDemoUrl": "https://hospital.matloob.dev",
         "featured": true,
         "image": "assets/project-cloudscale.svg",
         "hasLiveDemo": true
       },
       {
-        "id": "nexus-ui-system",
+        "id": "hotel-management-system",
         "number": "02",
-        "title": "NexusUI Studio — Kinetic Design System",
-        "category": "Design System & Frontend Architecture",
-        "description": "Zero-dependency, accessible design system containing 45+ headless components, design token pipelines, kinetic 60fps micro-interactions, and comprehensive WCAG 2.1 AA compliance.",
-        "metrics": "Cut frontend sprint delivery cycles by 35% with centralized token updates.",
+        "title": "Hotel Management System",
+        "category": "Enterprise Hospitality & Booking",
+        "description": "Developed a full-stack hospitality system managing room inventories, guest profiles, and dynamic reservation lifecycles. Built scalable FastAPI REST endpoints handling guest registration, real-time booking updates, and cancellations backed by relational persistence.",
+        "metrics": "Engineered responsive dashboard with live room availability search and booking tracking.",
         "techStack": [
-          "React 18",
-          "TypeScript",
-          "Tailwind CSS",
-          "GSAP",
-          "Storybook",
-          "Vite"
+          "React.js",
+          "FastAPI",
+          "PostgreSQL",
+          "SQLAlchemy",
+          "Python",
+          "Bootstrap"
         ],
-        "githubUrl": "https://github.com/mdmatloob/nexus-ui-system",
-        "liveDemoUrl": "https://nexusui.matloob.dev",
-        "featured": true,
-        "image": "assets/project-nexusui.svg",
-        "hasLiveDemo": true
-      },
-      {
-        "id": "pulse-metrics",
-        "number": "03",
-        "title": "PulseMetrics — Real-Time Telemetry Engine",
-        "category": "Distributed Systems & Telemetry",
-        "description": "High-throughput real-time performance telemetry dashboard streaming server vitals, latency percentiles, and request graphs using WebSockets and HTML5 high-DPI canvas charts.",
-        "metrics": "Streams 5,000+ events/sec with sub-50ms round-trip latency.",
-        "techStack": [
-          "Node.js",
-          "Express.js",
-          "Redis",
-          "WebSockets",
-          "HTML5 Canvas",
-          "PostgreSQL"
-        ],
-        "githubUrl": "https://github.com/mdmatloob/pulse-metrics-dashboard",
-        "liveDemoUrl": "https://pulsemetrics.matloob.dev",
+        "githubUrl": "https://github.com/mdmatloob/hotel-management-system",
+        "liveDemoUrl": "https://hotel.matloob.dev",
         "featured": true,
         "image": "assets/project-pulsemetrics.svg",
         "hasLiveDemo": true
       },
       {
-        "id": "devflow-engine",
-        "number": "04",
-        "title": "DevFlow Engine — CI/CD Pipeline Orchestrator",
-        "category": "DevOps & Pipeline Automation",
-        "description": "Visual directed acyclic graph (DAG) pipeline orchestrator that coordinates automated test suites, container builds, and deployment verification across multiple environments.",
-        "metrics": "Decreased pipeline deployment execution duration by 42%.",
+        "id": "github-profile-readme-generator",
+        "number": "03",
+        "title": "GitHub Profile README Generator",
+        "category": "Developer Productivity & Web App",
+        "description": "Engineered an interactive web application that automates the generation of customized GitHub profile README files. Implemented dynamic form controls, real-time live Markdown parsing, and a one-click copy workflow to simplify developer portfolio creation.",
+        "metrics": "Zero-dependency client-side generator with instant Markdown compilation and responsive UI.",
         "techStack": [
-          "TypeScript",
-          "Docker",
-          "GitHub Actions API",
-          "MongoDB",
-          "GraphQL"
+          "React.js",
+          "JavaScript (ES6+)",
+          "HTML5",
+          "CSS3",
+          "Tailwind CSS"
         ],
-        "githubUrl": "https://github.com/mdmatloob/devflow-pipeline-engine",
-        "liveDemoUrl": "https://devflow.matloob.dev",
+        "githubUrl": "https://github.com/mdmatloob/github-profile-readme-generator",
+        "liveDemoUrl": "https://readme-generator.matloob.dev",
         "featured": true,
-        "image": "assets/project-devflow.svg",
+        "image": "assets/project-nexusui.svg",
         "hasLiveDemo": true
       }
     ]
@@ -378,93 +331,30 @@
   "experience": {
     "sectionTag": "CAREER TRAJECTORY",
     "title": "Work Experience & Professional Impact",
-    "subtitle": "Chronological track record of building resilient software, architecting scalable web platforms, and mentoring engineering teams.",
+    "subtitle": "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems.",
     "roles": [
       {
         "id": "exp-1",
-        "role": "Lead Full Stack Developer & UI Architect",
-        "company": "Tech Innovations Labs",
-        "location": "Hybrid / Enterprise Tech",
-        "period": "2024 — Present",
+        "role": "Software Developer",
+        "company": "NICS Technology",
+        "location": "Noida, Uttar Pradesh, India",
+        "period": "June 2025 — Present",
         "isCurrent": true,
         "highlights": [
-          "Architected responsive web platforms serving 100K+ monthly active users with sub-second page loads and 99.98% uptime.",
-          "Engineered secure Node.js microservices and RESTful API gateways handling high-throughput transactional traffic.",
-          "Reduced client-side bundle size by 40% through route-based code splitting, dynamic asset pipelines, and memoization.",
-          "Implemented comprehensive design system components ensuring strict WCAG 2.1 AA accessibility across products."
+          "Develop and maintain modern web applications, implementing production features while improving application functionality, runtime performance, and user satisfaction.",
+          "Architect and integrate RESTful APIs and backend services with interactive frontend interfaces, facilitating smooth asynchronous data communication and workflow execution.",
+          "Deploy and maintain enterprise web applications on cloud platforms, securing high application availability, operational resilience, and scalable traffic handling.",
+          "Integrate third-party APIs and specialized external microservices to broaden product functionality and deliver intuitive end-user experiences."
         ],
         "techStack": [
-          "React",
-          "Next.js",
-          "TypeScript",
-          "Node.js",
-          "PostgreSQL",
-          "Docker",
-          "Tailwind CSS"
-        ]
-      },
-      {
-        "id": "exp-2",
-        "role": "Senior Frontend Engineer",
-        "company": "Digital Systems Corp",
-        "location": "Full-Time",
-        "period": "2022 — 2024",
-        "isCurrent": false,
-        "highlights": [
-          "Built high-conversion SaaS web applications with React, Next.js, and modern TypeScript architecture.",
-          "Optimized rendering performance and state management, increasing user retention metrics by 28%.",
-          "Integrated robust RESTful APIs, caching pipelines, and real-time event notifications.",
-          "Standardized automated component testing with Jest and React Testing Library, maintaining 90%+ code coverage."
-        ],
-        "techStack": [
-          "React",
-          "TypeScript",
-          "Redux Toolkit",
-          "REST APIs",
-          "Jest",
-          "Tailwind CSS"
-        ]
-      },
-      {
-        "id": "exp-3",
-        "role": "Software Developer",
-        "company": "Interactive Web Solutions",
-        "location": "Full-Time",
-        "period": "2021 — 2022",
-        "isCurrent": false,
-        "highlights": [
-          "Engineered interactive web applications and client dashboards using JavaScript (ES6+), React, and modular CSS3.",
-          "Partnered with UI/UX designers to translate Figma design systems into responsive, fluid front-end code.",
-          "Collaborated on database schema updates and query optimization for PostgreSQL and MongoDB backends."
-        ],
-        "techStack": [
-          "JavaScript (ES6+)",
-          "React",
-          "Node.js",
-          "Express",
-          "MongoDB",
-          "CSS3"
-        ]
-      },
-      {
-        "id": "exp-4",
-        "role": "Software Engineering Intern",
-        "company": "Apex CyberTech Solutions",
-        "location": "Internship",
-        "period": "Jan 2021 — Jun 2021",
-        "isCurrent": false,
-        "highlights": [
-          "Developed core responsive user interfaces and internal administrative tooling.",
-          "Assisted in crafting REST API endpoints, input validation routines, and automated integration tests.",
-          "Received outstanding intern distinction for delivering the internal metrics logger sprint ahead of schedule."
-        ],
-        "techStack": [
+          "Python",
           "JavaScript",
-          "HTML5",
-          "CSS3",
-          "REST APIs",
-          "Git",
-          "PostgreSQL"
+          "React.js",
+          "Next.js",
+          "FastAPI",
+          "Django",
+          "PostgreSQL",
+          "REST APIs"
         ]
       }
     ]
@@ -472,46 +362,45 @@
   "education": {
     "sectionTag": "ACADEMIC PEDIGREE",
     "title": "Education & Academic Qualifications",
-    "subtitle": "Rigorous foundational computer science training, algorithmic problem solving, and software engineering coursework.",
+    "subtitle": "Strong analytical foundation in engineering, electronic systems, and computational problem solving.",
     "degrees": [
       {
         "id": "edu-1",
-        "degree": "Bachelor of Technology in Computer Science & Engineering",
-        "institution": "State Technological University",
-        "period": "2019 — 2023",
-        "status": "Graduated with Distinction",
-        "cgpa": "8.85 / 10.0 CGPA",
-        "honors": "First Class with Distinction (Top 5% of Graduating Cohort)",
+        "degree": "Bachelor of Technology in Electronics & Communications Engineering",
+        "institution": "Saharsa College of Engineering, Bihar",
+        "period": "2020 — 2024",
+        "status": "Graduated",
+        "cgpa": "7.69 / 10.0 CGPA",
+        "honors": "First Class Honors",
         "highlights": [
-          "Major Coursework: Data Structures & Algorithms, Database Management Systems, Distributed Operating Systems, Web Technologies, Software Architecture.",
-          "Capstone Research: Architected and benchmarked a distributed real-time state synchronization engine for collaborative browser applications.",
-          "Academic Excellence Honor Roll across final 4 consecutive semesters."
+          "Core Studies: Microprocessors & Microcontrollers, Digital Signal Processing, Object-Oriented Programming, Computational Logic, and Communication Systems.",
+          "Applied software engineering principles to bridge hardware-level protocols with modern web application frameworks and database systems."
         ],
         "skillsGained": [
-          "Algorithms",
-          "Distributed Systems",
-          "Database Design",
-          "Software Engineering",
-          "Computer Networks"
+          "Object-Oriented Programming",
+          "Data Structures & Algorithms",
+          "Relational Database Design",
+          "Digital Logic",
+          "Software Engineering"
         ]
       },
       {
         "id": "edu-2",
-        "degree": "Higher Secondary Certificate (HSC / 10+2)",
-        "institution": "Senior Secondary Science College",
-        "period": "2017 — 2019",
-        "status": "First Division Honors",
-        "cgpa": "82.4% Aggregate",
-        "honors": "Distinction in Mathematics & Physics",
+        "degree": "Intermediate (Class XII), BSEB Board",
+        "institution": "Hadi Hashmi Plus Two School, Gaya, Bihar",
+        "period": "2018 — 2020",
+        "status": "First Division",
+        "cgpa": "First Division Honors",
+        "honors": "First Division Distinction in Science Stream",
         "highlights": [
-          "Focused Curriculum: Advanced Mathematics, Physics, Chemistry, and Computer Science fundamentals.",
-          "Elected Student Technology Club Lead, organizing intra-school programming symposiums and algorithmic quizzes."
+          "Focused Curriculum: Mathematics, Physics, and Chemistry.",
+          "Built a rigorous mathematical and logical foundation that fueled software engineering and algorithmic development."
         ],
         "skillsGained": [
-          "Discrete Mathematics",
+          "Mathematics",
           "Physics",
-          "Computer Science Fundamentals",
-          "Logic Design"
+          "Analytical Problem Solving",
+          "Computational Logic"
         ]
       }
     ]
@@ -519,7 +408,7 @@
   "certifications": {
     "sectionTag": "VALIDATED MASTERY",
     "title": "Certifications & Professional Achievements",
-    "subtitle": "Industry vendor credentials, continuous specialized technical training, and competitive engineering milestones.",
+    "subtitle": "Recognized technical credentials, competitive programming distinctions, and community leadership.",
     "categories": [
       {
         "id": "all",
@@ -530,88 +419,51 @@
         "name": "Technical Certifications"
       },
       {
-        "id": "training",
-        "name": "Specialized Training"
-      },
-      {
         "id": "achievements",
         "name": "Honors & Achievements"
       }
     ],
     "items": [
       {
-        "id": "cert-aws",
+        "id": "cert-iit-bombay",
         "category": "technical",
-        "title": "Certified AWS Solutions Architect - Associate",
-        "issuer": "Amazon Web Services (AWS)",
-        "period": "2023 — 2026",
-        "credentialId": "AWS-SAA-839210",
-        "verificationUrl": "https://aws.amazon.com/verification",
-        "badge": "Cloud Architecture",
-        "description": "Validated architectural mastery in deploying secure, resilient, high-availability multi-tier cloud applications on AWS infrastructure."
-      },
-      {
-        "id": "cert-meta",
-        "category": "technical",
-        "title": "Meta Frontend Developer Professional Certificate",
-        "issuer": "Meta",
+        "title": "Python Certification",
+        "issuer": "Spoken Tutorial, IIT Bombay",
         "period": "2023",
-        "credentialId": "META-FED-55219",
-        "verificationUrl": "https://www.coursera.org/verify/meta-frontend",
-        "badge": "React & Architecture",
-        "description": "Comprehensive specialization spanning advanced React development, client-side UX architecture, automated testing, and WCAG accessibility."
+        "credentialId": "IITB-PY-85PCT",
+        "verificationUrl": "https://spoken-tutorial.org",
+        "badge": "Score: 85% · 4 Credits",
+        "description": "Comprehensive evaluation covering Python programming principles, functional modules, data structures, and algorithmic scripting with distinction."
       },
       {
-        "id": "cert-google",
-        "category": "technical",
-        "title": "Google UX Design & Web Architecture Specialization",
-        "issuer": "Google",
-        "period": "2022",
-        "credentialId": "GOOG-UX-99182",
-        "verificationUrl": "https://grow.google/certificates",
-        "badge": "UI/UX & Design Systems",
-        "description": "Rigorous training in user-centered design, prototyping in Figma, responsive layouts, design token workflows, and usability validation."
-      },
-      {
-        "id": "train-dist-systems",
-        "category": "training",
-        "title": "Enterprise Distributed Systems & Microservices",
-        "issuer": "Advanced Engineering Academy",
-        "period": "2023",
-        "credentialId": "AEA-DIST-8821",
-        "verificationUrl": "https://matloob.dev",
-        "badge": "Microservices",
-        "description": "Intensive engineering bootcamp focused on event-driven architectures, Redis distributed caching, message queues, and horizontal auto-scaling."
-      },
-      {
-        "id": "achieve-hackathon",
+        "id": "achieve-hackerrank-sql",
         "category": "achievements",
-        "title": "1st Place Champion — National Full Stack Hackathon",
-        "issuer": "National Tech Consortium",
-        "period": "2023",
-        "credentialId": "NTC-HACK-1ST",
-        "verificationUrl": "https://matloob.dev",
-        "badge": "1st of 120+ Teams",
-        "description": "Led a 4-engineer squad to design and deploy a live disaster telemetry and relief allocation portal in under 36 continuous hours."
+        "title": "3-Star Badge in SQL & Python",
+        "issuer": "HackerRank",
+        "period": "Verified",
+        "credentialId": "HR-3STAR-PY-SQL",
+        "verificationUrl": "https://www.hackerrank.com",
+        "badge": "3-Star Rank",
+        "description": "Demonstrated practical problem-solving proficiency in SQL querying, join optimizations, subqueries, and Python algorithm challenges."
       },
       {
-        "id": "achieve-opensource",
+        "id": "achieve-google-crowdsource",
         "category": "achievements",
-        "title": "Open Source Maintainer & Contributor",
-        "issuer": "GitHub Community",
-        "period": "Ongoing",
-        "credentialId": "GH-CONTRIB-1500",
-        "verificationUrl": "https://github.com/mdmatloob",
-        "badge": "1,500+ Stars",
-        "description": "Authored and maintained developer productivity tools, modern React hooks libraries, and CSS utility generators embraced by the developer community."
+        "title": "Google Crowdsource Learning Community Program",
+        "issuer": "Crowdsource by Google",
+        "period": "Recognized",
+        "credentialId": "GOOG-CROWD-COMM",
+        "verificationUrl": "https://crowdsource.google.com",
+        "badge": "Community Contributor",
+        "description": "Active contributor to Google's Crowdsource program, helping improve machine learning models through structured cultural and linguistic data validation."
       }
     ]
   },
   "contact": {
     "sectionTag": "GET IN TOUCH",
-    "title": "Let's Build Something High-Impact Together",
-    "subtitle": "Whether you have an enterprise vacancy, a high-throughput consulting project, or want to discuss modern web architecture, my inbox is open.",
-    "email": "contact@matloob.dev",
+    "title": "Let's Build Scalable Software Solutions Together",
+    "subtitle": "Open to discussions regarding full-stack software development roles, API engineering, or technical consulting. Drop an email and let's connect.",
+    "email": "mdmatloobgaya@gmail.com",
     "secondaryEmail": "mdmatloobgaya@gmail.com",
     "responseTime": "SLA: Guaranteed response within 24 hours",
     "social": [
@@ -629,24 +481,24 @@
       }
     ],
     "serviceOptions": [
-      "Full Stack Web App",
-      "Next.js / React Architecture",
-      "API & Microservices",
-      "UI/UX Design System",
-      "Performance Optimization"
+      "Full-Stack Web Development",
+      "FastAPI & Django REST APIs",
+      "React.js & Next.js Dashboards",
+      "Database Design (PostgreSQL / MySQL)",
+      "Cloud Deployment & Maintenance"
     ],
     "timezoneMatrix": [
       {
-        "region": "Americas (EST/PST)",
-        "overlap": "3 - 4 Hours Daily"
+        "region": "India Standard Time (IST)",
+        "overlap": "Full Working Day (Core)"
       },
       {
         "region": "Europe & UK (CET/GMT)",
-        "overlap": "5 - 6 Hours Daily"
+        "overlap": "4 - 5 Hours Daily"
       },
       {
-        "region": "Asia-Pacific (IST/SGT/AEST)",
-        "overlap": "Full Working Day"
+        "region": "Americas (EST)",
+        "overlap": "3 - 4 Hours Morning Overlap"
       }
     ]
   }
