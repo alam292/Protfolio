@@ -567,98 +567,343 @@ class PortfolioRenderer {
     `;
   }
 
-  // 7. Certifications & Achievements Section
+  // 7. Certifications & Achievements Section (Gallery Slider Matching UI Mockup)
+  getCertRosetteSvg(emblem) {
+    if (emblem === 'hackerrank') {
+      return `
+        <svg class="cert-rosette-svg" width="88" height="102" viewBox="0 0 92 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="rosetteHk" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#34d399" />
+              <stop offset="50%" stop-color="#10b981" />
+              <stop offset="100%" stop-color="#059669" />
+            </linearGradient>
+            <linearGradient id="ribbonHk1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#059669" />
+              <stop offset="100%" stop-color="#047857" />
+            </linearGradient>
+            <linearGradient id="ribbonHk2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#10b981" />
+              <stop offset="100%" stop-color="#059669" />
+            </linearGradient>
+            <filter id="rosetteHkShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#10b981" flood-opacity="0.35" />
+            </filter>
+          </defs>
+          <path d="M34 58 L20 102 L34 94 L46 102 L44 60 Z" fill="url(#ribbonHk1)" opacity="0.95" />
+          <path d="M58 58 L46 102 L58 94 L72 102 L58 60 Z" fill="url(#ribbonHk2)" />
+          <path d="M46 6 L52 9.5 L58 7.5 L63 12.5 L69 12 L72 18 L78 19 L79 26 L85 29 L84 36 L89 40 L86 47 L89 54 L84 58 L85 65 L79 68 L78 75 L72 76 L69 82 L63 81.5 L58 86.5 L52 84.5 L46 88 L40 84.5 L34 86.5 L29 81.5 L23 82 L20 76 L14 75 L13 68 L7 65 L8 58 L3 54 L6 47 L3 40 L8 36 L7 29 L13 26 L14 19 L20 18 L23 12 L29 12.5 L34 7.5 L40 9.5 Z" fill="url(#rosetteHk)" filter="url(#rosetteHkShadow)" stroke="#047857" stroke-width="1.2" />
+          <circle cx="46" cy="47" r="33" fill="#065f46" stroke="#a7f3d0" stroke-width="1.5" stroke-dasharray="2 2" />
+          <circle cx="46" cy="47" r="28" fill="#064e3b" stroke="#34d399" stroke-width="2" />
+          <g transform="translate(30, 31) scale(0.68)">
+            <path d="M7 6 L7 42 L16 42 L16 29 L32 29 L32 42 L41 42 L41 6 L32 6 L32 19 L16 19 L16 6 Z" fill="#ffffff" />
+            <polygon points="12 4 13.2 7.5 17 7.5 14 9.6 15.2 13 12 11 8.8 13 10 9.6 7 7.5 10.8 7.5" fill="#fbbf24" />
+            <polygon points="24 1 25.2 4.5 29 4.5 26 6.6 27.2 10 24 8 20.8 10 22 6.6 19 4.5 22.8 4.5" fill="#fbbf24" />
+            <polygon points="36 4 37.2 7.5 41 7.5 38 9.6 39.2 13 36 11 32.8 13 34 9.6 31 7.5 34.8 7.5" fill="#fbbf24" />
+          </g>
+        </svg>
+      `;
+    }
+
+    if (emblem === 'google') {
+      return `
+        <svg class="cert-rosette-svg" width="88" height="102" viewBox="0 0 92 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="rosetteGoog" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#60a5fa" />
+              <stop offset="50%" stop-color="#3b82f6" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
+            <linearGradient id="ribbonGoog1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1d4ed8" />
+              <stop offset="100%" stop-color="#1e40af" />
+            </linearGradient>
+            <linearGradient id="ribbonGoog2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3b82f6" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
+            <filter id="rosetteGoogShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#3b82f6" flood-opacity="0.35" />
+            </filter>
+          </defs>
+          <path d="M34 58 L20 102 L34 94 L46 102 L44 60 Z" fill="url(#ribbonGoog1)" opacity="0.95" />
+          <path d="M58 58 L46 102 L58 94 L72 102 L58 60 Z" fill="url(#ribbonGoog2)" />
+          <path d="M46 6 L52 9.5 L58 7.5 L63 12.5 L69 12 L72 18 L78 19 L79 26 L85 29 L84 36 L89 40 L86 47 L89 54 L84 58 L85 65 L79 68 L78 75 L72 76 L69 82 L63 81.5 L58 86.5 L52 84.5 L46 88 L40 84.5 L34 86.5 L29 81.5 L23 82 L20 76 L14 75 L13 68 L7 65 L8 58 L3 54 L6 47 L3 40 L8 36 L7 29 L13 26 L14 19 L20 18 L23 12 L29 12.5 L34 7.5 L40 9.5 Z" fill="url(#rosetteGoog)" filter="url(#rosetteGoogShadow)" stroke="#1e40af" stroke-width="1.2" />
+          <circle cx="46" cy="47" r="33" fill="#1e3a8a" stroke="#bfdbfe" stroke-width="1.5" stroke-dasharray="2 2" />
+          <circle cx="46" cy="47" r="28" fill="#0f172a" stroke="#60a5fa" stroke-width="2" />
+          <g transform="translate(31, 32) scale(0.64)">
+            <path d="M46.1 24.5 C46.1 22.8 45.9 21.3 45.6 19.8 L23.5 19.8 L23.5 28.7 L36.2 28.7 C35.7 31.6 33.9 34 31.3 35.7 L31.3 41.7 L39 41.7 C43.5 37.5 46.1 31.4 46.1 24.5 Z" fill="#4285F4" />
+            <path d="M23.5 47.5 C29.8 47.5 35.1 45.4 39 41.7 L31.3 35.7 C29.2 37.1 26.5 38 23.5 38 C17.4 38 12.2 33.9 10.3 28.4 L2.4 28.4 L2.4 34.5 C6.3 42.2 14.3 47.5 23.5 47.5 Z" fill="#34A853" />
+            <path d="M10.3 28.4 C9.8 26.9 9.5 25.2 9.5 23.5 C9.5 21.8 9.8 20.1 10.3 18.6 L10.3 12.5 L2.4 12.5 C0.9 15.5 0 19.4 0 23.5 C0 27.6 0.9 31.5 2.4 34.5 L10.3 28.4 Z" fill="#FBBC05" />
+            <path d="M23.5 9 C26.9 9 30 10.2 32.4 12.5 L39.1 5.8 C35.1 2.1 29.8 0 23.5 0 C14.3 0 6.3 5.3 2.4 13 L10.3 19.1 C12.2 13.6 17.4 9 23.5 9 Z" fill="#EA4335" />
+          </g>
+        </svg>
+      `;
+    }
+
+    // Default: Golden Orange Python Rosette (Exact match with user's uploaded image)
+    return `
+      <svg class="cert-rosette-svg" width="88" height="102" viewBox="0 0 92 106" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rosetteGold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fbbf24" />
+            <stop offset="45%" stop-color="#f59e0b" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+          <linearGradient id="ribbonGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ea580c" />
+            <stop offset="100%" stop-color="#c2410c" />
+          </linearGradient>
+          <linearGradient id="ribbonGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f97316" />
+            <stop offset="100%" stop-color="#ea580c" />
+          </linearGradient>
+          <filter id="rosetteShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#ea580c" flood-opacity="0.35" />
+          </filter>
+        </defs>
+        <path d="M34 58 L20 102 L34 94 L46 102 L44 60 Z" fill="url(#ribbonGrad1)" opacity="0.95" />
+        <path d="M58 58 L46 102 L58 94 L72 102 L58 60 Z" fill="url(#ribbonGrad2)" />
+        <path d="M46 6 L52 9.5 L58 7.5 L63 12.5 L69 12 L72 18 L78 19 L79 26 L85 29 L84 36 L89 40 L86 47 L89 54 L84 58 L85 65 L79 68 L78 75 L72 76 L69 82 L63 81.5 L58 86.5 L52 84.5 L46 88 L40 84.5 L34 86.5 L29 81.5 L23 82 L20 76 L14 75 L13 68 L7 65 L8 58 L3 54 L6 47 L3 40 L8 36 L7 29 L13 26 L14 19 L20 18 L23 12 L29 12.5 L34 7.5 L40 9.5 Z" fill="url(#rosetteGold)" filter="url(#rosetteShadow)" stroke="#d97706" stroke-width="1.2" />
+        <circle cx="46" cy="47" r="33" fill="#b45309" stroke="#fef3c7" stroke-width="1.5" stroke-dasharray="2 2" />
+        <circle cx="46" cy="47" r="28" fill="#0f172a" stroke="#f59e0b" stroke-width="2" />
+        <g transform="translate(32, 33) scale(0.68)">
+          <path d="M20.2 0.3 C10.8 0.3 11.4 4.4 11.4 4.4 L11.4 8.7 L20.5 8.7 L20.5 10 L6.8 10 C6.8 10 0 9.2 0 18.6 C0 28 5.9 27.6 5.9 27.6 L9.5 27.6 L9.5 22.8 C9.5 17.3 14 17.5 14 17.5 L23.2 17.5 C27.5 17.5 27.2 13.5 27.2 13.5 L27.2 4.4 C27.2 4.4 28 0.3 20.2 0.3 Z M15.2 3.1 C16.5 3.1 17.5 4.1 17.5 5.4 C17.5 6.7 16.5 7.7 15.2 7.7 C13.9 7.7 12.9 6.7 12.9 5.4 C12.9 4.1 13.9 3.1 15.2 3.1 Z" fill="#38bdf8" />
+          <path d="M20.8 41 C30.2 41 29.6 36.9 29.6 36.9 L29.6 32.6 L20.5 32.6 L20.5 31.3 L34.2 31.3 C34.2 31.3 41 32.1 41 22.7 C41 13.3 35.1 13.7 35.1 13.7 L31.5 13.7 L31.5 18.5 C31.5 24 27 23.8 27 23.8 L17.8 23.8 C13.5 23.8 13.8 27.8 13.8 27.8 L13.8 36.9 C13.8 36.9 13 41 20.8 41 Z M25.8 38.2 C24.5 38.2 23.5 37.2 23.5 35.9 C23.5 34.6 24.5 33.6 25.8 33.6 C27.1 33.6 28.1 34.6 28.1 35.9 C28.1 37.2 27.1 38.2 25.8 38.2 Z" fill="#fbbf24" />
+        </g>
+      </svg>
+    `;
+  }
+
   renderCertifications() {
     const mount = document.getElementById('certificatesMount');
     if (!mount) return;
 
     const { certifications } = this.data;
+    const items = certifications.items || [];
+    this.certTotalSlides = items.length;
+    this.certCurrentSlide = 0;
 
-    const filterButtonsHtml = certifications.categories.map(cat => {
-      const count = cat.id === 'all' 
-        ? certifications.items.length 
-        : certifications.items.filter(i => i.category === cat.id).length;
-
-      return `
-        <button 
-          type="button" 
-          class="cert-filter-btn ${this.activeCertCategory === cat.id ? 'active' : ''}" 
-          data-filter="${cat.id}"
-        >
-          <span class="cert-filter-dot" aria-hidden="true"></span>
-          <span>${cat.name}</span>
-          <span class="cert-filter-count">${count}</span>
-        </button>
-      `;
-    }).join('');
-
-    const filteredItems = this.activeCertCategory === 'all'
-      ? certifications.items
-      : certifications.items.filter(i => i.category === this.activeCertCategory);
-
-    const cardsHtml = filteredItems.map(c => `
-      <article class="cert-card" data-category="${c.category}">
-        <div class="cert-card-top">
-          <span class="cert-badge-pill">${c.badge}</span>
-          <span class="cert-year-tag">${c.period}</span>
+    const slidesHtml = items.map((c, idx) => `
+      <div class="cert-slide-item" data-index="${idx}">
+        <div class="cert-image-display" data-full-img="${c.image}" title="Click to view full certificate">
+          <img src="${c.image}" alt="${c.title}" class="cert-showcase-img" loading="lazy" />
         </div>
+      </div>
+    `).join('');
 
-        <h3 class="cert-title">${c.title}</h3>
-        <div class="cert-issuer-row">
-          <span class="cert-issuer">Issued by: <strong>${c.issuer}</strong></span>
-        </div>
-        <p class="cert-desc">${c.description}</p>
-
-        <div class="cert-card-footer">
-          <div class="cert-id-tag">
-            <span>ID:</span>
-            <code>${c.credentialId}</code>
-          </div>
-
-          <a 
-            href="${c.verificationUrl}" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            class="cert-verify-btn" 
-            aria-label="Verify ${c.title} credential"
-          >
-            <span>Verify</span>
-            ${this.getIconSvg('external')}
-          </a>
-        </div>
-      </article>
+    const dotsHtml = items.map((_, idx) => `
+      <button 
+        type="button" 
+        class="cert-dot-btn ${idx === 0 ? 'active' : ''}" 
+        data-slide-index="${idx}"
+        aria-label="Go to credential slide ${idx + 1}"
+      >
+        <span class="dot-shape"></span>
+      </button>
     `).join('');
 
     mount.innerHTML = `
-      <div class="section-tag">${certifications.sectionTag}</div>
-      <h2 class="section-title" id="certificates-title">${certifications.title}</h2>
-      <p class="section-subtitle">${certifications.subtitle}</p>
+      <div class="cert-gallery-shell">
+        <div class="cert-header-block">
+          <div class="cert-pill-tag">
+            <span class="cert-pill-dot" aria-hidden="true"></span>
+            <span>${certifications.sectionTag}</span>
+          </div>
+          <h2 class="cert-main-title" id="certificates-title">${certifications.title}</h2>
+          <p class="cert-main-subtitle">${certifications.subtitle}</p>
+        </div>
 
-      <div class="cert-filter-bar" role="tablist" aria-label="Credential filters">
-        ${filterButtonsHtml}
+        <div class="cert-carousel-row">
+          <button type="button" class="cert-nav-arrow cert-nav-prev" id="certPrevBtn" aria-label="Previous credential">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+
+          <div class="cert-card-outer" id="certCardOuter">
+            <div class="cert-card-inner">
+              <div class="cert-track" id="certSlideTrack">
+                ${slidesHtml}
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="cert-nav-arrow cert-nav-next" id="certNextBtn" aria-label="Next credential">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div class="cert-gallery-footer">
+          <div class="cert-dots-capsule" id="certDotsCapsule" role="tablist" aria-label="Slide indicators">
+            ${dotsHtml}
+          </div>
+          <div class="cert-counter-display">
+            <span id="certCurrentIndex">01</span> <span class="cert-counter-total">/ ${String(items.length).padStart(2, '0')}</span>
+          </div>
+        </div>
       </div>
 
-      <div class="certs-grid">
-        ${cardsHtml}
+      <!-- Full Certificate Lightbox Modal -->
+      <div id="certLightbox" class="cert-lightbox-overlay" aria-hidden="true">
+        <div class="cert-lightbox-content">
+          <button type="button" class="cert-lightbox-close" id="certLightboxClose" aria-label="Close certificate preview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+          <img id="certLightboxImg" src="" alt="Full Certificate View" class="cert-lightbox-img" />
+        </div>
       </div>
     `;
+
+    this.bindCertGallerySlider();
+  }
+
+  bindCertGallerySlider() {
+    const track = document.getElementById('certSlideTrack');
+    const prevBtn = document.getElementById('certPrevBtn');
+    const nextBtn = document.getElementById('certNextBtn');
+    const dots = document.querySelectorAll('.cert-dot-btn');
+    const counter = document.getElementById('certCurrentIndex');
+    const outer = document.getElementById('certCardOuter');
+
+    if (!track || !this.certTotalSlides) return;
+
+    const goToSlide = (idx) => {
+      this.certCurrentSlide = (idx + this.certTotalSlides) % this.certTotalSlides;
+      track.style.transform = `translateX(-${this.certCurrentSlide * 100}%)`;
+
+      if (counter) {
+        counter.textContent = String(this.certCurrentSlide + 1).padStart(2, '0');
+      }
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === this.certCurrentSlide);
+      });
+    };
+
+    if (prevBtn) {
+      prevBtn.onclick = () => {
+        resetAutoSlide();
+        goToSlide(this.certCurrentSlide - 1);
+      };
+    }
+
+    if (nextBtn) {
+      nextBtn.onclick = () => {
+        resetAutoSlide();
+        goToSlide(this.certCurrentSlide + 1);
+      };
+    }
+
+    dots.forEach((dot) => {
+      dot.onclick = () => {
+        resetAutoSlide();
+        const idx = parseInt(dot.getAttribute('data-slide-index'), 10);
+        goToSlide(idx);
+      };
+    });
+
+    // Auto-slide Timer (5 seconds)
+    let autoInterval;
+    const startAutoSlide = () => {
+      stopAutoSlide();
+      autoInterval = setInterval(() => {
+        goToSlide(this.certCurrentSlide + 1);
+      }, 5000);
+    };
+
+    const stopAutoSlide = () => {
+      if (autoInterval) clearInterval(autoInterval);
+    };
+
+    const resetAutoSlide = () => {
+      stopAutoSlide();
+      startAutoSlide();
+    };
+
+    if (outer) {
+      outer.addEventListener('mouseenter', stopAutoSlide);
+      outer.addEventListener('mouseleave', startAutoSlide);
+
+      // Touch Swipe Support for Mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      outer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        stopAutoSlide();
+      }, { passive: true });
+
+      outer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) {
+            goToSlide(this.certCurrentSlide + 1);
+          } else {
+            goToSlide(this.certCurrentSlide - 1);
+          }
+        }
+        startAutoSlide();
+      }, { passive: true });
+    }
+
+    // Lightbox Functionality
+    const lightbox = document.getElementById('certLightbox');
+    const lightboxImg = document.getElementById('certLightboxImg');
+    const lightboxClose = document.getElementById('certLightboxClose');
+    const imageFrames = document.querySelectorAll('.cert-image-frame');
+
+    imageFrames.forEach((frame) => {
+      frame.addEventListener('click', (e) => {
+        e.stopPropagation();
+        stopAutoSlide();
+        const fullImgSrc = frame.getAttribute('data-full-img');
+        if (lightbox && lightboxImg && fullImgSrc) {
+          lightboxImg.src = fullImgSrc;
+          lightbox.classList.add('active');
+          lightbox.setAttribute('aria-hidden', 'false');
+        }
+      });
+    });
+
+    const closeLightbox = () => {
+      if (lightbox) {
+        lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
+        startAutoSlide();
+      }
+    };
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener('click', closeLightbox);
+    }
+
+    if (lightbox) {
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lightbox && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+
+    startAutoSlide();
   }
 
   bindCertFilters() {
-    const mount = document.getElementById('certificatesMount');
-    if (!mount || this._certFiltersBound) return;
-    this._certFiltersBound = true;
-
-    mount.addEventListener('click', (e) => {
-      const btn = e.target.closest('.cert-filter-btn');
-      if (!btn) return;
-
-      const filter = btn.getAttribute('data-filter');
-      if (filter === this.activeCertCategory) return;
-
-      this.activeCertCategory = filter;
-      this.renderCertifications();
-    });
+    // Retained for backward-compatibility with init()
+    this.bindCertGallerySlider();
   }
 
   // 8. Contact Section (Animated Form & Channels)

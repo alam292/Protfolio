@@ -402,7 +402,7 @@
   "certifications": {
     "sectionTag": "VALIDATED MASTERY",
     "title": "Certifications & Professional Achievements",
-    "subtitle": "Recognized technical credentials, competitive programming distinctions, and community leadership.",
+    "subtitle": "Verified industry credentials, competitive milestones, and technical specializations",
     "categories": [
       {
         "id": "all",
@@ -419,37 +419,74 @@
     ],
     "items": [
       {
-        "id": "cert-iit-bombay",
+        "id": "cert-iit-bombay-java",
         "category": "technical",
-        "title": "Python Certification",
-        "issuer": "Spoken Tutorial, IIT Bombay",
-        "period": "2023",
-        "credentialId": "IITB-PY-85PCT",
+        "title": "Java Training Certification",
+        "issuer": "Spoken Tutorial Project, IIT Bombay",
+        "period": "2024",
+        "issueDate": "May 6th 2024",
+        "credentialId": "3140257TJZ",
         "verificationUrl": "https://spoken-tutorial.org",
-        "badge": "Score: 85% · 4 Credits",
-        "description": "Comprehensive evaluation covering Python programming principles, functional modules, data structures, and algorithmic scripting with distinction."
+        "badge": "Score: 85.00% · 4 Credits",
+        "image": "assets/certificates/cert-java-iit-bombay.jpg",
+        "emblem": "java",
+        "description": "Completed comprehensive Java test organized at Saharsa College of Engineering with course material and remote online examination invigilated by Spoken Tutorial Project, IIT Bombay."
       },
       {
-        "id": "achieve-hackerrank-sql",
-        "category": "achievements",
-        "title": "3-Star Badge in SQL & Python",
-        "issuer": "HackerRank",
-        "period": "Verified",
-        "credentialId": "HR-3STAR-PY-SQL",
-        "verificationUrl": "https://www.hackerrank.com",
-        "badge": "3-Star Rank",
-        "description": "Demonstrated practical problem-solving proficiency in SQL querying, join optimizations, subqueries, and Python algorithm challenges."
+        "id": "cert-hackerrank-python",
+        "category": "technical",
+        "title": "Python (Basic) Skill Certification",
+        "issuer": "HackerRank Skill Certification",
+        "period": "2026",
+        "issueDate": "03 Feb, 2026",
+        "credentialId": "OBC250A5E1AF",
+        "verificationUrl": "https://www.hackerrank.com/certificates/obc250a5e1af",
+        "badge": "HackerRank Certified",
+        "image": "assets/certificates/cert-python-hackerrank.jpg",
+        "emblem": "python",
+        "description": "Passed the rigorous HackerRank skill certification test validating problem solving in Python, data structures, functional modules, and algorithmic scripting."
       },
       {
-        "id": "achieve-google-crowdsource",
+        "id": "cert-iit-roorkee-python",
+        "category": "technical",
+        "title": "Fundamentals of Python for ML & Web",
+        "issuer": "iHUB DivyaSampark, IIT Roorkee",
+        "period": "2023",
+        "issueDate": "15 Nov 2023",
+        "credentialId": "TIHBDST4544",
+        "verificationUrl": "https://tih.iitr.ac.in",
+        "badge": "Grade A · 40 hrs Immersion",
+        "image": "assets/certificates/cert-python-iit-roorkee.jpg",
+        "emblem": "iitr",
+        "description": "40-hour intensive skill development program on Fundamentals of Python for Machine Learning, Data Science & Web Development by IIT Roorkee & DST, Govt. of India."
+      },
+      {
+        "id": "cert-nareshit-hackfest",
         "category": "achievements",
-        "title": "Google Crowdsource Learning Community Program",
-        "issuer": "Crowdsource by Google",
-        "period": "Recognized",
-        "credentialId": "GOOG-CROWD-COMM",
-        "verificationUrl": "https://crowdsource.google.com",
-        "badge": "Community Contributor",
-        "description": "Active contributor to Google's Crowdsource program, helping improve machine learning models through structured cultural and linguistic data validation."
+        "title": "HackFest 2026 - Project Awaz-E-Awam",
+        "issuer": "Naresh i Technologies",
+        "period": "2026",
+        "issueDate": "Edition 2026",
+        "credentialId": "NIT-HACKFEST-2026",
+        "verificationUrl": "https://nareshit.com",
+        "badge": "Exemplary Submission",
+        "image": "assets/certificates/cert-hackfest-nareshit.jpg",
+        "emblem": "hackfest",
+        "description": "Conferred in acknowledgment of the completion and exemplary submission of the community-driven tech platform project Awaz-E-Awam for NareshIT HackFest 2026."
+      },
+      {
+        "id": "cert-deloitte-forage",
+        "category": "technical",
+        "title": "Deloitte Technology Job Simulation",
+        "issuer": "Deloitte (via Forage)",
+        "period": "2025",
+        "issueDate": "July 15th, 2025",
+        "credentialId": "SE3xfRvJEuNjBqX9K",
+        "verificationUrl": "https://www.theforage.com/simulations/deloitte",
+        "badge": "Coding & Development",
+        "image": "assets/certificates/cert-deloitte-job-simulation.png",
+        "emblem": "deloitte",
+        "description": "Completed practical engineering tasks in software development, architectural problem solving, and enterprise system design simulation under Deloitte."
       }
     ]
   },
