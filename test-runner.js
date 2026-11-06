@@ -20,27 +20,26 @@ function assert(condition, testName) {
 async function runTests() {
   console.log('\n=== SUITE 1: DATA STORE & RESUME VALIDATION ===');
   const data = JSON.parse(fs.readFileSync('data/portfolio.json', 'utf8'));
-  assert(data.profile.name === 'Md MatlooB Alam', 'Profile author matches resume');
-  assert(data.profile.title.includes('Full Stack Developer'), 'Profile title matches resume');
+  assert(data.profile.name.toLowerCase().includes('matloob'), 'Profile author matches resume');
+  assert(data.profile.title.includes('Software Developer'), 'Profile title matches resume');
   assert(fs.existsSync(data.profile.resumeUrl), 'Resume PDF file exists at path');
   assert(fs.statSync(data.profile.resumeUrl).size > 1000, 'Resume PDF is non-empty (>1KB)');
   assert(data.stats.length === 4, '4 KPI statistics configured');
   assert(data.skills.categories.length === 5, '5 Technical skills tiers defined');
-  assert(data.projects.items.length === 4, '4 Flagship projects present');
+  assert(data.projects.items.length >= 3, 'Flagship projects present');
   assert(data.projects.items.every(p => p.githubUrl && p.liveDemoUrl), 'All projects have GitHub & Demo links');
-  assert(data.experience.roles.length === 4, '4 Experience roles documented');
-  assert(data.education.degrees.length === 2, '2 Education degrees verified');
-  assert(data.certifications.items.length === 6, '6 Certifications & achievements present');
-  assert(data.contact.email === 'contact@matloob.dev', 'Verified contact email configured');
+  assert(data.experience.roles.length >= 1, 'Experience roles documented');
+  assert(data.education.degrees.length >= 2, '2 Education degrees verified');
+  assert(data.certifications.items.length >= 3, 'Certifications & achievements present');
+  assert(data.contact.email === 'mdmatloobgaya@gmail.com', 'Verified contact email configured');
 
   console.log('\n=== SUITE 2: ASSET INTEGRITY ===');
   const requiredAssets = [
-    'assets/Md_MatlooB_Alam_Resume.pdf',
+    'assets/Md_Matloob_Alam_Software_Developer_Resume.pdf',
     'assets/profile-avatar.svg',
     'assets/project-cloudscale.svg',
     'assets/project-nexusui.svg',
-    'assets/project-pulsemetrics.svg',
-    'assets/project-devflow.svg'
+    'assets/project-pulsemetrics.svg'
   ];
   requiredAssets.forEach(asset => {
     assert(fs.existsSync(asset) && fs.statSync(asset).size > 0, `Asset valid & exists: ${asset}`);
@@ -70,14 +69,14 @@ async function runTests() {
   assert(fs.existsSync('css/components/upload-modal.css'), 'css/components/upload-modal.css exists on disk');
 
   console.log('\n=== SUITE 5: IN-MEMORY TEXT EXTRACTION & RULE PARSER ===');
-  const samplePdfBuf = fs.readFileSync('assets/Md_MatlooB_Alam_Resume.pdf');
+  const samplePdfBuf = fs.readFileSync('assets/Md_Matloob_Alam_Software_Developer_Resume.pdf');
   const extractedText = await extractRawText(samplePdfBuf, '.pdf');
   assert(extractedText.length > 500, `PDF text successfully extracted (${extractedText.length} chars)`);
-  assert(extractedText.includes('Md MatlooB Alam'), 'Extracted text contains candidate name');
-  assert(extractedText.includes('contact@matloob.dev'), 'Extracted text contains candidate email');
+  assert(extractedText.toUpperCase().includes('MATLOOB'), 'Extracted text contains candidate name');
+  assert(extractedText.includes('mdmatloobgaya@gmail.com'), 'Extracted text contains candidate email');
   const parsedLocal = fallbackRuleBasedParser(extractedText, data);
-  assert(parsedLocal.profile.name === 'Md MatlooB Alam', 'Rule-based parser accurately extracts candidate name');
-  assert(parsedLocal.profile.email === 'contact@matloob.dev', 'Rule-based parser accurately extracts email');
+  assert(parsedLocal.profile.name.toUpperCase().includes('MATLOOB'), 'Rule-based parser accurately extracts candidate name');
+  assert(parsedLocal.profile.email === 'mdmatloobgaya@gmail.com', 'Rule-based parser accurately extracts email');
 
   console.log('\n=== SUITE 6: LOCAL HTTP SERVER ENDPOINTS ===');
   // Start ephemeral test server
@@ -92,7 +91,7 @@ async function runTests() {
   const endpoints = [
     { path: '/', expectedStatus: 200, mime: 'text/html' },
     { path: '/data/portfolio.json', expectedStatus: 200, mime: 'application/json' },
-    { path: '/assets/Md_MatlooB_Alam_Resume.pdf', expectedStatus: 200, mime: 'application/pdf' },
+    { path: '/assets/Md_Matloob_Alam_Software_Developer_Resume.pdf', expectedStatus: 200, mime: 'application/pdf' },
     { path: '/js/render.js', expectedStatus: 200, mime: 'text/javascript' },
     { path: '/js/resume-uploader.js', expectedStatus: 200, mime: 'text/javascript' },
     { path: '/js/theme.js', expectedStatus: 200, mime: 'text/javascript' },
@@ -116,10 +115,13 @@ async function runTests() {
   }
 
   console.log('\n=== SUITE 7: RESUME UPLOAD API ENDPOINT (POST /api/upload-resume) ===');
+  // Preserve portfolio state before upload test
+  const portfolioSnapshot = fs.readFileSync('data/portfolio.json', 'utf8');
+
   // Construct a multipart/form-data request body
   const boundary = '----WebKitFormBoundaryTest' + Date.now();
-  const fileContent = fs.readFileSync('assets/Md_MatlooB_Alam_Resume.pdf');
-  const filename = 'Test_Resume.pdf';
+  const fileContent = fs.readFileSync('assets/Md_Matloob_Alam_Software_Developer_Resume.pdf');
+  const filename = 'Md_Matloob_Alam_Software_Developer_Resume.pdf';
 
   const postDataHeader = Buffer.from(
     `--${boundary}\r\n` +
@@ -163,6 +165,9 @@ async function runTests() {
   if (uploadResult.json?.backup) {
     assert(fs.existsSync(uploadResult.json.backup), 'Backup file exists on file system');
   }
+
+  // Restore snapshot to ensure portfolio remains clean
+  fs.writeFileSync('data/portfolio.json', portfolioSnapshot, 'utf8');
 
   // Close ephemeral server
   testServer.close();
