@@ -111,9 +111,20 @@
   --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.55);
   --shadow-glow: 0 0 28px var(--accent-orange-glow);
 
-  /* Transitions & Animation Timings */
-  --transition-fast: 0.18s ease;
-  --transition-normal: 0.28s ease;
+  /* Transitions & Animation Timings (Design Tokens) */
+  --duration-fast: 0.18s;
+  --duration-normal: 0.28s;
+  --duration-smooth: 0.4s;
+  --duration-slow: 0.6s;
+
+  /* Ergonomic Easing Curves */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Standard Composite Transitions */
+  --transition-fast: 0.18s var(--ease-out);
+  --transition-normal: 0.28s var(--ease-out);
   --transition-smooth: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   --transition-slow: 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 

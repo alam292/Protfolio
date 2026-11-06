@@ -165,6 +165,10 @@
   width: clamp(14px, 2.2vw, 24px);
   height: 2px;
   background: linear-gradient(270deg, var(--accent-orange), rgba(255, 87, 34, 0.25));
+  transform-origin: right center;
+  transition: transform var(--duration-normal) var(--ease-out),
+              filter var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .graph-node-entry--left .graph-coord-bar {
@@ -211,6 +215,10 @@
   width: clamp(14px, 2.2vw, 24px);
   height: 2px;
   background: linear-gradient(90deg, var(--accent-orange), rgba(255, 87, 34, 0.25));
+  transform-origin: left center;
+  transition: transform var(--duration-normal) var(--ease-out),
+              filter var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .graph-node-entry--right .graph-coord-bar {
@@ -241,7 +249,8 @@
   justify-content: center;
   transition: transform var(--duration-normal) var(--ease-out),
               box-shadow var(--duration-normal) var(--ease-out),
-              border-color var(--duration-normal) var(--ease-out);
+              border-color var(--duration-normal) var(--ease-out),
+              background-color var(--duration-normal) var(--ease-out);
 }
 
 .graph-node-core {
@@ -249,7 +258,8 @@
   height: 6px;
   border-radius: 50%;
   background: var(--accent-orange);
-  transition: background-color var(--duration-fast), transform var(--duration-fast);
+  transition: background-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-spring);
 }
 
 .graph-node-ping {
@@ -273,7 +283,7 @@
 
 .graph-node-entry:hover .graph-node-circle {
   transform: scale(1.25);
-  border-color: #ff8a65;
+  border-color: var(--accent-orange-light, #ff8a65);
   box-shadow: 0 0 20px rgba(255, 87, 34, 0.85), 0 0 35px rgba(255, 87, 34, 0.4);
   background: var(--bg-surface-elevated, #141822);
 }
@@ -283,6 +293,11 @@
   transform: scale(1.25);
 }
 
+.graph-node-entry:hover .graph-stem-connector {
+  box-shadow: 0 0 10px var(--accent-orange-glow);
+  filter: brightness(1.25);
+}
+
 /* --------------------------------------------------------------------------
    Graph Node Payload & Typography (Pure Text, No Boxes)
    -------------------------------------------------------------------------- */
@@ -290,6 +305,15 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.graph-node-entry--left:hover .graph-node-payload {
+  transform: translateX(-5px);
+}
+
+.graph-node-entry--right:hover .graph-node-payload {
+  transform: translateX(5px);
 }
 
 .graph-coord-bar {
@@ -307,6 +331,13 @@
   color: var(--accent-orange);
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  transition: color var(--duration-fast) var(--ease-out),
+              text-shadow var(--duration-fast) var(--ease-out);
+}
+
+.graph-node-entry:hover .graph-node-id {
+  color: var(--accent-orange-light);
+  text-shadow: 0 0 10px var(--accent-orange-glow);
 }
 
 .graph-node-time {
@@ -325,7 +356,7 @@
   line-height: 1.35;
   letter-spacing: -0.015em;
   margin: 2px 0 4px 0;
-  transition: color var(--duration-fast);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .graph-node-entry:hover .graph-node-title {
@@ -340,12 +371,24 @@
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: 6px;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.graph-node-entry:hover .graph-node-institution {
+  color: var(--text-primary);
 }
 
 .graph-inst-icon {
   color: var(--accent-orange);
   opacity: 0.9;
   flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-spring),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.graph-node-entry:hover .graph-inst-icon {
+  transform: scale(1.15);
+  color: var(--accent-orange-hover);
 }
 
 /* --------------------------------------------------------------------------
@@ -410,6 +453,11 @@
   position: relative;
   box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
   transform-origin: left center;
+  transition: box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.graph-node-entry:hover .graph-metric-bar {
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.85);
 }
 
 .graph-metric-pip {
@@ -421,6 +469,13 @@
   border-radius: 50%;
   background: #ffffff;
   box-shadow: 0 0 6px #10b981;
+  transition: transform var(--duration-fast) var(--ease-spring),
+              box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.graph-node-entry:hover .graph-metric-pip {
+  transform: scale(1.3);
+  box-shadow: 0 0 10px #10b981;
 }
 
 /* Coursework & Subjects as minimal inline text */
@@ -444,6 +499,11 @@
 .graph-coursework-inline {
   color: var(--text-secondary);
   display: inline;
+  transition: color var(--duration-fast) var(--ease-out);
+}
+
+.graph-node-entry:hover .graph-coursework-inline {
+  color: var(--text-primary);
 }
 
 .graph-coursework-sep {
@@ -509,14 +569,23 @@
   .graph-metric-track {
     width: 90px;
   }
+
+  .graph-node-entry--left:hover .graph-node-payload,
+  .graph-node-entry--right:hover .graph-node-payload {
+    transform: translateX(4px);
+  }
 }
 
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .graph-edge-spine,
   .graph-node-circle,
+  .graph-node-core,
   .graph-node-payload,
+  .graph-stem-connector,
+  .graph-inst-icon,
   .graph-metric-bar,
+  .graph-metric-pip,
   .graph-node-ping {
     animation: none !important;
     transition: none !important;
