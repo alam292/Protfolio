@@ -115,43 +115,6 @@
   gap: var(--space-4);
 }
 
-/* Theme Toggle Button */
-.theme-toggle-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-sm);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: transform var(--duration-fast) var(--ease-spring),
-              border-color var(--duration-fast) var(--ease-out),
-              background-color var(--duration-fast) var(--ease-out),
-              color var(--duration-fast) var(--ease-out),
-              box-shadow var(--duration-fast) var(--ease-out);
-  outline: none;
-}
-
-.theme-toggle-btn:hover {
-  border-color: var(--accent-orange);
-  background: var(--accent-orange-subtle);
-  color: var(--accent-orange);
-  transform: translateY(-2px);
-  box-shadow: 0 0 12px var(--accent-orange-glow);
-}
-
-.theme-toggle-btn:active {
-  transform: translateY(0) scale(0.92);
-}
-
-.theme-toggle-btn .theme-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
 /* Mobile Toggle Hamburger */

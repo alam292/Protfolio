@@ -53,7 +53,7 @@ async function runTests() {
     assert(html.includes(`id="${sec}Mount"`), `Dynamic mount point present: #${sec}Mount`);
     assert(html.includes(`href="#${sec}"`), `Desktop nav anchor present: href="#${sec}"`);
   });
-  assert(html.includes('theme-toggle-btn'), 'Theme toggle buttons present in DOM');
+  assert(!html.includes('theme-toggle-btn'), 'Theme toggle buttons removed from DOM');
   assert(html.includes('toastNotification'), 'Toast notification container present');
   assert(html.includes('schema.org'), 'JSON-LD Person Schema present');
 
