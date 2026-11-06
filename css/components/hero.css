@@ -440,38 +440,45 @@
   letter-spacing: 0.04em;
 }
 
-/* Portrait Photo & Video Viewport (16:9 Aspect Ratio Container - Frameless Clean) */
+/* Portrait Photo & Video Viewport (Clean Card Frame with Ambient Back-Lighting) */
 .hero-photo-viewport,
 .hero-video-viewport {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 4 / 5;
+  min-height: 440px;
   border-radius: 19px;
   overflow: hidden;
-  background: #05070a;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 87, 34, 0.12) 0%, rgba(9, 13, 22, 0.95) 75%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
 .hero-portrait-image,
 .hero-cinematic-video,
 .hero-video-fallback {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  width: auto;
+  max-width: 95%;
+  height: 94%;
+  max-height: 520px;
+  object-fit: contain;
+  object-position: center bottom;
   display: block;
   transition: transform 0.5s cubic-bezier(0.2, 0, 0.2, 1);
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.65));
 }
 
 .hero-showcase-window:hover .hero-portrait-image {
-  transform: scale(1.03);
+  transform: scale(1.025) translateY(-4px);
 }
 
 .hero-photo-cinematic-overlay,
 .hero-video-cinematic-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 7, 10, 0.03) 0%, transparent 45%, rgba(5, 7, 10, 0.2) 80%, rgba(5, 7, 10, 0.55) 100%),
-              radial-gradient(ellipse at center, transparent 70%, rgba(5, 7, 10, 0.35) 100%);
+  background: linear-gradient(180deg, rgba(5, 7, 10, 0.01) 0%, transparent 55%, rgba(5, 7, 10, 0.25) 85%, rgba(5, 7, 10, 0.6) 100%),
+              radial-gradient(ellipse at center, transparent 75%, rgba(5, 7, 10, 0.35) 100%);
   pointer-events: none;
 }
 

@@ -14,7 +14,7 @@
     "linkedinUrl": "https://linkedin.com/in/mdmatloob",
     "resumeUrl": "assets/Md_Matloob_Alam_Software_Developer_Resume.pdf",
     "resumeFilename": "Md_Matloob_Alam_Software_Developer_Resume.pdf",
-    "avatarUrl": "assets/gemini_generated_video_ebe17827.gif",
+    "avatarUrl": "assets/profile-matloob-transparent.png",
     "location": {
       "city": "New Delhi",
       "state": "Delhi",
@@ -98,18 +98,48 @@
         "icon": "code",
         "description": "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
         "skills": [
-          { "name": "Python", "icon": "python" },
-          { "name": "Java", "icon": "java" },
-          { "name": "JavaScript", "icon": "javascript" },
-          { "name": "HTML5", "icon": "html5" },
-          { "name": "CSS3", "icon": "css3" }
+          {
+            "name": "Python",
+            "icon": "python"
+          },
+          {
+            "name": "Java",
+            "icon": "java"
+          },
+          {
+            "name": "JavaScript",
+            "icon": "javascript"
+          },
+          {
+            "name": "HTML5",
+            "icon": "html5"
+          },
+          {
+            "name": "CSS3",
+            "icon": "css3"
+          }
         ],
         "items": [
-          { "name": "Python", "icon": "python" },
-          { "name": "Java", "icon": "java" },
-          { "name": "JavaScript", "icon": "javascript" },
-          { "name": "HTML5", "icon": "html5" },
-          { "name": "CSS3", "icon": "css3" }
+          {
+            "name": "Python",
+            "icon": "python"
+          },
+          {
+            "name": "Java",
+            "icon": "java"
+          },
+          {
+            "name": "JavaScript",
+            "icon": "javascript"
+          },
+          {
+            "name": "HTML5",
+            "icon": "html5"
+          },
+          {
+            "name": "CSS3",
+            "icon": "css3"
+          }
         ]
       },
       {
@@ -118,18 +148,48 @@
         "icon": "layers",
         "description": "Modern reactive UI libraries, SSR frameworks, and utility-first styling architectures.",
         "skills": [
-          { "name": "React.js", "icon": "react" },
-          { "name": "Next.js", "icon": "nextjs" },
-          { "name": "Tailwind CSS", "icon": "tailwindcss" },
-          { "name": "Bootstrap", "icon": "bootstrap" },
-          { "name": "Redux", "icon": "redux" }
+          {
+            "name": "React.js",
+            "icon": "react"
+          },
+          {
+            "name": "Next.js",
+            "icon": "nextjs"
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": "tailwindcss"
+          },
+          {
+            "name": "Bootstrap",
+            "icon": "bootstrap"
+          },
+          {
+            "name": "Redux",
+            "icon": "redux"
+          }
         ],
         "items": [
-          { "name": "React.js", "icon": "react" },
-          { "name": "Next.js", "icon": "nextjs" },
-          { "name": "Tailwind CSS", "icon": "tailwindcss" },
-          { "name": "Bootstrap", "icon": "bootstrap" },
-          { "name": "Redux", "icon": "redux" }
+          {
+            "name": "React.js",
+            "icon": "react"
+          },
+          {
+            "name": "Next.js",
+            "icon": "nextjs"
+          },
+          {
+            "name": "Tailwind CSS",
+            "icon": "tailwindcss"
+          },
+          {
+            "name": "Bootstrap",
+            "icon": "bootstrap"
+          },
+          {
+            "name": "Redux",
+            "icon": "redux"
+          }
         ]
       },
       {
@@ -138,20 +198,56 @@
         "icon": "server",
         "description": "High-throughput asynchronous frameworks, RESTful web services, and database ORMs.",
         "skills": [
-          { "name": "FastAPI", "icon": "fastapi" },
-          { "name": "Django", "icon": "django" },
-          { "name": "Node.js", "icon": "nodejs" },
-          { "name": "Express.js", "icon": "express" },
-          { "name": "REST API", "icon": "restapi" },
-          { "name": "SQLAlchemy", "icon": "sqlalchemy" }
+          {
+            "name": "FastAPI",
+            "icon": "fastapi"
+          },
+          {
+            "name": "Django",
+            "icon": "django"
+          },
+          {
+            "name": "Node.js",
+            "icon": "nodejs"
+          },
+          {
+            "name": "Express.js",
+            "icon": "express"
+          },
+          {
+            "name": "REST API",
+            "icon": "restapi"
+          },
+          {
+            "name": "SQLAlchemy",
+            "icon": "sqlalchemy"
+          }
         ],
         "items": [
-          { "name": "FastAPI", "icon": "fastapi" },
-          { "name": "Django", "icon": "django" },
-          { "name": "Node.js", "icon": "nodejs" },
-          { "name": "Express.js", "icon": "express" },
-          { "name": "REST API", "icon": "restapi" },
-          { "name": "SQLAlchemy", "icon": "sqlalchemy" }
+          {
+            "name": "FastAPI",
+            "icon": "fastapi"
+          },
+          {
+            "name": "Django",
+            "icon": "django"
+          },
+          {
+            "name": "Node.js",
+            "icon": "nodejs"
+          },
+          {
+            "name": "Express.js",
+            "icon": "express"
+          },
+          {
+            "name": "REST API",
+            "icon": "restapi"
+          },
+          {
+            "name": "SQLAlchemy",
+            "icon": "sqlalchemy"
+          }
         ]
       },
       {
@@ -160,16 +256,40 @@
         "icon": "database",
         "description": "Relational, document, and embedded databases with normalized schema design and query optimization.",
         "skills": [
-          { "name": "MySQL", "icon": "mysql" },
-          { "name": "PostgreSQL", "icon": "postgresql" },
-          { "name": "MongoDB", "icon": "mongodb" },
-          { "name": "SQLite", "icon": "sqlite" }
+          {
+            "name": "MySQL",
+            "icon": "mysql"
+          },
+          {
+            "name": "PostgreSQL",
+            "icon": "postgresql"
+          },
+          {
+            "name": "MongoDB",
+            "icon": "mongodb"
+          },
+          {
+            "name": "SQLite",
+            "icon": "sqlite"
+          }
         ],
         "items": [
-          { "name": "MySQL", "icon": "mysql" },
-          { "name": "PostgreSQL", "icon": "postgresql" },
-          { "name": "MongoDB", "icon": "mongodb" },
-          { "name": "SQLite", "icon": "sqlite" }
+          {
+            "name": "MySQL",
+            "icon": "mysql"
+          },
+          {
+            "name": "PostgreSQL",
+            "icon": "postgresql"
+          },
+          {
+            "name": "MongoDB",
+            "icon": "mongodb"
+          },
+          {
+            "name": "SQLite",
+            "icon": "sqlite"
+          }
         ]
       },
       {
@@ -178,20 +298,56 @@
         "icon": "cpu",
         "description": "Enterprise developer tooling, containerization, collaborative version control, and API testing suites.",
         "skills": [
-          { "name": "Git", "icon": "git" },
-          { "name": "GitHub", "icon": "github" },
-          { "name": "VS Code", "icon": "vscode" },
-          { "name": "Docker", "icon": "docker" },
-          { "name": "Postman", "icon": "postman" },
-          { "name": "Linux", "icon": "linux" }
+          {
+            "name": "Git",
+            "icon": "git"
+          },
+          {
+            "name": "GitHub",
+            "icon": "github"
+          },
+          {
+            "name": "VS Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Docker",
+            "icon": "docker"
+          },
+          {
+            "name": "Postman",
+            "icon": "postman"
+          },
+          {
+            "name": "Linux",
+            "icon": "linux"
+          }
         ],
         "items": [
-          { "name": "Git", "icon": "git" },
-          { "name": "GitHub", "icon": "github" },
-          { "name": "VS Code", "icon": "vscode" },
-          { "name": "Docker", "icon": "docker" },
-          { "name": "Postman", "icon": "postman" },
-          { "name": "Linux", "icon": "linux" }
+          {
+            "name": "Git",
+            "icon": "git"
+          },
+          {
+            "name": "GitHub",
+            "icon": "github"
+          },
+          {
+            "name": "VS Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Docker",
+            "icon": "docker"
+          },
+          {
+            "name": "Postman",
+            "icon": "postman"
+          },
+          {
+            "name": "Linux",
+            "icon": "linux"
+          }
         ]
       },
       {
@@ -200,16 +356,40 @@
         "icon": "zap",
         "description": "Next-generation generative AI platforms, frontier models, and autonomous coding environments.",
         "skills": [
-          { "name": "ChatGPT", "icon": "chatgpt" },
-          { "name": "Claude", "icon": "claude" },
-          { "name": "Gemini", "icon": "gemini" },
-          { "name": "Antigravity IDE", "icon": "antigravity" }
+          {
+            "name": "ChatGPT",
+            "icon": "chatgpt"
+          },
+          {
+            "name": "Claude",
+            "icon": "claude"
+          },
+          {
+            "name": "Gemini",
+            "icon": "gemini"
+          },
+          {
+            "name": "Antigravity IDE",
+            "icon": "antigravity"
+          }
         ],
         "items": [
-          { "name": "ChatGPT", "icon": "chatgpt" },
-          { "name": "Claude", "icon": "claude" },
-          { "name": "Gemini", "icon": "gemini" },
-          { "name": "Antigravity IDE", "icon": "antigravity" }
+          {
+            "name": "ChatGPT",
+            "icon": "chatgpt"
+          },
+          {
+            "name": "Claude",
+            "icon": "claude"
+          },
+          {
+            "name": "Gemini",
+            "icon": "gemini"
+          },
+          {
+            "name": "Antigravity IDE",
+            "icon": "antigravity"
+          }
         ]
       }
     ]
@@ -330,7 +510,7 @@
         "score": {
           "type": "cgpa",
           "value": 7.69,
-          "scale": 10.0,
+          "scale": 10,
           "percentage": 76.9,
           "formatted": "7.69 / 10 CGPA"
         },
