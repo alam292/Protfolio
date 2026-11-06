@@ -124,7 +124,7 @@ SCHEMA SPECIFICATION:
   ],
   "about": {
     "sectionTag": "WHO I AM",
-    "title": "Engineering High-Performance Web Systems with Pixel-Perfect Precision",
+    "title": "",
     "lead": "Compelling summary paragraph",
     "pillars": [
       { "id": "identity", "tag": "01. IDENTITY & CRAFT", "title": "Core craft title", "content": "Craft description", "icon": "terminal" },
@@ -135,7 +135,7 @@ SCHEMA SPECIFICATION:
   },
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",
-    "title": "Core Competencies & Technology Matrix",
+    "title": "",
     "subtitle": "Carefully selected technologies battle-tested across production systems.",
     "categories": [
       {
@@ -151,7 +151,7 @@ SCHEMA SPECIFICATION:
   },
   "projects": {
     "sectionTag": "FEATURED WORK",
-    "title": "Selected Engineering Projects",
+    "title": "",
     "subtitle": "Production-grade applications built with attention to performance.",
     "items": [
       {
@@ -172,7 +172,7 @@ SCHEMA SPECIFICATION:
   },
   "experience": {
     "sectionTag": "CAREER TRAJECTORY",
-    "title": "Work Experience & Professional Impact",
+    "title": "",
     "subtitle": "Chronological track record of building resilient software.",
     "roles": [
       {
@@ -189,7 +189,7 @@ SCHEMA SPECIFICATION:
   },
   "education": {
     "sectionTag": "ACADEMIC PEDIGREE",
-    "title": "Education & Academic Qualifications",
+    "title": "",
     "subtitle": "Foundational computer science training.",
     "degrees": [
       {
@@ -207,7 +207,7 @@ SCHEMA SPECIFICATION:
   },
   "certifications": {
     "sectionTag": "VALIDATED MASTERY",
-    "title": "Certifications & Professional Achievements",
+    "title": "",
     "subtitle": "Industry credentials and milestones.",
     "categories": [
       { "id": "all", "name": "All Credentials" },
@@ -231,7 +231,7 @@ SCHEMA SPECIFICATION:
   },
   "contact": {
     "sectionTag": "GET IN TOUCH",
-    "title": "Let's Build Something High-Impact Together",
+    "title": "",
     "subtitle": "Inbox open for opportunities.",
     "email": "candidate email",
     "secondaryEmail": "fallback email",

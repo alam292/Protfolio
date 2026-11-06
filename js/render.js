@@ -243,8 +243,7 @@ class PortfolioRenderer {
     `).join('');
 
     mount.innerHTML = `
-      <div class="section-tag">${about.sectionTag}</div>
-      ${about.title ? `<h2 class="section-title" id="about-title">${about.title}</h2>` : ''}
+      <h2 class="section-tag" id="about-title">${about.sectionTag}</h2>
 
       <div class="about-grid">
         <!-- Biography Story Card -->
@@ -322,9 +321,8 @@ class PortfolioRenderer {
     }).join('');
 
     mount.innerHTML = `
-      <div class="section-tag">${skills.sectionTag}</div>
-      <h2 class="section-title" id="skills-title">${skills.title}</h2>
-      <p class="section-subtitle">${skills.subtitle}</p>
+      <h2 class="section-tag" id="skills-title">${skills.sectionTag}</h2>
+      ${skills.subtitle ? `<p class="section-subtitle">${skills.subtitle}</p>` : ''}
 
       <div class="skills-grid">
         ${cardsHtml}
@@ -439,8 +437,7 @@ class PortfolioRenderer {
     mount.innerHTML = `
       <div class="behind-header">
         <div class="behind-header-left">
-          <div class="behind-tag">${projects.sectionTag}</div>
-          <h2 class="behind-main-title" id="projects-title">${projects.title}</h2>
+          <h2 class="behind-tag" id="projects-title">${projects.sectionTag}</h2>
         </div>
         <div class="behind-header-right">
           <p class="behind-lead-text">
@@ -510,9 +507,8 @@ class PortfolioRenderer {
     }).join('');
 
     mount.innerHTML = `
-      <div class="section-tag">${experience.sectionTag}</div>
-      <h2 class="section-title" id="experience-title">${experience.title}</h2>
-      <p class="section-subtitle">${experience.subtitle}</p>
+      <h2 class="section-tag" id="experience-title">${experience.sectionTag}</h2>
+      ${experience.subtitle ? `<p class="section-subtitle">${experience.subtitle}</p>` : ''}
 
       <div class="experience-timeline">
         <div class="timeline-line" aria-hidden="true"></div>
@@ -557,9 +553,8 @@ class PortfolioRenderer {
     }).join('');
 
     mount.innerHTML = `
-      <div class="section-tag">${education.sectionTag}</div>
-      <h2 class="section-title" id="education-title">${education.title}</h2>
-      <p class="section-subtitle">${education.subtitle}</p>
+      <h2 class="section-tag" id="education-title">${education.sectionTag}</h2>
+      ${education.subtitle ? `<p class="section-subtitle">${education.subtitle}</p>` : ''}
 
       <div class="education-grid">
         ${cardsHtml}
@@ -706,12 +701,11 @@ class PortfolioRenderer {
     mount.innerHTML = `
       <div class="cert-gallery-shell">
         <div class="cert-header-block">
-          <div class="cert-pill-tag">
+          <h2 class="cert-pill-tag" id="certificates-title">
             <span class="cert-pill-dot" aria-hidden="true"></span>
             <span>${certifications.sectionTag}</span>
-          </div>
-          <h2 class="cert-main-title" id="certificates-title">${certifications.title}</h2>
-          <p class="cert-main-subtitle">${certifications.subtitle}</p>
+          </h2>
+          ${certifications.subtitle ? `<p class="cert-main-subtitle">${certifications.subtitle}</p>` : ''}
         </div>
 
         <div class="cert-carousel-row">
@@ -929,8 +923,7 @@ class PortfolioRenderer {
     `).join('');
 
     mount.innerHTML = `
-      <div class="section-tag">${contact.sectionTag}</div>
-      <h2 class="section-title" id="contact-title">${contact.title}</h2>
+      <h2 class="section-tag" id="contact-title">${contact.sectionTag}</h2>
       ${contact.subtitle ? `<p class="section-subtitle">${contact.subtitle}</p>` : ''}
 
       <div class="contact-master-container">

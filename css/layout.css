@@ -87,36 +87,42 @@ canvas {
   margin-right: auto;
 }
 
-/* Section Tag Pill */
+/* Section Tag Header with Bullet Point - Medium Size, Left-Aligned, Theme Orange */
 .section-tag {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-display, 'Inter', sans-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700;
   color: var(--accent-orange);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: 12px;
   width: fit-content;
+  margin-bottom: var(--space-3);
+  text-align: left;
 }
 
 .section-tag::before {
   content: "";
-  width: 7px;
-  height: 7px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--accent-orange);
-  box-shadow: 0 0 10px var(--accent-orange);
+  box-shadow: 0 0 12px var(--accent-orange);
+  flex-shrink: 0;
 }
 
-/* Section Title */
+/* Section Title - Medium Size, Left-Aligned, Theme Orange */
 .section-title {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-title);
-  font-weight: var(--font-weight-extrabold);
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-  color: var(--text-primary);
+  font-size: clamp(1.6rem, 2.2vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--accent-orange);
+  text-align: left;
+  margin-bottom: var(--space-2);
 }
 
 /* Section Description */

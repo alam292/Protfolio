@@ -89,7 +89,7 @@
   },
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",
-    "title": "Core Competencies & Technology Matrix",
+    "title": "",
     "subtitle": "Comprehensive technical stack spanning full-stack frameworks, relational database management, and cloud deployment tooling.",
     "categories": [
       {
@@ -261,7 +261,7 @@
   },
   "projects": {
     "sectionTag": "FEATURED WORK",
-    "title": "Selected Engineering Projects",
+    "title": "",
     "subtitle": "Production-tested web applications, full-stack systems, and developer productivity tools.",
     "items": [
       {
@@ -330,7 +330,7 @@
   },
   "experience": {
     "sectionTag": "CAREER TRAJECTORY",
-    "title": "Work Experience & Professional Impact",
+    "title": "",
     "subtitle": "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems.",
     "roles": [
       {
@@ -361,7 +361,7 @@
   },
   "education": {
     "sectionTag": "ACADEMIC PEDIGREE",
-    "title": "Education & Academic Qualifications",
+    "title": "",
     "subtitle": "Strong analytical foundation in engineering, electronic systems, and computational problem solving.",
     "degrees": [
       {
@@ -401,7 +401,7 @@
   },
   "certifications": {
     "sectionTag": "VALIDATED MASTERY",
-    "title": "Certifications & Professional Achievements",
+    "title": "",
     "subtitle": "Verified industry credentials, competitive milestones, and technical specializations",
     "categories": [
       {
@@ -492,7 +492,7 @@
   },
   "contact": {
     "sectionTag": "GET IN TOUCH",
-    "title": "Contact Me",
+    "title": "",
     "subtitle": "",
     "infoCardTitle": "Contact Information",
     "infoCardDescription": "Feel free to reach out via email or through social platforms. I typically respond within 24 hours.",
