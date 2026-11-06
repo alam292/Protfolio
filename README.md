@@ -1,10 +1,11 @@
 # 🌌 Md MatlooB Alam — Full Stack & UI Kinematics Portfolio
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge&logo=semver)](package.json)
+[![Live Portfolio](https://img.shields.io/badge/Live_Site-alam292--portfolio.pages.dev-00C7B7.svg?style=for-the-badge&logo=cloudflare&logoColor=white)](https://alam292-portfolio.pages.dev)
+[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg?style=for-the-badge&logo=semver)](package.json)
+[![Hosting](https://img.shields.io/badge/Cloudflare_Pages-Edge_CDN-F38020.svg?style=for-the-badge&logo=cloudflare)](https://alam292-portfolio.pages.dev)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions_%26_Pages-2088FF.svg?style=for-the-badge&logo=github)](https://github.com/alam292/Protfolio)
 [![Tech Stack](https://img.shields.io/badge/tech%20stack-HTML5%20%7C%20CSS3%20%7C%20Vanilla%20JS%20%7C%20GSAP-orange.svg?style=for-the-badge)](package.json)
-[![Runtime](https://img.shields.io/badge/node-%3E%3D18.0.0-339933.svg?style=for-the-badge&logo=node.js)](server.js)
 [![Performance](https://img.shields.io/badge/frame%20rate-60%20FPS%20Kinematics-success.svg?style=for-the-badge)](js/canvas-stream.js)
-[![Accessibility](https://img.shields.io/badge/WCAG%202.1-AA%20Compliant-purple.svg?style=for-the-badge)](DESIGN_SYSTEM.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)](LICENSE)
 
 > A production-grade, cinematic portfolio engineered with **modular vanilla ES6+**, a **300-frame hardware-accelerated HTML5 Canvas stream**, **GSAP ScrollTrigger kinematics**, and an enterprise **Glassmorphism Design System**.
@@ -370,6 +371,7 @@ npm test
 
 | Version | Release Date | Summary of Changes |
 | :---: | :---: | :--- |
+| **`v1.2.0`** | **November 2026** | **Cloudflare Pages Production Deployment & Edge Optimization**<br>&bull; **Zero-Cost Global Hosting**: Deployed on Cloudflare Pages free tier with global Edge CDN caching across 330+ cities worldwide.<br>&bull; **Automated GitHub CI/CD**: Integrated with `alam292/Protfolio` repository; pushes to `main` automatically build and deploy within 30-45 seconds.<br>&bull; **Cinematic Frame Stream Deployment**: All 300 sequential animation frames deployed to Cloudflare Edge with 1-year immutable caching (`max-age=31536000, immutable`) for instant, stutter-free scroll performance.<br>&bull; **Production Edge Headers & Security**: Added `_headers` configuring `SAMEORIGIN`, `nosniff`, `strict-origin-when-cross-origin`, and `Permissions-Policy`.<br>&bull; **SPA Routing & Fallbacks**: Configured `_redirects` with single-page fallback and canonical URL readiness.<br>&bull; **Free SSL/TLS**: Automatic Universal SSL/TLS certificate with full HTTPS redirection.<br>&bull; **Live URL**: [https://alam292-portfolio.pages.dev](https://alam292-portfolio.pages.dev) (Custom domain ready for `alam292.tech`). |
 | **`v1.1.0`** | **November 2026** | **Modern Animated Technology Showcase Redesign**<br>&bull; Replaced legacy cards, pills, and ratings with a minimalist, category-wise technology showcase.<br>&bull; 6 structured categories: Programming Languages, Frontend Development, Backend Development, Databases, Tools & Technologies, AI Development Tools.<br>&bull; 30 authentic official brand SVG vectors with responsive scaling and zero external network requests.<br>&bull; Dynamic reusable React components (`SkillIcon`, `SkillItem`, `SkillCategory`, `SkillsSection`) mounted into `#skillsMount`.<br>&bull; Phased floating keyframe animations (`@keyframes skillFloat`), interactive radiant brand glows, GSAP ScrollTrigger staggered entrance, and reduced-motion accessibility.<br>&bull; Expanded automated testing suite (`test-runner.js`) with 61 dedicated skills verification assertions (147 total checks passing). |
 | **`v1.0.0`** | **November 2026** | **Initial Production Release**<br>&bull; Fully integrated 300-frame scroll-scrubbed canvas engine.<br>&bull; 8 complete modular sections (Hero, About, Skills, Projects, Experience, Education, Certificates, Contact).<br>&bull; Modular CSS design system with glassmorphic cards and fluid typography.<br>&bull; Zero-dependency Node.js streaming HTTP server with immutable cache control headers.<br>&bull; Accessible mobile drawer navigation, live contact form validation, and toast notification system. |
 
@@ -397,10 +399,9 @@ For complete design specifications, refer to [DESIGN_SYSTEM.md](DESIGN_SYSTEM.md
 **Md MatlooB Alam**  
 *Full Stack Developer &amp; UI Systems Engineer*
 
-- **Website**: [matloobalam.dev](https://matloobalam.dev)
-- **Email**: [matloobalam138@gmail.com](mailto:matloobalam138@gmail.com)
-- **LinkedIn**: [linkedin.com/in/matloob-alam](https://linkedin.com/in/matloob-alam)
-- **GitHub**: [github.com/matloobalam](https://github.com/matloobalam)
+- **Live Portfolio**: [https://alam292-portfolio.pages.dev](https://alam292-portfolio.pages.dev)
+- **GitHub**: [github.com/alam292](https://github.com/alam292)
+- **Email**: [mdmatloobgaya@gmail.com](mailto:mdmatloobgaya@gmail.com)
 - **Location**: Bokaro Steel City, Jharkhand, India (IST &bull; UTC+5:30)
 
 ---
