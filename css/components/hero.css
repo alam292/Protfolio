@@ -124,15 +124,17 @@
 .hero-name-title {
   font-family: var(--font-family-display);
   font-size: clamp(2.8rem, 6.2vw, 5.2rem);
-  font-weight: 800;
-  line-height: 1.16;
-  letter-spacing: -0.025em;
-  margin: 0 0 4px 0;
+  font-weight: 850;
+  line-height: 1.14;
+  letter-spacing: -0.03em;
+  margin: 0 0 6px 0;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 6px 0;
-  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 32px rgba(255, 87, 34, 0.28));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 .hero-name-word {
@@ -142,17 +144,20 @@
 
 .hero-char {
   display: inline-block;
-  background: linear-gradient(135deg, #ffffff 0%, #ffc5b2 22%, #ff7849 52%, #ff5722 78%, #ff3d00 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #ffe8e0 20%, #ff8a65 45%, #ff5722 75%, #ff3d00 95%, #ffffff 100%);
+  background-size: 260% 100%;
+  animation: cinematicGradientFlow 8s ease-in-out infinite;
+  animation-delay: calc(var(--char-idx, 0) * 0.14s);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  will-change: transform;
-  transition: transform 0.22s cubic-bezier(0.2, 0, 0.2, 1), filter 0.22s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .hero-char:hover {
-  transform: translateY(-3px) scale(1.08);
-  filter: drop-shadow(0 0 20px rgba(255, 87, 34, 0.95));
+  transform: translateY(-3px) scale(1.06);
 }
 
 .hero-char-space {
@@ -160,25 +165,112 @@
   width: 0.28em;
 }
 
+/* Cinematic Title & Specialization */
 .hero-subheading {
+  font-family: var(--font-family-display);
   font-size: clamp(1.2rem, 1.9vw, 1.6rem);
-  font-weight: 600;
-  color: #e4e4e7;
   letter-spacing: -0.015em;
   line-height: 1.4;
-  margin: 0 0 2px 0;
+  margin: 0 0 6px 0;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 10px 14px;
   flex-wrap: wrap;
-  filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.85));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hero-subheading-main {
+  display: inline-flex;
+  align-items: center;
+  font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+  font-weight: 750;
+  letter-spacing: -0.015em;
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero-title-word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.hero-title-char {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffffff 0%, #f4f4f5 22%, #fed7aa 52%, #ff8a65 78%, #ffffff 100%);
+  background-size: 240% 100%;
+  animation: cinematicTitleFlow 7.5s ease-in-out infinite;
+  animation-delay: calc(var(--title-char-idx, 0) * 0.12s + 1.2s);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hero-title-char:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.hero-title-char-space {
+  display: inline-block;
+  width: 0.26em;
+}
+
+.hero-subheading-divider {
+  color: rgba(255, 255, 255, 0.32);
+  font-weight: 300;
+  font-size: 1.2em;
+  user-select: none;
 }
 
 .hero-subheading-accent {
-  background: linear-gradient(135deg, #ff7849 0%, #ff5722 60%, #ff8a65 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  font-size: clamp(0.92rem, 1.35vw, 1.08rem);
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  padding: 4px 14px;
+  background: linear-gradient(135deg, rgba(255, 87, 34, 0.12) 0%, rgba(255, 138, 101, 0.05) 100%);
+  border: 1px solid rgba(255, 87, 34, 0.32);
+  border-radius: var(--radius-full);
+  color: #ff9e80;
+  box-shadow: 0 0 20px rgba(255, 87, 34, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.hero-subheading-accent:hover {
+  border-color: rgba(255, 87, 34, 0.6);
+  box-shadow: 0 0 25px rgba(255, 87, 34, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Keyframes for Continuous Cinematic Liquid Shimmer */
+@keyframes cinematicGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes cinematicTitleFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* 3. Short Introduction */
@@ -447,10 +539,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-char {
+  .hero-char,
+  .hero-title-char,
+  .hero-subheading-accent,
+  .hero-subheading-divider {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
   }
   .status-pulse-dot,
   .tab-live-dot {

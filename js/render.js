@@ -209,16 +209,43 @@ class PortfolioRenderer {
     }).join('<span class="hero-char-space" aria-hidden="true">&nbsp;</span>');
   }
 
-  // Helper to render role subheading with accent styling
+  // Helper to render title with character-by-character cinematic animation spans
+  renderAnimatedTitle(title) {
+    if (!title) title = 'Software Developer';
+    const words = title.trim().split(/\s+/);
+    let charIdx = 0;
+    return words.map(word => {
+      const charsHtml = Array.from(word).map(char => {
+        const span = `<span class="hero-title-char" style="--title-char-idx: ${charIdx};" data-char="${char}">${char}</span>`;
+        charIdx++;
+        return span;
+      }).join('');
+      return `<span class="hero-title-word" aria-hidden="true">${charsHtml}</span>`;
+    }).join('<span class="hero-title-char-space" aria-hidden="true">&nbsp;</span>');
+  }
+
+  // Helper to render role subheading with cinematic typography and accent styling
   renderSubheading(title) {
     if (!title) {
-      return `<span>Full Stack Developer</span> <span style="color: #71717a;">&amp;</span> <span class="hero-subheading-accent">UI Engineer</span>`;
+      title = 'Software Developer | Full-Stack Python & React Specialist';
     }
     if (title.includes('|')) {
       const parts = title.split('|').map(s => s.trim());
-      return `<span>${parts[0]}</span> <span style="color: #71717a;">·</span> <span class="hero-subheading-accent">${parts.slice(1).join(' · ')}</span>`;
+      const mainRole = parts[0];
+      const specializations = parts.slice(1).join(' · ');
+      return `
+        <span class="hero-subheading-main" aria-label="${mainRole}">
+          ${this.renderAnimatedTitle(mainRole)}
+        </span>
+        <span class="hero-subheading-divider" aria-hidden="true">·</span>
+        <span class="hero-subheading-accent">${specializations}</span>
+      `;
     }
-    return `<span>${title}</span>`;
+    return `
+      <span class="hero-subheading-main" aria-label="${title}">
+        ${this.renderAnimatedTitle(title)}
+      </span>
+    `;
   }
 
   // 1. Hero / Home Section (Vercel / Linear Ultra-Clean Style)

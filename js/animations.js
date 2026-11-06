@@ -59,7 +59,7 @@ class AnimationsController {
 
   // Smooth, fluid entrance sequence for Hero elements on page load
   initHeroEntrance() {
-    const tl = gsap.timeline({ defaults: { ease: 'power2.out', duration: 0.85 } });
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', duration: 0.85 } });
 
     tl.from('.navbar', {
       y: -24,
@@ -70,38 +70,81 @@ class AnimationsController {
     .from('.hero-status-badge', {
       opacity: 0,
       y: 16,
-      duration: 0.65
+      duration: 0.65,
+      ease: 'power2.out'
     }, '-=0.45');
 
-    // Smooth character-by-character fluid reveal for primary grand name
-    const chars = document.querySelectorAll('.hero-char');
-    if (chars.length > 0) {
-      tl.from(chars, {
+    // 1. Cinematic Character Reveal for Grand Name: "MD MATLOOB ALAM" (100% Crisp, zero blur)
+    const nameChars = document.querySelectorAll('.hero-char');
+    if (nameChars.length > 0) {
+      tl.from(nameChars, {
         opacity: 0,
-        y: 22,
-        stagger: 0.02,
-        duration: 0.65,
-        ease: 'power2.out'
-      }, '-=0.4');
+        y: 26,
+        scale: 0.9,
+        stagger: 0.024,
+        duration: 0.7,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity'
+      }, '-=0.35');
     } else {
       tl.from('.hero-name-title', {
         opacity: 0,
         y: 20,
-        duration: 0.65,
-        ease: 'power2.out'
-      }, '-=0.4');
+        duration: 0.7,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity'
+      }, '-=0.35');
     }
 
-    tl.from('.hero-subheading', { opacity: 0, y: 16, duration: 0.65 }, '-=0.5')
-      .from('.hero-intro-text', { opacity: 0, y: 16, duration: 0.65 }, '-=0.5')
-      .from('.hero-actions-group', { opacity: 0, y: 16, duration: 0.65 }, '-=0.5')
+    // 2. Cinematic Character Reveal for Title: "Software Developer" (100% Crisp, zero blur)
+    const titleChars = document.querySelectorAll('.hero-title-char');
+    if (titleChars.length > 0) {
+      tl.from(titleChars, {
+        opacity: 0,
+        y: 18,
+        scale: 0.92,
+        stagger: 0.02,
+        duration: 0.65,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity'
+      }, '-=0.45');
+    } else {
+      tl.from('.hero-subheading-main', {
+        opacity: 0,
+        y: 16,
+        duration: 0.6,
+        ease: 'power3.out',
+        clearProps: 'transform,opacity'
+      }, '-=0.45');
+    }
+
+    // 3. Cinematic Reveal for Divider and Specialization Badge
+    tl.from('.hero-subheading-divider', {
+      opacity: 0,
+      scale: 0.4,
+      duration: 0.4,
+      ease: 'back.out(2)',
+      clearProps: 'transform,opacity'
+    }, '-=0.35')
+    .from('.hero-subheading-accent', {
+      opacity: 0,
+      y: 14,
+      scale: 0.95,
+      duration: 0.55,
+      ease: 'power2.out',
+      clearProps: 'transform,opacity'
+    }, '-=0.3');
+
+    // 4. Hero introduction text, actions & bento metrics
+    tl.from('.hero-intro-text', { opacity: 0, y: 16, duration: 0.65 }, '-=0.35')
+      .from('.hero-actions-group', { opacity: 0, y: 16, duration: 0.65 }, '-=0.35')
       .from('.bento-metric-card', {
         opacity: 0,
         y: 18,
-        stagger: 0.06,
+        stagger: 0.08,
         duration: 0.65,
         ease: 'power2.out'
-      }, '-=0.5');
+      }, '-=0.35');
   }
 
   // Graceful, fluid scroll parallax exit for Hero content (with 1.0s damping)
