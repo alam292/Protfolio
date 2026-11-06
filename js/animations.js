@@ -89,7 +89,7 @@ class AnimationsController {
       ease: 'none'
     });
 
-    gsap.to('.hero-pillars-grid', {
+    gsap.to('.hero-bento-metrics', {
       scrollTrigger: {
         trigger: '#hero',
         start: 'center top',

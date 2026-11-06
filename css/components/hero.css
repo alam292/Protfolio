@@ -641,24 +641,29 @@
   }
 
   .hero-showcase-window {
-    width: clamp(290px, 86vw, 420px);
-  }
-
-  .hero-badge-tag-ai {
-    right: -6px;
-    top: 36px;
-  }
-
-  .hero-badge-tag-stack {
-    left: -6px;
-    top: 76px;
+    width: clamp(280px, 86vw, 420px);
   }
 
   .hero-badge-tag-status {
-    right: 50%;
-    transform: translateX(50%) translateZ(40px) !important;
-    bottom: -18px;
+    top: auto;
+    bottom: -14px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%) translateZ(35px) !important;
     white-space: nowrap;
+    font-size: 0.7rem;
+    padding: 6px 14px;
+  }
+
+  .hero-badge-tag-stack {
+    top: -14px;
+    bottom: auto;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%) translateZ(45px) !important;
+    white-space: nowrap;
+    font-size: 0.7rem;
+    padding: 6px 14px;
   }
 }
 

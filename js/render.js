@@ -303,7 +303,7 @@ class PortfolioRenderer {
               <!-- Animated Motion Viewport (GIF) -->
               <div class="hero-photo-viewport">
                 <img 
-                  src="assets/gemini_generated_video_ebe17827.gif" 
+                  src="${profile.avatarUrl || 'assets/gemini_generated_video_ebe17827.gif'}" 
                   alt="${profile.name} — Interactive Motion Visual" 
                   class="hero-portrait-image"
                   id="heroPortraitImage"
@@ -335,54 +335,17 @@ class PortfolioRenderer {
       </div>
     `;
 
-    // Initialize 3D Parallax, Media Switcher & Video Controls
+    // Initialize 3D Parallax & Motion Controls
     this.initHeroVisual3D();
   }
 
-  // 3D Parallax & Video Playback Controller for Hero Visual
+  // 3D Parallax & Floating Motion Controller for Hero Visual
   initHeroVisual3D() {
     const stage = document.getElementById('hero3DStage');
     const card = document.getElementById('hero3DCard');
-    const video = document.getElementById('heroVideo');
     if (!stage || !card) return;
 
-    // 1. Optimize video playback with seamless autoplay
-    if (video) {
-      video.muted = true;
-      video.playsInline = true;
-      video.setAttribute('playsinline', '');
-      video.setAttribute('webkit-playsinline', '');
-
-      const playVideo = () => {
-        const promise = video.play();
-        if (promise !== undefined) {
-          promise.catch(() => {
-            // Document interaction fallback
-            const resumeOnInteraction = () => {
-              video.play().catch(() => { });
-              window.removeEventListener('click', resumeOnInteraction);
-              window.removeEventListener('touchstart', resumeOnInteraction);
-            };
-            window.addEventListener('click', resumeOnInteraction, { once: true });
-            window.addEventListener('touchstart', resumeOnInteraction, { once: true });
-          });
-        }
-      };
-
-      if (video.readyState >= 2) {
-        playVideo();
-      } else {
-        video.addEventListener('loadeddata', playVideo, { once: true });
-      }
-
-      // Continuous loop assurance
-      video.addEventListener('ended', () => {
-        video.currentTime = 0;
-        video.play().catch(() => { });
-      });
-    }
-
-    // 2. 3D Tilt & Optical Depth Parallax Engine
+    // 3D Tilt & Optical Depth Parallax Engine
     let rect = card.getBoundingClientRect();
     let isHovering = false;
     let targetX = 0;
@@ -406,7 +369,7 @@ class PortfolioRenderer {
       const mouseX = e.clientX - centerX;
       const mouseY = e.clientY - centerY;
 
-      // Gentle, luxury tilt (+/- 10 degrees max)
+      // Gentle luxury tilt (+/- 10 degrees max)
       targetY = (mouseX / (rect.width / 2)) * 10;
       targetX = -(mouseY / (rect.height / 2)) * 10;
     };
@@ -421,14 +384,14 @@ class PortfolioRenderer {
       isHovering = false;
       targetX = 0;
       targetY = 0;
-      setTimeout(() => {
-        if (!isHovering) card.classList.add('is-floating');
-      }, 350);
     };
 
-    stage.addEventListener('mousemove', onMouseMove, { passive: true });
-    stage.addEventListener('mouseenter', onMouseEnter);
-    stage.addEventListener('mouseleave', onMouseLeave);
+    // Only attach interactive mouse tracking on pointer-capable devices
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      stage.addEventListener('mousemove', onMouseMove, { passive: true });
+      stage.addEventListener('mouseenter', onMouseEnter);
+      stage.addEventListener('mouseleave', onMouseLeave);
+    }
 
     // Smooth Lerp Rendering Loop
     const renderLoop = () => {
@@ -445,6 +408,17 @@ class PortfolioRenderer {
           const py = (-currentY * (depth / 35) * 1.2).toFixed(1);
           layer.style.transform = `translate3d(${px}px, ${py}px, ${depth}px)`;
         });
+      } else if (!isHovering) {
+        // Clear inline transforms when idle so CSS float keyframes can seamlessly run
+        if (card.style.transform) {
+          card.style.transform = '';
+          parallaxLayers.forEach((layer) => {
+            layer.style.transform = '';
+          });
+        }
+        if (!card.classList.contains('is-floating')) {
+          card.classList.add('is-floating');
+        }
       }
 
       rafId = requestAnimationFrame(renderLoop);

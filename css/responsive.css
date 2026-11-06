@@ -32,12 +32,14 @@
 
   /* Hero Section */
   .hero-top-row {
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: var(--space-8);
   }
 
   .hero-headline-block {
     max-width: 100%;
+    align-items: center;
+    text-align: center;
   }
 
   .hero-visual-block {
@@ -45,13 +47,13 @@
     margin-top: var(--space-2);
   }
 
-  .hero-photo-card {
-    width: clamp(260px, 45vw, 330px);
+  .hero-showcase-window {
+    width: clamp(280px, 86vw, 420px);
   }
 
-  .hero-pillars-grid {
+  .hero-bento-metrics {
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
+    gap: var(--space-4);
   }
 
   /* Brands Ribbon */
@@ -134,8 +136,8 @@
     padding-bottom: 40px;
   }
 
-  .hero-pillars-grid {
-    grid-template-columns: 1fr;
+  .hero-bento-metrics {
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
   }
 
@@ -241,18 +243,16 @@
     font-size: 0.95rem;
   }
 
-  .hero-main-title {
-    font-size: 2.85rem;
-    letter-spacing: -0.03em;
+  .hero-name-title {
+    font-size: clamp(2rem, 8.5vw, 2.75rem);
+    letter-spacing: -0.025em;
+    justify-content: center;
+    text-align: center;
   }
 
   .hero-status-badge {
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     padding: 5px 12px;
-  }
-
-  .hero-author-name {
-    font-size: 1.35rem;
   }
 
   .hero-actions-group {
@@ -273,20 +273,13 @@
     justify-content: center;
   }
 
-  .hero-photo-card {
+  .hero-showcase-window {
     width: 100%;
-    max-width: 280px;
+    max-width: 320px;
   }
 
-  .hero-photo-badge-top {
-    right: 0;
-  }
-
-  .hero-photo-badge-bottom {
-    left: 0;
-  }
-
-  .hero-pillars-grid {
+  .hero-bento-metrics {
+    grid-template-columns: 1fr;
     margin-top: var(--space-6);
     padding-top: var(--space-6);
   }
