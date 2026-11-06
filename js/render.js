@@ -109,16 +109,13 @@ class PortfolioRenderer {
         <!-- Left: Identity, Headline, Intro & Dynamic CTAs -->
         <div class="hero-headline-block">
           <!-- 1. Live Opportunity Status Badge -->
+          ${profile.status ? `
           <div class="hero-status-badge" role="status" aria-label="Current availability status">
             <span class="status-pulse-dot" aria-hidden="true"></span>
             <span class="status-badge-text">${profile.status}</span>
-            <span class="status-badge-sub">${profile.statusSubtitle}</span>
-          </div>
+            ${profile.statusSubtitle ? `<span class="status-badge-sub">${profile.statusSubtitle}</span>` : ''}
+          </div>` : ''}
 
-          <!-- 2. Monospace Micro Tag -->
-          <div class="hero-code-tag" aria-hidden="true">
-            <span>//</span> SOFTWARE ARCHITECT &amp; UI ENGINEER
-          </div>
 
           <!-- 3. Primary Grand Name & Job Title -->
           <h1 class="hero-name-title">
@@ -247,15 +244,16 @@ class PortfolioRenderer {
 
     mount.innerHTML = `
       <div class="section-tag">${about.sectionTag}</div>
-      <h2 class="section-title" id="about-title">${about.title}</h2>
+      ${about.title ? `<h2 class="section-title" id="about-title">${about.title}</h2>` : ''}
 
       <div class="about-grid">
         <!-- Biography Story Card -->
         <article class="card about-story-card">
+          ${profile.status ? `
           <div class="status-indicator">
             <span class="status-dot" aria-hidden="true"></span>
             <span class="status-text">${profile.status}</span>
-          </div>
+          </div>` : ''}
 
           <h3 class="about-subheading">
             ${about.lead}
@@ -531,30 +529,29 @@ class PortfolioRenderer {
     const { education } = this.data;
 
     const cardsHtml = education.degrees.map(deg => {
-      const highlightsHtml = deg.highlights.map(h => `
-        <li class="edu-highlight-item">${h}</li>
-      `).join('');
+      const highlightsHtml = (deg.highlights && deg.highlights.length > 0) ? `
+        <ul class="edu-highlights" aria-label="Key highlights">
+          ${deg.highlights.map(h => `<li class="edu-highlight-item">${h}</li>`).join('')}
+        </ul>` : '';
 
-      const tagsHtml = deg.skillsGained.map(s => `<span class="edu-tag">${s}</span>`).join('');
+      const tagsHtml = (deg.skillsGained && deg.skillsGained.length > 0) ? `
+        <div class="edu-tags" aria-label="Core competencies">
+          ${deg.skillsGained.map(s => `<span class="edu-tag">${s}</span>`).join('')}
+        </div>` : '';
 
       return `
         <article class="edu-card">
           <div class="edu-card-top">
             <span class="edu-year-badge">${deg.period}</span>
-            <span class="edu-score-badge">${deg.cgpa}</span>
+            ${deg.cgpa ? `<span class="edu-score-badge">${deg.cgpa}</span>` : ''}
           </div>
 
           <h3 class="edu-degree-title">${deg.degree}</h3>
           <p class="edu-college-name">${deg.institution}</p>
-          <p class="edu-description">${deg.honors}</p>
+          ${deg.honors ? `<p class="edu-description">${deg.honors}</p>` : ''}
 
-          <ul class="edu-highlights" aria-label="Key highlights">
-            ${highlightsHtml}
-          </ul>
-
-          <div class="edu-tags" aria-label="Core competencies">
-            ${tagsHtml}
-          </div>
+          ${highlightsHtml}
+          ${tagsHtml}
         </article>
       `;
     }).join('');

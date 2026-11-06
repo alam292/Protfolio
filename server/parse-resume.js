@@ -415,7 +415,7 @@ function validateAndMergePortfolio(incoming, base = {}) {
   finalData.profile = finalData.profile || {};
   if (!finalData.profile.name) finalData.profile.name = base.profile?.name || 'Developer';
   if (!finalData.profile.title) finalData.profile.title = base.profile?.title || 'Full Stack Developer & UI Engineer';
-  if (!finalData.profile.status) finalData.profile.status = base.profile?.status || 'Available for opportunities';
+  if (finalData.profile.status === undefined) finalData.profile.status = base.profile?.status || '';
   if (!finalData.profile.avatarUrl) finalData.profile.avatarUrl = base.profile?.avatarUrl || 'assets/profile-avatar.svg';
 
   // Stats check

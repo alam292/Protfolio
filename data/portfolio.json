@@ -4,8 +4,8 @@
     "shortName": "MD",
     "title": "Software Developer | Full-Stack Python & React Specialist",
     "heroTagline": "Specializing in developing responsive web applications, robust RESTful APIs, and scalable backend services with React, Next.js, FastAPI, and Django. Turning complex requirements into clean, production-ready code.",
-    "status": "Available for opportunities",
-    "statusSubtitle": "Full-time & High-Impact Software Engineering Roles",
+    "status": "",
+    "statusSubtitle": "",
     "email": "mdmatloobgaya@gmail.com",
     "fallbackEmail": "mdmatloobgaya@gmail.com",
     "portfolioUrl": "https://matloob.dev",
@@ -54,7 +54,7 @@
   ],
   "about": {
     "sectionTag": "WHO I AM",
-    "title": "Crafting Scalable Backends and Fluid User Interfaces with Precision",
+    "title": "",
     "lead": "I am a Software Developer with hands-on experience bridging responsive frontend development with robust, high-performance backend systems using Python, JavaScript, React, Next.js, and relational databases.",
     "pillars": [
       {
@@ -371,11 +371,8 @@
         "period": "2020 — 2024",
         "status": "Graduated",
         "cgpa": "7.69 / 10.0 CGPA",
-        "honors": "First Class Honors",
-        "highlights": [
-          "Core Studies: Microprocessors & Microcontrollers, Digital Signal Processing, Object-Oriented Programming, Computational Logic, and Communication Systems.",
-          "Applied software engineering principles to bridge hardware-level protocols with modern web application frameworks and database systems."
-        ],
+        "honors": "",
+        "highlights": [],
         "skillsGained": [
           "Object-Oriented Programming",
           "Data Structures & Algorithms",
@@ -391,11 +388,8 @@
         "period": "2018 — 2020",
         "status": "First Division",
         "cgpa": "First Division Honors",
-        "honors": "First Division Distinction in Science Stream",
-        "highlights": [
-          "Focused Curriculum: Mathematics, Physics, and Chemistry.",
-          "Built a rigorous mathematical and logical foundation that fueled software engineering and algorithmic development."
-        ],
+        "honors": "",
+        "highlights": [],
         "skillsGained": [
           "Mathematics",
           "Physics",
