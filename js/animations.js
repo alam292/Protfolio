@@ -215,28 +215,73 @@ class AnimationsController {
   }
 
   initProjectsSection() {
-    gsap.from('.behind-header-left, .behind-header-right', {
-      scrollTrigger: {
-        trigger: '#projects .behind-header',
-        start: 'top 80%'
-      },
-      y: 45,
-      opacity: 0,
-      stagger: 0.16,
-      duration: 1.1,
-      ease: 'power3.out'
-    });
+    if (!this.hasGSAP || this.prefersReducedMotion) return;
 
-    gsap.from('.project-card, .showcase-card', {
+    const pipeline = document.querySelector('#projects .projects-pipeline');
+    if (!pipeline) return;
+
+    // 1. Central vector spine draw animation
+    gsap.fromTo(
+      '#projects .projects-edge-spine',
+      { scaleY: 0, transformOrigin: 'top center' },
+      {
+        scaleY: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#projects .projects-pipeline',
+          start: 'top 82%'
+        }
+      }
+    );
+
+    // 2. Vertex anchors pop in with bounce
+    gsap.from('#projects .project-node-circle', {
       scrollTrigger: {
-        trigger: '#projects .projects-grid, #projects .showcase-grid',
+        trigger: '#projects .projects-pipeline',
         start: 'top 82%'
       },
-      y: 70,
+      scale: 0,
       opacity: 0,
-      stagger: 0.18,
-      duration: 1.2,
-      ease: 'power3.out'
+      stagger: 0.2,
+      duration: 0.7,
+      ease: 'back.out(2)'
+    });
+
+    // 3. Bilateral alternating slide reveals for media and content
+    const entries = gsap.utils.toArray('#projects .project-entry');
+    entries.forEach((entry) => {
+      const media = entry.querySelector('.project-media-col');
+      const content = entry.querySelector('.project-content-col');
+      const isLeftMedia = entry.classList.contains('project-entry--left-media');
+
+      if (media) {
+        gsap.from(media, {
+          scrollTrigger: {
+            trigger: entry,
+            start: 'top 86%',
+            toggleActions: 'play none none reverse'
+          },
+          x: isLeftMedia ? -36 : 36,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out'
+        });
+      }
+
+      if (content) {
+        gsap.from(content, {
+          scrollTrigger: {
+            trigger: entry,
+            start: 'top 86%',
+            toggleActions: 'play none none reverse'
+          },
+          x: isLeftMedia ? 36 : -36,
+          opacity: 0,
+          duration: 0.9,
+          ease: 'power3.out'
+        });
+      }
     });
   }
 
@@ -312,18 +357,6 @@ class AnimationsController {
     // 4. Metric plot bar fills
     gsap.fromTo(
       '#education .graph-metric-bar',
-      { scaleX: 0, transformOrigin: 'left center' },
-      {
-        scaleX: 1,
-        duration: 1.2,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: '#education .academic-graph',
-          start: 'top 82%'
-        }
-      }
-    );
-  }
       { scaleX: 0, transformOrigin: 'left center' },
       {
         scaleX: 1,

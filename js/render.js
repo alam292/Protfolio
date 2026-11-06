@@ -86,6 +86,114 @@ class PortfolioRenderer {
     return icons[type] || icons.code;
   }
 
+  // Real Technology Icon & Brand Resolver for Project Tech Chips
+  getProjectTechIcon(techName) {
+    if (!techName) {
+      return {
+        brandColor: '#ff5722',
+        glowColor: 'rgba(255, 87, 34, 0.45)',
+        svg: `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`
+      };
+    }
+
+    // 1. Check if global window.SkillsShowcase provides the official brand SVG
+    if (typeof window !== 'undefined' && window.SkillsShowcase && typeof window.SkillsShowcase.getSkillIconEntry === 'function') {
+      const entry = window.SkillsShowcase.getSkillIconEntry(null, techName);
+      if (entry && entry.svg) return entry;
+    }
+
+    const clean = techName.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    // 2. Comprehensive built-in SVG registry for guaranteed visual fidelity
+    const registry = {
+      react: {
+        brandColor: '#61DAFB',
+        glowColor: 'rgba(97, 218, 251, 0.55)',
+        svg: `<svg viewBox="-11.5 -10.23174 23 20.46348" width="100%" height="100%" aria-hidden="true"><circle cx="0" cy="0" r="2.05" fill="#61DAFB"/><g stroke="#61DAFB" stroke-width="1" fill="none"><ellipse rx="11" ry="4.2"/><ellipse rx="11" ry="4.2" transform="rotate(60)"/><ellipse rx="11" ry="4.2" transform="rotate(120)"/></g></svg>`
+      },
+      fastapi: {
+        brandColor: '#05998B',
+        glowColor: 'rgba(5, 153, 139, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><circle cx="64" cy="64" r="62" fill="#05998B"/><path fill="#FFFFFF" d="M72 16L32 72h28l-8 40 44-60H68l12-36h-8z"/></svg>`
+      },
+      postgresql: {
+        brandColor: '#336791',
+        glowColor: 'rgba(51, 103, 145, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#336791" d="M64 8.5C33.4 8.5 8.5 33.4 8.5 64s24.9 55.5 55.5 55.5S119.5 94.6 119.5 64 94.6 8.5 64 8.5zm27.8 71.9c-4.1 6.5-11.4 11.2-19.8 12.8 4.2-7.2 4.6-15.6 1.1-23.1-3.6-7.8-10.6-13.4-19-15.5-3.5-.9-7.2-1.2-10.8-.9 1.1-6.1 4.5-11.4 9.6-14.8 6.5-4.3 14.6-5.3 22.3-2.7 7.7 2.6 13.9 8.5 17 16.2 3.1 7.7 2.8 16.4-.4 28zm-37.1-3.2c3.5 7.5 3.1 15.9-1.1 23.1-7.9-1.5-14.9-5.9-19-12-3.8-5.7-4.6-12.8-2.3-19.6 2.3-6.8 7.5-12.1 14.2-14.7.7 7.7 4.1 15.7 8.2 23.2z"/></svg>`
+      },
+      sqlalchemy: {
+        brandColor: '#D71F00',
+        glowColor: 'rgba(215, 31, 0, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#D71F00" d="M48 20h32v12h-6v16.8l28.6 44.5c4.8 7.4.4 18.7-8.6 18.7H34c-9 0-13.4-11.3-8.6-18.7L54 48.8V32h-6V20z"/><path fill="#FFFFFF" d="M42 96h44c3.3 0 5-3.8 2.8-6.4L74 66H54L39.2 89.6c-2.2 2.6-.5 6.4 2.8 6.4z"/><circle cx="64" cy="82" r="6" fill="#D71F00"/><circle cx="54" cy="74" r="4" fill="#D71F00"/><circle cx="72" cy="76" r="3.5" fill="#D71F00"/></svg>`
+      },
+      restapi: {
+        brandColor: '#6366F1',
+        glowColor: 'rgba(99, 102, 241, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><circle cx="64" cy="64" r="56" fill="none" stroke="#6366F1" stroke-width="7" stroke-dasharray="8 6"/><rect x="22" y="44" width="84" height="40" rx="10" fill="#6366F1"/><text x="64" y="69" font-family="monospace" font-size="22" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">API</text><circle cx="28" cy="64" r="4.5" fill="#A5B4FC"/><circle cx="100" cy="64" r="4.5" fill="#A5B4FC"/><path d="M64 16v18M64 94v18M16 64h18M94 64h18" stroke="#6366F1" stroke-width="5" stroke-linecap="round"/></svg>`
+      },
+      tailwindcss: {
+        brandColor: '#38BDF8',
+        glowColor: 'rgba(56, 189, 248, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#38BDF8" d="M64 25.6c-21.3 0-34.7 10.7-40 32 8-10.7 17.3-14.7 28-12 6.1 1.5 10.4 5.9 15.3 10.8C75.2 64.3 84.4 73.6 104 73.6c21.3 0 34.7-10.7 40-32-8 10.7-17.3 14.7-28 12-6.1-1.5-10.4-5.9-15.3-10.8C92.8 34.9 83.6 25.6 64 25.6zm-40 48c-21.3 0-34.7 10.7-40 32 8-10.7 17.3-14.7 28-12 6.1 1.5 10.4 5.9 15.3 10.8C35.2 112.3 44.4 121.6 64 121.6c21.3 0 34.7-10.7 40-32-8 10.7-17.3 14.7-28 12-6.1-1.5-10.4-5.9-15.3-10.8C52.8 82.9 43.6 73.6 24 73.6z"/></svg>`
+      },
+      python: {
+        brandColor: '#3776AB',
+        glowColor: 'rgba(55, 118, 171, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#3776AB" d="M63.7 3.5c-15.5 0-25.2 6.8-25.2 20.3v10.5h25.7v3.5H23.5C9.9 37.8 0 46.8 0 63.6s8.6 25.1 22.2 25.1h8.5v-12c0-15.7 13.4-25.1 28.5-25.1h25.4V38.7c0-14.7-12.7-25.2-27.2-25.2zm-13.8 8.1c3.1 0 5.6 2.5 5.6 5.6s-2.5 5.6-5.6 5.6-5.6-2.5-5.6-5.6 2.5-5.6 5.6-5.6z"/><path fill="#FFD438" d="M64.3 124.5c15.5 0 25.2-6.8 25.2-20.3V93.7H63.8v-3.5h40.7c13.6 0 23.5-9 23.5-25.8s-8.6-25.1-22.2-25.1h-8.5v12c0 15.7-13.4 25.1-28.5 25.1H43.9v12.9c0 14.7 12.7 25.2 27.2 25.2zm13.8-8.1c-3.1 0-5.6-2.5-5.6-5.6s2.5-5.6 5.6-5.6 5.6 2.5 5.6 5.6-2.5 5.6-5.6 5.6z"/></svg>`
+      },
+      bootstrap: {
+        brandColor: '#7952B3',
+        glowColor: 'rgba(121, 82, 179, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#7952B3" d="M12.9 17.2C10.7 20 9.5 23.9 9.5 28.9v70.2c0 5 1.2 8.9 3.4 11.7 2.2 2.8 5.4 4.2 9.5 4.2h83.2c4.1 0 7.3-1.4 9.5-4.2 2.2-2.8 3.4-6.7 3.4-11.7V28.9c0-5-1.2-8.9-3.4-11.7-2.2-2.8-5.4-4.2-9.5-4.2H22.4c-4.1 0-7.3 1.4-9.5 4.2z"/><path fill="#FFFFFF" d="M42.3 35.8h25.4c6.7 0 11.9 1.4 15.5 4.2 3.6 2.8 5.5 7.1 5.5 12.8 0 3.7-.9 6.8-2.8 9.2-1.9 2.4-4.5 4.1-8 5 4.6.9 8.1 2.8 10.4 5.7 2.3 2.9 3.5 6.7 3.5 11.5 0 6.4-2.1 11.3-6.2 14.7-4.1 3.4-10 5.1-17.5 5.1H42.3V35.8zm14.3 12.2v14.4h10.4c3.2 0 5.6-.6 7.2-1.9 1.6-1.3 2.4-3.2 2.4-5.7 0-2.3-.8-4.1-2.4-5.3-1.6-1.2-4-1.8-7.2-1.8H56.6zm0 25.5v16.7h11.8c3.5 0 6.2-.7 8-2.1 1.8-1.4 2.7-3.6 2.7-6.5 0-2.8-.9-4.9-2.7-6.2-1.8-1.3-4.5-1.9-8-1.9H56.6z"/></svg>`
+      },
+      javascript: {
+        brandColor: '#F7DF1E',
+        glowColor: 'rgba(247, 223, 30, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="18" fill="#F7DF1E"/><path fill="#000000" d="M67.3 102.7c3.1 1.9 7 3.2 10.9 3.2 5.9 0 9.8-2.9 9.8-7.3 0-4.8-4-6.6-10.7-9.5-8.5-3.6-14-8.3-14-17.4 0-8.9 6.8-15.6 17.5-15.6 4.9 0 8.7 1.1 11.7 2.7l-3.3 7.9c-2.4-1.4-5.3-2.3-8.6-2.3-5.2 0-8.5 2.8-8.5 6.6 0 4.3 3.6 6.1 9.9 8.8 9.3 4 14.9 8.5 14.9 18.2 0 10.2-8.1 16.3-19.7 16.3-5.7 0-10.6-1.5-13.6-3.3l3.7-8.3zm-39.7.5c2.7 1.7 6.3 2.7 10 2.7 6.1 0 10.1-3 10.1-11.4V56.6h9.1v37.6c0 14-8 19.9-19.9 19.9-5.4 0-10.4-1.3-13.2-3.1l3.9-7.8z"/></svg>`
+      },
+      html5: {
+        brandColor: '#E34F26',
+        glowColor: 'rgba(227, 79, 38, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#E34F26" d="M19.1 113.3L8 0h112l-11.1 113.3L64 128l-44.9-14.7z"/><path fill="#EF652A" d="M64 117.8l36.7-12 9.2-94.4H64v106.4z"/><path fill="#EBEBEB" d="M64 53.6H46.1l-1.3-14.3H64V25H30.8l3.7 42.9H64V53.6zm0 35.7l-.2.1-15.4-4.2-1-11H33.1l2 22.2L64 104.5v-15.2z"/><path fill="#FFFFFF" d="M64 53.6h17.9l-1.7 19.2-16.2 4.4v15.2l28.8-8 3.8-45.1H64V25h33.2l-.3 3.6-3.4 39.3H64v-14.3z"/></svg>`
+      },
+      css3: {
+        brandColor: '#1572B6',
+        glowColor: 'rgba(21, 114, 182, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#1572B6" d="M19.1 113.3L8 0h112l-11.1 113.3L64 128l-44.9-14.7z"/><path fill="#33A9DC" d="M64 117.8l36.7-12 9.2-94.4H64v106.4z"/><path fill="#EBEBEB" d="M64 53.6H46.1l-1.3-14.3H64V25H30.8l3.7 42.9H64V53.6zm0 35.7l-.2.1-15.4-4.2-1-11H33.1l2 22.2L64 104.5v-15.2z"/><path fill="#FFFFFF" d="M64 67.9h16.6l-1.6 17-15 4.1v15.3l27.7-7.7.3-3.6 2.3-25.1.3-3.6.3-3.6H64v-14.3h33.3l-.3 3.6-3.4 39.3H64V67.9zm0-42.9h33.2l.3-3.6.8-9.4H64V25z"/></svg>`
+      },
+      nodejs: {
+        brandColor: '#339933',
+        glowColor: 'rgba(51, 153, 51, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#339933" d="M64 4.5l55 31.7v63.6L64 123.5 9 99.8V36.2L64 4.5z"/><path fill="#FFFFFF" d="M64 32.5c-15.2 0-23.7 8.5-23.7 18.9 0 17.5 27.2 12.7 27.2 21.6 0 3.7-3.1 5.6-7.8 5.6-5.8 0-11.5-2.8-15.6-6.6l-5.6 7.6c5.5 5.2 13.3 8.3 21.2 8.3 16.4 0 24.3-8.8 24.3-19.5 0-18.4-27.3-13.3-27.3-21.8 0-3.3 2.7-4.9 7.1-4.9 4.8 0 9.7 2.1 13.5 5.2l5.2-7.8c-5-4.2-11.8-6.6-18.5-6.6z"/></svg>`
+      },
+      docker: {
+        brandColor: '#2496ED',
+        glowColor: 'rgba(36, 150, 237, 0.55)',
+        svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><path fill="#2496ED" d="M124.6 57.5c-2.4-1.7-7.7-2.6-13.8-.7-1.1-6.1-5-11.4-10.8-14.7l-4.1 3.8c4.3 3.9 7 9.5 7.4 15.6-2.4.9-5.1 1.7-8.1 2.3-4.1.8-9.4 1.1-15.2 1.1H12.9c-2.4 0-4.6.6-6.6 1.7-3.9 2.2-6.3 6.3-6.3 10.8 0 18.7 11.2 33.4 29.2 40.5 13.4 5.3 29.2 6.6 44.8 3.8 20.3-3.7 37.6-15.7 45.4-31.8 7.3-1.6 14.1-5.7 18.6-11.7 1.8-2.4 1.4-6.3-3.4-8.8z"/></svg>`
+      }
+    };
+
+    if (clean.includes('react')) return registry.react;
+    if (clean.includes('fastapi')) return registry.fastapi;
+    if (clean.includes('postgres')) return registry.postgresql;
+    if (clean.includes('sqlalch')) return registry.sqlalchemy;
+    if (clean.includes('api') || clean.includes('rest')) return registry.restapi;
+    if (clean.includes('tailwind')) return registry.tailwindcss;
+    if (clean.includes('python')) return registry.python;
+    if (clean.includes('bootstrap')) return registry.bootstrap;
+    if (clean.includes('script') || clean.includes('js')) return registry.javascript;
+    if (clean.includes('html')) return registry.html5;
+    if (clean.includes('css')) return registry.css3;
+    if (clean.includes('node')) return registry.nodejs;
+    if (clean.includes('docker')) return registry.docker;
+
+    return {
+      brandColor: '#ff5722',
+      glowColor: 'rgba(255, 87, 34, 0.45)',
+      svg: `<svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`
+    };
+  }
+
   // Helper to render name with character-by-character animation spans
   renderAnimatedName(name) {
     if (!name) return 'MD MATLOOB ALAM';
@@ -461,136 +569,160 @@ class PortfolioRenderer {
     }
   }
 
-  // 4. Featured Projects Section
+  // 4. Featured Projects Section (Bilateral Engineering Pipeline Form)
   renderProjects() {
     const mount = document.getElementById('projectsMount');
     if (!mount) return;
 
     const { projects } = this.data;
+    if (!projects || !Array.isArray(projects.items)) return;
 
-    const cardsHtml = projects.items.map(proj => {
-      const techPillsHtml = proj.techStack.map(t => `<span class="tech-pill">${t}</span>`).join('');
+    const entriesHtml = projects.items.map((proj, index) => {
+      const isEven = index % 2 === 0;
+      const sideClass = isEven ? 'project-entry--left-media' : 'project-entry--right-media';
+      const hasValidDemo = proj.hasLiveDemo !== false && Boolean(proj.liveDemoUrl) && proj.liveDemoUrl.trim() !== '' && proj.liveDemoUrl !== '#';
+      const primaryLink = hasValidDemo ? proj.liveDemoUrl : proj.githubUrl;
+      const demoHoverLabel = hasValidDemo ? 'Explore Live System' : 'View Source Code';
 
-      return `
-        <article class="project-card">
-          <!-- Browser Mockup Chrome Header -->
-          <div class="project-browser-bar" aria-hidden="true">
-            <div class="project-traffic-lights">
-              <span class="traffic-light traffic-red"></span>
-              <span class="traffic-light traffic-yellow"></span>
-              <span class="traffic-light traffic-green"></span>
-            </div>
-            <div class="project-address-bar">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="padlock-icon">
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-              </svg>
-              <span class="project-url">${proj.liveDemoUrl.replace('https://', '')}</span>
-            </div>
-            <span class="project-status-pill">
-              <span class="status-pulse-dot" style="width: 6px; height: 6px;"></span>
+      // Tech stack chips with authentic brand SVGs & custom brand glow
+      const techChipsHtml = (proj.techStack || []).map(t => {
+        const iconEntry = this.getProjectTechIcon(t);
+        return `
+          <div class="project-tech-chip" style="--brand-color: ${iconEntry.brandColor}; --glow-color: ${iconEntry.glowColor};" title="${t}">
+            <span class="project-tech-chip-icon" aria-hidden="true">${iconEntry.svg}</span>
+            <span class="project-tech-chip-name">${t}</span>
+          </div>
+        `;
+      }).join('');
+
+      // Media column with large preview, ambient glow, and hover interaction
+      const mediaColHtml = `
+        <div class="project-media-col">
+          <div class="project-preview-stage">
+            <div class="project-preview-glow" aria-hidden="true"></div>
+            <a href="${primaryLink}" target="_blank" rel="noopener noreferrer" class="project-preview-link" aria-label="Explore ${proj.title}">
+              <div class="project-preview-frame">
+                <img 
+                  src="${proj.image}" 
+                  alt="${proj.title} architecture and interface preview" 
+                  class="project-preview-img" 
+                  loading="lazy" 
+                  width="800" 
+                  height="500"
+                  onerror="this.onerror=null; this.src='assets/project-cloudscale.svg';"
+                />
+                <div class="project-preview-cinematic-overlay" aria-hidden="true"></div>
+                <div class="project-preview-hover-cta" aria-hidden="true">
+                  <span class="preview-cta-icon">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                  <span>${demoHoverLabel}</span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      `;
+
+      // Content column with clean typography, animated title, metrics, tech badges & buttons
+      const contentColHtml = `
+        <div class="project-content-col">
+          <div class="project-coord-bar">
+            <span class="project-node-id">${proj.number || String(index + 1).padStart(2, '0')}</span>
+            <span class="project-coord-sep" aria-hidden="true">&middot;</span>
+            <span class="project-category-tag">${proj.category}</span>
+            <span class="project-status-indicator">
+              <span class="status-pulse-dot" style="width: 6px; height: 6px;" aria-hidden="true"></span>
               <span>Production</span>
             </span>
           </div>
 
-          <!-- Visual Project Media Viewport -->
-          <div class="project-viewport">
-            <img 
-              src="${proj.image}" 
-              alt="${proj.title} architecture and dashboard mockup" 
-              class="project-visual-media" 
-              loading="lazy" 
-              width="600" 
-              height="338"
-              onerror="this.onerror=null; this.src='assets/project-cloudscale.svg';"
-            />
-            <div class="project-glow-layer" aria-hidden="true"></div>
+          <h3 class="project-title">
+            <a href="${primaryLink}" target="_blank" rel="noopener noreferrer" class="project-title-link">
+              <span class="project-title-text">${proj.title}</span>
+              <svg class="project-title-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </a>
+          </h3>
+
+          <p class="project-desc">${proj.description}</p>
+
+          ${proj.metrics ? `
+          <div class="project-metric-row" aria-label="Key Impact: ${proj.metrics}">
+            <span class="project-metric-bullet" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </span>
+            <div class="project-metric-content">
+              <span class="project-metric-label">KEY IMPACT:</span>
+              <span class="project-metric-text">${proj.metrics}</span>
+            </div>
+          </div>` : ''}
+
+          <div class="project-tech-row" aria-label="Technologies used">
+            <span class="project-tech-header">STACK:</span>
+            <div class="project-tech-list">
+              ${techChipsHtml}
+            </div>
           </div>
 
-          <!-- Project Description & Metadata -->
-          <div class="project-content">
-            <div class="project-eyebrow">
-              <span class="project-num">${proj.number}</span>
-              <span class="project-badge">${proj.category}</span>
-            </div>
-
-            <h3 class="project-heading">${proj.title}</h3>
-            <p class="project-desc">${proj.description}</p>
-
-            <div class="project-impact-box">
-              <span class="impact-icon" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                  <polyline points="17 6 23 6 23 12"></polyline>
+          <div class="project-actions-row">
+            ${hasValidDemo ? `
+            <a href="${proj.liveDemoUrl}" target="_blank" rel="noopener noreferrer" class="btn-touch btn-touch-orange project-btn-demo" aria-label="Launch live demo of ${proj.title}">
+              <span>Live Demo</span>
+              <span class="btn-icon-circle" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
                 </svg>
               </span>
-              <span class="impact-text">${proj.metrics}</span>
-            </div>
+            </a>` : ''}
 
-            <div class="project-tech-pills" aria-label="Technologies used">
-              ${techPillsHtml}
-            </div>
-
-            <!-- Footer Action Buttons -->
-            <div class="project-footer-actions">
-              <a 
-                href="${proj.githubUrl}" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="btn-project-code" 
-                aria-label="View source code of ${proj.title} on GitHub"
-              >
-                ${this.getIconSvg('github')}
-                <span>Source Code</span>
-              </a>
-
-              <a 
-                href="${proj.liveDemoUrl}" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="btn-project-demo" 
-                aria-label="Launch live demo of ${proj.title}"
-              >
-                <span>Live Demo</span>
-                <span class="btn-icon-circle" aria-hidden="true">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </span>
-              </a>
-            </div>
+            <a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-project-code" aria-label="View source code of ${proj.title} on GitHub">
+              <span class="project-code-icon" aria-hidden="true">${this.getIconSvg('github')}</span>
+              <span>Source Code</span>
+            </a>
           </div>
+        </div>
+      `;
+
+      return `
+        <article class="project-entry ${sideClass}" data-project-idx="${index}">
+          <div class="project-vertex" aria-hidden="true">
+            <div class="project-node-circle">
+              <span class="project-node-core"></span>
+              <span class="project-node-ping"></span>
+            </div>
+            <div class="project-stem-connector"></div>
+          </div>
+          ${isEven ? mediaColHtml + contentColHtml : contentColHtml + mediaColHtml}
         </article>
       `;
     }).join('');
 
     mount.innerHTML = `
-      <div class="behind-header">
-        <div class="behind-header-left">
-          <h2 class="behind-tag" id="projects-title">${projects.sectionTag}</h2>
-        </div>
-        <div class="behind-header-right">
-          <p class="behind-lead-text">
-            ${projects.subtitle}
-          </p>
-          <div class="behind-action-row">
-            <span class="behind-action-subtext">Verified production code &bull; 100% genuine engineering impact</span>
-            <a href="https://github.com/mdmatloob" target="_blank" rel="noopener noreferrer" class="btn-touch btn-touch-orange">
-              <span>View GitHub</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </span>
-            </a>
+      <h2 class="section-tag" id="projects-title">${projects.sectionTag || 'FEATURED WORK'}</h2>
+      ${projects.subtitle ? `<p class="section-subtitle">${projects.subtitle}</p>` : ''}
+
+      <div class="projects-pipeline-wrap">
+        <div class="projects-pipeline" role="region" aria-label="Featured Engineering Projects Pipeline">
+          <div class="projects-sys-header" aria-hidden="true">
+            <span class="projects-sys-tag">ENGINEERING_PIPELINE_PROJECTS</span>
+            <span class="projects-sys-coords">SYS_AXIS: PRODUCTION_BUILDS (2024 — 2026) <span class="projects-sys-sep">&bull;</span> VERIFIED_CODEBASES</span>
+          </div>
+
+          <div class="projects-network">
+            <div class="projects-edge-spine" aria-hidden="true"></div>
+            ${entriesHtml}
           </div>
         </div>
-      </div>
-
-      <div class="projects-grid">
-        ${cardsHtml}
       </div>
     `;
   }
