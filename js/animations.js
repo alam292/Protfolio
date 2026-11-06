@@ -84,20 +84,20 @@ class AnimationsController {
         end: 'bottom top',
         scrub: true
       },
-      y: -100,
-      opacity: 0.2,
+      y: -60,
+      opacity: 0.35,
       ease: 'none'
     });
 
     gsap.to('.hero-bento-metrics', {
       scrollTrigger: {
         trigger: '#hero',
-        start: 'center top',
+        start: '25% top',
         end: 'bottom top',
         scrub: true
       },
-      y: -70,
-      opacity: 0,
+      y: -40,
+      opacity: 0.2,
       ease: 'none'
     });
   }

@@ -127,7 +127,11 @@
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              border-color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
   outline: none;
 }
 
@@ -137,6 +141,10 @@
   color: var(--accent-orange);
   transform: translateY(-2px);
   box-shadow: 0 0 12px var(--accent-orange-glow);
+}
+
+.theme-toggle-btn:active {
+  transform: translateY(0) scale(0.92);
 }
 
 .theme-toggle-btn .theme-icon {

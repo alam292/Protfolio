@@ -80,6 +80,10 @@
   box-shadow: 0 8px 24px var(--accent-orange-glow);
 }
 
+.back-to-top:active {
+  transform: translateY(0) scale(0.94);
+}
+
 /* Toast Notification Component */
 .toast-notification {
   position: fixed;

@@ -8,19 +8,22 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-3);
-  background: #ffffff;
-  color: #0c0e12;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   padding: 8px 10px 8px 22px;
   border-radius: var(--radius-full);
   text-decoration: none;
-  border: none;
   cursor: pointer;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   transition: transform var(--transition-normal),
               box-shadow var(--transition-normal),
               background-color var(--transition-fast),
+              border-color var(--transition-fast),
               color var(--transition-fast);
   white-space: nowrap;
   user-select: none;
@@ -28,11 +31,15 @@
 
 .btn-touch:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 255, 255, 0.15);
 }
 
 .btn-touch:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
+  transition-duration: 0.08s;
 }
 
 /* Orange Accent Variant */

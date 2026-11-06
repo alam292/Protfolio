@@ -42,10 +42,10 @@
 .location-plan-card,
 .contact-form-card {
   position: relative;
-  background: rgba(14, 20, 30, 0.42); /* Lightweight transparency */
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 15, 24, 0.18); /* Ultra-clean transparency */
+  backdrop-filter: blur(20px) saturate(170%);
+  -webkit-backdrop-filter: blur(20px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 16px;
   box-shadow: 0 10px 28px -8px rgba(0, 0, 0, 0.35),
               inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -62,7 +62,7 @@
 .contact-channel-card:hover,
 .location-plan-card:hover,
 .contact-form-card:hover {
-  background: rgba(18, 25, 38, 0.55);
+  background: rgba(18, 25, 38, 0.28);
   border-color: rgba(255, 87, 34, 0.38);
   transform: perspective(1000px) translateY(-3px) translateZ(4px);
   box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5),
@@ -88,9 +88,9 @@
   padding: clamp(24px, 3.2vw, 36px) clamp(22px, 2.8vw, 32px);
   border-radius: 20px;
   overflow: hidden;
-  background: rgba(13, 19, 29, 0.52);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  background: rgba(10, 15, 24, 0.22);
+  backdrop-filter: blur(24px) saturate(170%);
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45),
               inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -101,7 +101,7 @@
 }
 
 .contact-info-card:hover {
-  background: rgba(17, 24, 37, 0.65);
+  background: rgba(17, 24, 37, 0.34);
   border-color: rgba(255, 87, 34, 0.4);
   transform: perspective(1000px) translateY(-3px) translateZ(4px);
   box-shadow: 0 20px 42px -10px rgba(0, 0, 0, 0.55),
@@ -248,13 +248,20 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--text-secondary, #94a3b8);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform var(--duration-fast) var(--ease-spring),
+              background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
 }
 
 .info-copy-email-btn:hover {
   background: rgba(255, 87, 34, 0.14);
   border-color: rgba(255, 87, 34, 0.4);
   color: #ffffff;
+}
+
+.info-copy-email-btn:active {
+  transform: scale(0.95);
 }
 
 .info-copy-email-btn.copied {
@@ -551,7 +558,8 @@
   margin-top: 1px;
   opacity: 0;
   transform: translateY(-2px);
-  transition: all var(--transition-fast);
+  transition: opacity var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out);
 }
 
 .field-error-msg.visible {
@@ -571,12 +579,18 @@
   margin-top: 2px;
   background: var(--accent-orange);
   box-shadow: 0 4px 16px rgba(255, 87, 34, 0.3);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              box-shadow var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out);
 }
 
 .animated-submit:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px var(--accent-orange-glow);
+}
+
+.animated-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
 }
 
 .submit-icon-circle {

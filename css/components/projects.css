@@ -185,7 +185,8 @@
   height: 6px;
   border-radius: 50%;
   background: var(--accent-orange);
-  transition: background-color var(--duration-fast), transform var(--duration-fast);
+  transition: background-color var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-spring);
 }
 
 .project-node-ping {
@@ -216,7 +217,9 @@
   height: 2px;
   background: linear-gradient(90deg, rgba(255, 87, 34, 0.3), var(--accent-orange), rgba(255, 87, 34, 0.3));
   pointer-events: none;
-  transition: all var(--duration-normal) var(--ease-out);
+  transition: background var(--duration-normal) var(--ease-out),
+              filter var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .project-entry:hover .project-node-circle {
@@ -644,7 +647,11 @@
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all var(--duration-normal) var(--ease-out);
+  transition: transform var(--duration-normal) var(--ease-out),
+              background var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
 }
 
 .project-code-icon {
@@ -652,7 +659,7 @@
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  transition: transform var(--duration-fast);
+  transition: transform var(--duration-fast) var(--ease-spring);
 }
 
 .btn-project-code:hover {

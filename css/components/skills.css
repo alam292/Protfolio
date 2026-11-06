@@ -145,9 +145,17 @@
   font-weight: 500;
   color: var(--text-secondary, #94a3b8);
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
   user-select: none;
   white-space: nowrap;
+}
+
+.gemini-filter-pill:active {
+  transform: translateY(0) scale(0.96);
 }
 
 .gemini-filter-dot {

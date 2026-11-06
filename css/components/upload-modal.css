@@ -114,7 +114,9 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-secondary, #9ea3b0);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform var(--duration-fast) var(--ease-spring),
+              background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
   flex-shrink: 0;
 }
 
@@ -135,7 +137,10 @@
   text-align: center;
   background: rgba(255, 255, 255, 0.02);
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out),
+              background-color var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
   outline: none;
 }
 
@@ -359,7 +364,9 @@
   font-size: 0.88rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out);
 }
 
 .btn-upload-cancel:hover {
@@ -380,12 +387,18 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 4px 18px var(--accent-orange-glow, rgba(255, 87, 34, 0.35));
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              box-shadow var(--duration-fast) var(--ease-out),
+              opacity var(--duration-fast) var(--ease-out);
 }
 
 .btn-upload-submit:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(255, 87, 34, 0.5);
+}
+
+.btn-upload-submit:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
 }
 
 .btn-upload-submit:disabled {
@@ -422,13 +435,21 @@
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform var(--duration-fast) var(--ease-spring),
+              background-color var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .btn-nav-upload:hover {
   background: rgba(255, 87, 34, 0.22);
   color: #ffffff;
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px var(--accent-orange-glow);
+}
+
+.btn-nav-upload:active {
+  transform: translateY(0) scale(0.96);
 }
 
 /* ==========================================================================

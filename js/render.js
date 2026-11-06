@@ -209,6 +209,18 @@ class PortfolioRenderer {
     }).join('<span class="hero-char-space" aria-hidden="true">&nbsp;</span>');
   }
 
+  // Helper to render role subheading with accent styling
+  renderSubheading(title) {
+    if (!title) {
+      return `<span>Full Stack Developer</span> <span style="color: #71717a;">&amp;</span> <span class="hero-subheading-accent">UI Engineer</span>`;
+    }
+    if (title.includes('|')) {
+      const parts = title.split('|').map(s => s.trim());
+      return `<span>${parts[0]}</span> <span style="color: #71717a;">·</span> <span class="hero-subheading-accent">${parts.slice(1).join(' · ')}</span>`;
+    }
+    return `<span>${title}</span>`;
+  }
+
   // 1. Hero / Home Section (Vercel / Linear Ultra-Clean Style)
   renderHero() {
     const mount = document.getElementById('heroMount');
@@ -245,9 +257,7 @@ class PortfolioRenderer {
           </h1>
 
           <div class="hero-subheading">
-            <span>Full Stack Developer</span>
-            <span style="color: #71717a;">&amp;</span>
-            <span class="hero-subheading-accent">UI Engineer</span>
+            ${this.renderSubheading(profile.title)}
           </div>
 
           <!-- 3. Short Introduction -->
@@ -348,10 +358,10 @@ class PortfolioRenderer {
     // 3D Tilt & Optical Depth Parallax Engine
     let rect = card.getBoundingClientRect();
     let isHovering = false;
-    let targetX = 0;
-    let targetY = 0;
-    let currentX = 0;
-    let currentY = 0;
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
     let rafId = null;
 
     const parallaxLayers = card.querySelectorAll('[data-depth]');
@@ -369,9 +379,9 @@ class PortfolioRenderer {
       const mouseX = e.clientX - centerX;
       const mouseY = e.clientY - centerY;
 
-      // Gentle luxury tilt (+/- 10 degrees max)
-      targetY = (mouseX / (rect.width / 2)) * 10;
-      targetX = -(mouseY / (rect.height / 2)) * 10;
+      // Ergonomic 3D tilt: mouse horizontal shifts rotateY, mouse vertical shifts rotateX
+      targetRotateY = (mouseX / (rect.width / 2)) * 8;
+      targetRotateX = -(mouseY / (rect.height / 2)) * 8;
     };
 
     const onMouseEnter = () => {
@@ -382,8 +392,8 @@ class PortfolioRenderer {
 
     const onMouseLeave = () => {
       isHovering = false;
-      targetX = 0;
-      targetY = 0;
+      targetRotateX = 0;
+      targetRotateY = 0;
     };
 
     // Only attach interactive mouse tracking on pointer-capable devices
@@ -395,17 +405,17 @@ class PortfolioRenderer {
 
     // Smooth Lerp Rendering Loop
     const renderLoop = () => {
-      currentX += (targetX - currentX) * 0.1;
-      currentY += (targetY - currentY) * 0.1;
+      currentRotateX += (targetRotateX - currentRotateX) * 0.1;
+      currentRotateY += (targetRotateY - currentRotateY) * 0.1;
 
-      if (isHovering || Math.abs(currentX) > 0.04 || Math.abs(currentY) > 0.04) {
-        card.style.transform = `perspective(1200px) rotateX(${currentY.toFixed(2)}deg) rotateY(${currentX.toFixed(2)}deg) translateZ(10px)`;
+      if (isHovering || Math.abs(currentRotateX) > 0.04 || Math.abs(currentRotateY) > 0.04) {
+        card.style.transform = `perspective(1200px) rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) translateZ(10px)`;
 
         // Optical parallax on foreground portrait card & tech badges
         parallaxLayers.forEach((layer) => {
           const depth = parseFloat(layer.getAttribute('data-depth')) || 35;
-          const px = (currentX * (depth / 35) * 1.2).toFixed(1);
-          const py = (-currentY * (depth / 35) * 1.2).toFixed(1);
+          const px = (currentRotateY * (depth / 35) * 1.2).toFixed(1);
+          const py = (-currentRotateX * (depth / 35) * 1.2).toFixed(1);
           layer.style.transform = `translate3d(${px}px, ${py}px, ${depth}px)`;
         });
       } else if (!isHovering) {
@@ -990,7 +1000,7 @@ class PortfolioRenderer {
     this.certCurrentSlide = 0;
 
     const slidesHtml = items.map((c, idx) => `
-      <div class="cert-slide-item" data-index="${idx}">
+      <div class="cert-slide-item ${idx === 0 ? 'active' : ''}" data-index="${idx}">
         <div class="cert-image-display" data-full-img="${c.image}" title="Click to view full certificate">
           <img src="${c.image}" alt="${c.title}" class="cert-showcase-img" loading="lazy" />
         </div>
@@ -1079,7 +1089,11 @@ class PortfolioRenderer {
 
     const goToSlide = (idx) => {
       this.certCurrentSlide = (idx + this.certTotalSlides) % this.certTotalSlides;
-      track.style.transform = `translateX(-${this.certCurrentSlide * 100}%)`;
+
+      const slides = track.querySelectorAll('.cert-slide-item');
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === this.certCurrentSlide);
+      });
 
       if (counter) {
         counter.textContent = String(this.certCurrentSlide + 1).padStart(2, '0');

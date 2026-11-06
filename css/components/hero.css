@@ -16,6 +16,17 @@
   margin: 0 auto;
   width: 100%;
   gap: clamp(32px, 5vh, 48px);
+  scroll-margin-top: 90px;
+}
+
+#heroMount {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-height: 100%;
+  gap: clamp(32px, 5vh, 48px);
 }
 
 /* ==========================================================================
@@ -120,7 +131,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 0 0.28em;
+  gap: 6px 0;
   filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 32px rgba(255, 87, 34, 0.28));
 }
 
@@ -271,7 +282,11 @@
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: all var(--transition-fast);
+  transition: transform var(--duration-fast) var(--ease-spring),
+              color var(--duration-fast) var(--ease-out),
+              background-color var(--duration-fast) var(--ease-out),
+              border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
 }
 
 .hero-social-icon:hover {
@@ -280,6 +295,10 @@
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
+}
+
+.hero-social-icon:active {
+  transform: translateY(0) scale(0.94);
 }
 
 /* ==========================================================================
@@ -561,7 +580,10 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: all var(--transition-fast);
+  transition: transform var(--duration-normal) var(--ease-out),
+              background-color var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .bento-metric-card:hover {
