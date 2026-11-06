@@ -1,159 +1,526 @@
 /**
- * Education Component
- * Academic qualifications and degrees with honors badges, marks metrics, and achievements.
+ * Education Component — Bilateral Academic Graph Pipeline
+ * Alternating two-sided graph form (One Left Side, One Right Side)
+ * with central vector spine, vertex anchors, metric axis plots, and inline text.
+ * Strictly NO cards, boxes, borders, or unnecessary descriptions.
  */
 
-.education-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: clamp(20px, 2.5vw, 32px);
+.academic-graph-wrap {
+  width: 100%;
+  max-width: 1040px;
+  margin-top: clamp(24px, 3.5vw, 40px);
 }
 
-.edu-card {
+.academic-graph {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  padding: clamp(24px, 3vw, 32px);
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-xl);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  transition: transform var(--duration-normal) var(--ease-out),
-              border-color var(--duration-normal) var(--ease-out),
-              box-shadow var(--duration-normal) var(--ease-out);
+  width: 100%;
+  /* Coordinate dot grid canvas — pure graph backdrop, no card borders or boxes */
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-position: 0 0;
+  padding: clamp(16px, 2.5vw, 28px) clamp(10px, 1.8vw, 20px);
 }
 
-.edu-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 87, 34, 0.4);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4), 0 0 24px rgba(255, 87, 34, 0.12);
-}
-
-.edu-card-top {
+/* Graph System Header Axis */
+.graph-sys-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 4px;
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: clamp(32px, 4.5vw, 46px);
+  padding-bottom: 12px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
 }
 
-.edu-year-badge {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+.graph-sys-tag {
   color: var(--accent-orange);
-  letter-spacing: 0.04em;
-  width: fit-content;
-  background: var(--accent-orange-subtle);
-  border: 1px solid rgba(255, 87, 34, 0.25);
-  border-radius: var(--radius-full);
-  padding: 4px 12px;
-}
-
-.edu-score-badge {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  color: #10b981;
-  letter-spacing: 0.03em;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.28);
-  border-radius: var(--radius-full);
-  padding: 4px 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.edu-score-badge svg {
-  color: #10b981;
-}
-
-.edu-degree {
-  font-family: var(--font-family-display);
-  font-size: clamp(1.2rem, 1.6vw, 1.4rem);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-}
-
-.edu-institution {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-secondary);
+  font-weight: 600;
 }
 
-.edu-institution svg {
-  color: var(--accent-orange);
-  flex-shrink: 0;
+.graph-sys-tag::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  box-shadow: 0 0 10px var(--accent-orange);
 }
 
-.edu-desc {
-  font-size: var(--font-size-sm);
+.graph-sys-coords {
   color: var(--text-muted);
-  line-height: 1.6;
 }
 
-.edu-achievements {
+/* ==========================================================================
+   Graph Network & Central Vector Spine (Desktop: 2-Sided Bilateral Layout)
+   ========================================================================== */
+.graph-network {
+  position: relative;
+  width: 100%;
+}
+
+/* Central Vector Edge Spine */
+.graph-edge-spine {
+  position: absolute;
+  top: 10px;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--accent-orange) 0%,
+    rgba(255, 87, 34, 0.55) 50%,
+    rgba(255, 87, 34, 0.15) 100%
+  );
+  box-shadow: 0 0 12px rgba(255, 87, 34, 0.35);
+  pointer-events: none;
+}
+
+/* Animated Data Flow Signal Traveling Down the Graph Edge */
+.graph-edge-spine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 6px;
+  height: 38px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    #ffffff 50%,
+    transparent 100%
+  );
+  border-radius: 999px;
+  filter: drop-shadow(0 0 8px var(--accent-orange));
+  animation: graphSignalFlow 4s infinite linear;
+}
+
+@keyframes graphSignalFlow {
+  0% {
+    top: -38px;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* Individual Graph Node Entry — NO cards, NO boxes, NO borders */
+.graph-node-entry {
+  position: relative;
+  width: 50%;
+  padding-bottom: clamp(40px, 5.5vw, 56px);
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.graph-node-entry:last-child {
+  padding-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT SIDE NODE (Graduate Milestone)
+   -------------------------------------------------------------------------- */
+.graph-node-entry--left {
+  margin-right: auto;
+  margin-left: 0;
+  padding-right: clamp(32px, 4vw, 48px);
+  padding-left: 0;
+  text-align: right;
+}
+
+.graph-node-entry--left .graph-vertex {
+  position: absolute;
+  right: -10px;
+  left: auto;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.graph-node-entry--left .graph-stem-connector {
+  position: absolute;
+  right: 20px;
+  left: auto;
+  top: 9px;
+  width: clamp(14px, 2.2vw, 24px);
+  height: 2px;
+  background: linear-gradient(270deg, var(--accent-orange), rgba(255, 87, 34, 0.25));
+}
+
+.graph-node-entry--left .graph-coord-bar {
+  justify-content: flex-end;
+}
+
+.graph-node-entry--left .graph-node-institution {
+  justify-content: flex-end;
+}
+
+.graph-node-entry--left .graph-plot-row {
+  justify-content: flex-end;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT SIDE NODE (Higher Secondary / Intermediate Milestone)
+   -------------------------------------------------------------------------- */
+.graph-node-entry--right {
+  margin-left: auto;
+  margin-right: 0;
+  padding-left: clamp(32px, 4vw, 48px);
+  padding-right: 0;
+  text-align: left;
+}
+
+.graph-node-entry--right .graph-vertex {
+  position: absolute;
+  left: -10px;
+  right: auto;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.graph-node-entry--right .graph-stem-connector {
+  position: absolute;
+  left: 20px;
+  right: auto;
+  top: 9px;
+  width: clamp(14px, 2.2vw, 24px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-orange), rgba(255, 87, 34, 0.25));
+}
+
+.graph-node-entry--right .graph-coord-bar {
+  justify-content: flex-start;
+}
+
+.graph-node-entry--right .graph-node-institution {
+  justify-content: flex-start;
+}
+
+.graph-node-entry--right .graph-plot-row {
+  justify-content: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   Shared Vertex & Anchor Circle
+   -------------------------------------------------------------------------- */
+.graph-node-circle {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-dark);
+  border: 2px solid var(--accent-orange);
+  box-shadow: 0 0 14px rgba(255, 87, 34, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out),
+              border-color var(--duration-normal) var(--ease-out);
+}
+
+.graph-node-core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-orange);
+  transition: background-color var(--duration-fast), transform var(--duration-fast);
+}
+
+.graph-node-ping {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 87, 34, 0.4);
+  animation: graphNodePing 3.2s infinite cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes graphNodePing {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.8;
+  }
+  75%, 100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+.graph-node-entry:hover .graph-node-circle {
+  transform: scale(1.25);
+  border-color: #ff8a65;
+  box-shadow: 0 0 20px rgba(255, 87, 34, 0.85), 0 0 35px rgba(255, 87, 34, 0.4);
+  background: var(--bg-surface-elevated, #141822);
+}
+
+.graph-node-entry:hover .graph-node-core {
+  background: #ffffff;
+  transform: scale(1.25);
+}
+
+/* --------------------------------------------------------------------------
+   Graph Node Payload & Typography (Pure Text, No Boxes)
+   -------------------------------------------------------------------------- */
+.graph-node-payload {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
-  padding-left: 0;
-  list-style: none;
+  gap: 5px;
 }
 
-.edu-achievement-item {
-  position: relative;
-  font-size: var(--font-size-xs);
-  color: var(--text-secondary);
-  line-height: 1.5;
+.graph-coord-bar {
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 2px;
 }
 
-.edu-achievement-item svg {
+.graph-node-id {
+  font-family: var(--font-family-mono);
+  font-size: clamp(0.72rem, 1vw, 0.78rem);
+  font-weight: 700;
   color: var(--accent-orange);
-  margin-top: 2px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.graph-node-time {
+  font-family: var(--font-family-mono);
+  font-size: clamp(0.78rem, 1.1vw, 0.86rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.graph-node-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.15rem, 1.75vw, 1.48rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  margin: 2px 0 4px 0;
+  transition: color var(--duration-fast);
+}
+
+.graph-node-entry:hover .graph-node-title {
+  color: #ffffff;
+}
+
+.graph-node-institution {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(0.88rem, 1.15vw, 0.98rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.graph-inst-icon {
+  color: var(--accent-orange);
+  opacity: 0.9;
   flex-shrink: 0;
 }
 
-.edu-meta-pill {
-  margin-top: var(--space-1);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-success);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.edu-tags {
+/* --------------------------------------------------------------------------
+   Graph Metric Plot Row (CGPA / Classification)
+   -------------------------------------------------------------------------- */
+.graph-plot-row {
   display: flex;
+  align-items: center;
+  gap: 16px;
   flex-wrap: wrap;
+  margin: 4px 0 8px 0;
+}
+
+.graph-plot-metric {
+  display: inline-flex;
+  align-items: baseline;
   gap: 6px;
-  margin-top: auto;
-  padding-top: var(--space-2);
+  font-family: var(--font-family-mono);
 }
 
-.edu-tag {
+.graph-metric-label {
   font-size: 0.72rem;
-  font-weight: 500;
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: var(--radius-sm);
-  padding: 2px 8px;
-  transition: color var(--duration-fast), border-color var(--duration-fast);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-.edu-card:hover .edu-tag {
-  border-color: rgba(255, 255, 255, 0.15);
+.graph-metric-num {
+  font-size: clamp(0.92rem, 1.2vw, 1.02rem);
+  font-weight: 700;
+  color: #10b981;
+}
+
+.graph-metric-denom {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.graph-metric-tier {
+  font-size: clamp(0.82rem, 1.1vw, 0.9rem);
+  font-weight: 600;
+  color: #10b981;
+  letter-spacing: 0.02em;
+}
+
+.graph-metric-track {
+  width: clamp(85px, 12vw, 120px);
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  position: relative;
+  overflow: visible;
+}
+
+.graph-metric-bar {
+  height: 100%;
+  width: var(--plot-pct, 76.9%);
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 999px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+  transform-origin: left center;
+}
+
+.graph-metric-pip {
+  position: absolute;
+  right: -3px;
+  top: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 6px #10b981;
+}
+
+/* Coursework & Subjects as minimal inline text */
+.graph-coursework-row {
+  font-size: clamp(0.84rem, 1.05vw, 0.92rem);
+  line-height: 1.65;
   color: var(--text-secondary);
+}
+
+.graph-coursework-label {
+  font-family: var(--font-family-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 8px;
+  display: inline;
+}
+
+.graph-coursework-inline {
+  color: var(--text-secondary);
+  display: inline;
+}
+
+.graph-coursework-sep {
+  color: var(--accent-orange);
+  opacity: 0.55;
+  margin: 0 5px;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Mobile & Small Screen Adaptation (< 768px: Collapses gracefully to Left Spine)
+   ========================================================================== */
+@media (max-width: 767px) {
+  .academic-graph {
+    padding: 16px 8px;
+  }
+
+  .graph-network {
+    padding-left: 36px;
+  }
+
+  .graph-edge-spine {
+    left: 9px;
+    transform: none;
+  }
+
+  .graph-node-entry {
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+  }
+
+  .graph-node-entry--left .graph-vertex,
+  .graph-node-entry--right .graph-vertex {
+    left: -36px;
+    right: auto;
+  }
+
+  .graph-node-entry--left .graph-stem-connector,
+  .graph-node-entry--right .graph-stem-connector {
+    left: 20px;
+    right: auto;
+    width: 12px;
+    background: linear-gradient(90deg, var(--accent-orange), rgba(255, 87, 34, 0.25));
+  }
+
+  .graph-coord-bar,
+  .graph-node-institution,
+  .graph-plot-row {
+    justify-content: flex-start !important;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .graph-plot-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .graph-metric-track {
+    width: 90px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .graph-edge-spine,
+  .graph-node-circle,
+  .graph-node-payload,
+  .graph-metric-bar,
+  .graph-node-ping {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }

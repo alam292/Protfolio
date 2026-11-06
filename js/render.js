@@ -648,47 +648,120 @@ class PortfolioRenderer {
     `;
   }
 
-  // 6. Education Section
+  // 6. Education Section (Academic Graph Pipeline Form)
   renderEducation() {
     const mount = document.getElementById('educationMount');
     if (!mount) return;
 
     const { education } = this.data;
+    if (!education || !Array.isArray(education.degrees)) return;
 
-    const cardsHtml = education.degrees.map(deg => {
-      const highlightsHtml = (deg.highlights && deg.highlights.length > 0) ? `
-        <ul class="edu-highlights" aria-label="Key highlights">
-          ${deg.highlights.map(h => `<li class="edu-highlight-item">${h}</li>`).join('')}
-        </ul>` : '';
+    const nodesHtml = education.degrees.map((deg, index) => {
+      // Coursework / subjects as minimal inline text
+      const courseworkList = deg.coursework || deg.skillsGained || [];
+      const courseworkLabel = deg.courseworkLabel || (deg.shortDegree === 'Intermediate' ? 'Key Subjects' : 'Core Coursework');
 
-      const tagsHtml = (deg.skillsGained && deg.skillsGained.length > 0) ? `
-        <div class="edu-tags" aria-label="Core competencies">
-          ${deg.skillsGained.map(s => `<span class="edu-tag">${s}</span>`).join('')}
-        </div>` : '';
+      const courseworkHtml = courseworkList.length > 0 ? `
+        <div class="graph-coursework-row">
+          <span class="graph-coursework-label">${courseworkLabel}:</span>
+          <span class="graph-coursework-inline">${courseworkList.join(' <span class="graph-coursework-sep" aria-hidden="true">&middot;</span> ')}</span>
+        </div>
+      ` : '';
+
+      // Graph Metric Plot (No card view, graph data plot format)
+      let metricPlotHtml = '';
+      if (deg.score && deg.score.type === 'cgpa') {
+        const val = typeof deg.score.value === 'number' ? deg.score.value.toFixed(2) : deg.score.value;
+        const max = deg.score.scale ? deg.score.scale.toFixed(1) : '10.0';
+        const pct = deg.score.percentage || (parseFloat(val) / parseFloat(max) * 100);
+        metricPlotHtml = `
+          <div class="graph-plot-row" aria-label="CGPA Plot: ${deg.score.formatted || deg.cgpa}">
+            <div class="graph-plot-metric">
+              <span class="graph-metric-label">CGPA PLOT:</span>
+              <span class="graph-metric-num">${val}</span>
+              <span class="graph-metric-denom">/ ${max}</span>
+            </div>
+            <div class="graph-metric-track" aria-hidden="true" title="${deg.score.formatted || deg.cgpa}">
+              <div class="graph-metric-bar" style="--plot-pct: ${pct}%;">
+                <span class="graph-metric-pip"></span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if ((deg.score && deg.score.type === 'division') || deg.status === 'First Division' || (deg.cgpa && deg.cgpa.includes('First Division'))) {
+        const divisionText = deg.score?.division || deg.score?.formatted || deg.status || deg.cgpa || 'First Division';
+        const boardText = deg.board || (deg.score && deg.score.board) || '';
+        metricPlotHtml = `
+          <div class="graph-plot-row" aria-label="Result Classification: ${divisionText}">
+            <div class="graph-plot-metric">
+              <span class="graph-metric-label">RESULT:</span>
+              <span class="graph-metric-tier">${divisionText}${boardText ? ` &middot; ${boardText}` : ''}</span>
+            </div>
+          </div>
+        `;
+      } else if (deg.cgpa) {
+        metricPlotHtml = `
+          <div class="graph-plot-row">
+            <div class="graph-plot-metric">
+              <span class="graph-metric-label">EVALUATION:</span>
+              <span class="graph-metric-tier">${deg.cgpa}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      const isLeft = index % 2 === 0;
+      const sideClass = isLeft ? 'graph-node-entry--left' : 'graph-node-entry--right';
+      const tagLabel = index === 0 ? 'GRADUATE' : 'HIGHER SECONDARY';
 
       return `
-        <article class="edu-card">
-          <div class="edu-card-top">
-            <span class="edu-year-badge">${deg.period}</span>
-            ${deg.cgpa ? `<span class="edu-score-badge">${deg.cgpa}</span>` : ''}
+        <div class="graph-node-entry ${sideClass}" data-node="${isLeft ? 'left' : 'right'}">
+          <div class="graph-vertex" aria-hidden="true">
+            <div class="graph-node-circle">
+              <span class="graph-node-core"></span>
+              <span class="graph-node-ping"></span>
+            </div>
+            <div class="graph-stem-connector"></div>
           </div>
 
-          <h3 class="edu-degree-title">${deg.degree}</h3>
-          <p class="edu-college-name">${deg.institution}</p>
-          ${deg.honors ? `<p class="edu-description">${deg.honors}</p>` : ''}
+          <div class="graph-node-payload">
+            <div class="graph-coord-bar">
+              <span class="graph-node-id">${tagLabel}</span>
+              <time class="graph-node-time">${deg.period}</time>
+            </div>
 
-          ${highlightsHtml}
-          ${tagsHtml}
-        </article>
+            <h3 class="graph-node-title">${deg.degree}</h3>
+
+            <div class="graph-node-institution">
+              <svg class="graph-inst-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 21h18M3 10h18M5 10v11M19 10v11M9 10v11M15 10v11M12 2L2 7h20L12 2z"></path>
+              </svg>
+              <span>${deg.institution}</span>
+            </div>
+
+            ${metricPlotHtml}
+            ${courseworkHtml}
+          </div>
+        </div>
       `;
     }).join('');
 
     mount.innerHTML = `
-      <h2 class="section-tag" id="education-title">${education.sectionTag}</h2>
+      <h2 class="section-tag" id="education-title">${education.sectionTag || 'ACADEMIC GRAPH'}</h2>
       ${education.subtitle ? `<p class="section-subtitle">${education.subtitle}</p>` : ''}
 
-      <div class="education-grid">
-        ${cardsHtml}
+      <div class="academic-graph-wrap">
+        <div class="academic-graph" role="region" aria-label="Academic Progression Graph">
+          <div class="graph-sys-header" aria-hidden="true">
+            <span class="graph-sys-tag">ACADEMIC_GRAPH_PIPELINE</span>
+            <span class="graph-sys-coords">AXIS: CHRONOLOGICAL_MILESTONES (2018 — 2024)</span>
+          </div>
+
+          <div class="graph-network">
+            <div class="graph-edge-spine" aria-hidden="true"></div>
+            ${nodesHtml}
+          </div>
+        </div>
       </div>
     `;
   }

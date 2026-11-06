@@ -255,17 +255,86 @@ class AnimationsController {
   }
 
   initEducationSection() {
-    gsap.from('.edu-card', {
+    const graph = document.querySelector('#education .academic-graph');
+    if (!graph) return;
+
+    // 1. Central Graph Edge Spine draw animation
+    gsap.fromTo(
+      '#education .graph-edge-spine',
+      { scaleY: 0, transformOrigin: 'top center' },
+      {
+        scaleY: 1,
+        duration: 1.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '#education .academic-graph',
+          start: 'top 82%'
+        }
+      }
+    );
+
+    // 2. Graph node vertices pop in
+    gsap.from('#education .graph-node-circle', {
       scrollTrigger: {
-        trigger: '#education .education-grid',
+        trigger: '#education .academic-graph',
         start: 'top 82%'
       },
-      y: 50,
+      scale: 0,
       opacity: 0,
-      stagger: 0.18,
-      duration: 1.1,
+      stagger: 0.22,
+      duration: 0.7,
+      ease: 'back.out(2)'
+    });
+
+    // 3. Bilateral payloads slide in from their respective sides (Left from -25px, Right from +25px)
+    gsap.from('#education .graph-node-entry--left .graph-node-payload', {
+      scrollTrigger: {
+        trigger: '#education .academic-graph',
+        start: 'top 82%'
+      },
+      x: -25,
+      opacity: 0,
+      duration: 0.9,
       ease: 'power3.out'
     });
+
+    gsap.from('#education .graph-node-entry--right .graph-node-payload', {
+      scrollTrigger: {
+        trigger: '#education .academic-graph',
+        start: 'top 82%'
+      },
+      x: 25,
+      opacity: 0,
+      duration: 0.9,
+      ease: 'power3.out'
+    });
+
+    // 4. Metric plot bar fills
+    gsap.fromTo(
+      '#education .graph-metric-bar',
+      { scaleX: 0, transformOrigin: 'left center' },
+      {
+        scaleX: 1,
+        duration: 1.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#education .academic-graph',
+          start: 'top 82%'
+        }
+      }
+    );
+  }
+      { scaleX: 0, transformOrigin: 'left center' },
+      {
+        scaleX: 1,
+        duration: 1.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#education .academic-graph',
+          start: 'top 82%'
+        }
+      }
+    );
   }
 
   initCertificatesSection() {

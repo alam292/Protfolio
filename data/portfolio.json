@@ -315,22 +315,36 @@
     ]
   },
   "education": {
-    "sectionTag": "ACADEMIC PEDIGREE",
-    "title": "",
-    "subtitle": "Strong analytical foundation in engineering, electronic systems, and computational problem solving.",
+    "sectionTag": "ACADEMIC TIMELINE",
+    "title": "Education & Academic Foundations",
+    "subtitle": "Chronological progression of engineering fundamentals, computer science coursework, and academic milestones.",
     "degrees": [
       {
         "id": "edu-1",
         "degree": "Bachelor of Technology in Electronics & Communications Engineering",
+        "shortDegree": "B.Tech",
         "institution": "Saharsa College of Engineering, Bihar",
         "period": "2020 — 2024",
         "status": "Graduated",
-        "cgpa": "7.69 / 10.0 CGPA",
-        "honors": "",
-        "highlights": [],
-        "skillsGained": [
-          "Object-Oriented Programming",
+        "cgpa": "7.69 / 10 CGPA",
+        "score": {
+          "type": "cgpa",
+          "value": 7.69,
+          "scale": 10.0,
+          "percentage": 76.9,
+          "formatted": "7.69 / 10 CGPA"
+        },
+        "courseworkLabel": "Core Coursework",
+        "coursework": [
           "Data Structures & Algorithms",
+          "Object-Oriented Programming",
+          "Relational Database Design",
+          "Digital Logic",
+          "Software Engineering"
+        ],
+        "skillsGained": [
+          "Data Structures & Algorithms",
+          "Object-Oriented Programming",
           "Relational Database Design",
           "Digital Logic",
           "Software Engineering"
@@ -338,13 +352,26 @@
       },
       {
         "id": "edu-2",
-        "degree": "Intermediate (Class XII), BSEB Board",
+        "degree": "Intermediate (Class XII), BSEB",
+        "shortDegree": "Intermediate",
         "institution": "Hadi Hashmi Plus Two School, Gaya, Bihar",
+        "board": "BSEB",
         "period": "2018 — 2020",
         "status": "First Division",
-        "cgpa": "First Division Honors",
-        "honors": "",
-        "highlights": [],
+        "cgpa": "First Division",
+        "score": {
+          "type": "division",
+          "division": "First Division",
+          "board": "BSEB",
+          "formatted": "First Division (BSEB)"
+        },
+        "courseworkLabel": "Core Subjects",
+        "coursework": [
+          "Mathematics",
+          "Physics",
+          "Analytical Problem Solving",
+          "Computational Logic"
+        ],
         "skillsGained": [
           "Mathematics",
           "Physics",

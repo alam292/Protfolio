@@ -94,8 +94,12 @@
   }
 
   /* Education & Certificates */
-  .education-grid {
-    grid-template-columns: 1fr;
+  .academic-graph {
+    padding: 16px 8px;
+  }
+
+  .graph-network {
+    padding-left: 36px;
   }
 
   .certificates-grid {
