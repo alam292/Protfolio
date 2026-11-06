@@ -671,20 +671,18 @@ class PortfolioRenderer {
 
     const { contact, profile } = this.data;
 
+    // Social Profiles - Modern Circular Icon Buttons (Ref. Image Style)
     const socialIconsHtml = contact.social.map(s => `
       <a 
         href="${s.url}" 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="social-icon-btn" 
+        class="contact-social-circle-btn" 
         data-platform="${s.platform.toLowerCase()}" 
-        aria-label="Visit ${profile.name}'s ${s.platform} profile (${s.handle})"
+        aria-label="${profile.name}'s ${s.platform} (${s.handle})"
         title="${s.platform}: ${s.handle}"
       >
-        <span class="social-icon-inner" aria-hidden="true">
-          ${this.getIconSvg(s.icon)}
-        </span>
-        <span class="social-icon-tooltip">${s.platform}</span>
+        ${this.getIconSvg(s.icon)}
       </a>
     `).join('');
 
@@ -695,86 +693,79 @@ class PortfolioRenderer {
 
       <div class="contact-master-container">
         <div class="contact-grid">
-          <!-- Left Column: Direct Communication Channels & Location -->
-          <div class="contact-channels-column">
-            <!-- 1. Direct Email Card with Copy & Direct Compose -->
-            <div class="contact-channel-card animated-card">
-              <div class="channel-card-top">
-                <div class="channel-icon-wrap" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                  </svg>
-                </div>
-                <div class="channel-header-text">
-                  <div class="channel-title-row">
-                    <h3 class="channel-title">Direct Email</h3>
-                    <span class="contact-sla-badge">
-                      <span class="sla-dot" aria-hidden="true"></span>
-                      <span>Available</span>
-                    </span>
+          <!-- Left Column: Unified Contact Information Card (Ref. Image Design) -->
+          <div class="contact-info-column">
+            <div class="contact-info-card animated-card">
+              <div class="contact-card-ambient" aria-hidden="true"></div>
+
+              <div class="contact-info-header">
+                <h3 class="contact-info-title">${contact.infoCardTitle || 'Contact Information'}</h3>
+                <p class="contact-info-description">${contact.infoCardDescription || 'Feel free to reach out via email or through social platforms. I typically respond within 24 hours.'}</p>
+              </div>
+
+              <!-- Contact Items List -->
+              <div class="contact-items-list">
+                <!-- 1. Email -->
+                <div class="contact-info-item">
+                  <div class="info-icon-circle" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
                   </div>
-                  <span class="channel-sla">${contact.responseTime}</span>
+                  <div class="info-item-content">
+                    <span class="info-item-label">EMAIL</span>
+                    <div class="info-email-row">
+                      <a href="mailto:${contact.email}" class="info-item-value info-item-link" title="Send email to ${contact.email}">${contact.email}</a>
+                      <button 
+                        type="button" 
+                        class="info-copy-email-btn" 
+                        id="copyEmailBtn" 
+                        data-copy="${contact.email}" 
+                        aria-label="Copy email address"
+                        title="Copy email to clipboard"
+                      >
+                        <svg class="copy-icon-idle" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        <span class="copy-text">Copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Availability -->
+                <div class="contact-info-item">
+                  <div class="info-icon-circle" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                  </div>
+                  <div class="info-item-content">
+                    <span class="info-item-label">AVAILABILITY</span>
+                    <span class="info-item-value">${contact.availability || 'Full-time • Freelance Projects'}</span>
+                  </div>
+                </div>
+
+                <!-- 3. Location -->
+                <div class="contact-info-item">
+                  <div class="info-icon-circle" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                      <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                  </div>
+                  <div class="info-item-content">
+                    <span class="info-item-label">LOCATION</span>
+                    <span class="info-item-value">${contact.locationDisplay || 'India • Available Worldwide (Remote)'}</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="channel-email-wrap">
-                <a href="mailto:${contact.email}" class="channel-email-link" title="Click to compose email">${contact.email}</a>
-                <div class="channel-btn-group">
-                  <button 
-                    type="button" 
-                    class="btn-copy-email" 
-                    id="copyEmailBtn" 
-                    data-copy="${contact.email}" 
-                    aria-label="Copy ${contact.email} to clipboard"
-                    title="Copy email address"
-                  >
-                    <svg class="copy-icon-idle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                    </svg>
-                    <span class="copy-text">Copy</span>
-                  </button>
-                  <a 
-                    href="mailto:${contact.email}" 
-                    class="btn-send-email-link" 
-                    title="Open default email app"
-                    aria-label="Send email to ${contact.email}"
-                  >
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <line x1="22" y1="2" x2="11" y2="13"></line>
-                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                    </svg>
-                    <span>Send</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2. Social Media Accounts in Icon Form -->
-            <div class="social-accounts-card animated-card">
-              <div class="social-card-header">
-                <div>
-                  <h3 class="social-card-title">Social Profiles</h3>
-                  <span class="social-card-sub">Verified Developer Accounts</span>
-                </div>
-                <span class="social-card-badge">Direct Connect</span>
-              </div>
-              <div class="social-icons-flex" role="list">
+              <!-- Social Media Icon Buttons (Ref. Image Style) -->
+              <div class="contact-social-dock" role="list">
                 ${socialIconsHtml}
-              </div>
-            </div>
-
-            <!-- 3. Location Card (Clean - Location Name Only) -->
-            <div class="location-plan-card animated-card location-card-clean">
-              <div class="location-clean-wrap">
-                <div class="location-icon-circle" aria-hidden="true">
-                  ${this.getIconSvg('map-pin')}
-                </div>
-                <div class="location-clean-text">
-                  <span class="location-clean-label">Location</span>
-                  <h3 class="location-clean-name">${profile.location.city}, ${profile.location.country}</h3>
-                </div>
               </div>
             </div>
           </div>

@@ -463,7 +463,11 @@
     "sectionTag": "GET IN TOUCH",
     "title": "Contact Me",
     "subtitle": "",
+    "infoCardTitle": "Contact Information",
+    "infoCardDescription": "Feel free to reach out via email or through social platforms. I typically respond within 24 hours.",
     "email": "mdmatloobgaya@gmail.com",
+    "availability": "Full-time • Freelance Projects",
+    "locationDisplay": "India • Available Worldwide (Remote)",
     "secondaryEmail": "mdmatloobgaya@gmail.com",
     "responseTime": "SLA: Guaranteed response within 24 hours",
     "social": [

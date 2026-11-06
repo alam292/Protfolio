@@ -70,7 +70,7 @@ flowchart TD
 
 ### Section 8: Contact & Global Collaboration (`#contact`)
 - **Data Source:** `portfolio.contact`
-- **Dynamic Bindings:** Direct verified email (`contact@matloob.dev` / `mdmatloobgaya@gmail.com`) with 1-click clipboard utility, LinkedIn, GitHub, live IST clock with radar ping, and accessible contact form with real-time validation.
+- **Dynamic Bindings:** Unified left-side Contact Information card matching reference design with Email (`mdmatloobgaya@gmail.com`) + 1-click clipboard copy, Availability (`Full-time • Freelance Projects`), Location (`India • Available Worldwide (Remote)`), circular social icon dock (GitHub, LinkedIn, Twitter), and interactive validated contact form on the right.
 
 ---
 
@@ -106,4 +106,5 @@ flowchart TD
 - [x] Connect `index.html` dynamic mount points
 - [x] Wire navigation ScrollSpy, mobile drawer, resume download, and form validation
 - [x] Verify accessibility, responsive breakpoints, and SEO schema
+- [x] Refine Contact Section left side to match reference design (unified glass card with orange circular badges and integrated social dock)
 - [x] Launch local server on localhost:3000 and verify in browser

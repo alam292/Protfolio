@@ -18,6 +18,12 @@ class FormController {
     this.initClipboardCopy();
     this.initServiceChips();
     this.initLiveClock();
+
+    window.addEventListener('portfolio:rendered', () => {
+      this.init();
+      this.initClipboardCopy();
+      this.initLiveClock();
+    });
   }
 
   init() {

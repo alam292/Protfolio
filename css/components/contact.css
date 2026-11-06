@@ -35,12 +35,14 @@
 /* ==========================================================================
    Lightweight Transparent Glass Cards (3D Glassmorphism)
    ========================================================================== */
+.contact-info-card,
+.contact-email-card,
+.location-hub-card,
 .contact-channel-card,
-.social-accounts-card,
 .location-plan-card,
 .contact-form-card {
   position: relative;
-  background: rgba(14, 20, 30, 0.38); /* Lightweight transparency */
+  background: rgba(14, 20, 30, 0.42); /* Lightweight transparency */
   backdrop-filter: blur(16px) saturate(150%);
   -webkit-backdrop-filter: blur(16px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -54,11 +56,13 @@
   transform: perspective(1000px) translateZ(0);
 }
 
+.contact-info-card:hover,
+.contact-email-card:hover,
+.location-hub-card:hover,
 .contact-channel-card:hover,
-.social-accounts-card:hover,
 .location-plan-card:hover,
 .contact-form-card:hover {
-  background: rgba(18, 25, 38, 0.52);
+  background: rgba(18, 25, 38, 0.55);
   border-color: rgba(255, 87, 34, 0.38);
   transform: perspective(1000px) translateY(-3px) translateZ(4px);
   box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.5),
@@ -67,341 +71,265 @@
 }
 
 /* ==========================================================================
-   Left Column: Channels, Social & Location (Compact)
+   Left Column: Unified Contact Information Card (Ref. Image Design)
    ========================================================================== */
-.contact-channels-column {
+.contact-info-column {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  height: 100%;
 }
 
-/* 1. Direct Email Card */
-.contact-channel-card {
-  padding: 14px 18px;
+.contact-info-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.channel-card-top {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  height: 100%;
+  padding: clamp(24px, 3.2vw, 36px) clamp(22px, 2.8vw, 32px);
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(13, 19, 29, 0.52);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.45),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.32s ease,
+              box-shadow 0.32s ease,
+              background 0.32s ease;
 }
 
-.channel-header-text {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
+.contact-info-card:hover {
+  background: rgba(17, 24, 37, 0.65);
+  border-color: rgba(255, 87, 34, 0.4);
+  transform: perspective(1000px) translateY(-3px) translateZ(4px);
+  box-shadow: 0 20px 42px -10px rgba(0, 0, 0, 0.55),
+              0 0 28px rgba(255, 87, 34, 0.12),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-.channel-title-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.contact-card-ambient {
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 87, 34, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.channel-title {
-  font-family: var(--font-family-display);
-  font-size: 0.92rem;
+/* --------------------------------------------------------------------------
+   Header: Title & Subtitle (Clean & Elegant Typography)
+   -------------------------------------------------------------------------- */
+.contact-info-header {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 28px;
+}
+
+.contact-info-title {
+  font-family: var(--font-family-display, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.01em;
-  margin: 0;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin: 0 0 12px 0;
 }
 
-.channel-icon-wrap {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--accent-orange-subtle);
-  border: 1px solid var(--accent-orange-border);
+.contact-info-description {
+  font-size: 0.92rem;
+  color: var(--text-secondary, #94a3b8);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 95%;
+}
+
+/* --------------------------------------------------------------------------
+   Contact Details List (Orange Bordered Circle Badges)
+   -------------------------------------------------------------------------- */
+.contact-items-list {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform 0.25s ease;
+}
+
+.contact-info-item:hover {
+  transform: translateX(4px);
+}
+
+.info-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 87, 34, 0.08);
+  border: 1px solid rgba(255, 87, 34, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-orange);
+  color: var(--accent-orange, #ff5722);
   flex-shrink: 0;
-  transition: transform var(--transition-fast);
+  box-shadow: 0 0 14px rgba(255, 87, 34, 0.14);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.28s ease,
+              border-color 0.28s ease,
+              background 0.28s ease;
 }
 
-.contact-channel-card:hover .channel-icon-wrap {
-  transform: scale(1.08) rotate(-4deg);
+.contact-info-item:hover .info-icon-circle {
+  transform: scale(1.08) rotate(-3deg);
+  background: rgba(255, 87, 34, 0.16);
+  border-color: var(--accent-orange, #ff5722);
+  box-shadow: 0 0 22px rgba(255, 87, 34, 0.38);
 }
 
-.contact-sla-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+.info-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.info-item-label {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 2px 8px;
-  border-radius: 9999px;
-  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, #71717a);
+  line-height: 1;
 }
 
-.sla-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
-  animation: radar-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-.channel-email-wrap {
+.info-email-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 10px;
   flex-wrap: wrap;
 }
 
-.channel-email-link {
-  font-family: var(--font-family-mono);
-  font-size: 0.95rem;
+.info-item-value {
+  font-size: 0.98rem;
   font-weight: 600;
   color: #ffffff;
-  text-decoration: none;
-  word-break: break-all;
   letter-spacing: -0.01em;
-  transition: color var(--transition-fast);
+  line-height: 1.35;
 }
 
-.channel-email-link:hover {
-  color: var(--accent-orange);
+.info-item-link {
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-all;
 }
 
-.channel-btn-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.info-item-link:hover {
+  color: var(--accent-orange, #ff5722);
 }
 
-.btn-copy-email {
+.info-copy-email-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  font-size: 0.78rem;
+  gap: 5px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
   font-weight: 600;
-  border-radius: 8px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  color: var(--text-secondary, #94a3b8);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.2s ease;
 }
 
-.btn-copy-email:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.28);
-  transform: translateY(-2px);
+.info-copy-email-btn:hover {
+  background: rgba(255, 87, 34, 0.14);
+  border-color: rgba(255, 87, 34, 0.4);
+  color: #ffffff;
 }
 
-.btn-copy-email.copied {
-  background: rgba(16, 185, 129, 0.18);
-  border-color: rgba(16, 185, 129, 0.4);
+.info-copy-email-btn.copied {
+  background: rgba(16, 185, 129, 0.16);
+  border-color: rgba(16, 185, 129, 0.45);
   color: #10b981;
 }
 
-.btn-send-email-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  border-radius: 8px;
-  background: var(--accent-orange);
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.28);
-}
-
-.btn-send-email-link:hover {
-  background: var(--accent-orange-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px var(--accent-orange-glow);
-  color: #ffffff;
-}
-
-/* 2. Social Media Accounts (Icon Form) */
-.social-accounts-card {
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.social-card-header {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.social-card-title {
-  font-family: var(--font-family-display);
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: -0.01em;
-  margin: 0;
-}
-
-.social-card-sub {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-}
-
-.social-icons-flex {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.social-icon-btn {
+/* --------------------------------------------------------------------------
+   Social Media Dock (Modern Circular Icon Buttons - Ref. Image Style)
+   -------------------------------------------------------------------------- */
+.contact-social-dock {
   position: relative;
-  display: inline-flex;
+  z-index: 1;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.contact-social-circle-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary, #94a3b8);
   text-decoration: none;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              border-color 0.25s ease,
+              color 0.25s ease,
+              box-shadow 0.25s ease;
 }
 
-.social-icon-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform var(--transition-fast);
+.contact-social-circle-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.25s ease;
 }
 
-.social-icon-tooltip {
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 50%;
-  transform: translateX(-50%) translateY(4px);
-  padding: 3px 8px;
-  background: rgba(15, 20, 28, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 6px;
+.contact-social-circle-btn:hover {
+  transform: translateY(-2px) scale(1.06);
+  background: rgba(255, 87, 34, 0.15);
+  border-color: var(--accent-orange, #ff5722);
   color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 600;
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: all var(--transition-fast);
-  z-index: 10;
+  box-shadow: 0 4px 18px rgba(255, 87, 34, 0.3);
 }
 
-.social-icon-tooltip::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 4px;
-  border-style: solid;
-  border-color: rgba(15, 20, 28, 0.95) transparent transparent transparent;
+.contact-social-circle-btn:hover svg {
+  transform: scale(1.1);
 }
 
-.social-icon-btn:hover {
-  transform: translateY(-3px) scale(1.08);
-  color: #ffffff;
-}
-
-.social-icon-btn:hover .social-icon-tooltip {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(0);
-}
-
-.social-icon-btn[data-platform="github"]:hover {
-  background: rgba(255, 255, 255, 0.14);
+.contact-social-circle-btn[data-platform="github"]:hover {
   border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.15);
 }
 
-.social-icon-btn[data-platform="linkedin"]:hover {
-  background: rgba(10, 102, 194, 0.24);
-  border-color: rgba(10, 102, 194, 0.6);
-  color: #0077b5;
-  box-shadow: 0 6px 18px rgba(10, 102, 194, 0.35);
+.contact-social-circle-btn[data-platform="linkedin"]:hover {
+  border-color: #0a66c2;
+  background: rgba(10, 102, 194, 0.18);
+  color: #38bdf8;
+  box-shadow: 0 4px 18px rgba(10, 102, 194, 0.35);
 }
 
-.social-icon-btn[data-platform="twitter"]:hover {
-  background: rgba(29, 161, 242, 0.24);
-  border-color: rgba(29, 161, 242, 0.6);
+.contact-social-circle-btn[data-platform="twitter"]:hover {
+  border-color: #1da1f2;
+  background: rgba(29, 161, 242, 0.18);
   color: #1da1f2;
-  box-shadow: 0 6px 18px rgba(29, 161, 242, 0.35);
-}
-
-/* 3. Location Card (Clean Single Row) */
-.location-plan-card.location-card-clean {
-  padding: 12px 18px;
-}
-
-.location-clean-wrap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.location-icon-circle {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--accent-orange-subtle);
-  border: 1px solid var(--accent-orange-border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent-orange);
-  flex-shrink: 0;
-  transition: transform var(--transition-fast);
-}
-
-.location-plan-card:hover .location-icon-circle {
-  transform: scale(1.08);
-}
-
-.location-clean-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.location-clean-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-
-.location-clean-name {
-  font-family: var(--font-family-display);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin: 0;
+  box-shadow: 0 4px 18px rgba(29, 161, 242, 0.35);
 }
 
 /* ==========================================================================
@@ -713,10 +641,44 @@
 @media (max-width: 860px) {
   .contact-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 16px;
   }
 
   .form-row-2 {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-info-card,
+  .contact-form-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .contact-info-title {
+    font-size: 1.35rem;
+  }
+
+  .contact-info-description {
+    font-size: 0.88rem;
+  }
+
+  .contact-items-list {
+    gap: 20px;
+  }
+
+  .info-icon-circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .info-item-value {
+    font-size: 0.92rem;
+  }
+
+  .contact-social-circle-btn {
+    width: 38px;
+    height: 38px;
   }
 }
