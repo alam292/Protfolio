@@ -1,109 +1,454 @@
 /**
- * Skills & Capabilities Component
- * Modular cards categorizing Programming Languages, Frontend, Backend, Databases, and Developer Tools.
+ * Modern Technology Skills Showcase Stylesheet (css/components/skills.css)
+ * Premium, minimal, Gemini AI-inspired animated technology showcase.
+ * Strictly NO cards, NO boxes, NO borders, NO rating bars, and NO percentage meters.
+ * Pure authentic brand logos + Gemini cosmic aura + animated typography with subtle floating & radiant glow.
  */
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: clamp(20px, 2.5vw, 32px);
-}
-
-.skill-card {
+/* Container & Header Structure */
+.skills-showcase-container {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: clamp(28px, 4vw, 48px);
+  width: 100%;
   position: relative;
-  transition: transform var(--transition-medium), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.skill-card-top {
-  display: flex;
+/* Gemini Ambient Cosmic Aurora Graphics */
+.gemini-skills-ambient {
+  position: absolute;
+  inset: -60px -30px;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.gemini-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  will-change: transform, opacity;
+}
+
+.gemini-glow-1 {
+  width: clamp(280px, 35vw, 500px);
+  height: clamp(280px, 35vw, 500px);
+  top: -80px;
+  left: 5%;
+  background: radial-gradient(circle, rgba(78, 128, 238, 0.3) 0%, rgba(128, 151, 255, 0.1) 50%, transparent 70%);
+  animation: geminiOrbFloat 14s ease-in-out infinite alternate;
+}
+
+.gemini-glow-2 {
+  width: clamp(260px, 30vw, 450px);
+  height: clamp(260px, 30vw, 450px);
+  top: 35%;
+  right: 5%;
+  background: radial-gradient(circle, rgba(186, 152, 251, 0.25) 0%, rgba(78, 128, 238, 0.1) 50%, transparent 70%);
+  animation: geminiOrbFloat 18s ease-in-out infinite alternate-reverse;
+}
+
+.gemini-glow-3 {
+  width: clamp(240px, 25vw, 380px);
+  height: clamp(240px, 25vw, 380px);
+  bottom: 0;
+  left: 30%;
+  background: radial-gradient(circle, rgba(255, 87, 34, 0.18) 0%, rgba(186, 152, 251, 0.08) 50%, transparent 70%);
+  animation: geminiOrbFloat 12s ease-in-out infinite alternate;
+}
+
+@keyframes geminiOrbFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate(30px, -25px) scale(1.1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translate(-20px, 20px) scale(0.95);
+    opacity: 0.3;
+  }
+}
+
+/* Gemini Interactive Cursor Spotlight */
+.gemini-interactive-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(500px circle at var(--gemini-mouse-x, 50%) var(--gemini-mouse-y, 30%), rgba(78, 128, 238, 0.12), rgba(186, 152, 251, 0.05), transparent 70%);
+  pointer-events: none;
+  transition: background 0.05s ease-out;
+}
+
+/* Gemini AI Badge */
+.gemini-ai-badge {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-3);
-  position: relative;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background: rgba(78, 128, 238, 0.1);
+  border: 1px solid rgba(128, 151, 255, 0.3);
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #BA98FB;
+  margin-bottom: 12px;
+  width: fit-content;
+  box-shadow: 0 0 14px rgba(78, 128, 238, 0.2);
 }
 
-.skill-icon-wrap {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-orange-subtle);
-  border: 1px solid var(--accent-orange-border);
-  display: flex;
+.gemini-sparkle-spin {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-orange);
-  flex-shrink: 0;
-  transition: transform var(--transition-fast), background var(--transition-fast);
+  animation: geminiSpin 10s linear infinite;
 }
 
-.skill-card:hover .skill-icon-wrap {
-  transform: scale(1.08) rotate(3deg);
-  background: rgba(255, 87, 34, 0.2);
+@keyframes geminiSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.skill-category-title {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-card-title);
-  font-weight: var(--font-weight-bold);
-  color: #ffffff;
-  letter-spacing: -0.015em;
+/* Header & Filter Controls */
+.skills-header {
+  margin-bottom: var(--space-2);
+  position: relative;
+  z-index: 1;
 }
 
-.skill-card-badge {
-  margin-left: auto;
-  font-size: 0.72rem;
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
-}
-
-.skill-card:hover .skill-card-badge {
-  color: var(--accent-orange-light);
-  border-color: rgba(255, 87, 34, 0.3);
-}
-
-.skill-category-desc {
-  font-size: var(--font-size-sm);
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.skill-pills {
+.gemini-filter-container {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: auto;
-  padding-top: var(--space-2);
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
 }
 
-.skill-pill {
+.gemini-filter-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.04);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: #e5e7eb;
-  transition: all var(--transition-fast);
-  cursor: default;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary, #94a3b8);
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.gemini-filter-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4E80EE;
+  box-shadow: 0 0 8px #4E80EE;
+}
+
+.gemini-filter-pill:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.gemini-filter-pill.active {
+  background: linear-gradient(135deg, rgba(78, 128, 238, 0.25), rgba(186, 152, 251, 0.25));
+  border-color: rgba(128, 151, 255, 0.55);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(78, 128, 238, 0.35);
+}
+
+body.theme-light .gemini-filter-pill {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #475569;
+}
+
+body.theme-light .gemini-filter-pill.active {
+  background: linear-gradient(135deg, rgba(78, 128, 238, 0.15), rgba(186, 152, 251, 0.15));
+  border-color: rgba(78, 128, 238, 0.5);
+  color: #1e1b4b;
+}
+
+/* Categories Container */
+.skills-categories-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(36px, 4.5vw, 56px);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Category Block */
+.skill-category {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.5vw, 24px);
+  width: 100%;
+  position: relative;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* Category Header with Gemini Laser Pulse */
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
   user-select: none;
 }
 
-.skill-pill:hover {
-  background: var(--accent-orange-subtle);
-  border-color: var(--accent-orange);
-  color: #ffffff;
+.skill-category-badge {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #4E80EE;
+  background: transparent;
+  opacity: 0.95;
+  text-shadow: 0 0 10px rgba(78, 128, 238, 0.4);
+}
+
+.skill-category-title {
+  font-family: var(--font-family-display, 'Inter', sans-serif);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--text-primary, #ffffff);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.skill-category-divider {
+  flex: 1;
+  height: 1px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 80%, transparent 100%);
+}
+
+.gemini-laser-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #4E80EE, #BA98FB, transparent);
+  animation: geminiLaserPulse 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes geminiLaserPulse {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1000%);
+    opacity: 0;
+  }
+}
+
+body.theme-light .skill-category-divider {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.02) 80%, transparent 100%);
+}
+
+/* Category Technology Grid: Responsive, Uniform & Clean Spacing */
+.skills-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: clamp(20px, 3vw, 36px);
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .skills-category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 18px 12px;
+  }
+}
+
+/* Skill Item: ZERO cards, ZERO boxes, ZERO borders, ZERO progress bars */
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none;
+  padding: 10px 6px;
+  cursor: pointer;
+  user-select: none;
+  width: 100%;
+  max-width: 125px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.skill-item:focus-visible {
+  outline: 2px solid #4E80EE;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* Holographic Halo Ring behind each icon */
+.skill-icon-halo {
+  position: absolute;
+  top: 10px;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brand-glow, rgba(78, 128, 238, 0.5)) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Skill Icon Wrapper: Phased Floating Animation & Brand Glow */
+.skill-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  animation: skillFloat 4.2s ease-in-out infinite alternate;
+  animation-delay: var(--float-delay, 0s);
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.35s ease;
+  will-change: transform, filter;
+  z-index: 1;
+}
+
+.skill-icon-wrapper svg,
+.skill-icon-svg-inner,
+.skill-icon-svg-inner svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Subtle Floating Keyframe Animation */
+@keyframes skillFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Interactive Hover & Focus State */
+.skill-item:hover .skill-icon-halo,
+.skill-item:focus-visible .skill-icon-halo {
+  opacity: 0.85;
+  transform: scale(1.3);
+  filter: blur(5px);
+}
+
+.skill-item:hover .skill-icon-wrapper,
+.skill-item:focus-visible .skill-icon-wrapper {
+  transform: translateY(-8px) scale(1.16);
+  filter: drop-shadow(0 0 18px var(--brand-glow, rgba(78, 128, 238, 0.6)));
+}
+
+/* Skill Name Typography */
+.skill-name {
+  font-family: var(--font-family-body, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--text-secondary, #94a3b8);
+  margin-top: 10px;
+  text-align: center;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.25s ease, transform 0.25s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-item:hover .skill-name,
+.skill-item:focus-visible .skill-name {
+  color: var(--text-primary, #ffffff);
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(255, 87, 34, 0.25);
+  font-weight: 600;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+}
+
+body.theme-light .skill-name {
+  color: #64748b;
+}
+
+body.theme-light .skill-item:hover .skill-name,
+body.theme-light .skill-item:focus-visible .skill-name {
+  color: #0f172a;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Reduced Motion Accessibility Compliance */
+@media (prefers-reduced-motion: reduce) {
+  .skill-icon-wrapper,
+  .gemini-ambient-glow,
+  .gemini-sparkle-spin,
+  .gemini-laser-pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .skill-item,
+  .skill-name,
+  .skill-icon-halo,
+  .gemini-filter-pill {
+    transition: none !important;
+  }
+
+  .skill-item:hover .skill-icon-wrapper,
+  .skill-item:focus-visible .skill-icon-wrapper,
+  .skill-item:hover .skill-icon-halo,
+  .skill-item:focus-visible .skill-icon-halo {
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .skill-item:hover .skill-name,
+  .skill-item:focus-visible .skill-name {
+    transform: none !important;
+  }
 }

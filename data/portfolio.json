@@ -89,172 +89,127 @@
   },
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",
-    "title": "",
-    "subtitle": "Comprehensive technical stack spanning full-stack frameworks, relational database management, and cloud deployment tooling.",
+    "title": "Core Skills & Technologies",
+    "subtitle": "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.",
     "categories": [
       {
         "id": "languages",
         "name": "Programming Languages",
         "icon": "code",
-        "description": "Core languages utilized for full-stack engineering, scripting, and relational data querying.",
+        "description": "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
+        "skills": [
+          { "name": "Python", "icon": "python" },
+          { "name": "Java", "icon": "java" },
+          { "name": "JavaScript", "icon": "javascript" },
+          { "name": "HTML5", "icon": "html5" },
+          { "name": "CSS3", "icon": "css3" }
+        ],
         "items": [
-          {
-            "name": "Python",
-            "level": "Advanced",
-            "badge": "Primary Backend"
-          },
-          {
-            "name": "JavaScript (ES6+)",
-            "level": "Advanced",
-            "badge": "Frontend Core"
-          },
-          {
-            "name": "SQL",
-            "level": "Advanced",
-            "badge": "Relational Queries"
-          },
-          {
-            "name": "HTML5",
-            "level": "Advanced",
-            "badge": "Semantic Markup"
-          },
-          {
-            "name": "CSS3",
-            "level": "Advanced",
-            "badge": "Responsive Styling"
-          }
+          { "name": "Python", "icon": "python" },
+          { "name": "Java", "icon": "java" },
+          { "name": "JavaScript", "icon": "javascript" },
+          { "name": "HTML5", "icon": "html5" },
+          { "name": "CSS3", "icon": "css3" }
         ]
       },
       {
         "id": "frontend",
-        "name": "Frontend Technologies",
+        "name": "Frontend Development",
         "icon": "layers",
-        "description": "Building interactive, accessible, and high-performance user interfaces and dashboards.",
+        "description": "Modern reactive UI libraries, SSR frameworks, and utility-first styling architectures.",
+        "skills": [
+          { "name": "React.js", "icon": "react" },
+          { "name": "Next.js", "icon": "nextjs" },
+          { "name": "Tailwind CSS", "icon": "tailwindcss" },
+          { "name": "Bootstrap", "icon": "bootstrap" },
+          { "name": "Redux", "icon": "redux" }
+        ],
         "items": [
-          {
-            "name": "React.js",
-            "level": "Advanced",
-            "badge": "SPA & Dashboards"
-          },
-          {
-            "name": "Next.js",
-            "level": "Proficient",
-            "badge": "SSR & Routing"
-          },
-          {
-            "name": "Tailwind CSS",
-            "level": "Advanced",
-            "badge": "Modern Styling"
-          },
-          {
-            "name": "Bootstrap",
-            "level": "Advanced",
-            "badge": "Rapid UI Layouts"
-          },
-          {
-            "name": "Markdown Rendering",
-            "level": "Proficient",
-            "badge": "Live Preview Workflows"
-          }
+          { "name": "React.js", "icon": "react" },
+          { "name": "Next.js", "icon": "nextjs" },
+          { "name": "Tailwind CSS", "icon": "tailwindcss" },
+          { "name": "Bootstrap", "icon": "bootstrap" },
+          { "name": "Redux", "icon": "redux" }
         ]
       },
       {
         "id": "backend",
-        "name": "Backend & API Technologies",
+        "name": "Backend Development",
         "icon": "server",
-        "description": "Developing robust RESTful services, server-side business logic, and API integrations.",
+        "description": "High-throughput asynchronous frameworks, RESTful web services, and database ORMs.",
+        "skills": [
+          { "name": "FastAPI", "icon": "fastapi" },
+          { "name": "Django", "icon": "django" },
+          { "name": "Node.js", "icon": "nodejs" },
+          { "name": "Express.js", "icon": "express" },
+          { "name": "REST API", "icon": "restapi" },
+          { "name": "SQLAlchemy", "icon": "sqlalchemy" }
+        ],
         "items": [
-          {
-            "name": "FastAPI",
-            "level": "Advanced",
-            "badge": "Async REST APIs"
-          },
-          {
-            "name": "Django",
-            "level": "Advanced",
-            "badge": "Full-Featured Web"
-          },
-          {
-            "name": "RESTful APIs",
-            "level": "Advanced",
-            "badge": "Architecture & CRUD"
-          },
-          {
-            "name": "SQLAlchemy (ORM)",
-            "level": "Advanced",
-            "badge": "Data Modeling"
-          },
-          {
-            "name": "Third-Party API Integration",
-            "level": "Proficient",
-            "badge": "External Services"
-          }
+          { "name": "FastAPI", "icon": "fastapi" },
+          { "name": "Django", "icon": "django" },
+          { "name": "Node.js", "icon": "nodejs" },
+          { "name": "Express.js", "icon": "express" },
+          { "name": "REST API", "icon": "restapi" },
+          { "name": "SQLAlchemy", "icon": "sqlalchemy" }
         ]
       },
       {
         "id": "databases",
-        "name": "Databases & Storage",
+        "name": "Databases",
         "icon": "database",
-        "description": "Structured schema design, query optimization, and persistent relational data storage.",
+        "description": "Relational, document, and embedded databases with normalized schema design and query optimization.",
+        "skills": [
+          { "name": "MySQL", "icon": "mysql" },
+          { "name": "PostgreSQL", "icon": "postgresql" },
+          { "name": "MongoDB", "icon": "mongodb" },
+          { "name": "SQLite", "icon": "sqlite" }
+        ],
         "items": [
-          {
-            "name": "PostgreSQL",
-            "level": "Advanced",
-            "badge": "Relational DB"
-          },
-          {
-            "name": "MySQL",
-            "level": "Advanced",
-            "badge": "Relational Schemas"
-          },
-          {
-            "name": "CRUD Optimization",
-            "level": "Advanced",
-            "badge": "Query Performance"
-          },
-          {
-            "name": "Database Migrations",
-            "level": "Proficient",
-            "badge": "Schema Versioning"
-          }
+          { "name": "MySQL", "icon": "mysql" },
+          { "name": "PostgreSQL", "icon": "postgresql" },
+          { "name": "MongoDB", "icon": "mongodb" },
+          { "name": "SQLite", "icon": "sqlite" }
         ]
       },
       {
         "id": "tools",
-        "name": "Developer Tools & Core Concepts",
+        "name": "Tools & Technologies",
         "icon": "cpu",
-        "description": "Software engineering fundamentals, testing tools, and continuous collaborative workflows.",
+        "description": "Enterprise developer tooling, containerization, collaborative version control, and API testing suites.",
+        "skills": [
+          { "name": "Git", "icon": "git" },
+          { "name": "GitHub", "icon": "github" },
+          { "name": "VS Code", "icon": "vscode" },
+          { "name": "Docker", "icon": "docker" },
+          { "name": "Postman", "icon": "postman" },
+          { "name": "Linux", "icon": "linux" }
+        ],
         "items": [
-          {
-            "name": "Git & GitHub",
-            "level": "Advanced",
-            "badge": "Version Control"
-          },
-          {
-            "name": "Postman",
-            "level": "Advanced",
-            "badge": "API Testing"
-          },
-          {
-            "name": "OOPs Concepts",
-            "level": "Advanced",
-            "badge": "System Design"
-          },
-          {
-            "name": "Data Structures & Algorithms",
-            "level": "Proficient",
-            "badge": "Problem Solving"
-          },
-          {
-            "name": "VS Code",
-            "level": "Advanced",
-            "badge": "IDE & Extensions"
-          },
-          {
-            "name": "Jupyter Notebook",
-            "level": "Proficient",
-            "badge": "Prototyping"
-          }
+          { "name": "Git", "icon": "git" },
+          { "name": "GitHub", "icon": "github" },
+          { "name": "VS Code", "icon": "vscode" },
+          { "name": "Docker", "icon": "docker" },
+          { "name": "Postman", "icon": "postman" },
+          { "name": "Linux", "icon": "linux" }
+        ]
+      },
+      {
+        "id": "ai-tools",
+        "name": "AI Development Tools",
+        "icon": "zap",
+        "description": "Next-generation generative AI platforms, frontier models, and autonomous coding environments.",
+        "skills": [
+          { "name": "ChatGPT", "icon": "chatgpt" },
+          { "name": "Claude", "icon": "claude" },
+          { "name": "Gemini", "icon": "gemini" },
+          { "name": "Antigravity IDE", "icon": "antigravity" }
+        ],
+        "items": [
+          { "name": "ChatGPT", "icon": "chatgpt" },
+          { "name": "Claude", "icon": "claude" },
+          { "name": "Gemini", "icon": "gemini" },
+          { "name": "Antigravity IDE", "icon": "antigravity" }
         ]
       }
     ]

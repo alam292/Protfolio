@@ -36,6 +36,7 @@
   - [5. AI Resume Auto-Sync & Dynamic Update Workflow](#5-ai-resume-auto-sync--dynamic-update-workflow)
 - [📂 Directory & Module Structure](#-directory--module-structure)
 - [🚀 Quick Start & Installation](#-quick-start--installation)
+- [🧪 Automated Testing & Verification](#-automated-testing--verification)
 - [📌 Versioning & Release History](#-versioning--release-history)
 - [🎨 Design Tokens & UI Architecture](#-design-tokens--ui-architecture)
 - [👨‍💻 Author & Contact](#-author--contact)
@@ -338,10 +339,38 @@ d:\Project\Protfolio\
 
 ---
 
+## 🧪 Automated Testing & Verification
+
+The portfolio includes an automated test runner (`test-runner.js`) ensuring complete architectural integrity, schema compliance, asset availability, HTTP endpoint health, and accessibility:
+
+```bash
+# Execute the automated verification suite
+npm test
+```
+
+### Test Suites Overview
+
+| Suite | Description | Verification Target | Status |
+| :---: | :--- | :--- | :---: |
+| **Suite 1** | **Data Store & Resume Validation** | Verifies `portfolio.json` author metadata, titles, PDF size (>1KB), stats count, 6 skills tiers, projects, roles, and degrees. | `PASS (12/12)` |
+| **Suite 2** | **Asset Integrity** | Asserts all critical binary and vector assets exist and have positive file sizes on disk. | `PASS (5/5)` |
+| **Suite 3** | **DOM Skeleton & Navigation Mapping** | Validates semantic section containers, dynamic mounts (`#skillsMount`, etc.), anchors, and JSON-LD schema. | `PASS (27/27)` |
+| **Suite 4** | **AI Resume Modal Integration** | Tests dropzone, file input, progress bars, and modal stylesheets. | `PASS (8/8)` |
+| **Suite 5** | **Text Extraction & Rule Parser** | Tests in-memory PDF parsing and deterministic fallback restructuring without network dependency. | `PASS (5/5)` |
+| **Suite 6** | **HTTP Server Endpoints** | Tests live HTTP response codes (200) and MIME types for static assets, scripts, CSS, and API endpoints. | `PASS (20/20)` |
+| **Suite 7** | **Resume Upload API** | Executes real multipart PDF upload against `/api/upload-resume`, verifies automated snapshot backups and persistence. | `PASS (4/4)` |
+| **Suite 8** | **Form Validation Engine** | Evaluates email regex against standard domains, complex subdomains, invalid inputs, and boundary conditions. | `PASS (5/5)` |
+| **Suite 9** | **Modern Technology Skills Showcase** | Verifies 6 official categories, 30 authentic brand vector logos, dynamic React component exports (`SkillItem`, `SkillCategory`, `SkillsSection`), floating keyframes, radiant hover glows, zero cards/boxes/bars, and reduced motion. | `PASS (61/61)` |
+
+**Test Result Summary**: **147 Checks | 147 Passed | 0 Failed (100% Production Ready)**
+
+---
+
 ## 📌 Versioning & Release History
 
 | Version | Release Date | Summary of Changes |
 | :---: | :---: | :--- |
+| **`v1.1.0`** | **November 2026** | **Modern Animated Technology Showcase Redesign**<br>&bull; Replaced legacy cards, pills, and ratings with a minimalist, category-wise technology showcase.<br>&bull; 6 structured categories: Programming Languages, Frontend Development, Backend Development, Databases, Tools & Technologies, AI Development Tools.<br>&bull; 30 authentic official brand SVG vectors with responsive scaling and zero external network requests.<br>&bull; Dynamic reusable React components (`SkillIcon`, `SkillItem`, `SkillCategory`, `SkillsSection`) mounted into `#skillsMount`.<br>&bull; Phased floating keyframe animations (`@keyframes skillFloat`), interactive radiant brand glows, GSAP ScrollTrigger staggered entrance, and reduced-motion accessibility.<br>&bull; Expanded automated testing suite (`test-runner.js`) with 61 dedicated skills verification assertions (147 total checks passing). |
 | **`v1.0.0`** | **November 2026** | **Initial Production Release**<br>&bull; Fully integrated 300-frame scroll-scrubbed canvas engine.<br>&bull; 8 complete modular sections (Hero, About, Skills, Projects, Experience, Education, Certificates, Contact).<br>&bull; Modular CSS design system with glassmorphic cards and fluid typography.<br>&bull; Zero-dependency Node.js streaming HTTP server with immutable cache control headers.<br>&bull; Accessible mobile drawer navigation, live contact form validation, and toast notification system. |
 
 ---

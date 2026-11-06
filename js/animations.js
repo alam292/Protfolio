@@ -144,17 +144,59 @@ class AnimationsController {
   }
 
   initSkillsSection() {
-    gsap.from('.skill-card', {
-      scrollTrigger: {
-        trigger: '#skills .skills-grid',
-        start: 'top 82%'
-      },
-      y: 50,
-      opacity: 0,
-      stagger: 0.14,
-      duration: 1,
-      ease: 'power3.out'
-    });
+    if (!this.hasGSAP || this.prefersReducedMotion) return;
+
+    // Stagger categories and skill items smoothly as they enter viewport
+    const categories = gsap.utils.toArray('.skill-category');
+    if (categories.length > 0) {
+      categories.forEach((cat) => {
+        const header = cat.querySelector('.skill-category-header');
+        const items = cat.querySelectorAll('.skill-item');
+
+        if (header) {
+          gsap.from(header, {
+            scrollTrigger: {
+              trigger: cat,
+              start: 'top 88%',
+              toggleActions: 'play none none reverse'
+            },
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+          });
+        }
+
+        if (items.length > 0) {
+          gsap.from(items, {
+            scrollTrigger: {
+              trigger: cat,
+              start: 'top 85%',
+              toggleActions: 'play none none reverse'
+            },
+            y: 28,
+            opacity: 0,
+            scale: 0.92,
+            stagger: 0.045,
+            duration: 0.7,
+            ease: 'back.out(1.2)'
+          });
+        }
+      });
+    } else {
+      gsap.from('.skill-item', {
+        scrollTrigger: {
+          trigger: '#skills',
+          start: 'top 82%'
+        },
+        y: 30,
+        opacity: 0,
+        scale: 0.9,
+        stagger: 0.03,
+        duration: 0.7,
+        ease: 'power3.out'
+      });
+    }
   }
 
   initProjectsSection() {

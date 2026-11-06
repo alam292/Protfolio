@@ -159,9 +159,22 @@ Every component in the Folioblox Design System is built as a self-contained modu
 - **Dual-Pane Composition**: Left pane delivers the primary identity hierarchy (Availability Badge, Monospace Micro-Tag, Grand Display Name, Subtitle, and Call-to-Actions). Right pane features a card with an avatar portrait, atmospheric radial glow, and floating metadata badges.
 - **Bento Metric Indicators**: 4-card statistics cluster delivering high-impact metrics (Years Experience, Production Deploys, Systems Engineered, Performance Ratings) with spring hover lift.
 
-### 4.3 Tech Skills Matrix (`skills.css`)
-- **5-Tier Capability Grid**: Categorized into Frontend Architecture, Backend & Microservices, Database & Caching, DevOps & Cloud, and Tooling & Architecture.
-- **Interactive Badges**: Monospace chip tags with subtle hover glow effects and progress indicators.
+### 4.3 Modern Technology Skills Showcase (`skills.css` & `js/skills-component.js`)
+- **Category-Wise Technology Architecture**: Dynamic 6-tier classification spanning:
+  1. *Programming Languages* (Python, Java, JavaScript, HTML5, CSS3)
+  2. *Frontend Development* (React.js, Next.js, Tailwind CSS, Bootstrap, Redux)
+  3. *Backend Development* (FastAPI, Django, Node.js, Express.js, REST API, SQLAlchemy)
+  4. *Databases* (MySQL, PostgreSQL, MongoDB, SQLite)
+  5. *Tools & Technologies* (Git, GitHub, VS Code, Docker, Postman, Linux)
+  6. *AI Development Tools* (ChatGPT, Claude, Gemini, Antigravity IDE)
+- **Zero-Box / Zero-Border Philosophy**: Strictly no cards, background boxes, border outlines, progress meters, or percentage bars. Minimalist, uncluttered, and elegant aesthetic where only the authentic brand vector and animated typography are visible.
+- **Dynamic React Components**: Modular, reusable React components (`SkillIcon`, `SkillItem`, `SkillCategory`, `SkillsSection`) mounted into `#skillsMount` via React 18 `createRoot` from `data/portfolio.json`.
+- **Kinematic Physics & Brand Glow**:
+  - Continuous subtle floating animation (`@keyframes skillFloat`) with staggered phase delays (`--float-delay`).
+  - Interactive hover state scaling the SVG icon (1.14x) with radiant brand-colored drop shadows (`--brand-glow`).
+  - Typography smooth slide-up and color illumination on hover.
+  - Viewport entry staggered reveal orchestrated via GSAP ScrollTrigger.
+  - Complete `@media (prefers-reduced-motion: reduce)` compliance.
 
 ### 4.4 Projects Showcase Browser (`projects.css`)
 - **Simulated Browser Chrome**: Mac-style traffic light window controls (Red, Yellow, Green), SSL security padlock, and monospace URL bar.
@@ -210,7 +223,7 @@ d:/Project/Protfolio/
 │       ├── hero.css                    # Hero identity, avatar card & Bento metrics
 │       ├── brands.css                  # Tech ribbon ticker
 │       ├── about.css                   # Bio narrative & KPI cards
-│       ├── skills.css                  # 5-tier technical skill cards
+│       ├── skills.css                  # Modern minimalist technology showcase (zero cards/boxes)
 │       ├── projects.css                # Browser mockup project cards
 │       ├── experience.css              # Career timeline with luminous nodes
 │       ├── education.css               # Academic qualifications & coursework

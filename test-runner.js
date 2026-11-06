@@ -25,7 +25,7 @@ async function runTests() {
   assert(fs.existsSync(data.profile.resumeUrl), 'Resume PDF file exists at path');
   assert(fs.statSync(data.profile.resumeUrl).size > 1000, 'Resume PDF is non-empty (>1KB)');
   assert(data.stats.length === 4, '4 KPI statistics configured');
-  assert(data.skills.categories.length === 5, '5 Technical skills tiers defined');
+  assert(data.skills.categories.length === 6, '6 Technical skills categories defined');
   assert(data.projects.items.length >= 3, 'Flagship projects present');
   assert(data.projects.items.every(p => p.githubUrl && p.liveDemoUrl), 'All projects have GitHub & Demo links');
   assert(data.experience.roles.length >= 1, 'Experience roles documented');
@@ -93,6 +93,7 @@ async function runTests() {
     { path: '/data/portfolio.json', expectedStatus: 200, mime: 'application/json' },
     { path: '/assets/Md_Matloob_Alam_Software_Developer_Resume.pdf', expectedStatus: 200, mime: 'application/pdf' },
     { path: '/js/render.js', expectedStatus: 200, mime: 'text/javascript' },
+    { path: '/js/skills-component.js', expectedStatus: 200, mime: 'text/javascript' },
     { path: '/js/resume-uploader.js', expectedStatus: 200, mime: 'text/javascript' },
     { path: '/js/theme.js', expectedStatus: 200, mime: 'text/javascript' },
     { path: '/css/main.css', expectedStatus: 200, mime: 'text/css' },
@@ -179,6 +180,78 @@ async function runTests() {
   assert(!emailRegex.test('invalid-email'), 'Invalid string fails email regex');
   assert(!emailRegex.test('@missinguser.com'), 'Missing username fails email regex');
   assert(!emailRegex.test('user@domain'), 'Missing TLD fails email regex');
+
+  console.log('\n=== SUITE 9: MODERN TECHNOLOGY SKILLS SHOWCASE & COMPONENT INTEGRATION ===');
+  const skillsData = data.skills;
+  const expectedCategories = [
+    'Programming Languages',
+    'Frontend Development',
+    'Backend Development',
+    'Databases',
+    'Tools & Technologies',
+    'AI Development Tools'
+  ];
+
+  assert(skillsData && Array.isArray(skillsData.categories), 'Skills categories array is defined');
+  assert(skillsData.categories.length === 6, 'Exactly 6 skill categories configured');
+
+  expectedCategories.forEach((catName) => {
+    const found = skillsData.categories.some(c => c.name === catName);
+    assert(found, `Category defined: "${catName}"`);
+  });
+
+  // Calculate total skill count
+  const allSkills = skillsData.categories.flatMap(c => c.skills || c.items || []);
+  assert(allSkills.length === 30, `Total 30 official skills configured (found ${allSkills.length})`);
+
+  // Verify all 30 skills have names and icons
+  const requiredSkillsList = [
+    'Python', 'Java', 'JavaScript', 'HTML5', 'CSS3',
+    'React.js', 'Next.js', 'Tailwind CSS', 'Bootstrap', 'Redux',
+    'FastAPI', 'Django', 'Node.js', 'Express.js', 'REST API', 'SQLAlchemy',
+    'MySQL', 'PostgreSQL', 'MongoDB', 'SQLite',
+    'Git', 'GitHub', 'VS Code', 'Docker', 'Postman', 'Linux',
+    'ChatGPT', 'Claude', 'Gemini', 'Antigravity IDE'
+  ];
+
+  requiredSkillsList.forEach(name => {
+    const item = allSkills.find(s => s.name === name);
+    assert(item !== undefined && item.icon, `Skill present with brand icon: ${name}`);
+  });
+
+  // Test SkillsShowcase component module
+  const skillsModule = require('./js/skills-component');
+  assert(typeof skillsModule.renderSkillsHtmlString === 'function', 'renderSkillsHtmlString exported');
+  assert(skillsModule.SKILLS_ICONS_REGISTRY && Object.keys(skillsModule.SKILLS_ICONS_REGISTRY).length >= 25, 'Official brand SVG icon registry loaded');
+
+  // Verify rendered HTML conforms to zero-card, zero-box, minimal design
+  const generatedHtml = skillsModule.renderSkillsHtmlString(skillsData);
+  assert(generatedHtml.includes('skills-showcase-container'), 'Showcase container present');
+  assert(generatedHtml.includes('skill-category'), 'Category containers present');
+  assert(generatedHtml.includes('skill-item'), 'Skill item present');
+  assert(generatedHtml.includes('skill-icon-wrapper'), 'Skill icon wrapper present');
+  assert(generatedHtml.includes('skill-name'), 'Skill name typography element present');
+  assert(!generatedHtml.includes('skill-card'), 'NO cards or boxes in generated markup');
+  assert(!generatedHtml.includes('progress-bar'), 'NO progress bars in generated markup');
+  assert(!generatedHtml.includes('rating'), 'NO percentage ratings in generated markup');
+
+  // Verify index.html integration
+  assert(html.includes('react.production.min.js'), 'React 18 script included in index.html');
+  assert(html.includes('react-dom.production.min.js'), 'ReactDOM 18 script included in index.html');
+  assert(html.includes('js/skills-component.js'), 'js/skills-component.js included in index.html');
+
+  // Verify CSS styles
+  const skillsCss = fs.readFileSync('css/components/skills.css', 'utf8');
+  assert(skillsCss.includes('.skills-category-grid'), 'Grid layout defined in skills.css');
+  assert(skillsCss.includes('skillFloat'), 'Floating animation keyframes defined');
+  assert(skillsCss.includes('--brand-glow'), 'Brand-colored hover glow effect defined');
+  assert(skillsCss.includes('prefers-reduced-motion'), 'Reduced motion accessibility supported');
+  assert(!skillsCss.includes('.skill-card {'), 'Legacy card styling eliminated');
+
+  // Verify animations controller
+  const animationsJs = fs.readFileSync('js/animations.js', 'utf8');
+  assert(animationsJs.includes('.skill-category'), 'Staggered category animation in animations.js');
+  assert(animationsJs.includes('.skill-item'), 'Staggered skill item animation in animations.js');
 
   console.log('\n======================================================');
   console.log(`TOTAL CHECKS: ${passed + failed} | PASSED: ${passed} | FAILED: ${failed}`);

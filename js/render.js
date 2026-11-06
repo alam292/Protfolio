@@ -287,47 +287,55 @@ class PortfolioRenderer {
     `;
   }
 
-  // 3. Technical Skills Section
+  // 3. Technical Skills Section (Modern Animated Technology Showcase)
   renderSkills() {
     const mount = document.getElementById('skillsMount');
     if (!mount) return;
 
     const { skills } = this.data;
+    if (!skills) return;
 
-    const cardsHtml = skills.categories.map(cat => {
-      const pillsHtml = cat.items.map(item => `
-        <span class="skill-pill" title="${item.level}">
-          <strong>${item.name}</strong> &bull; ${item.badge}
-        </span>
-      `).join('');
-
-      return `
-        <article class="card skill-card">
-          <div class="skill-card-top">
-            <div class="skill-icon-wrap" aria-hidden="true">
-              ${this.getIconSvg(cat.icon)}
+    if (window.SkillsShowcase && typeof window.SkillsShowcase.renderSkillsReact === 'function') {
+      window.SkillsShowcase.renderSkillsReact(mount, skills);
+    } else if (window.SkillsShowcase && typeof window.SkillsShowcase.renderSkillsHtmlString === 'function') {
+      mount.innerHTML = window.SkillsShowcase.renderSkillsHtmlString(skills);
+    } else {
+      // Fallback simple clean grid if module is loading
+      const categoriesHtml = (skills.categories || []).map((cat, idx) => {
+        const skillsList = cat.skills || cat.items || [];
+        const items = skillsList.map(s => `
+          <div class="skill-item" role="listitem" tabindex="0" aria-label="${s.name}">
+            <div class="skill-icon-wrapper" aria-hidden="true">${this.getIconSvg(cat.icon || 'code')}</div>
+            <span class="skill-name">${s.name}</span>
+          </div>
+        `).join('');
+        return `
+          <div class="skill-category" role="region" aria-label="${cat.name}">
+            <div class="skill-category-header">
+              <span class="skill-category-badge">${String(idx + 1).padStart(2, '0')}</span>
+              <h3 class="skill-category-title">${cat.name}</h3>
+              <div class="skill-category-divider" aria-hidden="true"></div>
             </div>
-            <h3 class="skill-category-title">${cat.name}</h3>
-            <span class="skill-card-badge">${cat.items.length} Techs</span>
+            <div class="skills-category-grid" role="list">
+              ${items}
+            </div>
           </div>
-          <p class="skill-category-desc">
-            ${cat.description}
-          </p>
-          <div class="skill-pills">
-            ${pillsHtml}
+        `;
+      }).join('');
+
+      mount.innerHTML = `
+        <div class="skills-showcase-container">
+          <div class="skills-header">
+            <h2 class="section-tag" id="skills-title">${skills.sectionTag || 'TECHNICAL ARSENAL'}</h2>
+            ${skills.title ? `<h3 class="section-heading">${skills.title}</h3>` : ''}
+            ${skills.subtitle ? `<p class="section-subtitle">${skills.subtitle}</p>` : ''}
           </div>
-        </article>
+          <div class="skills-categories-container">
+            ${categoriesHtml}
+          </div>
+        </div>
       `;
-    }).join('');
-
-    mount.innerHTML = `
-      <h2 class="section-tag" id="skills-title">${skills.sectionTag}</h2>
-      ${skills.subtitle ? `<p class="section-subtitle">${skills.subtitle}</p>` : ''}
-
-      <div class="skills-grid">
-        ${cardsHtml}
-      </div>
-    `;
+    }
   }
 
   // 4. Featured Projects Section
