@@ -1,19 +1,18 @@
 /**
- * Responsive Design Architecture
+ * Responsive Design Architecture (css/responsive.css)
  * Comprehensive breakpoint system covering Desktop, Laptop, Tablet, Phablet, and Mobile.
  */
 
 /* ==========================================================================
-   1. Laptop & Desktop Refinements (1025px - 1440px)
+   1. Laptop & Desktop Refinements (1025px - 1280px)
    ========================================================================== */
 @media (max-width: 1200px) {
   .hero-main-title {
     font-size: clamp(3rem, 6.5vw, 5.2rem);
   }
 
-  .behind-header {
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
+  .projects-pipeline-wrap {
+    max-width: 1000px;
   }
 }
 
@@ -28,6 +27,10 @@
 
   .mobile-toggle {
     display: flex;
+  }
+
+  .nav-actions {
+    gap: var(--space-3);
   }
 
   /* Hero Section */
@@ -68,20 +71,48 @@
     gap: var(--space-6);
   }
 
-  /* Featured Projects */
-  .behind-header {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
+  /* Featured Projects Bilateral Pipeline */
+  .projects-pipeline {
+    padding: 20px 14px 20px 40px;
   }
 
-  .projects-grid,
-  .showcase-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
+  .projects-edge-spine {
+    left: 14px;
+    transform: none;
   }
 
-  .showcase-card:last-child {
-    grid-column: span 2;
+  .project-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding-bottom: clamp(48px, 6vw, 68px);
+  }
+
+  .project-entry--left-media .project-media-col,
+  .project-entry--right-media .project-media-col {
+    order: 1;
+    width: 100%;
+  }
+
+  .project-entry--left-media .project-content-col,
+  .project-entry--right-media .project-content-col {
+    order: 2;
+    width: 100%;
+  }
+
+  .project-vertex {
+    left: -40px;
+    top: 14px;
+    transform: none;
+  }
+
+  .project-stem-connector {
+    left: 20px;
+    top: 9px;
+    width: 18px;
+    transform: none;
+    background: linear-gradient(90deg, var(--accent-orange), rgba(255, 87, 34, 0.25));
   }
 
   /* About & Contact Grids */
@@ -95,17 +126,13 @@
     gap: var(--space-8);
   }
 
-  /* Education & Certificates */
+  /* Education Pipeline */
   .academic-graph {
     padding: 16px 8px;
   }
 
   .graph-network {
     padding-left: 36px;
-  }
-
-  .certificates-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -114,7 +141,7 @@
    ========================================================================== */
 @media (max-width: 767px) {
   .navbar {
-    padding: 16px var(--section-padding-x);
+    padding: 14px var(--section-padding-x);
   }
 
   .navbar.scrolled {
@@ -132,7 +159,7 @@
   }
 
   .hero-section {
-    padding-top: 110px;
+    padding-top: 100px;
     padding-bottom: 40px;
   }
 
@@ -141,36 +168,13 @@
     gap: var(--space-4);
   }
 
-  .projects-grid,
-  .showcase-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
-  }
-
-  .showcase-card {
-    aspect-ratio: 4 / 3;
-  }
-
-  .showcase-card:last-child {
-    grid-column: span 1;
-  }
-
-  .project-actions {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .about-stats-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
   }
 
-  .behind-action-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-4);
-  }
-
-  .form-row {
+  .form-row,
+  .form-row-2 {
     grid-template-columns: 1fr;
     gap: var(--space-4);
   }
@@ -185,20 +189,6 @@
 
   .timeline-dot {
     left: 7px;
-  }
-
-  /* Certificates & Achievements */
-  .certificates-grid {
-    grid-template-columns: 1fr;
-  }
-
-  /* Contact Section Adaptations */
-  .form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .timezone-chips-grid {
-    grid-template-columns: 1fr;
   }
 
   .footer {
@@ -222,15 +212,28 @@
 @media (max-width: 480px) {
   :root {
     --card-radius: 20px;
-    --section-padding-x: 18px;
+    --section-padding-x: 16px;
   }
 
   .navbar {
-    padding: 14px 16px;
+    padding: 12px 14px;
   }
 
+  /* Compact Navbar Actions: Hide verbose button text */
   .nav-actions .btn-touch {
-    display: none; /* Keep clean space for brand logo and hamburger toggle */
+    display: none; /* Accessible in the mobile drawer */
+  }
+
+  .btn-nav-upload span {
+    display: none; /* Show icon-only button on compact mobile */
+  }
+
+  .btn-nav-upload {
+    padding: 8px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
   }
 
   .logo-text {
@@ -316,36 +319,32 @@
     padding: var(--space-5);
   }
 
-  .project-browser-bar {
-    padding: 10px 14px;
+  .projects-pipeline {
+    padding: 14px 6px 14px 28px;
   }
 
-  .project-address-bar {
-    max-width: 170px;
+  .projects-edge-spine {
+    left: 8px;
   }
 
-  .project-body {
-    padding: 18px 16px;
+  .project-vertex {
+    left: -28px;
   }
 
-  .project-title {
-    font-size: 1.18rem;
+  .project-stem-connector {
+    width: 10px;
+    left: 18px;
   }
 
-  .project-actions {
-    grid-template-columns: 1fr;
+  .project-actions-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .showcase-card {
-    aspect-ratio: 1 / 1;
-  }
-
-  .showcase-card-overlay {
-    padding: 20px 16px 16px;
-  }
-
-  .showcase-card-name {
-    font-size: 1.05rem;
+  .btn-touch,
+  .btn-project-code {
+    width: 100%;
+    justify-content: center;
   }
 
   .timeline-meta {
@@ -377,17 +376,10 @@
     grid-template-columns: 1fr;
   }
 
-  .location-plan-details {
-    grid-template-columns: 1fr;
-  }
-
-  .channel-card-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .btn-channel-action {
-    justify-content: center;
+  .contact-info-card,
+  .contact-form-card {
+    padding: 20px 16px;
+    border-radius: 16px;
   }
 
   .back-to-top {
@@ -397,4 +389,3 @@
     height: 40px;
   }
 }
-

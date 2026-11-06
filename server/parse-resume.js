@@ -57,9 +57,16 @@ async function structureResumeWithAI(rawText, basePortfolio = {}) {
 
   if (apiKey && apiKey !== 'YOUR_GEMINI_API_KEY_HERE') {
     try {
-      return await callGeminiAI(rawText, basePortfolio, apiKey);
+      // Impose a strict 8-second global timeout for AI processing
+      const timeoutPromise = new Promise((_, reject) => {
+        setTimeout(() => reject(new Error('AI processing timed out after 8s')), 8000);
+      });
+      return await Promise.race([
+        callGeminiAI(rawText, basePortfolio, apiKey),
+        timeoutPromise
+      ]);
     } catch (aiErr) {
-      console.warn('[AI Parser] Gemini AI call failed, switching to deterministic fallback parser:', aiErr.message);
+      console.warn('[AI Parser] Gemini AI call failed or timed out, switching to deterministic fallback parser:', aiErr.message);
       return fallbackRuleBasedParser(rawText, basePortfolio);
     }
   } else {
@@ -260,53 +267,45 @@ ${rawText}
 `;
 
   let responseText = '';
+  const controller = new AbortController();
+  const fetchTimeout = setTimeout(() => controller.abort(), 6000);
 
-  // 1. Primary: Direct REST call with gemini-3.8-flash (fast, reliable, native JSON mode)
-  try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
-          responseMimeType: 'application/json'
-        }
-      })
-    });
-    const data = await res.json();
-    if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-      responseText = data.candidates[0].content.parts[0].text;
-    } else if (data.error) {
-      throw new Error(`Gemini API Error: ${data.error.message || JSON.stringify(data.error)}`);
-    }
-  } catch (restErr) {
-    console.warn('[AI Parser] REST call failed, trying SDK fallback:', restErr.message);
+  // 1. Primary: Direct REST call with official models (fast, reliable, native JSON mode)
+  const modelsToTry = ['gemini-2.0-flash', 'gemini-1.5-flash'];
+  let restSucceeded = false;
 
-    // 2. Secondary fallback: @google/genai SDK
+  for (const model of modelsToTry) {
     try {
-      const { GoogleGenAI } = require('@google/genai');
-      const ai = new GoogleGenAI({ apiKey });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3.8-flash',
-        contents: prompt,
-        config: {
-          responseMimeType: 'application/json'
-        }
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: controller.signal,
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: {
+            responseMimeType: 'application/json'
+          }
+        })
       });
-      responseText = response.text || (response.candidates && response.candidates[0]?.content?.parts[0]?.text) || '';
-    } catch (sdkErr) {
-      // 3. Tertiary fallback: @google/generative-ai SDK
-      try {
-        const { GoogleGenerativeAI } = require('@google/generative-ai');
-        const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-3.8-flash' });
-        const result = await model.generateContent(prompt);
-        responseText = result.response.text();
-      } catch (genAiErr) {
-        console.warn('[AI Parser] Gemini AI call failed, switching to deterministic fallback parser:', genAiErr.message);
-        return fallbackRuleBasedParser(rawText, basePortfolio);
+      const data = await res.json();
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        responseText = data.candidates[0].content.parts[0].text;
+        restSucceeded = true;
+        break;
+      } else if (data.error) {
+        console.warn(`[AI Parser] REST call model ${model} error:`, data.error.message || JSON.stringify(data.error));
       }
+    } catch (restErr) {
+      console.warn(`[AI Parser] REST call ${model} failed:`, restErr.message);
+      break;
     }
+  }
+  clearTimeout(fetchTimeout);
+
+  if (!restSucceeded || !responseText) {
+    // Immediate fallback to deterministic rule parser
+    console.log('[AI Parser] Switched to deterministic rule-based parser for instant, reliable response.');
+    return fallbackRuleBasedParser(rawText, basePortfolio);
   }
 
   // Sanitize JSON

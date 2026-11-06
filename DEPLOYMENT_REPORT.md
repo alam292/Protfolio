@@ -145,5 +145,17 @@ When you decide to purchase the domain `alam292.tech`:
 
 ---
 
+## ⚡ 6. Post-Deployment QA & Maintenance Patch (v1.3.0)
+
+On November 06, 2026, a comprehensive quality and responsiveness update was applied and verified:
+- **Resilient AI Resume Ingestion**: Implemented 8s AbortController timeout in `server/parse-resume.js` to eliminate network retries on Gemini API demand spikes, providing immediate deterministic schema parsing fallback.
+- **Social Media Meta Verification**: Synchronized `og:image` and `twitter:image` tags in `index.html` to point to valid production image `assets/profile-matloob-clean.png`.
+- **Theme Consistency**: Updated `css/components/skills.css` to respect `[data-theme="light"]` selectors.
+- **Mobile Drawer Touch Optimization**: Configured `css/components/drawer.css` with vertical scrolling (`overflow-y: auto`, `-webkit-overflow-scrolling: touch`) and flexible padding for small screens and landscape orientations.
+- **Upload Modal Safe Bounds**: Added `max-height: calc(100vh - 2.5rem)` and scrollability to prevent clipping on mobile viewports.
+- **Full Verification**: Ran test runner (`node test-runner.js`), passing 147 out of 147 tests across all 9 suites.
+
+---
+
 *Report generated on November 06, 2026 &bull; Verified and operational.*
 

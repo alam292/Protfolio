@@ -1,7 +1,7 @@
 # 🌌 Md MatlooB Alam — Full Stack & UI Kinematics Portfolio
 
 [![Live Portfolio](https://img.shields.io/badge/Live_Site-alam292--portfolio.pages.dev-00C7B7.svg?style=for-the-badge&logo=cloudflare&logoColor=white)](https://alam292-portfolio.pages.dev)
-[![Version](https://img.shields.io/badge/version-1.2.0-blue.svg?style=for-the-badge&logo=semver)](package.json)
+[![Version](https://img.shields.io/badge/version-1.3.0-blue.svg?style=for-the-badge&logo=semver)](package.json)
 [![Hosting](https://img.shields.io/badge/Cloudflare_Pages-Edge_CDN-F38020.svg?style=for-the-badge&logo=cloudflare)](https://alam292-portfolio.pages.dev)
 [![CI/CD](https://img.shields.io/badge/CI%2FCD-GitHub_Actions_%26_Pages-2088FF.svg?style=for-the-badge&logo=github)](https://github.com/alam292/Protfolio)
 [![Tech Stack](https://img.shields.io/badge/tech%20stack-HTML5%20%7C%20CSS3%20%7C%20Vanilla%20JS%20%7C%20GSAP-orange.svg?style=for-the-badge)](package.json)
@@ -278,7 +278,8 @@ d:\Project\Protfolio\
 │       ├── hero.css                      # Hero headline, author badge & quick pillars
 │       ├── navbar.css                    # Desktop sticky header & logo styling
 │       ├── projects.css                  # Featured projects browser chrome & tags
-│       └── skills.css                    # Technical taxonomy grid & capability pills
+│       ├── skills.css                    # Technical taxonomy grid & capability pills
+│       └── upload-modal.css              # AI resume upload & sync modal styles
 ├── doc/                                  # Architectural plans & documentation
 │   ├── ABOUT_ME_PLAN.md                  # Narrative strategy & 4 core pillars
 │   ├── CERTIFICATIONS_ACHIEVEMENTS_PLAN.md # Credentials & verified achievements
@@ -293,17 +294,27 @@ d:\Project\Protfolio\
 │   ├── ezgif-frame-001.jpg               # Frame 001
 │   ├── ...                               # Frames 002 through 299
 │   └── ezgif-frame-300.jpg               # Frame 300
-├── js/                                   # Vanilla ES6+ Modular Controllers
+├── js/                                   # Vanilla ES6+ & Dynamic React Controllers
 │   ├── animations.js                     # GSAP ScrollTrigger timeline orchestrator
 │   ├── canvas-stream.js                  # 300-frame canvas kinematics & DPR loader
 │   ├── form.js                           # Form validation & floating toast alerts
 │   ├── main.js                           # Entry point & module bootstrap
-│   └── navigation.js                     # Sticky navbar, drawer toggle & scrollspy
+│   ├── navigation.js                     # Sticky navbar, drawer toggle & scrollspy
+│   ├── render.js                         # Dynamic section renderer from portfolio.json
+│   ├── resume-uploader.js                # Drag & drop upload controller & progress tracker
+│   ├── skills-component.js               # React 18 / SVG skills showcase module
+│   └── theme.js                          # Hacker Dark & Slate theme controller
+├── server/                               # Backend AI Ingestion & Backup Controllers
+│   ├── parse-resume.js                   # Gemini AI transformer & deterministic rule parser
+│   └── resume-controller.js              # Multer storage, snapshots & schema persistence
 ├── DESIGN_SYSTEM.md                      # UI tokens, color palettes & breakpoints
 ├── RESUME_AUTO_UPDATE_PLAN.md            # Automated dynamic resume data plan
+├── RESUME_AUTO_UPDATE_GUIDE.md           # Operational manual for AI resume syncing
+├── DEPLOYMENT_REPORT.md                  # Cloudflare Pages production deployment report
 ├── index.html                            # Master HTML5 single-page application
 ├── package.json                          # Project metadata & start script
 ├── server.js                             # Zero-dependency Node.js streaming server
+├── test-runner.js                        # 9-suite automated verification runner
 ├── start.bat                             # One-click Windows launch script
 └── README.md                             # Comprehensive technical documentation
 ```
@@ -371,6 +382,7 @@ npm test
 
 | Version | Release Date | Summary of Changes |
 | :---: | :---: | :--- |
+| **`v1.3.0`** | **November 2026** | **Comprehensive Code Audit, Bug Fixes & Mobile Responsiveness Overhaul**<br>&bull; **Backend AI Parser Resilience**: Implemented `AbortController` and 8s strict timeout in `server/parse-resume.js`. Eliminates infinite SDK retry hangs on Gemini API overload, ensuring instantaneous fallback to the deterministic schema parser.<br>&bull; **Broken Asset Fix**: Corrected OpenGraph and Twitter card image URLs in `index.html` from missing placeholder to verified asset `assets/profile-matloob-clean.png`.<br>&bull; **Theme Synchronization**: Fixed light theme selectors in `css/components/skills.css` (`[data-theme="light"]`) for flawless filter pills, category dividers, and typography rendering in slate mode.<br>&bull; **Mobile Drawer Full Scrollability**: Overhauled `css/components/drawer.css` with `overflow-y: auto`, `-webkit-overflow-scrolling: touch`, and ergonomic spacing so all 8 navigation links and CTA buttons are 100% reachable in mobile portrait and landscape viewports.<br>&bull; **Responsive Upload Modal**: Added `max-height: calc(100vh - 2.5rem)` and smooth scrolling to `.upload-modal-dialog` in `css/components/upload-modal.css` to prevent button clipping on compact screens.<br>&bull; **Certificates Gallery Touch Targets**: Relocated mobile navigation arrows in `css/components/certificates.css` from negative screen edges (`-8px`) to safe touch insets (`left: 4px;` / `right: 4px;`).<br>&bull; **Responsive Architecture Cleanup**: Fully refreshed `css/responsive.css` to eliminate legacy dead classes and optimize mobile header and pipeline layout down to 320px viewports.<br>&bull; **100% Test Pass Rate**: All 147 verification assertions passing across all 9 automated test suites in `test-runner.js`. |
 | **`v1.2.0`** | **November 2026** | **Cloudflare Pages Production Deployment & Edge Optimization**<br>&bull; **Zero-Cost Global Hosting**: Deployed on Cloudflare Pages free tier with global Edge CDN caching across 330+ cities worldwide.<br>&bull; **Automated GitHub CI/CD**: Integrated with `alam292/Protfolio` repository; pushes to `main` automatically build and deploy within 30-45 seconds.<br>&bull; **Cinematic Frame Stream Deployment**: All 300 sequential animation frames deployed to Cloudflare Edge with 1-year immutable caching (`max-age=31536000, immutable`) for instant, stutter-free scroll performance.<br>&bull; **Production Edge Headers & Security**: Added `_headers` configuring `SAMEORIGIN`, `nosniff`, `strict-origin-when-cross-origin`, and `Permissions-Policy`.<br>&bull; **SPA Routing & Fallbacks**: Configured `_redirects` with single-page fallback and canonical URL readiness.<br>&bull; **Free SSL/TLS**: Automatic Universal SSL/TLS certificate with full HTTPS redirection.<br>&bull; **Live URL**: [https://alam292-portfolio.pages.dev](https://alam292-portfolio.pages.dev) (Custom domain ready for `alam292.tech`). |
 | **`v1.1.0`** | **November 2026** | **Modern Animated Technology Showcase Redesign**<br>&bull; Replaced legacy cards, pills, and ratings with a minimalist, category-wise technology showcase.<br>&bull; 6 structured categories: Programming Languages, Frontend Development, Backend Development, Databases, Tools & Technologies, AI Development Tools.<br>&bull; 30 authentic official brand SVG vectors with responsive scaling and zero external network requests.<br>&bull; Dynamic reusable React components (`SkillIcon`, `SkillItem`, `SkillCategory`, `SkillsSection`) mounted into `#skillsMount`.<br>&bull; Phased floating keyframe animations (`@keyframes skillFloat`), interactive radiant brand glows, GSAP ScrollTrigger staggered entrance, and reduced-motion accessibility.<br>&bull; Expanded automated testing suite (`test-runner.js`) with 61 dedicated skills verification assertions (147 total checks passing). |
 | **`v1.0.0`** | **November 2026** | **Initial Production Release**<br>&bull; Fully integrated 300-frame scroll-scrubbed canvas engine.<br>&bull; 8 complete modular sections (Hero, About, Skills, Projects, Experience, Education, Certificates, Contact).<br>&bull; Modular CSS design system with glassmorphic cards and fluid typography.<br>&bull; Zero-dependency Node.js streaming HTTP server with immutable cache control headers.<br>&bull; Accessible mobile drawer navigation, live contact form validation, and toast notification system. |

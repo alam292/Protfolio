@@ -180,12 +180,14 @@
   box-shadow: 0 0 16px rgba(78, 128, 238, 0.35);
 }
 
+[data-theme="light"] .gemini-filter-pill,
 body.theme-light .gemini-filter-pill {
   background: rgba(0, 0, 0, 0.03);
   border-color: rgba(0, 0, 0, 0.08);
   color: #475569;
 }
 
+[data-theme="light"] .gemini-filter-pill.active,
 body.theme-light .gemini-filter-pill.active {
   background: linear-gradient(135deg, rgba(78, 128, 238, 0.15), rgba(186, 152, 251, 0.15));
   border-color: rgba(78, 128, 238, 0.5);
@@ -276,6 +278,7 @@ body.theme-light .gemini-filter-pill.active {
   }
 }
 
+[data-theme="light"] .skill-category-divider,
 body.theme-light .skill-category-divider {
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.02) 80%, transparent 100%);
 }
@@ -420,10 +423,13 @@ body.theme-light .skill-category-divider {
   text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
 }
 
+[data-theme="light"] .skill-name,
 body.theme-light .skill-name {
   color: #64748b;
 }
 
+[data-theme="light"] .skill-item:hover .skill-name,
+[data-theme="light"] .skill-item:focus-visible .skill-name,
 body.theme-light .skill-item:hover .skill-name,
 body.theme-light .skill-item:focus-visible .skill-name {
   color: #0f172a;

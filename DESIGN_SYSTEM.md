@@ -238,19 +238,19 @@ d:/Project/Protfolio/
 │   ├── canvas-stream.js                # 300-frame kinematic scroll scrub & DPR scaling
 │   ├── render.js                       # Modular DOM rendering engine
 │   ├── resume-uploader.js              # Drag-and-drop resume upload & AI sync handler
+│   ├── skills-component.js             # React 18 / SVG skills showcase component
 │   ├── theme.js                        # Theme switcher (Dark / Light) with localStorage
 │   ├── navigation.js                   # Sticky navbar, ScrollSpy & mobile drawer
 │   ├── animations.js                   # GSAP ScrollTrigger timeline orchestrator
 │   ├── form.js                         # Form validation & toast notification engine
 │   └── main.js                         # Application bootstrap orchestrator
 ├── server/
-│   ├── api.js                          # Express REST API routes (/api/portfolio, /api/upload-resume)
 │   ├── parse-resume.js                 # Gemini AI extractor & deterministic fallback parser
-│   └── backup.js                       # Snapshot generator for rollback safety
+│   └── resume-controller.js            # Ingestion controller, backups & schema persistence
 ├── index.html                          # Semantic HTML5 application shell
 ├── server.js                           # Production HTTP server
 ├── package.json                        # Node.js dependencies & scripts
-├── test-runner.js                      # 86-test automated verification suite
+├── test-runner.js                      # 147-test automated verification suite
 └── DESIGN_SYSTEM.md                    # This authoritative design specification
 ```
 
@@ -287,11 +287,13 @@ Under `@media (prefers-reduced-motion: reduce)`:
 
 ## 8. Automated Quality Verification
 
-The portfolio includes an automated 86-check test harness (`test-runner.js`) verifying:
-1. **Data Store & Schema Integrity**: Profile information, resume URLs, 4 KPI stats, 5 skill categories, flagship projects, experience, degrees, and certificates.
+The portfolio includes an automated 147-check test harness (`test-runner.js`) verifying:
+1. **Data Store & Schema Integrity**: Profile information, resume URLs, 4 KPI stats, 6 skill categories, flagship projects, experience, degrees, and certificates.
 2. **Asset Integrity**: Physical existence and byte validity of resume PDFs, SVG avatars, and project mockups.
 3. **DOM Skeleton & Navigation Mapping**: All 8 section containers (`#hero` to `#contact`), mount points (`#heroMount` to `#contactMount`), anchor links, and theme toggle buttons.
 4. **AI Resume Modal Integration**: Dropzone elements, progress bars, and modal stylesheets.
 5. **Text Extraction & Deterministic Parsing**: PDF parsing accuracy, email validation, and candidate extraction.
 6. **HTTP Endpoints & MIME Verification**: 200 OK responses and proper content-type headers for HTML, CSS, JavaScript, JSON, and PDF files.
-7. **Form Validation Logic**: Regex pattern tests for email verification and required field constraints.
+7. **Resume Upload API & Snapshot Persistence**: Verified multipart POST `/api/upload-resume`, schema updating, and automatic snapshot backup in `data/backups/`.
+8. **Form Validation Logic**: Regex pattern tests for email verification and required field constraints.
+9. **Modern Technology Skills Showcase**: Verification of 6 official categories, 30 official brand vector logos, React component exports, radiant brand glow keyframes, zero cards/bars, and reduced motion.
