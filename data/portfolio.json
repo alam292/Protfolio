@@ -461,23 +461,29 @@
   },
   "contact": {
     "sectionTag": "GET IN TOUCH",
-    "title": "Let's Build Scalable Software Solutions Together",
-    "subtitle": "Open to discussions regarding full-stack software development roles, API engineering, or technical consulting. Drop an email and let's connect.",
+    "title": "Contact Me",
+    "subtitle": "",
     "email": "mdmatloobgaya@gmail.com",
     "secondaryEmail": "mdmatloobgaya@gmail.com",
     "responseTime": "SLA: Guaranteed response within 24 hours",
     "social": [
       {
         "platform": "GitHub",
-        "handle": "@mdmatloob",
+        "handle": "mdmatloob",
         "url": "https://github.com/mdmatloob",
         "icon": "github"
       },
       {
         "platform": "LinkedIn",
-        "handle": "in/mdmatloob",
+        "handle": "mdmatloob",
         "url": "https://linkedin.com/in/mdmatloob",
         "icon": "linkedin"
+      },
+      {
+        "platform": "Twitter",
+        "handle": "@mdmatloob",
+        "url": "https://twitter.com/mdmatloob",
+        "icon": "twitter"
       }
     ],
     "serviceOptions": [

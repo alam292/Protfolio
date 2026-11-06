@@ -14,6 +14,7 @@ class FormController {
     this.clockInterval = null;
 
     this.init();
+    this.initCharCounter();
     this.initClipboardCopy();
     this.initServiceChips();
     this.initLiveClock();
@@ -33,13 +34,79 @@ class FormController {
       this.handleSubmit();
     });
 
-    // Real-time input validation clear
-    const inputs = this.form.querySelectorAll('.form-input, .form-textarea');
-    inputs.forEach((input) => {
+    // Real-time input validation clear & focus handling
+    const fields = ['name', 'email', 'subject', 'message'];
+    fields.forEach((fieldName) => {
+      const fieldContainer = this.form.querySelector(`.animated-field[data-field="${fieldName}"]`);
+      if (!fieldContainer) return;
+
+      const input = fieldContainer.querySelector('.form-input, .form-textarea');
+      if (!input) return;
+
       input.addEventListener('input', () => {
-        input.classList.remove('input-error');
+        this.clearFieldError(fieldName);
       });
     });
+  }
+
+  /**
+   * Live Character Counter for the Message textarea
+   */
+  initCharCounter() {
+    const messageInput = document.getElementById('userMessage');
+    const counterEl = document.getElementById('charCounter');
+    if (!messageInput || !counterEl) return;
+
+    const updateCounter = () => {
+      const len = messageInput.value.length;
+      const max = 1000;
+      counterEl.textContent = `${len} / ${max}`;
+
+      if (len >= 950) {
+        counterEl.className = 'char-counter limit-max';
+      } else if (len >= 800) {
+        counterEl.className = 'char-counter limit-near';
+      } else {
+        counterEl.className = 'char-counter';
+      }
+    };
+
+    messageInput.addEventListener('input', updateCounter);
+    updateCounter();
+  }
+
+  showFieldError(fieldName, message) {
+    const fieldContainer = document.querySelector(`.animated-field[data-field="${fieldName}"]`);
+    if (!fieldContainer) return;
+
+    fieldContainer.classList.remove('has-error');
+    // Trigger reflow for shake animation
+    void fieldContainer.offsetWidth;
+    fieldContainer.classList.add('has-error');
+
+    const input = fieldContainer.querySelector('.form-input, .form-textarea');
+    if (input) input.classList.add('input-error');
+
+    const errorMsgEl = document.getElementById(`${fieldName}ErrorMsg`);
+    if (errorMsgEl) {
+      errorMsgEl.textContent = message;
+      errorMsgEl.classList.add('visible');
+    }
+  }
+
+  clearFieldError(fieldName) {
+    const fieldContainer = document.querySelector(`.animated-field[data-field="${fieldName}"]`);
+    if (!fieldContainer) return;
+
+    fieldContainer.classList.remove('has-error');
+    const input = fieldContainer.querySelector('.form-input, .form-textarea');
+    if (input) input.classList.remove('input-error');
+
+    const errorMsgEl = document.getElementById(`${fieldName}ErrorMsg`);
+    if (errorMsgEl) {
+      errorMsgEl.textContent = '';
+      errorMsgEl.classList.remove('visible');
+    }
   }
 
   /**
@@ -50,7 +117,7 @@ class FormController {
     if (!copyBtn) return;
 
     copyBtn.addEventListener('click', async () => {
-      const emailToCopy = copyBtn.getAttribute('data-copy') || 'contact@matloob.dev';
+      const emailToCopy = copyBtn.getAttribute('data-copy') || 'mdmatloobgaya@gmail.com';
       const copyTextEl = copyBtn.querySelector('.copy-text');
       const originalText = copyTextEl ? copyTextEl.textContent : 'Copy';
 
@@ -68,7 +135,7 @@ class FormController {
 
         copyBtn.classList.add('copied');
         if (copyTextEl) copyTextEl.textContent = 'Copied!';
-        this.showToast(`Email copied to clipboard: ${emailToCopy}`);
+        this.showToast(`Email copied: ${emailToCopy}`);
 
         setTimeout(() => {
           copyBtn.classList.remove('copied');
@@ -100,8 +167,9 @@ class FormController {
           serviceInput.value = serviceName;
         }
 
-        if (subjectInput && (!subjectInput.value || subjectInput.value.startsWith('Inquiry: '))) {
-          subjectInput.value = `Inquiry: ${serviceName}`;
+        if (subjectInput && (!subjectInput.value || subjectInput.value.startsWith('Scope: ') || subjectInput.value.startsWith('Inquiry: '))) {
+          subjectInput.value = `Scope: ${serviceName}`;
+          this.clearFieldError('subject');
         }
       });
     });
@@ -144,74 +212,99 @@ class FormController {
     const emailInput = document.getElementById('userEmail');
     const subjectInput = document.getElementById('userSubject');
     const messageInput = document.getElementById('userMessage');
-    const submitBtn = document.getElementById('contactSubmitBtn') || this.form.querySelector('button[type="submit"]');
+    const submitBtn = document.getElementById('contactSubmitBtn');
+    const submitTextEl = document.getElementById('submitBtnText');
 
     let isValid = true;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     // Validate Name
     if (!nameInput || !nameInput.value.trim()) {
-      if (nameInput) nameInput.classList.add('input-error');
-      this.showToast('Please enter your name.', true);
+      this.showFieldError('name', 'Please enter your full name.');
       isValid = false;
-      return;
+    } else {
+      this.clearFieldError('name');
     }
 
     // Validate Email
     if (!emailInput || !emailRegex.test(emailInput.value.trim())) {
-      if (emailInput) emailInput.classList.add('input-error');
-      this.showToast('Please provide a valid email address.', true);
+      this.showFieldError('email', 'Please enter a valid email address.');
       isValid = false;
-      return;
+    } else {
+      this.clearFieldError('email');
     }
 
     // Validate Subject
     if (!subjectInput || !subjectInput.value.trim()) {
-      if (subjectInput) subjectInput.classList.add('input-error');
-      this.showToast('Please enter a project subject or purpose.', true);
+      this.showFieldError('subject', 'Please specify a project scope or subject.');
       isValid = false;
-      return;
+    } else {
+      this.clearFieldError('subject');
     }
 
     // Validate Message
     if (!messageInput || messageInput.value.trim().length < 8) {
-      if (messageInput) messageInput.classList.add('input-error');
-      this.showToast('Message must be at least 8 characters long.', true);
+      this.showFieldError('message', 'Message details must be at least 8 characters.');
       isValid = false;
+    } else {
+      this.clearFieldError('message');
+    }
+
+    if (!isValid) {
+      this.showToast('Please complete all required fields.', true);
       return;
     }
 
-    // Submit state animation
-    const submitTextEl = submitBtn ? submitBtn.querySelector('.btn-submit-text') : null;
-    const originalText = submitTextEl ? submitTextEl.textContent : 'Transmit Message';
-
+    // Begin Submission Animation
     if (submitBtn) {
       submitBtn.disabled = true;
+      submitBtn.classList.remove('success');
+      submitBtn.classList.add('submitting');
       if (submitTextEl) submitTextEl.textContent = 'Transmitting...';
     }
 
+    // Simulate async dispatch with state changes
     setTimeout(() => {
       const senderName = nameInput.value.trim();
-      this.showToast(`Thank you, ${senderName}! Your transmission has been dispatched.`);
-
-      this.form.reset();
-
-      // Reset service chips
-      const chips = document.querySelectorAll('.service-chip');
-      chips.forEach((c, index) => {
-        if (index === 0) c.classList.add('active');
-        else c.classList.remove('active');
-      });
-      const serviceInput = document.getElementById('selectedServiceInput');
-      if (serviceInput && chips[0]) {
-        serviceInput.value = chips[0].getAttribute('data-service') || 'Full Stack Web App';
-      }
 
       if (submitBtn) {
-        submitBtn.disabled = false;
-        if (submitTextEl) submitTextEl.textContent = originalText;
+        submitBtn.classList.remove('submitting');
+        submitBtn.classList.add('success');
+        if (submitTextEl) submitTextEl.textContent = 'Transmission Dispatched!';
       }
-    }, 750);
+
+      this.showToast(`Thank you, ${senderName}! Your transmission has been dispatched.`);
+
+      // Reset form after short pause
+      setTimeout(() => {
+        this.form.reset();
+
+        // Reset service chips
+        const chips = document.querySelectorAll('.service-chip');
+        chips.forEach((c, index) => {
+          if (index === 0) c.classList.add('active');
+          else c.classList.remove('active');
+        });
+        const serviceInput = document.getElementById('selectedServiceInput');
+        if (serviceInput && chips[0]) {
+          serviceInput.value = chips[0].getAttribute('data-service') || 'Full-Stack Web App';
+        }
+
+        // Reset character counter
+        const counterEl = document.getElementById('charCounter');
+        if (counterEl) {
+          counterEl.textContent = '0 / 1000';
+          counterEl.className = 'char-counter';
+        }
+
+        // Reset submit button state
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('success');
+          if (submitTextEl) submitTextEl.textContent = 'Transmit Message';
+        }
+      }, 2500);
+    }, 900);
   }
 
   showToast(message, isError = false) {

@@ -74,8 +74,13 @@ class PortfolioRenderer {
       zap: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
       shield: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`,
       "git-branch": `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="3" x2="6" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg>`,
-      github: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
-      linkedin: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+      github: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>`,
+      linkedin: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>`,
+      twitter: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>`,
+      mail: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>`,
+      "map-pin": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`,
+      send: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`,
+      user: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`,
       external: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
     };
     return icons[type] || icons.code;
@@ -659,50 +664,41 @@ class PortfolioRenderer {
     });
   }
 
-  // 8. Contact Section
+  // 8. Contact Section (Animated Form & Channels)
   renderContact() {
     const mount = document.getElementById('contactMount');
     if (!mount) return;
 
     const { contact, profile } = this.data;
 
-    const socialLinksHtml = contact.social.map(s => `
+    const socialIconsHtml = contact.social.map(s => `
       <a 
         href="${s.url}" 
         target="_blank" 
         rel="noopener noreferrer" 
-        class="social-link-card" 
-        aria-label="Visit ${profile.name}'s ${s.platform} profile"
+        class="social-icon-btn" 
+        data-platform="${s.platform.toLowerCase()}" 
+        aria-label="Visit ${profile.name}'s ${s.platform} profile (${s.handle})"
+        title="${s.platform}: ${s.handle}"
       >
-        <span class="social-icon" aria-hidden="true">
+        <span class="social-icon-inner" aria-hidden="true">
           ${this.getIconSvg(s.icon)}
         </span>
-        <div class="social-text-block">
-          <span class="social-name">${s.platform}</span>
-          <span class="social-handle">${s.handle}</span>
-        </div>
-        <span class="social-arrow" aria-hidden="true">&rarr;</span>
+        <span class="social-icon-tooltip">${s.platform}</span>
       </a>
-    `).join('');
-
-    const timezoneRowsHtml = contact.timezoneMatrix.map(t => `
-      <div class="tz-row">
-        <span class="tz-region">${t.region}</span>
-        <span class="tz-hours">${t.overlap}</span>
-      </div>
     `).join('');
 
     mount.innerHTML = `
       <div class="section-tag">${contact.sectionTag}</div>
       <h2 class="section-title" id="contact-title">${contact.title}</h2>
-      <p class="section-subtitle">${contact.subtitle}</p>
+      ${contact.subtitle ? `<p class="section-subtitle">${contact.subtitle}</p>` : ''}
 
       <div class="contact-master-container">
         <div class="contact-grid">
-          <!-- Left Column: Direct Communication Channels & Location Plan -->
+          <!-- Left Column: Direct Communication Channels & Location -->
           <div class="contact-channels-column">
-            <!-- Email Channel Card with Copy Utility -->
-            <div class="contact-channel-card">
+            <!-- 1. Direct Email Card with Copy & Direct Compose -->
+            <div class="contact-channel-card animated-card">
               <div class="channel-card-top">
                 <div class="channel-icon-wrap" aria-hidden="true">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -711,125 +707,219 @@ class PortfolioRenderer {
                   </svg>
                 </div>
                 <div class="channel-header-text">
-                  <h3 class="channel-title">Direct Email</h3>
+                  <div class="channel-title-row">
+                    <h3 class="channel-title">Direct Email</h3>
+                    <span class="contact-sla-badge">
+                      <span class="sla-dot" aria-hidden="true"></span>
+                      <span>Available</span>
+                    </span>
+                  </div>
                   <span class="channel-sla">${contact.responseTime}</span>
                 </div>
               </div>
 
               <div class="channel-email-wrap">
-                <a href="mailto:${contact.email}" class="channel-email-link">${contact.email}</a>
-                <button 
-                  type="button" 
-                  class="btn-copy-email" 
-                  id="copyEmailBtn" 
-                  data-copy="${contact.email}" 
-                  aria-label="Copy ${contact.email} to clipboard"
-                >
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  <span class="copy-text">Copy</span>
-                </button>
+                <a href="mailto:${contact.email}" class="channel-email-link" title="Click to compose email">${contact.email}</a>
+                <div class="channel-btn-group">
+                  <button 
+                    type="button" 
+                    class="btn-copy-email" 
+                    id="copyEmailBtn" 
+                    data-copy="${contact.email}" 
+                    aria-label="Copy ${contact.email} to clipboard"
+                    title="Copy email address"
+                  >
+                    <svg class="copy-icon-idle" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="copy-text">Copy</span>
+                  </button>
+                  <a 
+                    href="mailto:${contact.email}" 
+                    class="btn-send-email-link" 
+                    title="Open default email app"
+                    aria-label="Send email to ${contact.email}"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    <span>Send</span>
+                  </a>
+                </div>
               </div>
             </div>
 
-            <!-- Professional Social Connections -->
-            <div class="contact-social-grid">
-              ${socialLinksHtml}
-            </div>
-
-            <!-- Location Plan & Live Clock Card -->
-            <div class="location-plan-card">
-              <div class="location-header">
-                <div class="location-radar-pulse" aria-hidden="true">
-                  <span class="radar-ring"></span>
-                  <span class="radar-point"></span>
-                </div>
+            <!-- 2. Social Media Accounts in Icon Form -->
+            <div class="social-accounts-card animated-card">
+              <div class="social-card-header">
                 <div>
-                  <h3 class="location-city">Base: ${profile.location.city}, ${profile.location.country}</h3>
-                  <span class="location-coords">${profile.location.coordinates} &bull; ${profile.location.timezoneOffset}</span>
+                  <h3 class="social-card-title">Social Profiles</h3>
+                  <span class="social-card-sub">Verified Developer Accounts</span>
                 </div>
+                <span class="social-card-badge">Direct Connect</span>
               </div>
-
-              <div class="location-clock-block">
-                <span class="clock-label">Local Time (IST):</span>
-                <span class="clock-value" id="liveLocalClock">--:--:-- IST</span>
+              <div class="social-icons-flex" role="list">
+                ${socialIconsHtml}
               </div>
+            </div>
 
-              <div class="location-badges">
-                <span class="location-badge">${profile.location.remoteReadiness}</span>
-                <span class="location-badge">${profile.location.relocationReadiness}</span>
-              </div>
-
-              <div class="location-timezone-matrix">
-                <div class="tz-header">Global Timezone Sync Overlap:</div>
-                ${timezoneRowsHtml}
+            <!-- 3. Location Card (Clean - Location Name Only) -->
+            <div class="location-plan-card animated-card location-card-clean">
+              <div class="location-clean-wrap">
+                <div class="location-icon-circle" aria-hidden="true">
+                  ${this.getIconSvg('map-pin')}
+                </div>
+                <div class="location-clean-text">
+                  <span class="location-clean-label">Location</span>
+                  <h3 class="location-clean-name">${profile.location.city}, ${profile.location.country}</h3>
+                </div>
               </div>
             </div>
           </div>
 
-          <!-- Right Column: Interactive Contact Form -->
+          <!-- Right Column: Interactive Animated Contact Form -->
           <div class="contact-form-column">
-            <div class="card contact-form-card">
-              <h3 class="form-title">Send a Direct Transmission</h3>
-              <p class="form-subtitle">Fill in the parameters below. I will respond within 24 hours.</p>
+            <div class="card contact-form-card animated-form-wrapper">
+              <div class="form-header-clean">
+                <h3 class="form-title-clean">Send a Message</h3>
+                <span class="form-status-dot-wrap">
+                  <span class="pulse-beacon" aria-hidden="true"></span>
+                  <span class="form-status-text">Online</span>
+                </span>
+              </div>
 
-              <form class="contact-form" id="contactForm" novalidate>
+              <form class="contact-form animated-form" id="contactForm" novalidate>
+                <!-- Row: Name and Email -->
                 <div class="form-row-2">
-                  <div class="form-group">
+                  <!-- Name Input -->
+                  <div class="form-group animated-field" data-field="name">
                     <label class="form-label" for="userName">
-                      Your Name <span class="required-mark" aria-hidden="true">*</span>
+                      <span>Your Name</span>
+                      <span class="required-mark" aria-hidden="true">*</span>
                     </label>
-                    <input type="text" id="userName" name="name" class="form-input" placeholder="e.g. Alex Mercer" required autocomplete="name">
+                    <div class="input-container">
+                      <span class="input-icon" aria-hidden="true">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      </span>
+                      <input 
+                        type="text" 
+                        id="userName" 
+                        name="name" 
+                        class="form-input" 
+                        placeholder="e.g. Alex Mercer" 
+                        required 
+                        autocomplete="name"
+                        aria-required="true"
+                      >
+                      <span class="focus-glow-line" aria-hidden="true"></span>
+                    </div>
+                    <span class="field-error-msg" id="nameErrorMsg" aria-live="polite"></span>
                   </div>
-                  <div class="form-group">
+
+                  <!-- Email Input -->
+                  <div class="form-group animated-field" data-field="email">
                     <label class="form-label" for="userEmail">
-                      Email Address <span class="required-mark" aria-hidden="true">*</span>
+                      <span>Email Address</span>
+                      <span class="required-mark" aria-hidden="true">*</span>
                     </label>
-                    <input type="email" id="userEmail" name="email" class="form-input" placeholder="e.g. alex@enterprise.com" required autocomplete="email">
+                    <div class="input-container">
+                      <span class="input-icon" aria-hidden="true">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                          <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                      </span>
+                      <input 
+                        type="email" 
+                        id="userEmail" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="e.g. alex@enterprise.com" 
+                        required 
+                        autocomplete="email"
+                        aria-required="true"
+                      >
+                      <span class="focus-glow-line" aria-hidden="true"></span>
+                    </div>
+                    <span class="field-error-msg" id="emailErrorMsg" aria-live="polite"></span>
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label" id="serviceSelectLabel">I'm interested in</label>
-                  <div class="service-selector-chips" role="group" aria-labelledby="serviceSelectLabel">
-                    <button type="button" class="service-chip active" data-service="Full Stack Web App">
-                      <span>Full-Stack Development</span>
-                    </button>
-                    <button type="button" class="service-chip" data-service="Frontend & UI Architecture">
-                      <span>Frontend &amp; UI Architecture</span>
-                    </button>
-                    <button type="button" class="service-chip" data-service="Cloud & APIs">
-                      <span>Cloud &amp; Backend APIs</span>
-                    </button>
-                    <button type="button" class="service-chip" data-service="Technical Consultation">
-                      <span>Technical Consultation</span>
-                    </button>
-                  </div>
-                  <input type="hidden" id="selectedServiceInput" name="service" value="Full Stack Web App">
-                </div>
-
-                <div class="form-group">
+                <!-- Subject Input -->
+                <div class="form-group animated-field" data-field="subject">
                   <label class="form-label" for="userSubject">
-                    Subject / Project Scope <span class="required-mark" aria-hidden="true">*</span>
+                    <span>Subject</span>
+                    <span class="required-mark" aria-hidden="true">*</span>
                   </label>
-                  <input type="text" id="userSubject" name="subject" class="form-input" placeholder="e.g. Enterprise Web Platform, Frontend Overhaul" required>
+                  <div class="input-container">
+                    <span class="input-icon" aria-hidden="true">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                      </svg>
+                    </span>
+                    <input 
+                      type="text" 
+                      id="userSubject" 
+                      name="subject" 
+                      class="form-input" 
+                      placeholder="e.g. Project Inquiry, Hiring Collaboration" 
+                      required
+                      aria-required="true"
+                    >
+                    <span class="focus-glow-line" aria-hidden="true"></span>
+                  </div>
+                  <span class="field-error-msg" id="subjectErrorMsg" aria-live="polite"></span>
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label" for="userMessage">
-                    Message Details <span class="required-mark" aria-hidden="true">*</span>
-                  </label>
-                  <textarea id="userMessage" name="message" class="form-textarea" rows="4" placeholder="Briefly describe your objectives, scope, or timeline..." required></textarea>
+                <!-- Message Details -->
+                <div class="form-group animated-field" data-field="message">
+                  <div class="label-row-between">
+                    <label class="form-label" for="userMessage">
+                      <span>Message</span>
+                      <span class="required-mark" aria-hidden="true">*</span>
+                    </label>
+                    <span class="char-counter" id="charCounter">0 / 1000</span>
+                  </div>
+                  <div class="input-container textarea-container">
+                    <textarea 
+                      id="userMessage" 
+                      name="message" 
+                      class="form-textarea" 
+                      rows="3" 
+                      maxlength="1000"
+                      placeholder="Briefly describe your objectives, scope, or timeline..." 
+                      required
+                      aria-required="true"
+                    ></textarea>
+                    <span class="focus-glow-line" aria-hidden="true"></span>
+                  </div>
+                  <span class="field-error-msg" id="messageErrorMsg" aria-live="polite"></span>
                 </div>
 
-                <button type="submit" class="btn-touch btn-touch-orange btn-submit" id="contactSubmitBtn">
-                  <span class="btn-submit-text">Transmit Message</span>
-                  <span class="btn-icon-circle" aria-hidden="true">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Animated Submit Button -->
+                <button type="submit" class="btn-touch btn-touch-orange btn-submit animated-submit" id="contactSubmitBtn">
+                  <span class="btn-submit-text" id="submitBtnText">Transmit Message</span>
+                  <span class="btn-icon-circle submit-icon-circle" aria-hidden="true">
+                    <!-- Standard Plane/Arrow SVG -->
+                    <svg class="icon-submit-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12"></line>
                       <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                    <!-- Spinner SVG (Active on Submit) -->
+                    <svg class="icon-submit-spinner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                      <path d="M12 2a10 10 0 0 1 10 10"></path>
+                    </svg>
+                    <!-- Checkmark SVG (Active on Success) -->
+                    <svg class="icon-submit-check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
                     </svg>
                   </span>
                 </button>
