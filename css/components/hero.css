@@ -34,15 +34,15 @@
    ========================================================================== */
 .hero-top-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   gap: clamp(32px, 5vw, 64px);
   width: 100%;
 }
 
 .hero-headline-block {
-  flex: 1 1 58%;
-  max-width: 680px;
+  flex: 1 1 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -301,60 +301,6 @@
   transform: translateY(0) scale(0.94);
 }
 
-/* ==========================================================================
-   Hero Visual Block (Right Side: Pure Transparent Profile Image)
-   ========================================================================== */
-.hero-visual-block {
-  flex: 0 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 2;
-  perspective: 1200px;
-}
-
-.hero-image-stage {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  width: 100%;
-}
-
-/* Transparent PNG Cut-Out Styling */
-.hero-transparent-profile-img {
-  width: auto;
-  max-width: 100%;
-  max-height: clamp(380px, 54vh, 560px);
-  object-fit: contain;
-  object-position: center bottom;
-  display: block;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 35px rgba(255, 87, 34, 0.18));
-  will-change: transform, opacity;
-  transform-origin: center bottom;
-  transition: filter 0.3s ease;
-}
-
-.hero-transparent-profile-img:hover {
-  filter: drop-shadow(0 25px 48px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 45px rgba(255, 87, 34, 0.32));
-}
-
-.hero-transparent-profile-img.hero-float-idle {
-  animation: heroProfileFloat 5s ease-in-out infinite alternate;
-}
-
-@keyframes heroProfileFloat {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(-4px);
-  }
-}
 
 /* ==========================================================================
    4 Service Pillars Grid (#01 - #04)
@@ -498,10 +444,6 @@
   .hero-actions-group {
     justify-content: center;
   }
-
-  .hero-transparent-profile-img {
-    max-height: clamp(280px, 44vh, 400px);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -509,11 +451,6 @@
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
-  }
-  .hero-transparent-profile-img {
-    animation: none !important;
-    transform: none !important;
-    transition: none !important;
   }
   .status-pulse-dot,
   .tab-live-dot {

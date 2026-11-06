@@ -301,19 +301,6 @@ class PortfolioRenderer {
             </div>
           </div>
         </div>
-
-        <!-- Right: Pure Transparent Profile Cutout with Smooth Scroll Animation (Zero Extra Elements) -->
-        <div class="hero-visual-block" id="heroVisualBlock">
-          <div class="hero-image-stage" id="heroImageStage">
-            <img 
-              src="assets/profile-matloob-transparent.png" 
-              alt="${profile.name}" 
-              class="hero-transparent-profile-img hero-float-idle"
-              id="heroProfileImg"
-              loading="eager"
-            />
-          </div>
-        </div>
       </div>
 
       <!-- Hero Bottom Row: Dynamic Bento Metrics Strip -->
@@ -326,78 +313,9 @@ class PortfolioRenderer {
     this.initHeroVisual3D();
   }
 
-  // 3D Parallax & Floating Motion Controller for Hero Transparent Visual
+  // Hero Visual 3D Controller (Profile visual block completely removed)
   initHeroVisual3D() {
-    const stage = document.getElementById('heroImageStage') || document.getElementById('heroVisualBlock');
-    const img = document.getElementById('heroProfileImg');
-    if (!stage || !img) return;
-
-    // Smooth Lerp Tilt for Transparent Cutout
-    let rect = stage.getBoundingClientRect();
-    let isHovering = false;
-    let targetRotateX = 0;
-    let targetRotateY = 0;
-    let currentRotateX = 0;
-    let currentRotateY = 0;
-    let rafId = null;
-
-    const updateRect = () => {
-      rect = stage.getBoundingClientRect();
-    };
-    window.addEventListener('resize', updateRect, { passive: true });
-
-    const onMouseMove = (e) => {
-      isHovering = true;
-      img.classList.remove('hero-float-idle');
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const mouseX = e.clientX - centerX;
-      const mouseY = e.clientY - centerY;
-
-      // Subtle, refined 3D tilt without clipping
-      targetRotateY = (mouseX / (rect.width / 2)) * 6;
-      targetRotateX = -(mouseY / (rect.height / 2)) * 6;
-    };
-
-    const onMouseEnter = () => {
-      updateRect();
-      isHovering = true;
-      img.classList.remove('hero-float-idle');
-    };
-
-    const onMouseLeave = () => {
-      isHovering = false;
-      targetRotateX = 0;
-      targetRotateY = 0;
-    };
-
-    // Only attach interactive mouse tracking on pointer-capable devices
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      stage.addEventListener('mousemove', onMouseMove, { passive: true });
-      stage.addEventListener('mouseenter', onMouseEnter);
-      stage.addEventListener('mouseleave', onMouseLeave);
-    }
-
-    // Smooth Lerp Rendering Loop
-    const renderLoop = () => {
-      currentRotateX += (targetRotateX - currentRotateX) * 0.1;
-      currentRotateY += (targetRotateY - currentRotateY) * 0.1;
-
-      if (isHovering || Math.abs(currentRotateX) > 0.04 || Math.abs(currentRotateY) > 0.04) {
-        img.style.transform = `perspective(1000px) rotateX(${currentRotateX.toFixed(2)}deg) rotateY(${currentRotateY.toFixed(2)}deg) translateZ(8px)`;
-      } else if (!isHovering) {
-        if (img.style.transform) {
-          img.style.transform = '';
-        }
-        if (!img.classList.contains('hero-float-idle')) {
-          img.classList.add('hero-float-idle');
-        }
-      }
-
-      rafId = requestAnimationFrame(renderLoop);
-    };
-
-    renderLoop();
+    // No-op: visual block removed
   }
 
   // 2. About Me Section
