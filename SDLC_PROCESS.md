@@ -164,3 +164,4 @@ $$\text{Plan} \longrightarrow \text{Design} \longrightarrow \text{Architecture} 
 1. **Sequential Progression**: Never skip stages in the pipeline.
 2. **Evidence-Based Verification**: Never assume success without running `node test-runner.js` and inspecting output.
 3. **Approval First**: Always obtain user confirmation before making breaking architectural changes.
+
