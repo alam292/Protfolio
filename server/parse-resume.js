@@ -88,11 +88,19 @@ Extract, refine, and structure the candidate's information into a JSON object ad
 CRITICAL REQUIREMENTS:
 1. Return ONLY valid, parseable JSON. Do NOT include markdown code blocks, backticks (\`\`\`json), or explanations.
 2. Preserve existing verified URLs (like GitHub, LinkedIn, live demos) unless the resume text specifies new or updated links.
-3. Organize skills into 4-5 logical categories (e.g. Programming Languages, Frontend Technologies, Backend Technologies, Databases & Storage, Developer Tools & DevOps).
-4. Extract all work experience chronologically, with bullet highlights describing architectural impact and metrics.
-5. Extract education degrees with university name, period, and honors or CGPA if mentioned.
-6. Extract certifications and achievements.
-7. Craft a punchy professional elevator headline and hero tagline representing the candidate.
+3. Organize skills strictly into the 6 official categories:
+   - "Programming Languages" (icon: "code")
+   - "Frontend Development" (icon: "layers")
+   - "Backend Development" (icon: "server")
+   - "Databases" (icon: "database")
+   - "Tools & Technologies" (icon: "cpu")
+   - "AI Development Tools" (icon: "zap")
+   Each skill in a category must be an object with { "name": "...", "icon": "..." } using clean lowercase brand icon identifiers (e.g. python, javascript, react, nextjs, tailwindcss, fastapi, django, nodejs, postgresql, mysql, git, docker, postman, chatgpt, gemini, antigravity). Do NOT use cards, boxes, rating bars or "items" arrays.
+4. For the "WHO I AM" section, extract a crisp, high-impact 2-sentence developer bio in "lead", set "terminalCommand" to "whoami", and extract 4 high-signal superpower cards in "highlights" with icons from: "zap", "code", "database", "shield".
+5. Extract all work experience chronologically, with bullet highlights describing architectural impact and metrics.
+6. Extract education degrees with university name, period, and honors or CGPA if mentioned.
+7. Extract certifications and achievements.
+8. Craft a punchy professional elevator headline and hero tagline representing the candidate.
 
 SCHEMA SPECIFICATION:
 {
@@ -124,34 +132,90 @@ SCHEMA SPECIFICATION:
     }
   },
   "stats": [
-    { "value": "3+", "suffix": "Years", "label": "Commercial Experience", "description": "Engineering full-stack web applications" },
-    { "value": "100K+", "suffix": "MAU", "label": "Users Scaled", "description": "Architected platforms serving large traffic" },
-    { "value": "40%", "suffix": "Faster", "label": "Performance Gains", "description": "Reduced bundle sizes and latency" },
-    { "value": "20+", "suffix": "Shipped", "label": "Production Projects", "description": "Shipped applications and tools" }
+    { "value": "2+", "suffix": "Years", "label": "Engineering Experience", "description": "Building full-stack web applications and robust architectures" },
+    { "value": "15+", "suffix": "APIs", "label": "REST Endpoints Built", "description": "Designed high-speed FastAPI and Django REST services" },
+    { "value": "3+", "suffix": "Systems", "label": "Full-Stack Products", "description": "Production-grade SaaS and management dashboards" },
+    { "value": "99.9%", "suffix": "Uptime", "label": "Cloud Reliability", "description": "High availability, smooth operations and reliability" }
   ],
   "about": {
     "sectionTag": "WHO I AM",
-    "title": "",
-    "lead": "Compelling summary paragraph",
-    "pillars": [
-      { "id": "identity", "tag": "01. IDENTITY & CRAFT", "title": "Core craft title", "content": "Craft description", "icon": "terminal" },
-      { "id": "journey", "tag": "02. THE JOURNEY", "title": "Journey title", "content": "Journey description", "icon": "git-branch" },
-      { "id": "goals", "tag": "03. TRACK RECORD & IMPACT", "title": "Impact title", "content": "Impact description", "icon": "zap" },
-      { "id": "philosophy", "tag": "04. PASSION & STANDARDS", "title": "Standards title", "content": "Standards description", "icon": "shield" }
+    "terminalCommand": "whoami",
+    "lead": "I am a Full-Stack Software Developer specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.",
+    "highlights": [
+      { "icon": "zap", "title": "High-Speed APIs", "detail": "FastAPI & Django REST" },
+      { "icon": "code", "title": "Modern Frontends", "detail": "React, Next.js & UI/UX" },
+      { "icon": "database", "title": "Relational Schemas", "detail": "PostgreSQL & SQLAlchemy" },
+      { "icon": "shield", "title": "Production Ready", "detail": "Tested & Cloud Deployed" }
     ]
   },
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",
-    "title": "",
-    "subtitle": "Carefully selected technologies battle-tested across production systems.",
+    "title": "Core Skills & Technologies",
+    "subtitle": "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.",
     "categories": [
       {
         "id": "languages",
         "name": "Programming Languages",
         "icon": "code",
-        "description": "Primary languages",
-        "items": [
-          { "name": "TypeScript", "level": "Advanced", "badge": "Primary" }
+        "description": "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
+        "skills": [
+          { "name": "Python", "icon": "python" },
+          { "name": "JavaScript", "icon": "javascript" }
+        ]
+      },
+      {
+        "id": "frontend",
+        "name": "Frontend Development",
+        "icon": "layers",
+        "description": "Modern frontend architectures, component systems, and high-fidelity responsive user interfaces.",
+        "skills": [
+          { "name": "React.js", "icon": "react" },
+          { "name": "Next.js", "icon": "nextjs" },
+          { "name": "Tailwind CSS", "icon": "tailwindcss" }
+        ]
+      },
+      {
+        "id": "backend",
+        "name": "Backend Development",
+        "icon": "server",
+        "description": "High-throughput RESTful microservices, asynchronous execution, and enterprise web frameworks.",
+        "skills": [
+          { "name": "FastAPI", "icon": "fastapi" },
+          { "name": "Django", "icon": "django" },
+          { "name": "Node.js", "icon": "nodejs" }
+        ]
+      },
+      {
+        "id": "databases",
+        "name": "Databases",
+        "icon": "database",
+        "description": "Relational data modeling, schema normalization, and performant query optimization.",
+        "skills": [
+          { "name": "PostgreSQL", "icon": "postgresql" },
+          { "name": "MySQL", "icon": "mysql" },
+          { "name": "MongoDB", "icon": "mongodb" }
+        ]
+      },
+      {
+        "id": "tools",
+        "name": "Tools & Technologies",
+        "icon": "cpu",
+        "description": "Developer tooling, containerization, version control, and rigorous API testing suites.",
+        "skills": [
+          { "name": "Git", "icon": "git" },
+          { "name": "Docker", "icon": "docker" },
+          { "name": "Postman", "icon": "postman" }
+        ]
+      },
+      {
+        "id": "ai-tools",
+        "name": "AI Development Tools",
+        "icon": "zap",
+        "description": "Advanced AI coding assistants and intelligent automation tools accelerating full-stack delivery.",
+        "skills": [
+          { "name": "ChatGPT", "icon": "chatgpt" },
+          { "name": "Gemini", "icon": "gemini" },
+          { "name": "Antigravity IDE", "icon": "antigravity" }
         ]
       }
     ]
@@ -401,6 +465,114 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
     }
   }
 
+  // 6. Who Am I Revamp Schema Alignment
+  result.about = result.about || {};
+  result.about.sectionTag = "WHO I AM";
+  result.about.terminalCommand = "whoami";
+  if (!result.about.lead || result.about.lead.length < 20) {
+    const leadRole = result.profile.title || "Full-Stack Software Developer";
+    result.about.lead = `I am a ${leadRole} specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.`;
+  }
+  if (!Array.isArray(result.about.highlights) || result.about.highlights.length === 0) {
+    result.about.highlights = [
+      { icon: "zap", title: "High-Speed APIs", detail: "FastAPI & Django REST" },
+      { icon: "code", title: "Modern Frontends", detail: "React, Next.js & UI/UX" },
+      { icon: "database", title: "Relational Schemas", detail: "PostgreSQL & SQLAlchemy" },
+      { icon: "shield", title: "Production Ready", detail: "Tested & Cloud Deployed" }
+    ];
+  }
+
+  // 7. Modern Skills Showcase Alignment (6 Official Categories with Brand Registry)
+  const officialCategories = [
+    {
+      id: "languages",
+      name: "Programming Languages",
+      icon: "code",
+      description: "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
+      skills: [
+        { name: "Python", icon: "python" },
+        { name: "Java", icon: "java" },
+        { name: "JavaScript", icon: "javascript" },
+        { name: "HTML5", icon: "html5" },
+        { name: "CSS3", icon: "css3" }
+      ]
+    },
+    {
+      id: "frontend",
+      name: "Frontend Development",
+      icon: "layers",
+      description: "Modern frontend architectures, component systems, and high-fidelity responsive user interfaces.",
+      skills: [
+        { name: "React.js", icon: "react" },
+        { name: "Next.js", icon: "nextjs" },
+        { name: "Tailwind CSS", icon: "tailwindcss" },
+        { name: "Bootstrap", icon: "bootstrap" },
+        { name: "Redux", icon: "redux" }
+      ]
+    },
+    {
+      id: "backend",
+      name: "Backend Development",
+      icon: "server",
+      description: "High-throughput RESTful microservices, asynchronous execution, and enterprise web frameworks.",
+      skills: [
+        { name: "FastAPI", icon: "fastapi" },
+        { name: "Django", icon: "django" },
+        { name: "Node.js", icon: "nodejs" },
+        { name: "Express.js", icon: "express" },
+        { name: "REST API", icon: "restapi" }
+      ]
+    },
+    {
+      id: "databases",
+      name: "Databases",
+      icon: "database",
+      description: "Relational data modeling, schema normalization, and performant query optimization.",
+      skills: [
+        { name: "SQLAlchemy", icon: "sqlalchemy" },
+        { name: "MySQL", icon: "mysql" },
+        { name: "PostgreSQL", icon: "postgresql" },
+        { name: "MongoDB", icon: "mongodb" },
+        { name: "SQLite", icon: "sqlite" }
+      ]
+    },
+    {
+      id: "tools",
+      name: "Tools & Technologies",
+      icon: "cpu",
+      description: "Developer tooling, containerization, version control, and rigorous API testing suites.",
+      skills: [
+        { name: "Git", icon: "git" },
+        { name: "GitHub", icon: "github" },
+        { name: "VS Code", icon: "vscode" },
+        { name: "Docker", icon: "docker" },
+        { name: "Postman", icon: "postman" },
+        { name: "Linux", icon: "linux" }
+      ]
+    },
+    {
+      id: "ai-tools",
+      name: "AI Development Tools",
+      icon: "zap",
+      description: "Advanced AI coding assistants and intelligent automation tools accelerating full-stack delivery.",
+      skills: [
+        { name: "ChatGPT", icon: "chatgpt" },
+        { name: "Claude", icon: "claude" },
+        { name: "Gemini", icon: "gemini" },
+        { name: "Antigravity IDE", icon: "antigravity" }
+      ]
+    }
+  ];
+
+  if (!result.skills || !Array.isArray(result.skills.categories) || result.skills.categories.length === 0) {
+    result.skills = {
+      sectionTag: "TECHNICAL ARSENAL",
+      title: "Core Skills & Technologies",
+      subtitle: "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.",
+      categories: officialCategories
+    };
+  }
+
   return validateAndMergePortfolio(result, basePortfolio);
 }
 
@@ -420,17 +592,57 @@ function validateAndMergePortfolio(incoming, base = {}) {
   // Stats check
   if (!Array.isArray(finalData.stats) || finalData.stats.length === 0) {
     finalData.stats = base.stats || [
-      { value: "3+", suffix: "Years", label: "Commercial Experience", description: "Engineering full-stack systems" },
-      { value: "100K+", suffix: "MAU", label: "Users Scaled", description: "Architected high-scale web platforms" },
-      { value: "40%", suffix: "Faster", label: "Performance Gains", description: "Reduced bundle sizes and latency" },
-      { value: "25+", suffix: "Shipped", label: "Production Projects", description: "Delivered applications and systems" }
+      { value: "2+", suffix: "Years", label: "Engineering Experience", description: "Building full-stack web applications and robust architectures" },
+      { value: "15+", suffix: "APIs", label: "REST Endpoints Built", description: "Designed high-speed FastAPI and Django REST services" },
+      { value: "3+", suffix: "Systems", label: "Full-Stack Products", description: "Production-grade SaaS and management dashboards" },
+      { value: "99.9%", suffix: "Uptime", label: "Cloud Reliability", description: "High availability, smooth operations and reliability" }
     ];
   }
 
-  // Skills sanity check
+  // Who Am I (About) sanity check
+  finalData.about = finalData.about || {};
+  finalData.about.sectionTag = finalData.about.sectionTag || base.about?.sectionTag || "WHO I AM";
+  finalData.about.terminalCommand = finalData.about.terminalCommand || base.about?.terminalCommand || "whoami";
+  finalData.about.lead = finalData.about.lead || base.about?.lead || "Full-Stack Software Developer specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js.";
+  if (!Array.isArray(finalData.about.highlights) || finalData.about.highlights.length === 0) {
+    finalData.about.highlights = base.about?.highlights || [
+      { icon: "zap", title: "High-Speed APIs", detail: "FastAPI & Django REST" },
+      { icon: "code", title: "Modern Frontends", detail: "React, Next.js & UI/UX" },
+      { icon: "database", title: "Relational Schemas", detail: "PostgreSQL & SQLAlchemy" },
+      { icon: "shield", title: "Production Ready", detail: "Tested & Cloud Deployed" }
+    ];
+  }
+
+  // Skills sanity check & auto-normalization for React brand showcase
   finalData.skills = finalData.skills || {};
+  finalData.skills.sectionTag = finalData.skills.sectionTag || "TECHNICAL ARSENAL";
+  finalData.skills.title = finalData.skills.title || "Core Skills & Technologies";
+  finalData.skills.subtitle = finalData.skills.subtitle || "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.";
+
   if (!Array.isArray(finalData.skills.categories) || finalData.skills.categories.length === 0) {
-    finalData.skills = base.skills;
+    finalData.skills = base.skills || finalData.skills;
+  } else {
+    // Ensure all categories have valid 'skills' array with lowercase icons
+    finalData.skills.categories = finalData.skills.categories.map(cat => {
+      let skillsArr = Array.isArray(cat.skills) ? cat.skills : [];
+      if (skillsArr.length === 0 && Array.isArray(cat.items)) {
+        // Handle Gemini legacy format gracefully
+        skillsArr = cat.items.map(item => ({
+          name: item.name || String(item),
+          icon: (item.icon || item.name || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+        }));
+      }
+      return {
+        id: cat.id || cat.name?.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'category',
+        name: cat.name || 'Category',
+        icon: cat.icon || 'code',
+        description: cat.description || '',
+        skills: skillsArr.map(s => ({
+          name: s.name,
+          icon: (s.icon || s.name || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+        }))
+      };
+    });
   }
 
   // Projects sanity check

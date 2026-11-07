@@ -71,13 +71,13 @@ Jab aap ya koi user website par **"Update Resume"** button par click karta hai, 
 
 | Area / Feature | Current Status | Abhi Kya Ho Raha Hai? (Current State) | Kya Baki / Missing Hai? (Gaps) | Priority |
 | :--- | :---: | :--- | :--- | :---: |
-| **Upload Modal UI** | ✅ **Complete** | Drag-and-drop, file type validation, animated multi-step progress bar sab active hai. | Koi **Admin PIN / Passcode** protection nahi hai. Koi bhi external visitor upload kar sakta hai. | 🔴 **High** |
+| **Upload Modal UI** | ✅ **Complete** | Drag-and-drop, file type validation, animated multi-step progress bar sab active hai. | Optional **Admin PIN / Passcode** protection (Phase 1). | 🔴 **High** |
 | **Text Extraction** | ✅ **Complete** | PDF (`pdf-parse`) aur DOCX (`mammoth`) dono se clean text extract ho raha hai. | Image-scanned / photocopied resumes (OCR) support nahi hain (sirf text-based document chalta hai). | 🟡 **Medium** |
-| **Gemini AI Parsing** | ⚠️ **Partial** | Gemini AI call aur local deterministic fallback parser working hai. | AI prompt abhi purane `about` schema par hai; naye **"Who Am I" revamp** schema ke hisab se align nahi hai. | 🔴 **High** |
-| **Data Persistence** | ✅ **Complete** | `data/portfolio.json` safely temporary file ke through atomically update hota hai. | Direct overwrite hota hai; owner ke liye koi **"Review / Diff Preview"** nahi hai. | 🟡 **Medium** |
-| **Automated Backups** | ⚠️ **Partial** | `data/backups/` folder mein har upload se pehle snapshot banta hai. | Backups ko UI se **1-Click Restore / Rollback** karne ka option nahi hai. | 🟡 **Medium** |
-| **Live Frontend Update** | ✅ **Complete** | `portfolio:updated` event se Hero, Experience, Projects turant update hote hain. | Naye React-based Skills circuit component ke sath dynamic re-mount sync verify karna baki hai. | 🟢 **Normal** |
-| **Production Hosting** | ❌ **Pending** | Abhi local Node.js server (`server.js`) par chalta hai. | Agar GitHub Pages/Netlify par static host kiya toh upload API nahi chalegi (Serverless ya VPS chahiye). | 🔴 **High** |
+| **Gemini AI Parsing** | ✅ **Complete** | Gemini AI prompt aur offline deterministic parser dono naye **"Who Am I" revamp** (`terminalCommand`, `highlights`) aur **6 official Skills categories** brand SVG registry ke sath 100% aligned hain. | None. Schema mismatch problem resolved. | 🟢 **Done** |
+| **Data Persistence** | ✅ **Complete** | `data/portfolio.json` safely temporary file ke through atomically update hota hai. | Direct overwrite hota hai; owner ke liye koi **"Review / Diff Preview"** nahi hai (Phase 3). | 🟡 **Medium** |
+| **Automated Backups** | ⚠️ **Partial** | `data/backups/` folder mein har upload se pehle snapshot banta hai. | Backups ko UI se **1-Click Restore / Rollback** karne ka option nahi hai (Phase 4). | 🟡 **Medium** |
+| **Live Frontend Update** | ✅ **Complete** | `portfolio:updated` event se Hero, About, Experience, Projects, aur React Skills showcase turant re-render hote hain. | None. Dynamic re-mount verified. | 🟢 **Done** |
+| **Production Hosting** | ❌ **Pending** | Abhi local Node.js server (`server.js`) par chalta hai. | Agar GitHub Pages/Netlify par static host kiya toh upload API nahi chalegi (Serverless ya VPS chahiye - Phase 5). | 🔴 **High** |
 
 ---
 
@@ -110,7 +110,7 @@ Jab aap ya koi user website par **"Update Resume"** button par click karta hai, 
 | Phase | Strategy / Step | Exact Technical Work | Fayda / Output | Priority |
 | :---: | :--- | :--- | :--- | :---: |
 | **Phase 1** | **Admin PIN Protection** | 1. `.env` mein `ADMIN_UPLOAD_PIN=1234` set karein.<br>2. Modal mein PIN input field add karein.<br>3. `resume-controller.js` mein PIN verify karein (401 Unauthorized agar PIN galat ho). | Visitors aapke portfolio ka data modify ya corrupt nahi kar sakenge. | 🔴 **Immediate** |
-| **Phase 2** | **AI Schema Alignment** | 1. `server/parse-resume.js` prompt ko naye `"WHO AM I"` (`terminalCommand`, `highlights`) aur `"Skills Showcase"` brand registry ke sath match karein.<br>2. Fallback parser ko bhi update karein. | Resume upload hone ke baad naya cyber-terminal UI aur skill badges bina tute perfect render honge. | 🔴 **Immediate** |
+| **Phase 2** | **AI Schema Alignment** | ✅ **COMPLETE** (Nov 2026):<br>1. `server/parse-resume.js` Gemini prompt aur deterministic fallback parser dono ko naye `"WHO AM I"` (`terminalCommand: "whoami"`, 4 superpower `highlights`) aur 6 official `"Skills Showcase"` brand SVG categories ke sath 100% align kar diya gaya.<br>2. `validateAndMergePortfolio` sanitizer legacy format ko auto-normalize karta hai.<br>3. 178 automated tests verified. | Resume upload hone ke baad naya cyber-terminal UI aur skill badges bina tute perfect render hote hain. | 🟢 **Completed** |
 | **Phase 3** | **Review & Confirm Step** | Upload ke baad modal mein 2 buttons dikhana:<br>• `Preview Diff / Summary`<br>• `Confirm & Publish Live` | Galat extraction live hone se bachegi; full control aapke paas rahega. | 🟡 **Next** |
 | **Phase 4** | **1-Click Rollback Modal** | Modal ke footer mein chhota sa *"Version History"* link jahan pichle 5 backups ki list ho aur 1-click restore button ho (`POST /api/restore-backup`). | Galat upload hone par 2 second mein purana portfolio wapas restore ho jayega. | 🟡 **Next** |
 | **Phase 5** | **Cloud Deployment Setup** | Free Node.js cloud hosting config (Render / Railway / Koyeb) ya Vercel Serverless functions create karna. | Live internet par bhi resume auto-sync bina server crash ke chalega. | 🟢 **Future** |

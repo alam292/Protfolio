@@ -77,6 +77,10 @@ async function runTests() {
   const parsedLocal = fallbackRuleBasedParser(extractedText, data);
   assert(parsedLocal.profile.name.toUpperCase().includes('MATLOOB'), 'Rule-based parser accurately extracts candidate name');
   assert(parsedLocal.profile.email === 'mdmatloobgaya@gmail.com', 'Rule-based parser accurately extracts email');
+  assert(parsedLocal.about && parsedLocal.about.terminalCommand === 'whoami', 'Rule-based parser sets about.terminalCommand to whoami');
+  assert(parsedLocal.about && Array.isArray(parsedLocal.about.highlights) && parsedLocal.about.highlights.length === 4, 'Rule-based parser populates 4 Who Am I highlights');
+  assert(parsedLocal.skills && Array.isArray(parsedLocal.skills.categories) && parsedLocal.skills.categories.length === 6, 'Rule-based parser ensures 6 official skills categories');
+  assert(parsedLocal.skills.categories.every(c => Array.isArray(c.skills) && c.skills.length > 0), 'Every skills category contains valid skills array');
 
   console.log('\n=== SUITE 6: LOCAL HTTP SERVER ENDPOINTS ===');
   // Start ephemeral test server
@@ -166,6 +170,11 @@ async function runTests() {
   if (uploadResult.json?.backup) {
     assert(fs.existsSync(uploadResult.json.backup), 'Backup file exists on file system');
   }
+  const uploadedPortfolio = uploadResult.json?.data;
+  assert(uploadedPortfolio && uploadedPortfolio.about && uploadedPortfolio.about.terminalCommand === 'whoami', 'Uploaded data contains about.terminalCommand whoami');
+  assert(uploadedPortfolio && Array.isArray(uploadedPortfolio.about.highlights) && uploadedPortfolio.about.highlights.length === 4, 'Uploaded data contains 4 Who Am I highlights');
+  assert(uploadedPortfolio && uploadedPortfolio.skills && Array.isArray(uploadedPortfolio.skills.categories) && uploadedPortfolio.skills.categories.length === 6, 'Uploaded data contains 6 skills categories');
+  assert(uploadedPortfolio.skills.categories.every(c => Array.isArray(c.skills) && c.skills.length > 0), 'Every uploaded skills category contains valid skills array');
 
   // Restore snapshot to ensure portfolio remains clean
   fs.writeFileSync('data/portfolio.json', portfolioSnapshot, 'utf8');
