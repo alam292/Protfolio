@@ -213,11 +213,12 @@ class FormController {
     this.clockInterval = setInterval(updateClock, 1000);
   }
 
-  handleSubmit() {
+  async handleSubmit() {
     const nameInput = document.getElementById('userName');
     const emailInput = document.getElementById('userEmail');
     const subjectInput = document.getElementById('userSubject');
     const messageInput = document.getElementById('userMessage');
+    const serviceInput = document.getElementById('selectedServiceInput');
     const submitBtn = document.getElementById('contactSubmitBtn');
     const submitTextEl = document.getElementById('submitBtnText');
 
@@ -261,6 +262,14 @@ class FormController {
       return;
     }
 
+    const payload = {
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      subject: subjectInput.value.trim(),
+      message: messageInput.value.trim(),
+      serviceType: serviceInput ? serviceInput.value.trim() : 'General Inquiry'
+    };
+
     // Begin Submission Animation
     if (submitBtn) {
       submitBtn.disabled = true;
@@ -269,49 +278,66 @@ class FormController {
       if (submitTextEl) submitTextEl.textContent = 'Transmitting...';
     }
 
-    // Simulate async dispatch with state changes
-    setTimeout(() => {
-      const senderName = nameInput.value.trim();
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
 
-      if (submitBtn) {
-        submitBtn.classList.remove('submitting');
-        submitBtn.classList.add('success');
-        if (submitTextEl) submitTextEl.textContent = 'Transmission Dispatched!';
-      }
+      const result = await response.json().catch(() => ({}));
 
-      this.showToast(`Thank you, ${senderName}! Your transmission has been dispatched.`);
-
-      // Reset form after short pause
-      setTimeout(() => {
-        this.form.reset();
-
-        // Reset service chips
-        const chips = document.querySelectorAll('.service-chip');
-        chips.forEach((c, index) => {
-          if (index === 0) c.classList.add('active');
-          else c.classList.remove('active');
-        });
-        const serviceInput = document.getElementById('selectedServiceInput');
-        if (serviceInput && chips[0]) {
-          serviceInput.value = chips[0].getAttribute('data-service') || 'Full-Stack Web App';
-        }
-
-        // Reset character counter
-        const counterEl = document.getElementById('charCounter');
-        if (counterEl) {
-          counterEl.textContent = '0 / 1000';
-          counterEl.className = 'char-counter';
-        }
-
-        // Reset submit button state
+      if (response.ok && result.success) {
         if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.classList.remove('success');
-          if (submitTextEl) submitTextEl.textContent = 'Transmit Message';
+          submitBtn.classList.remove('submitting');
+          submitBtn.classList.add('success');
+          if (submitTextEl) submitTextEl.textContent = 'Transmission Dispatched!';
         }
-      }, 2500);
-    }, 900);
+
+        this.showToast(result.message || `Thank you, ${payload.name}! Your transmission has been dispatched.`);
+
+        // Reset form after short pause
+        setTimeout(() => {
+          this.form.reset();
+
+          // Reset service chips
+          const chips = document.querySelectorAll('.service-chip');
+          chips.forEach((c, index) => {
+            if (index === 0) c.classList.add('active');
+            else c.classList.remove('active');
+          });
+          if (serviceInput && chips[0]) {
+            serviceInput.value = chips[0].getAttribute('data-service') || 'Full-Stack Web App';
+          }
+
+          // Reset character counter
+          const counterEl = document.getElementById('charCounter');
+          if (counterEl) {
+            counterEl.textContent = '0 / 1000';
+            counterEl.className = 'char-counter';
+          }
+
+          // Reset submit button state
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('success');
+            if (submitTextEl) submitTextEl.textContent = 'Transmit Message';
+          }
+        }, 2500);
+      } else {
+        throw new Error(result.error || 'Transmission failed. Server returned error.');
+      }
+    } catch (err) {
+      console.error('[Contact Form Transmission Error]', err);
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.classList.remove('submitting');
+        if (submitTextEl) submitTextEl.textContent = 'Transmit Message';
+      }
+      this.showToast(err.message || 'Transmission failed. Please try again or email directly.', true);
+    }
   }
+
 
   showToast(message, isError = false) {
     if (!this.toast) {

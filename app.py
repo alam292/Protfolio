@@ -7,7 +7,8 @@ version rollback, and dynamic portfolio sync API endpoints.
 import os
 import json
 import time
-from datetime import datetime
+from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional, Dict, Any
 
@@ -24,22 +25,44 @@ from server_py.config import (
     ADMIN_UPLOAD_PIN,
     GEMINI_API_KEY
 )
+from server_py.database import check_db_connection
+from server_py.seed_db import seed_initial_data
 from server_py.resume_parser import extract_raw_text, structure_resume_with_ai
 from server_py.controller import (
     verify_admin_pin,
+    get_active_portfolio,
     create_portfolio_backup,
     compute_portfolio_diff,
     list_backups,
     restore_backup,
     publish_portfolio,
-    atomic_write_portfolio
+    atomic_write_portfolio,
+    save_contact_message,
+    list_contact_messages
 )
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """
+    Application lifespan manager.
+    Initializes database schema and ensures baseline portfolio data is seeded on boot.
+    """
+    try:
+        stats = seed_initial_data()
+        print(f"[Database Engine] Startup seed verified: {stats}")
+    except Exception as exc:
+        print(f"[Database Engine Warning] Startup seed encountered error: {exc}")
+    yield
+
 
 app = FastAPI(
     title="Folioblox Dynamic Portfolio & AI Engine",
     description="Python FastAPI backend powering AI resume transformation and dynamic portfolio sync.",
-    version="1.5.0"
+    version="1.6.0",
+    lifespan=lifespan
 )
+
 
 # Global CORS Configuration
 app.add_middleware(
@@ -74,26 +97,24 @@ MIME_TYPES = {
 
 @app.get("/api/health")
 async def health_check():
-    """Server health status and AI key check."""
+    """Server health status, database connectivity and AI key check."""
+    db_health = check_db_connection()
     return {
         "status": "ok",
-        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "database": db_health,
         "geminiKeyConfigured": bool(GEMINI_API_KEY and GEMINI_API_KEY != "YOUR_GEMINI_API_KEY_HERE")
     }
 
 
 @app.get("/api/portfolio")
 async def get_portfolio():
-    """Retrieve current portfolio JSON schema."""
-    if not PORTFOLIO_PATH.exists():
-        return JSONResponse(status_code=404, content={"success": False, "error": "portfolio.json not found"})
+    """Retrieve current portfolio JSON schema (Database-first with fallback)."""
+    data = get_active_portfolio()
+    if not data:
+        return JSONResponse(status_code=404, content={"success": False, "error": "portfolio schema not found"})
+    return JSONResponse(content=data, headers={"Cache-Control": "no-cache"})
 
-    try:
-        with open(PORTFOLIO_PATH, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        return JSONResponse(content=data, headers={"Cache-Control": "no-cache"})
-    except Exception as e:
-        return JSONResponse(status_code=500, content={"success": False, "error": str(e)})
 
 
 @app.get("/api/backups")
@@ -293,9 +314,53 @@ async def restore_snapshot(
     return JSONResponse(status_code=status_code, content=response_data)
 
 
+@app.post("/api/contact")
+async def contact_form_submit(request: Request):
+    """
+    Persist client / recruiter contact transmission into the database.
+    """
+    try:
+        body = await request.json()
+    except Exception:
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": "Invalid request payload format."}
+        )
+
+    name = body.get("name")
+    email = body.get("email")
+    subject = body.get("subject")
+    message = body.get("message")
+    service_type = body.get("serviceType")
+
+    success, status_code, response_data = save_contact_message(
+        name=name,
+        email=email,
+        subject=subject,
+        message=message,
+        service_type=service_type
+    )
+    return JSONResponse(status_code=status_code, content=response_data)
+
+
+@app.get("/api/admin/messages")
+async def get_admin_contact_messages(
+    request: Request,
+    x_admin_pin: Optional[str] = Header(None),
+    pin: Optional[str] = Query(None)
+):
+    """
+    Retrieve stored contact inquiries (Protected by Admin PIN).
+    """
+    provided_pin = x_admin_pin or pin
+    success, status_code, response_data = list_contact_messages(pin=provided_pin)
+    return JSONResponse(status_code=status_code, content=response_data)
+
+
 # ============================================================================
 # STATIC ASSET ROUTING & HEADERS
 # ============================================================================
+
 
 @app.get("/{full_path:path}")
 async def serve_static(full_path: str, request: Request):
