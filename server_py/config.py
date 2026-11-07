@@ -21,6 +21,8 @@ load_dotenv(ROOT_DIR / ".env")
 ADMIN_UPLOAD_PIN = os.getenv("ADMIN_UPLOAD_PIN", "1234").strip()
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 PORT = int(os.getenv("PORT", 8000))
+DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
+SQLITE_PATH = DATA_DIR / "portfolio.db"
 
 # Ensure runtime directories exist
 for directory in (BACKUPS_DIR, UPLOADS_DIR, ASSETS_DIR):
