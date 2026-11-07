@@ -1,19 +1,19 @@
 {
   "profile": {
-    "name": "MD MATLOOB ALAM",
-    "shortName": "MD",
+    "name": "CURRICULUM VITAE",
+    "shortName": "CURRICULUM",
     "title": "Data Analyst Trainee & Power BI Developer",
     "heroTagline": "Skilled in SQL, Python, Advanced Excel, and Power BI. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.",
     "status": "Available for opportunities",
     "statusSubtitle": "Full-time & High-Impact Software Engineering Roles",
-    "email": "mdmatloobalam292@gmail.com",
+    "email": "mdmatloobgaya@gmail.com",
     "fallbackEmail": "mdmatloobgaya@gmail.com",
     "portfolioUrl": "https://matloob.dev",
     "githubUrl": "https://github.com/Alam292",
     "githubUser": "Alam292",
     "linkedinUrl": "https://linkedin.com/in/md-matloob-alam-016408229",
-    "resumeUrl": "assets/MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf",
-    "resumeFilename": "MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf",
+    "resumeUrl": "assets/Md_Matloob_Alam.pdf",
+    "resumeFilename": "Md_Matloob_Alam.pdf",
     "avatarUrl": "assets/profile-matloob-transparent.png",
     "location": {
       "city": "New Delhi",
@@ -55,27 +55,27 @@
   "about": {
     "sectionTag": "WHO I AM",
     "terminalCommand": "whoami",
-    "lead": "I am a Data Analyst Trainee and Power BI Developer with hands-on training at Naresh i Technologies and practical project experience in SQL, Python, Advanced Excel, and Power BI. Skilled in data cleaning, ETL, EDA, DAX, Power Query, and dashboard development to generate actionable, data-driven insights.",
+    "lead": "I am a Data Analyst Trainee & Power BI Developer specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.",
     "highlights": [
       {
         "icon": "zap",
-        "title": "Actionable Insights",
-        "detail": "Power BI & DAX Dashboards"
+        "title": "High-Speed APIs",
+        "detail": "FastAPI & Django REST"
       },
       {
         "icon": "code",
-        "title": "Python Analytics",
-        "detail": "Pandas, NumPy & EDA"
+        "title": "Modern Frontends",
+        "detail": "React, Next.js & UI/UX"
       },
       {
         "icon": "database",
-        "title": "Database Querying",
-        "detail": "SQL, MySQL & ETL"
+        "title": "Relational Schemas",
+        "detail": "PostgreSQL & SQLAlchemy"
       },
       {
         "icon": "shield",
-        "title": "Business Reports",
-        "detail": "Advanced Excel & Tableau"
+        "title": "Production Ready",
+        "detail": "Tested & Cloud Deployed"
       }
     ],
     "pillars": [
@@ -469,7 +469,7 @@
     "subtitle": "",
     "infoCardTitle": "Contact Information",
     "infoCardDescription": "Feel free to reach out via email or through social platforms. I typically respond within 24 hours.",
-    "email": "mdmatloobalam292@gmail.com",
+    "email": "mdmatloobgaya@gmail.com",
     "availability": "Full-time • Freelance Projects",
     "locationDisplay": "India • Available Worldwide (Remote)",
     "secondaryEmail": "mdmatloobgaya@gmail.com",
