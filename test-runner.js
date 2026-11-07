@@ -253,6 +253,42 @@ async function runTests() {
   assert(animationsJs.includes('.skill-category'), 'Staggered category animation in animations.js');
   assert(animationsJs.includes('.skill-item'), 'Staggered skill item animation in animations.js');
 
+  console.log('\n=== SUITE 10: RESPONSIVE LEFT-MENU & LIST-WISE DRAWER VERIFICATION ===');
+  // 1. Left Menu Button Placement
+  assert(html.includes('class="navbar-left"'), 'Navbar left-group container present');
+  const toggleIndex = html.indexOf('id="mobileToggle"');
+  const logoIndex = html.indexOf('class="logo-container"');
+  assert(toggleIndex !== -1 && toggleIndex < logoIndex, 'Mobile toggle placed on LEFT side of logo');
+
+  // 2. Mobile Drawer & Backdrop DOM Structure
+  assert(html.includes('id="mobileDrawerBackdrop"'), 'Tap-to-close drawer backdrop overlay present');
+  assert(html.includes('id="drawerCloseBtn"'), 'Drawer close (✕) button present');
+  assert(html.includes('class="mobile-nav-list"'), 'List-wise navigation container present');
+
+  // 3. List-Wise Structure with Indices (01-08) & Chevrons
+  for (let i = 1; i <= 8; i++) {
+    const padded = String(i).padStart(2, '0');
+    assert(html.includes(`<span class="item-index">${padded}</span>`), `Nav list item index ${padded} present`);
+  }
+  assert(html.includes('class="item-chevron"'), 'Item chevron arrow indicators present');
+
+  // 4. Drawer & Responsive CSS Assertions
+  const drawerCss = fs.readFileSync('css/components/drawer.css', 'utf8');
+  assert(drawerCss.includes('transform: translateX(-100%)'), 'Left off-canvas slide initial state defined');
+  assert(drawerCss.includes('transform: translateX(0)'), 'Drawer open slide-in state defined');
+  assert(drawerCss.includes('.mobile-drawer-backdrop'), 'Backdrop overlay styling defined');
+  assert(drawerCss.includes('.mobile-nav-link.active'), 'Active state styling defined with orange accent');
+
+  const responsiveCss = fs.readFileSync('css/responsive.css', 'utf8');
+  assert(responsiveCss.includes('.navbar-left'), 'Responsive navbar-left defined in responsive.css');
+  assert(responsiveCss.includes('.mobile-toggle'), 'Responsive mobile-toggle defined in responsive.css');
+
+  // 5. JavaScript Navigation Controller Assertions
+  const navJs = fs.readFileSync('js/navigation.js', 'utf8');
+  assert(navJs.includes('drawerBackdrop'), 'Navigation controller binds backdrop overlay');
+  assert(navJs.includes('drawerCloseBtn'), 'Navigation controller binds close button');
+  assert(navJs.includes('aria-expanded'), 'Accessibility aria-expanded handled in drawer toggle');
+
   console.log('\n======================================================');
   console.log(`TOTAL CHECKS: ${passed + failed} | PASSED: ${passed} | FAILED: ${failed}`);
   if (failed === 0) {

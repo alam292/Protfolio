@@ -89,10 +89,21 @@
 
   <!-- Fixed Header Navigation -->
   <header class="navbar" id="navbar">
-    <a href="#hero" class="logo-container" aria-label="Md MatlooB Alam Home">
-      <span class="logo-badge">M</span>
-      <span class="logo-text">Matloob<span class="logo-text-accent">.dev</span></span>
-    </a>
+    <!-- Left Navigation Group (Mobile Toggle + Logo) -->
+    <div class="navbar-left">
+      <!-- Mobile Hamburger Toggle on LEFT side -->
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false"
+        aria-controls="mobileDrawer">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a href="#hero" class="logo-container" aria-label="Md MatlooB Alam Home">
+        <span class="logo-badge">M</span>
+        <span class="logo-text">Matloob<span class="logo-text-accent">.dev</span></span>
+      </a>
+    </div>
 
     <!-- Desktop Navigation Links (All 8 Sections) -->
     <nav aria-label="Primary Navigation">
@@ -108,7 +119,7 @@
       </ul>
     </nav>
 
-    <!-- Header Actions (Contact CTA, Mobile Toggle) -->
+    <!-- Header Actions (Contact CTA, Resume trigger) -->
     <div class="nav-actions">
       <!-- AI Resume Upload / Update Trigger -->
       <button type="button" class="btn-nav-upload btn-open-resume-modal" data-action="open-resume-modal"
@@ -132,35 +143,92 @@
           </svg>
         </span>
       </a>
-
-      <!-- Mobile Hamburger Toggle -->
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false"
-        aria-controls="mobileDrawer">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </header>
 
-  <!-- Mobile Drawer Menu -->
-  <div class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
-    <nav>
-      <ul class="mobile-nav-links">
-        <li><a href="#hero" class="mobile-nav-link">Home</a></li>
-        <li><a href="#about" class="mobile-nav-link">About</a></li>
-        <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
-        <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
-        <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
-        <li><a href="#education" class="mobile-nav-link">Education</a></li>
-        <li><a href="#certificates" class="mobile-nav-link">Certificates</a></li>
-        <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+  <!-- Mobile Drawer Backdrop Overlay (Tap to close) -->
+  <div class="mobile-drawer-backdrop" id="mobileDrawerBackdrop" aria-hidden="true"></div>
+
+  <!-- Mobile Left-Slide Drawer Menu (List-Wise Hierarchy) -->
+  <aside class="mobile-drawer" id="mobileDrawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <div class="drawer-brand">
+        <span class="logo-badge">M</span>
+        <span class="drawer-brand-text">Matloob<span class="logo-text-accent">.dev</span></span>
+      </div>
+      <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close navigation menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-drawer-nav" aria-label="Mobile Menu">
+      <ul class="mobile-nav-list">
+        <li>
+          <a href="#hero" class="mobile-nav-link active">
+            <span class="item-index">01</span>
+            <span class="item-label">Home</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#about" class="mobile-nav-link">
+            <span class="item-index">02</span>
+            <span class="item-label">About</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#skills" class="mobile-nav-link">
+            <span class="item-index">03</span>
+            <span class="item-label">Skills</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#projects" class="mobile-nav-link">
+            <span class="item-index">04</span>
+            <span class="item-label">Projects</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#experience" class="mobile-nav-link">
+            <span class="item-index">05</span>
+            <span class="item-label">Experience</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#education" class="mobile-nav-link">
+            <span class="item-index">06</span>
+            <span class="item-label">Education</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#certificates" class="mobile-nav-link">
+            <span class="item-index">07</span>
+            <span class="item-label">Certificates</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="mobile-nav-link">
+            <span class="item-index">08</span>
+            <span class="item-label">Contact</span>
+            <span class="item-chevron" aria-hidden="true">›</span>
+          </a>
+        </li>
       </ul>
     </nav>
 
-    <div class="mobile-drawer-cta">
-      <button type="button" class="btn-touch btn-open-resume-modal" data-action="open-resume-modal"
-        style="width: 100%; justify-content: center; margin-bottom: 0.75rem; background: rgba(255, 87, 34, 0.15); border-color: rgba(255, 87, 34, 0.4); color: #ff8a65;">
+    <div class="mobile-drawer-footer">
+      <button type="button" class="btn-touch btn-drawer-resume btn-open-resume-modal" data-action="open-resume-modal"
+        style="width: 100%; justify-content: center; margin-bottom: 0.65rem; background: rgba(255, 87, 34, 0.12); border-color: rgba(255, 87, 34, 0.35); color: #ff8a65;">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -170,8 +238,8 @@
         <span>Update Resume (AI)</span>
       </button>
 
-      <a href="#contact" class="btn-touch btn-touch-orange">
-        <span>Let's talk</span>
+      <a href="#contact" class="btn-touch btn-touch-orange" style="width: 100%; justify-content: center;">
+        <span>Get in touch</span>
         <span class="btn-icon-circle" aria-hidden="true">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
@@ -181,7 +249,7 @@
         </span>
       </a>
     </div>
-  </div>
+  </aside>
 
   <!-- Interactive Scrollable Main Content -->
   <main class="scroll-content">

@@ -1,90 +1,203 @@
 /**
  * Mobile Drawer Menu
- * Fullscreen glass overlay for mobile & tablet responsive navigation.
+ * Sleek Left-Slide frosted glass drawer with list-wise navigation hierarchy,
+ * status indicators, chevrons, and touch-optimized actions.
  */
 
-.mobile-drawer {
+/* Tap-to-close Backdrop Overlay */
+.mobile-drawer-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   height: 100dvh;
-  background: rgba(3, 6, 8, 0.96);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: var(--z-drawer);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: clamp(20px, 4vh, 40px) var(--space-6) clamp(32px, 6vh, 60px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-24px);
   transition: opacity var(--transition-smooth),
-              transform var(--transition-smooth),
               visibility var(--transition-smooth);
 }
 
-.mobile-drawer.open {
+.mobile-drawer-backdrop.open {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 
-.mobile-drawer-top {
-  width: 100%;
-  max-width: 380px;
+/* Left Sliding Drawer Container */
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: clamp(285px, 80vw, 340px);
+  height: 100vh;
+  height: 100dvh;
+  background: rgba(5, 9, 13, 0.96);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 20px 0 50px rgba(0, 0, 0, 0.7);
+  z-index: calc(var(--z-drawer) + 5);
   display: flex;
-  justify-content: flex-end;
-  padding: 0 0 var(--space-4) 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 18px 24px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mobile-nav-links {
+.mobile-drawer.open {
+  transform: translateX(0);
+}
+
+/* Drawer Header (Brand + Close X) */
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.drawer-brand-text {
+  font-family: var(--font-family-display);
+  font-size: 1.15rem;
+  font-weight: var(--font-weight-extrabold);
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.drawer-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.drawer-close-btn:hover,
+.drawer-close-btn:focus-visible {
+  color: #ffffff;
+  background: rgba(255, 87, 34, 0.15);
+  border-color: var(--accent-orange);
+}
+
+/* Vertical List-Wise Navigation Menu */
+.mobile-drawer-nav {
+  flex: 1;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.mobile-nav-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(10px, 1.8vh, 18px);
-  text-align: center;
-  width: 100%;
-  max-width: 380px;
-  margin: auto 0;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
 }
 
 .mobile-nav-link {
-  font-family: var(--font-family-display);
-  font-size: clamp(1.15rem, 4vw, 1.6rem);
-  font-weight: var(--font-weight-bold);
-  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
   text-decoration: none;
-  transition: color var(--transition-fast), transform var(--transition-fast);
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  font-family: var(--font-family-display);
+  font-size: 0.95rem;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
 }
 
+.mobile-nav-link .item-index {
+  font-family: var(--font-family-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  margin-right: 10px;
+  transition: color var(--transition-fast);
+}
+
+.mobile-nav-link .item-label {
+  flex: 1;
+  text-align: left;
+}
+
+.mobile-nav-link .item-chevron {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* Hover & Focus State */
 .mobile-nav-link:hover,
-.mobile-nav-link:focus-visible,
-.mobile-nav-link.active {
+.mobile-nav-link:focus-visible {
   color: #ffffff;
-  background: rgba(255, 87, 34, 0.12);
-  transform: scale(1.05);
+  background: rgba(255, 87, 34, 0.08);
+  border-color: rgba(255, 87, 34, 0.25);
+  transform: translateX(4px);
 }
 
-.mobile-nav-link.active {
+.mobile-nav-link:hover .item-index,
+.mobile-nav-link:focus-visible .item-index {
   color: var(--accent-orange);
 }
 
-.mobile-drawer-cta {
-  margin-top: clamp(20px, 3vh, 32px);
-  width: 100%;
-  max-width: 380px;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+.mobile-nav-link:hover .item-chevron,
+.mobile-nav-link:focus-visible .item-chevron {
+  color: var(--accent-orange);
+  transform: translateX(2px);
 }
 
+/* Active State (ScrollSpy or Current) */
+.mobile-nav-link.active {
+  color: #ffffff;
+  font-weight: var(--font-weight-bold);
+  background: linear-gradient(90deg, rgba(255, 87, 34, 0.18), rgba(255, 87, 34, 0.03));
+  border-left: 3px solid var(--accent-orange);
+  border-color: rgba(255, 87, 34, 0.35);
+  box-shadow: 0 0 16px rgba(255, 87, 34, 0.12);
+}
+
+.mobile-nav-link.active .item-index {
+  color: var(--accent-orange);
+}
+
+.mobile-nav-link.active .item-chevron {
+  color: var(--accent-orange);
+}
+
+/* Drawer Footer Actions */
+.mobile-drawer-footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}

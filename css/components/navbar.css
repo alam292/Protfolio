@@ -29,6 +29,13 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
+/* Left Navigation Group (Holds Mobile Toggle & Brand Logo) */
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 /* Brand Logo */
 .logo-container {
   display: flex;

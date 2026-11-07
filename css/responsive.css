@@ -20,9 +20,15 @@
    2. Tablet Viewports (768px - 1024px)
    ========================================================================== */
 @media (max-width: 1024px) {
-  /* Navigation */
+  /* Navigation & Left Mobile Toggle */
   .nav-links {
     display: none;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
   }
 
   .mobile-toggle {
@@ -141,11 +147,24 @@
    ========================================================================== */
 @media (max-width: 767px) {
   .navbar {
-    padding: 14px var(--section-padding-x);
+    padding: 12px var(--section-padding-x);
+    min-height: 56px;
   }
 
   .navbar.scrolled {
-    padding: 12px var(--section-padding-x);
+    padding: 10px var(--section-padding-x);
+  }
+
+  .navbar-left {
+    gap: var(--space-2);
+  }
+
+  .mobile-toggle {
+    padding: 8px 9px;
+  }
+
+  .mobile-toggle span {
+    width: 20px;
   }
 
   .btn-touch {

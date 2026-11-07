@@ -8,6 +8,8 @@ class NavigationController {
     this.navbar = document.getElementById('navbar');
     this.mobileToggle = document.getElementById('mobileToggle');
     this.mobileDrawer = document.getElementById('mobileDrawer');
+    this.drawerBackdrop = document.getElementById('mobileDrawerBackdrop');
+    this.drawerCloseBtn = document.getElementById('drawerCloseBtn');
     this.desktopLinks = document.querySelectorAll('.nav-link');
     this.mobileLinks = document.querySelectorAll('.mobile-nav-link');
     this.sections = document.querySelectorAll('section[id]');
@@ -68,6 +70,9 @@ class NavigationController {
 
       this.mobileToggle.classList.toggle('active', isOpen);
       this.mobileDrawer.classList.toggle('open', isOpen);
+      if (this.drawerBackdrop) {
+        this.drawerBackdrop.classList.toggle('open', isOpen);
+      }
       this.mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       document.body.style.overflow = isOpen ? 'hidden' : '';
 
@@ -78,6 +83,16 @@ class NavigationController {
     };
 
     this.mobileToggle.addEventListener('click', () => toggleDrawer());
+
+    // Close on close button click
+    if (this.drawerCloseBtn) {
+      this.drawerCloseBtn.addEventListener('click', () => toggleDrawer(true));
+    }
+
+    // Close on backdrop overlay click
+    if (this.drawerBackdrop) {
+      this.drawerBackdrop.addEventListener('click', () => toggleDrawer(true));
+    }
 
     // Close on link click
     this.mobileLinks.forEach((link) => {
@@ -92,7 +107,7 @@ class NavigationController {
       }
     });
 
-    // Close on backdrop click
+    // Close on backdrop click (fallback)
     this.mobileDrawer.addEventListener('click', (e) => {
       if (e.target === this.mobileDrawer) {
         toggleDrawer(true);
