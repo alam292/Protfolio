@@ -41,10 +41,38 @@ class PortfolioRenderer {
 
       // Dispatch event to announce rendering completion
       window.dispatchEvent(new CustomEvent('portfolio:rendered', { detail: this.data }));
+
+      // Seamlessly revalidate with live database backend in background (SWR pattern)
+      this.syncWithBackend();
+
       return this.data;
     } catch (error) {
       console.error('[PortfolioRenderer] Initialization error:', error);
       return null;
+    }
+  }
+
+  /**
+   * Stale-While-Revalidate backend synchronization.
+   * Checks live database backend for updates without blocking initial page render.
+   */
+  async syncWithBackend() {
+    try {
+      const isLocal = typeof window !== 'undefined' && (
+        window.location.hostname === 'localhost' ||
+        window.location.hostname === '127.0.0.1' ||
+        window.location.hostname === ''
+      );
+      const apiBaseUrl = isLocal ? '' : (window.PORTFOLIO_API_URL || 'https://matloob-portfolio.onrender.com').replace(/\/+$/, '');
+      const res = await fetch(`${apiBaseUrl}/api/portfolio`, { cache: 'no-cache' });
+      if (res.ok) {
+        const liveData = await res.json();
+        if (liveData && liveData.profile && JSON.stringify(liveData) !== JSON.stringify(this.data)) {
+          this.updateData(liveData);
+        }
+      }
+    } catch (_) {
+      // Quiet fallback: bundled data already rendered
     }
   }
 
