@@ -12,7 +12,9 @@ const {
   handleResumeUpload,
   handlePublishPortfolio,
   handleGetPortfolio,
-  handleListBackups
+  handleListBackups,
+  handleRestoreBackup,
+  handleVerifyPin
 } = require('./server/resume-controller');
 
 const app = express();
@@ -23,7 +25,7 @@ const PUBLIC_DIR = __dirname;
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-pin');
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
@@ -34,6 +36,8 @@ app.use(express.json());
 // API Endpoints
 app.post('/api/upload-resume', handleResumeUpload);
 app.post('/api/publish-portfolio', handlePublishPortfolio);
+app.post('/api/restore-backup', handleRestoreBackup);
+app.post('/api/verify-pin', handleVerifyPin);
 app.get('/api/portfolio', handleGetPortfolio);
 app.get('/api/backups', handleListBackups);
 

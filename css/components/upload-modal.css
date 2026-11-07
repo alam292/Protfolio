@@ -766,3 +766,343 @@
   transform: none;
 }
 
+/* ==========================================================================
+   10. Version History & 1-Click Rollback (Phase 4)
+   ========================================================================== */
+.version-history-section {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.btn-toggle-version-history {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: var(--text-secondary, #9ea3b0);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.btn-toggle-version-history:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--text-primary, #ffffff);
+}
+
+.version-history-toggle-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.backup-count-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  background: rgba(255, 87, 34, 0.12);
+  border: 1px solid rgba(255, 87, 34, 0.3);
+  border-radius: 9999px;
+  color: #ff7043;
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-family-mono);
+}
+
+.version-history-drawer {
+  margin-top: 0.75rem;
+  padding: 0.85rem;
+  background: rgba(10, 14, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  max-height: 280px;
+  overflow-y: auto;
+  animation: reviewFadeIn 0.25s var(--ease-out) forwards;
+}
+
+.version-history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.version-history-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary, #ffffff);
+  margin: 0 0 0.15rem 0;
+}
+
+.version-history-desc {
+  font-size: 0.72rem;
+  color: var(--text-secondary, #888d9d);
+  margin: 0;
+}
+
+.btn-refresh-backups {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.btn-refresh-backups:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  transform: rotate(90deg);
+}
+
+.version-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.backup-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  transition: all var(--duration-fast);
+}
+
+.backup-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 87, 34, 0.25);
+}
+
+.backup-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.backup-item-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary, #ffffff);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.backup-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-secondary, #888d9d);
+  font-family: var(--font-family-mono);
+}
+
+.btn-restore-backup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(255, 87, 34, 0.15);
+  border: 1px solid rgba(255, 87, 34, 0.4);
+  border-radius: 6px;
+  color: #ff7043;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--duration-fast);
+}
+
+.btn-restore-backup:hover {
+  background: #ff5722;
+  border-color: #ff5722;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(255, 87, 34, 0.4);
+}
+
+.btn-restore-backup:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.backup-empty-state {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-secondary, #888d9d);
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   11. Admin Security PIN Modal Dialog (Phase 4)
+   ========================================================================== */
+.admin-pin-dialog-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 7, 13, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 16px;
+  animation: reviewFadeIn 0.2s var(--ease-out) forwards;
+}
+
+.admin-pin-modal {
+  width: 90%;
+  max-width: 380px;
+  background: #0f1523;
+  border: 1px solid rgba(255, 87, 34, 0.35);
+  border-radius: 12px;
+  padding: 1.4rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 87, 34, 0.15);
+}
+
+.admin-pin-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-pin-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 87, 34, 0.15);
+  border: 1px solid rgba(255, 87, 34, 0.3);
+  color: #ff7043;
+  flex-shrink: 0;
+}
+
+.admin-pin-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.2rem 0;
+}
+
+.admin-pin-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary, #9ea3b0);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.admin-pin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-pin-input {
+  width: 100%;
+  padding: 0.75rem;
+  text-align: center;
+  letter-spacing: 0.5em;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: var(--font-family-mono);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+  outline: none;
+  transition: all var(--duration-fast);
+}
+
+.admin-pin-input:focus {
+  border-color: #ff5722;
+  box-shadow: 0 0 0 3px rgba(255, 87, 34, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.admin-pin-hint {
+  font-size: 0.72rem;
+  color: var(--text-secondary, #888d9d);
+  text-align: center;
+}
+
+.admin-pin-hint code {
+  color: #ff7043;
+  background: rgba(255, 87, 34, 0.1);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+.admin-pin-error {
+  padding: 0.4rem 0.6rem;
+  background: rgba(255, 82, 82, 0.15);
+  border: 1px solid rgba(255, 82, 82, 0.4);
+  border-radius: 6px;
+  color: #ff5252;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.admin-pin-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+.btn-admin-pin-cancel {
+  padding: 0.5rem 0.9rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.btn-admin-pin-cancel:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+.btn-admin-pin-confirm {
+  padding: 0.5rem 1.1rem;
+  background: linear-gradient(135deg, #ff5722 0%, #f4511e 100%);
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.btn-admin-pin-confirm:hover {
+  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.4);
+  transform: translateY(-1px);
+}
+
+

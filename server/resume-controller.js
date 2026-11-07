@@ -315,12 +315,42 @@ function handleGetPortfolio(req, res) {
 }
 
 /**
+ * Verify Admin PIN from Request (Header, Body, or Query)
+ * @param {import('express').Request} req
+ * @returns {boolean}
+ */
+function verifyAdminPinHelper(req) {
+  const configuredPin = process.env.ADMIN_UPLOAD_PIN;
+  if (!configuredPin || !configuredPin.trim()) {
+    return true; // No PIN configured, allow access
+  }
+  const provided = req.headers['x-admin-pin'] || (req.body && req.body.pin) || (req.query && req.query.pin);
+  return String(provided || '').trim() === String(configuredPin).trim();
+}
+
+/**
+ * Handle POST /api/verify-pin
+ */
+function handleVerifyPin(req, res) {
+  const configuredPin = process.env.ADMIN_UPLOAD_PIN;
+  if (!configuredPin || !configuredPin.trim()) {
+    return res.json({ success: true, required: false, valid: true });
+  }
+  const valid = verifyAdminPinHelper(req);
+  return res.json({
+    success: true,
+    required: true,
+    valid
+  });
+}
+
+/**
  * Handle GET /api/backups
  */
 function handleListBackups(req, res) {
   try {
     if (!fs.existsSync(BACKUPS_DIR)) {
-      return res.json({ success: true, backups: [] });
+      return res.json({ success: true, count: 0, backups: [] });
     }
     const files = fs.readdirSync(BACKUPS_DIR)
       .filter(f => f.endsWith('.json'))
@@ -330,14 +360,115 @@ function handleListBackups(req, res) {
           filename: name,
           path: `data/backups/${name}`,
           size: stats.size,
-          created: stats.mtime
+          sizeBytes: stats.size,
+          sizeFormatted: `${(stats.size / 1024).toFixed(1)} KB`,
+          created: stats.mtime,
+          timestampIso: stats.mtime.toISOString(),
+          formattedDate: new Date(stats.mtime).toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })
         };
       })
-      .sort((a, b) => b.created - a.created);
+      .sort((a, b) => new Date(b.created) - new Date(a.created));
 
     return res.json({ success: true, count: files.length, backups: files });
   } catch (err) {
     return res.status(500).json({ success: false, error: err.message });
+  }
+}
+
+/**
+ * Handle POST /api/restore-backup (Phase 4)
+ * Atomically rolls back portfolio.json to a specified backup snapshot.
+ */
+async function handleRestoreBackup(req, res) {
+  try {
+    if (!verifyAdminPinHelper(req)) {
+      return res.status(401).json({
+        success: false,
+        error: 'Unauthorized: Invalid or missing Admin Security PIN.'
+      });
+    }
+
+    const { filename } = req.body || {};
+    if (!filename || typeof filename !== 'string') {
+      return res.status(400).json({
+        success: false,
+        error: 'Backup filename is required.'
+      });
+    }
+
+    // Security check: Path traversal prevention
+    if (
+      filename.includes('..') ||
+      filename.includes('/') ||
+      filename.includes('\\') ||
+      !filename.endsWith('.json')
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: 'Invalid backup filename format.'
+      });
+    }
+
+    const sanitizedFilename = path.basename(filename);
+
+    const backupFilePath = path.join(BACKUPS_DIR, sanitizedFilename);
+    if (!fs.existsSync(backupFilePath)) {
+      return res.status(404).json({
+        success: false,
+        error: `Selected backup "${sanitizedFilename}" does not exist.`
+      });
+    }
+
+    // Read and parse backup JSON
+    let parsedBackup;
+    try {
+      const backupContent = fs.readFileSync(backupFilePath, 'utf8');
+      parsedBackup = JSON.parse(backupContent);
+      if (!parsedBackup || typeof parsedBackup !== 'object') {
+        throw new Error('Backup content is not a valid JSON object.');
+      }
+    } catch (parseErr) {
+      return res.status(422).json({
+        success: false,
+        error: `Backup file contains corrupted JSON: ${parseErr.message}`
+      });
+    }
+
+    // 1. Create a safety snapshot of current live state BEFORE overwriting
+    const safetySnapshot = createPortfolioBackup();
+    console.log(`[Rollback Engine] Created pre-rollback safety snapshot: ${safetySnapshot}`);
+
+    // 2. Atomically write the restored backup into data/portfolio.json
+    const tempPath = `${PORTFOLIO_PATH}.tmp`;
+    fs.writeFileSync(tempPath, JSON.stringify(parsedBackup, null, 2), 'utf8');
+    try {
+      fs.renameSync(tempPath, PORTFOLIO_PATH);
+    } catch (renameErr) {
+      fs.copyFileSync(tempPath, PORTFOLIO_PATH);
+      try { fs.unlinkSync(tempPath); } catch (_) {}
+    }
+
+    console.log(`[Rollback Engine] Successfully restored portfolio from backup: ${sanitizedFilename}`);
+
+    return res.status(200).json({
+      success: true,
+      message: `Portfolio successfully rolled back to snapshot: ${sanitizedFilename}`,
+      restoredFilename: sanitizedFilename,
+      safetyBackup: safetySnapshot,
+      data: parsedBackup
+    });
+  } catch (err) {
+    console.error('[Rollback Engine Error]', err);
+    return res.status(500).json({
+      success: false,
+      error: `Rollback failed: ${err.message}`
+    });
   }
 }
 
@@ -347,6 +478,13 @@ function handleListBackups(req, res) {
  */
 async function handlePublishPortfolio(req, res) {
   try {
+    if (!verifyAdminPinHelper(req)) {
+      return res.status(401).json({
+        success: false,
+        error: 'Unauthorized: Invalid or missing Admin Security PIN.'
+      });
+    }
+
     const { data, resumeFilename } = req.body || {};
 
     if (!data || typeof data !== 'object') {
@@ -422,6 +560,9 @@ module.exports = {
   handlePublishPortfolio,
   handleGetPortfolio,
   handleListBackups,
+  handleRestoreBackup,
+  handleVerifyPin,
+  verifyAdminPinHelper,
   createPortfolioBackup,
   computePortfolioDiff
 };

@@ -552,6 +552,65 @@
           </button>
         </div>
       </div>
+
+      <!-- Version History & Rollback Section (Phase 4) -->
+      <div class="version-history-section" id="versionHistorySection">
+        <button type="button" class="btn-toggle-version-history" id="btnToggleVersionHistory" aria-expanded="false">
+          <span class="version-history-toggle-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="btnVersionHistoryText">Version History &amp; 1-Click Rollback</span>
+          </span>
+          <span class="backup-count-badge" id="backupCountBadge">Backups</span>
+        </button>
+
+        <div class="version-history-drawer" id="versionHistoryDrawer" style="display: none;">
+          <div class="version-history-header">
+            <div>
+              <h5 class="version-history-title">Saved Snapshot Backups</h5>
+              <p class="version-history-desc">Click any timestamped backup to instantly restore that version live.</p>
+            </div>
+            <button type="button" class="btn-refresh-backups" id="btnRefreshBackups" title="Refresh backups list">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+            </button>
+          </div>
+          <div class="version-history-list" id="versionHistoryList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Security PIN Modal Dialog (Phase 4) -->
+      <div class="admin-pin-dialog-backdrop" id="adminPinDialog" style="display: none;">
+        <div class="admin-pin-modal">
+          <div class="admin-pin-header">
+            <div class="admin-pin-icon-wrap" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <div>
+              <h5 class="admin-pin-title">Security Authorization</h5>
+              <p class="admin-pin-subtitle">Enter 4-digit Admin PIN to authorize portfolio modification.</p>
+            </div>
+          </div>
+          <div class="admin-pin-form">
+            <input type="password" class="admin-pin-input" id="adminPinInput" maxlength="8" placeholder="••••" autocomplete="off" />
+            <div class="admin-pin-hint">Default development PIN: <code>1234</code></div>
+            <div class="admin-pin-error" id="adminPinError" style="display: none;"></div>
+            <div class="admin-pin-actions">
+              <button type="button" class="btn-admin-pin-cancel" id="btnAdminPinCancel">Cancel</button>
+              <button type="button" class="btn-admin-pin-confirm" id="btnAdminPinConfirm">Authorize</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

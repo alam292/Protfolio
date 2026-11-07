@@ -39,6 +39,20 @@ class ResumeUploader {
     this.btnReviewDiscard = document.getElementById('btnReviewDiscard');
     this.btnConfirmPublish = document.getElementById('btnConfirmPublish');
 
+    // Phase 4 Version History & Admin PIN Elements
+    this.btnToggleVersionHistory = document.getElementById('btnToggleVersionHistory');
+    this.versionHistoryDrawer = document.getElementById('versionHistoryDrawer');
+    this.versionHistoryList = document.getElementById('versionHistoryList');
+    this.backupCountBadge = document.getElementById('backupCountBadge');
+    this.btnRefreshBackups = document.getElementById('btnRefreshBackups');
+    this.adminPinDialog = document.getElementById('adminPinDialog');
+    this.adminPinInput = document.getElementById('adminPinInput');
+    this.adminPinError = document.getElementById('adminPinError');
+    this.btnAdminPinConfirm = document.getElementById('btnAdminPinConfirm');
+    this.btnAdminPinCancel = document.getElementById('btnAdminPinCancel');
+    this.pendingAuthAction = null;
+    this.adminPin = sessionStorage.getItem('portfolio_admin_pin') || '';
+
     // Staged State for Review Step (Phase 3)
     this.stagedData = null;
     this.stagedFilename = null;
@@ -73,6 +87,7 @@ class ResumeUploader {
     this.resetForm();
     this.modal.classList.add('is-active');
     document.body.style.overflow = 'hidden';
+    this.fetchBackupsCount();
   }
 
   closeModal() {
@@ -164,6 +179,34 @@ class ResumeUploader {
     if (this.btnConfirmPublish) {
       this.btnConfirmPublish.addEventListener('click', () => this.confirmAndPublish());
     }
+
+    // Phase 4 Version History & Admin PIN Actions
+    if (this.btnToggleVersionHistory) {
+      this.btnToggleVersionHistory.addEventListener('click', () => this.toggleVersionHistory());
+    }
+
+    if (this.btnRefreshBackups) {
+      this.btnRefreshBackups.addEventListener('click', () => this.loadBackupsList());
+    }
+
+    if (this.btnAdminPinConfirm) {
+      this.btnAdminPinConfirm.addEventListener('click', () => this.submitAdminPin());
+    }
+
+    if (this.btnAdminPinCancel) {
+      this.btnAdminPinCancel.addEventListener('click', () => this.cancelAdminPin());
+    }
+
+    if (this.adminPinInput) {
+      this.adminPinInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.submitAdminPin();
+        } else if (e.key === 'Escape') {
+          this.cancelAdminPin();
+        }
+      });
+    }
   }
 
   handleFileSelection(file) {
@@ -218,6 +261,11 @@ class ResumeUploader {
       this.btnToggleDiffJson.classList.remove('is-open');
       this.btnToggleDiffJson.setAttribute('aria-expanded', 'false');
     }
+
+    // Reset Phase 4 Version History & PIN Dialog
+    if (this.versionHistoryDrawer) this.versionHistoryDrawer.style.display = 'none';
+    if (this.btnToggleVersionHistory) this.btnToggleVersionHistory.setAttribute('aria-expanded', 'false');
+    if (this.adminPinDialog) this.adminPinDialog.style.display = 'none';
 
     if (this.progressContainer) this.progressContainer.classList.remove('is-visible');
     if (this.progressBarFill) this.progressBarFill.style.width = '0%';
@@ -436,77 +484,314 @@ class ResumeUploader {
   /**
    * Phase 3 Confirmation: Publish staged portfolio data live!
    */
-  async confirmAndPublish() {
+  confirmAndPublish() {
     if (!this.stagedData || this.isPublishing) return;
 
-    this.isPublishing = true;
-    if (this.btnConfirmPublish) {
-      this.btnConfirmPublish.disabled = true;
-      this.btnConfirmPublish.innerHTML = `
-        <span class="btn-spinner" aria-hidden="true"></span>
-        <span>Publishing Live...</span>
-      `;
-    }
-    if (this.btnReviewDiscard) {
-      this.btnReviewDiscard.disabled = true;
-    }
-
-    try {
-      const response = await fetch('/api/publish-portfolio', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          data: this.stagedData,
-          resumeFilename: this.stagedFilename
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok || !result.success) {
-        throw new Error(result.error || `Publish failed with status ${response.status}`);
-      }
-
-      this.showStatusBanner('Portfolio successfully published live!', 'success');
-
-      // Dispatch global portfolio:updated event
-      window.dispatchEvent(new CustomEvent('portfolio:updated', { detail: result.data }));
-
-      // Trigger renderer update directly if available
-      if (window.__PORTFOLIO_APP__ && window.__PORTFOLIO_APP__.renderer) {
-        window.__PORTFOLIO_APP__.renderer.updateData(result.data);
-      }
-
-      // Show toast if form controller is available
-      if (window.__PORTFOLIO_APP__ && window.__PORTFOLIO_APP__.form) {
-        window.__PORTFOLIO_APP__.form.showToast('AI Resume Sync Published! Portfolio updated live.');
-      }
-
-      // Auto close modal after successful render
-      setTimeout(() => {
-        this.closeModal();
-      }, 1500);
-
-    } catch (err) {
-      console.error('[ResumeUploader] Publish error:', err);
-      this.showStatusBanner(err.message || 'Failed to publish changes. Please try again.', 'error');
+    this.requestAuthorizedAction(async (pin) => {
+      this.isPublishing = true;
       if (this.btnConfirmPublish) {
-        this.btnConfirmPublish.disabled = false;
+        this.btnConfirmPublish.disabled = true;
         this.btnConfirmPublish.innerHTML = `
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>Retry Publish</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+          <span>Publishing Live...</span>
         `;
       }
       if (this.btnReviewDiscard) {
-        this.btnReviewDiscard.disabled = false;
+        this.btnReviewDiscard.disabled = true;
       }
-    } finally {
-      this.isPublishing = false;
+
+      try {
+        const response = await fetch('/api/publish-portfolio', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-pin': pin || ''
+          },
+          body: JSON.stringify({
+            data: this.stagedData,
+            resumeFilename: this.stagedFilename,
+            pin: pin || ''
+          })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || `Publish failed with status ${response.status}`);
+        }
+
+        this.showStatusBanner('Portfolio successfully published live!', 'success');
+
+        // Dispatch global portfolio:updated event
+        window.dispatchEvent(new CustomEvent('portfolio:updated', { detail: result.data }));
+
+        // Trigger renderer update directly if available
+        if (window.__PORTFOLIO_APP__ && window.__PORTFOLIO_APP__.renderer) {
+          window.__PORTFOLIO_APP__.renderer.updateData(result.data);
+        }
+
+        // Show toast if form controller is available
+        if (window.__PORTFOLIO_APP__ && window.__PORTFOLIO_APP__.form) {
+          window.__PORTFOLIO_APP__.form.showToast('AI Resume Sync Published! Portfolio updated live.');
+        }
+
+        // Refresh backups list
+        this.fetchBackupsCount();
+
+        // Auto close modal after successful render
+        setTimeout(() => {
+          this.closeModal();
+        }, 1500);
+
+      } catch (err) {
+        console.error('[ResumeUploader] Publish error:', err);
+        this.showStatusBanner(err.message || 'Failed to publish changes. Please try again.', 'error');
+        if (this.btnConfirmPublish) {
+          this.btnConfirmPublish.disabled = false;
+          this.btnConfirmPublish.innerHTML = `
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Retry Publish</span>
+          `;
+        }
+        if (this.btnReviewDiscard) {
+          this.btnReviewDiscard.disabled = false;
+        }
+      } finally {
+        this.isPublishing = false;
+      }
+    });
+  }
+
+  // ==========================================
+  // Phase 4: Version History & Rollback System
+  // ==========================================
+  toggleVersionHistory() {
+    if (!this.versionHistoryDrawer) return;
+    const isHidden = this.versionHistoryDrawer.style.display === 'none';
+    this.versionHistoryDrawer.style.display = isHidden ? 'block' : 'none';
+    if (this.btnToggleVersionHistory) {
+      this.btnToggleVersionHistory.setAttribute('aria-expanded', String(isHidden));
     }
+    if (isHidden) {
+      this.loadBackupsList();
+    }
+  }
+
+  async fetchBackupsCount() {
+    try {
+      const res = await fetch('/api/backups');
+      const data = await res.json();
+      const count = data.count !== undefined ? data.count : (data.backups ? data.backups.length : 0);
+      if (this.backupCountBadge) {
+        this.backupCountBadge.textContent = `${count} Backups`;
+      }
+    } catch (_) {}
+  }
+
+  async loadBackupsList() {
+    if (!this.versionHistoryList) return;
+    this.versionHistoryList.innerHTML = '<div class="backup-empty-state">Loading snapshot backups...</div>';
+
+    try {
+      const res = await fetch('/api/backups');
+      const data = await res.json();
+      const backups = data.backups || [];
+
+      if (this.backupCountBadge) {
+        this.backupCountBadge.textContent = `${backups.length} Backups`;
+      }
+
+      if (backups.length === 0) {
+        this.versionHistoryList.innerHTML = '<div class="backup-empty-state">No automated backups found yet. Backups are saved automatically upon publish or rollback.</div>';
+        return;
+      }
+
+      this.versionHistoryList.innerHTML = backups.map(b => {
+        const dateStr = b.formattedDate || new Date(b.created).toLocaleString();
+        const sizeStr = b.sizeFormatted || `${Math.round((b.size || b.sizeBytes || 0) / 1024)} KB`;
+        return `
+          <div class="backup-item" data-filename="${b.filename}">
+            <div class="backup-item-info">
+              <span class="backup-item-title">${b.filename}</span>
+              <div class="backup-item-meta">
+                <span>🕒 ${dateStr}</span>
+                <span>•</span>
+                <span>💾 ${sizeStr}</span>
+              </div>
+            </div>
+            <button type="button" class="btn-restore-backup" data-filename="${b.filename}" title="Rollback live portfolio to this snapshot">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>Restore</span>
+            </button>
+          </div>
+        `;
+      }).join('');
+
+      // Bind restore buttons
+      this.versionHistoryList.querySelectorAll('.btn-restore-backup').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const filename = btn.getAttribute('data-filename');
+          this.rollbackToBackup(filename, btn);
+        });
+      });
+    } catch (err) {
+      console.error('[ResumeUploader] Failed to load backups:', err);
+      this.versionHistoryList.innerHTML = '<div class="backup-empty-state">Failed to load backups. Check server status.</div>';
+    }
+  }
+
+  async rollbackToBackup(filename, btnTrigger) {
+    if (!filename) return;
+
+    const confirmed = window.confirm(`Are you sure you want to rollback to snapshot "${filename}"?\n\nA safety backup of your current portfolio will be created before restoring.`);
+    if (!confirmed) return;
+
+    this.requestAuthorizedAction(async (pin) => {
+      if (btnTrigger) {
+        btnTrigger.disabled = true;
+        btnTrigger.innerHTML = '<span>Restoring...</span>';
+      }
+
+      this.showStatusBanner(`Rolling back portfolio to snapshot ${filename}...`, 'success');
+
+      try {
+        const response = await fetch('/api/restore-backup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-pin': pin || ''
+          },
+          body: JSON.stringify({ filename, pin: pin || '' })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || `Rollback failed with status ${response.status}`);
+        }
+
+        this.showStatusBanner(`Portfolio successfully restored to ${filename}!`, 'success');
+
+        // Dispatch live update
+        window.dispatchEvent(new CustomEvent('portfolio:updated', { detail: result.data }));
+
+        if (window.__PORTFOLIO_APP__ && window.__PORTFOLIO_APP__.renderer) {
+          window.__PORTFOLIO_APP__.renderer.updateData(result.data);
+        }
+
+        if (window.__PORTFOLIO_APP__ && window.__PORTFOLIO_APP__.form) {
+          window.__PORTFOLIO_APP__.form.showToast(`Rollback Complete! Portfolio restored from ${filename}`);
+        }
+
+        // Refresh backups list to show the new safety snapshot
+        this.loadBackupsList();
+
+        setTimeout(() => {
+          this.closeModal();
+        }, 1500);
+
+      } catch (err) {
+        console.error('[ResumeUploader] Rollback error:', err);
+        this.showStatusBanner(err.message || 'Rollback failed. Please try again.', 'error');
+        if (btnTrigger) {
+          btnTrigger.disabled = false;
+          btnTrigger.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Restore</span>
+          `;
+        }
+      }
+    });
+  }
+
+  // ==========================================
+  // Phase 4: Admin PIN Authorization Flow
+  // ==========================================
+  async requestAuthorizedAction(callback) {
+    // Check if PIN protection is active on server
+    try {
+      const res = await fetch('/api/verify-pin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-pin': this.adminPin || '' },
+        body: JSON.stringify({ pin: this.adminPin || '' })
+      });
+      const data = await res.json();
+      if (!data.required || data.valid) {
+        return callback(this.adminPin);
+      }
+    } catch (e) {
+      // If network check fails, proceed to prompt
+    }
+
+    // Show PIN Dialog
+    this.pendingAuthAction = callback;
+    if (this.adminPinDialog) {
+      this.adminPinDialog.style.display = 'flex';
+      if (this.adminPinError) this.adminPinError.style.display = 'none';
+      if (this.adminPinInput) {
+        this.adminPinInput.value = '';
+        setTimeout(() => this.adminPinInput.focus(), 60);
+      }
+    }
+  }
+
+  async submitAdminPin() {
+    if (!this.adminPinInput) return;
+    const pin = this.adminPinInput.value.trim();
+    if (!pin) {
+      if (this.adminPinError) {
+        this.adminPinError.textContent = 'Please enter your Admin PIN.';
+        this.adminPinError.style.display = 'block';
+      }
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/verify-pin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pin })
+      });
+      const data = await res.json();
+
+      if (data.valid) {
+        this.adminPin = pin;
+        sessionStorage.setItem('portfolio_admin_pin', pin);
+        this.adminPinDialog.style.display = 'none';
+        if (this.pendingAuthAction) {
+          const action = this.pendingAuthAction;
+          this.pendingAuthAction = null;
+          action(pin);
+        }
+      } else {
+        if (this.adminPinError) {
+          this.adminPinError.textContent = 'Invalid Admin Security PIN. Please try again.';
+          this.adminPinError.style.display = 'block';
+        }
+        this.adminPinInput.select();
+      }
+    } catch (err) {
+      if (this.adminPinError) {
+        this.adminPinError.textContent = 'Failed to verify PIN. Check server connection.';
+        this.adminPinError.style.display = 'block';
+      }
+    }
+  }
+
+  cancelAdminPin() {
+    if (this.adminPinDialog) {
+      this.adminPinDialog.style.display = 'none';
+    }
+    this.pendingAuthAction = null;
   }
 
   updateProgress(percent, statusText) {

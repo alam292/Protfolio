@@ -68,6 +68,10 @@ async function runTests() {
   assert(html.includes('id="btnConfirmPublish"'), 'Confirm & Publish button present: #btnConfirmPublish');
   assert(html.includes('id="btnReviewDiscard"'), 'Discard & Re-upload button present: #btnReviewDiscard');
   assert(html.includes('id="btnToggleDiffJson"'), 'Toggle JSON diff button present: #btnToggleDiffJson');
+  assert(html.includes('id="btnToggleVersionHistory"'), 'Version History toggle present: #btnToggleVersionHistory');
+  assert(html.includes('id="versionHistoryDrawer"'), 'Version History drawer present: #versionHistoryDrawer');
+  assert(html.includes('id="adminPinDialog"'), 'Admin PIN dialog present: #adminPinDialog');
+  assert(html.includes('id="adminPinInput"'), 'Admin PIN input present: #adminPinInput');
   assert(html.includes('js/resume-uploader.js'), 'Resume uploader script included in index.html');
   const mainCss = fs.readFileSync('css/main.css', 'utf8');
   assert(mainCss.includes('components/upload-modal.css'), 'upload-modal.css imported in main.css');
@@ -385,7 +389,8 @@ async function runTests() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(postPayload)
+        'Content-Length': Buffer.byteLength(postPayload),
+        'x-admin-pin': process.env.ADMIN_UPLOAD_PIN || '1234'
       }
     }, (res) => {
       let data = '';
@@ -405,6 +410,171 @@ async function runTests() {
   assert(publishRes.status === 200, `POST /api/publish-portfolio returned HTTP 200 (Got ${publishRes.status})`);
   assert(publishRes.json?.success === true, 'Publish API returned success: true');
   assert(publishRes.json?.backup && fs.existsSync(publishRes.json.backup), 'Publish API created automated backup on disk');
+
+  console.log('\n=== SUITE 12: PHASE 4 1-CLICK ROLLBACK & ADMIN SECURITY PIN ===');
+  // 1. Verify PIN with invalid PIN
+  const verifyInvalidPinRes = await new Promise((resolve) => {
+    const payload = JSON.stringify({ pin: '9999' });
+    const req = http.request(previewBaseUrl + '/api/verify-pin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+    req.write(payload);
+    req.end();
+  });
+  assert(verifyInvalidPinRes.status === 200, 'POST /api/verify-pin returned 200');
+  assert(verifyInvalidPinRes.json?.valid === false, 'POST /api/verify-pin rejected wrong PIN: valid=false');
+
+  // 2. Verify PIN with correct PIN
+  const verifyValidPinRes = await new Promise((resolve) => {
+    const payload = JSON.stringify({ pin: process.env.ADMIN_UPLOAD_PIN || '1234' });
+    const req = http.request(previewBaseUrl + '/api/verify-pin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+    req.write(payload);
+    req.end();
+  });
+  assert(verifyValidPinRes.json?.valid === true, 'POST /api/verify-pin accepted correct PIN: valid=true');
+
+  // 3. Publish with invalid PIN is blocked (401)
+  const unauthorizedPublishRes = await new Promise((resolve) => {
+    const postPayload = JSON.stringify({
+      data: previewRes.json?.data,
+      pin: 'WRONG_PIN'
+    });
+    const req = http.request(previewBaseUrl + '/api/publish-portfolio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(postPayload),
+        'x-admin-pin': 'WRONG_PIN'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try { resolve({ status: res.statusCode, json: JSON.parse(data) }); }
+        catch (e) { resolve({ status: res.statusCode, error: data }); }
+      });
+    });
+    req.write(postPayload);
+    req.end();
+  });
+  assert(unauthorizedPublishRes.status === 401, `POST /api/publish-portfolio with invalid PIN returned HTTP 401 (Got ${unauthorizedPublishRes.status})`);
+  assert(unauthorizedPublishRes.json?.success === false, 'Unauthorized publish rejected with success: false');
+
+  // 4. Test GET /api/backups formatting
+  const backupsListRes = await new Promise((resolve) => {
+    http.get(previewBaseUrl + '/api/backups', (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+  });
+  assert(backupsListRes.status === 200, 'GET /api/backups returned 200');
+  assert(Array.isArray(backupsListRes.json?.backups) && backupsListRes.json.backups.length > 0, 'Backups list has at least 1 backup');
+  const sampleBackup = backupsListRes.json.backups[0];
+  assert(sampleBackup.filename && sampleBackup.filename.endsWith('.json'), 'Backup item has valid .json filename');
+  assert(sampleBackup.sizeFormatted && sampleBackup.sizeFormatted.includes('KB'), 'Backup item includes formatted size string');
+  assert(sampleBackup.formattedDate !== undefined, 'Backup item includes human-readable formattedDate');
+
+  // 5. Test POST /api/restore-backup: Unauthorized check (401)
+  const unauthRestoreRes = await new Promise((resolve) => {
+    const payload = JSON.stringify({ filename: sampleBackup.filename, pin: 'WRONG_PIN' });
+    const req = http.request(previewBaseUrl + '/api/restore-backup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'x-admin-pin': 'WRONG_PIN'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+    req.write(payload);
+    req.end();
+  });
+  assert(unauthRestoreRes.status === 401, `Rollback with invalid PIN rejected with HTTP 401 (Got ${unauthRestoreRes.status})`);
+
+  // 6. Test Path Traversal Protection (400)
+  const traversalRestoreRes = await new Promise((resolve) => {
+    const payload = JSON.stringify({ filename: '../../portfolio.json', pin: process.env.ADMIN_UPLOAD_PIN || '1234' });
+    const req = http.request(previewBaseUrl + '/api/restore-backup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'x-admin-pin': process.env.ADMIN_UPLOAD_PIN || '1234'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+    req.write(payload);
+    req.end();
+  });
+  assert(traversalRestoreRes.status === 400, `Path traversal attack blocked with HTTP 400 (Got ${traversalRestoreRes.status})`);
+
+  // 7. Test Nonexistent backup check (404)
+  const notFoundRestoreRes = await new Promise((resolve) => {
+    const payload = JSON.stringify({ filename: 'portfolio-nonexistent-9999.json', pin: process.env.ADMIN_UPLOAD_PIN || '1234' });
+    const req = http.request(previewBaseUrl + '/api/restore-backup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'x-admin-pin': process.env.ADMIN_UPLOAD_PIN || '1234'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+    req.write(payload);
+    req.end();
+  });
+  assert(notFoundRestoreRes.status === 404, `Nonexistent backup request returned HTTP 404 (Got ${notFoundRestoreRes.status})`);
+
+  // 8. Test 1-Click Rollback Success (200)
+  const validRestoreRes = await new Promise((resolve) => {
+    const payload = JSON.stringify({ filename: sampleBackup.filename, pin: process.env.ADMIN_UPLOAD_PIN || '1234' });
+    const req = http.request(previewBaseUrl + '/api/restore-backup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload),
+        'x-admin-pin': process.env.ADMIN_UPLOAD_PIN || '1234'
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => resolve({ status: res.statusCode, json: JSON.parse(data) }));
+    });
+    req.write(payload);
+    req.end();
+  });
+  assert(validRestoreRes.status === 200, `POST /api/restore-backup returned HTTP 200 (Got ${validRestoreRes.status})`);
+  assert(validRestoreRes.json?.success === true, 'Rollback API returned success: true');
+  assert(validRestoreRes.json?.safetyBackup && fs.existsSync(validRestoreRes.json.safetyBackup), 'Rollback created safety snapshot prior to restoring');
+  assert(validRestoreRes.json?.data !== undefined, 'Rollback returned restored portfolio data');
 
   // Restore disk portfolio to original
   fs.writeFileSync('data/portfolio.json', originalDiskPortfolio, 'utf8');
