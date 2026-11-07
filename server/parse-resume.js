@@ -271,7 +271,7 @@ ${rawText}
   const fetchTimeout = setTimeout(() => controller.abort(), 6000);
 
   // 1. Primary: Direct REST call with official models (fast, reliable, native JSON mode)
-  const modelsToTry = ['gemini-2.0-flash', 'gemini-1.5-flash'];
+  const modelsToTry = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
   let restSucceeded = false;
 
   for (const model of modelsToTry) {
