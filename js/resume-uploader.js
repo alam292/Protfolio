@@ -53,6 +53,16 @@ class ResumeUploader {
     this.pendingAuthAction = null;
     this.adminPin = sessionStorage.getItem('portfolio_admin_pin') || '';
 
+    // Dynamic Cloud API Base URL configuration
+    // When running on localhost or 127.0.0.1, use relative paths ('')
+    // When running on production (Cloudflare Pages https://alam292-portfolio.pages.dev), route to Render cloud backend
+    const isLocal = typeof window !== 'undefined' && (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname === ''
+    );
+    this.apiBaseUrl = isLocal ? '' : (window.PORTFOLIO_API_URL || 'https://matloob-portfolio.onrender.com').replace(/\/+$/, '');
+
     // Staged State for Review Step (Phase 3)
     this.stagedData = null;
     this.stagedFilename = null;
@@ -323,7 +333,7 @@ class ResumeUploader {
       }, 700);
 
       // Call API in preview/review mode (Phase 3)
-      const response = await fetch('/api/upload-resume?preview=true', {
+      const response = await fetch(`${this.apiBaseUrl}/api/upload-resume?preview=true`, {
         method: 'POST',
         body: formData
       });
@@ -501,7 +511,7 @@ class ResumeUploader {
       }
 
       try {
-        const response = await fetch('/api/publish-portfolio', {
+        const response = await fetch(`${this.apiBaseUrl}/api/publish-portfolio`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -581,7 +591,7 @@ class ResumeUploader {
 
   async fetchBackupsCount() {
     try {
-      const res = await fetch('/api/backups');
+      const res = await fetch(`${this.apiBaseUrl}/api/backups`);
       const data = await res.json();
       const count = data.count !== undefined ? data.count : (data.backups ? data.backups.length : 0);
       if (this.backupCountBadge) {
@@ -595,7 +605,7 @@ class ResumeUploader {
     this.versionHistoryList.innerHTML = '<div class="backup-empty-state">Loading snapshot backups...</div>';
 
     try {
-      const res = await fetch('/api/backups');
+      const res = await fetch(`${this.apiBaseUrl}/api/backups`);
       const data = await res.json();
       const backups = data.backups || [];
 
@@ -661,7 +671,7 @@ class ResumeUploader {
       this.showStatusBanner(`Rolling back portfolio to snapshot ${filename}...`, 'success');
 
       try {
-        const response = await fetch('/api/restore-backup', {
+        const response = await fetch(`${this.apiBaseUrl}/api/restore-backup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -719,7 +729,7 @@ class ResumeUploader {
   async requestAuthorizedAction(callback) {
     // Check if PIN protection is active on server
     try {
-      const res = await fetch('/api/verify-pin', {
+      const res = await fetch(`${this.apiBaseUrl}/api/verify-pin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-admin-pin': this.adminPin || '' },
         body: JSON.stringify({ pin: this.adminPin || '' })
@@ -756,7 +766,7 @@ class ResumeUploader {
     }
 
     try {
-      const res = await fetch('/api/verify-pin', {
+      const res = await fetch(`${this.apiBaseUrl}/api/verify-pin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ pin })
