@@ -345,7 +345,7 @@ class PortfolioRenderer {
     // No-op: visual block removed
   }
 
-  // 2. About Me Section
+  // 2. About Me Section (Concise High-Signal Bio + Borderless Open Layout, No Card View)
   renderAbout() {
     const mount = document.getElementById('aboutMount');
     if (!mount) return;
@@ -353,7 +353,7 @@ class PortfolioRenderer {
     const { about, stats, profile } = this.data;
 
     const statsHtml = stats.map(s => `
-      <div class="card stat-card">
+      <div class="stat-card stat-item-open">
         <div class="stat-value-row">
           <span class="stat-number">${s.value}</span>
           <span class="stat-suffix">${s.suffix}</span>
@@ -363,29 +363,49 @@ class PortfolioRenderer {
       </div>
     `).join('');
 
+    const highlights = about.highlights || [
+      { icon: 'zap', title: 'High-Speed APIs', detail: 'FastAPI & Django REST' },
+      { icon: 'code', title: 'Modern Frontends', detail: 'React, Next.js & UI/UX' },
+      { icon: 'database', title: 'Relational Schemas', detail: 'PostgreSQL & SQLAlchemy' },
+      { icon: 'shield', title: 'Production Ready', detail: 'Tested & Cloud Deployed' }
+    ];
+
+    const highlightsHtml = highlights.map(h => `
+      <div class="about-highlight-item">
+        <div class="highlight-icon" aria-hidden="true">${this.getIconSvg(h.icon || 'zap')}</div>
+        <div class="highlight-text">
+          <span class="highlight-title">${h.title}</span>
+          <span class="highlight-detail">${h.detail}</span>
+        </div>
+      </div>
+    `).join('');
+
     mount.innerHTML = `
       <h2 class="section-tag" id="about-title">${about.sectionTag}</h2>
 
-      <div class="about-grid">
-        <!-- Biography Story Card -->
-        <article class="card about-story-card">
-          ${profile.status ? `
-          <div class="status-indicator">
-            <span class="status-dot" aria-hidden="true"></span>
-            <span class="status-text">${profile.status}</span>
-          </div>` : ''}
+      <div class="about-grid about-open-layout">
+        <!-- Biography Story (Borderless Open Layout - No Card View) -->
+        <div class="about-story-card about-open-story">
+          <div class="about-meta-row">
+            <div class="about-terminal-tag" aria-label="Terminal identity">
+              <span class="terminal-prompt">$</span>
+              <span class="terminal-cmd">${about.terminalCommand || 'whoami'}</span>
+            </div>
 
-          <h3 class="about-subheading">
-            ${about.lead}
-          </h3>
+            ${profile.status ? `
+            <div class="status-indicator status-indicator-inline">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span class="status-text">${profile.status}</span>
+            </div>` : ''}
+          </div>
 
-          <p class="about-text">
-            ${about.pillars[0].content}
+          <p class="about-bio-lead">
+            I am a <strong class="text-glow-accent">Full-Stack Software Developer</strong> specializing in high-throughput backend APIs with <span class="tech-tag">FastAPI &amp; Django</span>, paired with responsive, clean frontends in <span class="tech-tag">React &amp; Next.js</span>. Focused on robust database schemas, clean architecture, and reliable production deployment.
           </p>
 
-          <p class="about-text">
-            ${about.pillars[1].content}
-          </p>
+          <div class="about-highlights-list">
+            ${highlightsHtml}
+          </div>
 
           <div class="about-action-row">
             <a href="#projects" class="btn-touch btn-touch-orange">
@@ -398,10 +418,10 @@ class PortfolioRenderer {
               </span>
             </a>
           </div>
-        </article>
+        </div>
 
-        <!-- KPI Metrics Grid -->
-        <div class="about-stats-grid">
+        <!-- KPI Metrics (Typographic Open Layout - No Card Boxes) -->
+        <div class="about-stats-grid about-stats-open">
           ${statsHtml}
         </div>
       </div>

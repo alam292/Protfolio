@@ -54,8 +54,30 @@
   ],
   "about": {
     "sectionTag": "WHO I AM",
-    "title": "",
-    "lead": "I am a Software Developer with hands-on experience bridging responsive frontend development with robust, high-performance backend systems using Python, JavaScript, React, Next.js, and relational databases.",
+    "terminalCommand": "whoami",
+    "lead": "I am a Full-Stack Software Developer specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.",
+    "highlights": [
+      {
+        "icon": "zap",
+        "title": "High-Speed APIs",
+        "detail": "FastAPI & Django REST"
+      },
+      {
+        "icon": "code",
+        "title": "Modern Frontends",
+        "detail": "React, Next.js & UI/UX"
+      },
+      {
+        "icon": "database",
+        "title": "Relational Schemas",
+        "detail": "PostgreSQL & SQLAlchemy"
+      },
+      {
+        "icon": "shield",
+        "title": "Production Ready",
+        "detail": "Tested & Cloud Deployed"
+      }
+    ],
     "pillars": [
       {
         "id": "identity",
