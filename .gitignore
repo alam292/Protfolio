@@ -1,5 +1,14 @@
+# Python & Database Cache
+__pycache__/
+*.py[cod]
+*.db
+*.sqlite
+data/*.db
+data/*.sqlite
+
 # Dependencies
 node_modules/
+
 package-lock.json
 
 # Environment variables & secrets

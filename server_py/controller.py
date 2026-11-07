@@ -336,6 +336,9 @@ def restore_backup(filename: str, pin: Optional[str], db: Optional[Session] = No
     if not filename or not isinstance(filename, str):
         return False, 400, {"success": False, "error": "Backup filename is required."}
 
+    if ".." in filename or "/" in filename or "\\" in filename or not filename.endswith(".json"):
+        return False, 400, {"success": False, "error": "Invalid backup filename format."}
+
     clean_backup_id = Path(filename).stem
     parsed_backup = None
 

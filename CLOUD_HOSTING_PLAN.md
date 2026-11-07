@@ -36,18 +36,31 @@ Neeche 4 best free platforms ka analysis diya gaya hai:
 
 ## 🛡️ 3. The Data Persistence Strategy (Data Safe Kaise Rahega?)
 
-Kyunki hum koi paid database (MySQL, PostgreSQL ya MongoDB Atlas paid) use nahi kar rahe, isliye hum **3 Free Persistent Strategies** mein se ek chunenge:
+Humne modern production architecture ke hisab se **SQLAlchemy Dual-Engine Database** implement kiya hai, jisme 3 layers of persistence hain:
 
 ```mermaid
-flowchart LR
-    A["Resume Upload (Browser)"] --> B["Python FastAPI Server"]
-    B -->|"1. Parse & Preview"| C["Gemini AI Python SDK"]
-    C -->|"2. Confirm & Publish"| B
-    B -->|"Strategy A: Git Auto-Commit"| D["GitHub Repository (Free DB)"]
-    B -->|"Strategy B: Local Disk"| E["PythonAnywhere 512MB Disk"]
+flowchart TD
+    Client["Client / Recruiter (Browser)"] --> API["FastAPI Backend (app.py)"]
+    API --> ORM["SQLAlchemy ORM Layer (server_py/models.py)"]
+    
+    ORM -->|"1. Local Dev Default"| SQLite[("SQLite: data/portfolio.db")]
+    ORM -->|"2. Cloud Production (DATABASE_URL)"| CloudDB[("PostgreSQL: Neon.tech / Supabase")]
+    ORM -->|"3. Zero-Downtime Fallback"| LocalFile[("Local Disk: data/portfolio.json")]
+    
+    API -.->|"Optional Cloud Git Sync"| GH["GitHub API (Auto-Commit)"]
 ```
 
-### 🥇 Strategy A: GitHub API as Free Database (Render.com Ke Sath - Best!)
+### 🥇 Strategy A: Dual-Engine Database via SQLAlchemy (Implemented & Active ✅)
+* **Local Development:** Zero-configuration **SQLite** (`data/portfolio.db`) - bina kisi database install kiye local PC par instant run hota hai.
+* **Production Cloud (Render / Railway):** Free serverless PostgreSQL jaise **Neon.tech** ya **Supabase** use karein. Sirf `.env` mein `DATABASE_URL` provide karte hi ye automatic cloud DB se connect ho jata hai.
+* **Zero Downtime Fallback:** Agar DB connection fail ho jaye, backend seamlessly `data/portfolio.json` se data serve karta hai.
+* **Tables Active:**
+  - `portfolio_data`: Live profile, skills, projects, stats schema.
+  - `portfolio_versions`: Instant rollback snapshots (139+ snapshots migrated).
+  - `contact_messages`: Permanent recruiter & client inquiries.
+  - `audit_logs`: Activity and security tracking.
+
+### 🥈 Strategy B: GitHub API Auto-Commit (Render.com Ephemeral Disk Sync)
 * **Kaise kaam karega:**
   1. Jab aap modal mein **"Confirm & Publish Live"** dabayenge, Python server `data/portfolio.json` ko update karega.
   2. Python script automatically **GitHub REST API** ko call karke updated `portfolio.json` aur naya resume PDF aapke private/public GitHub repository mein commit kar degi.
@@ -55,12 +68,13 @@ flowchart LR
   - 100% Free, infinite storage, aur version control history.
   - Render chahe 1000 baar bhi restart ho jaye, aapka data kabhi gayab nahi hoga.
 
-### 🥈 Strategy B: PythonAnywhere Built-in Persistent Disk
+### 🥉 Strategy C: PythonAnywhere Built-in Persistent Disk
 * **Kaise kaam karega:**
   - PythonAnywhere free tier par pure Linux filesystem deta hai (512MB).
   - Python ka normal `with open("data/portfolio.json", "w")` code direct kaam karta hai aur reboot ke baad bhi data safe rehta hai.
 * **Fayda:**
   - Zero external setup, seedha file save karo aur chalao.
+
 
 ---
 
