@@ -1,3 +1,6 @@
+# Proxy API calls directly to live Render backend
+/api/* https://matloob-portfolio.onrender.com/api/:splat 200
+
 # Fallback: serve index.html for any unmatched route (SPA support)
 /* /index.html 200
 

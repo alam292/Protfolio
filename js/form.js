@@ -13,6 +13,14 @@ class FormController {
     this.toastTimeout = null;
     this.clockInterval = null;
 
+    // Dynamic Cloud API Base URL configuration
+    const isLocal = typeof window !== 'undefined' && (
+      window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1' ||
+      window.location.hostname === ''
+    );
+    this.apiBaseUrl = isLocal ? '' : (window.PORTFOLIO_API_URL || 'https://matloob-portfolio.onrender.com').replace(/\/+$/, '');
+
     this.init();
     this.initCharCounter();
     this.initClipboardCopy();
@@ -279,7 +287,7 @@ class FormController {
     }
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(`${this.apiBaseUrl}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
