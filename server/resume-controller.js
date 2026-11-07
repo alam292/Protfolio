@@ -131,10 +131,15 @@ async function handleResumeUpload(req, res) {
       structuredData.profile.resumeUrl = `assets/${sanitizedName}`;
       structuredData.profile.resumeFilename = sanitizedName;
 
-      // 8. Atomically write updated JSON to data/portfolio.json
+      // 8. Safely write updated JSON to data/portfolio.json
       const tempPath = `${PORTFOLIO_PATH}.tmp`;
       fs.writeFileSync(tempPath, JSON.stringify(structuredData, null, 2), 'utf8');
-      fs.renameSync(tempPath, PORTFOLIO_PATH);
+      try {
+        fs.renameSync(tempPath, PORTFOLIO_PATH);
+      } catch (renameErr) {
+        fs.copyFileSync(tempPath, PORTFOLIO_PATH);
+        try { fs.unlinkSync(tempPath); } catch (_) {}
+      }
       console.log('[Persistence] Successfully updated data/portfolio.json');
 
       return res.status(200).json({

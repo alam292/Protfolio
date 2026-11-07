@@ -198,7 +198,7 @@ body.theme-light .gemini-filter-pill.active {
 .skills-categories-container {
   display: flex;
   flex-direction: column;
-  gap: clamp(36px, 4.5vw, 56px);
+  gap: 0;
   width: 100%;
   position: relative;
   z-index: 1;
@@ -436,8 +436,279 @@ body.theme-light .skill-item:focus-visible .skill-name {
   text-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
 }
 
+/* ===================================================
+   CIRCUIT BUS ARCHITECTURE (Central Spine & Branches)
+   =================================================== */
+.circuit-bus-container {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  margin-top: 5px;
+}
+
+/* Central vertical glowing neon spine */
+.circuit-bus-spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, rgba(255, 87, 34, 0.15) 0%, #ff5722 8%, #ff5722 92%, rgba(255, 87, 34, 0.15) 100%);
+  box-shadow: 0 0 14px #ff5722, 0 0 30px rgba(255, 87, 34, 0.65);
+  z-index: 2;
+}
+
+/* Stream of falling neon energy pulses / sparks */
+.circuit-spark {
+  position: absolute;
+  width: 5px;
+  left: -1px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, #ffffff 65%, #ff8a65);
+  box-shadow: 0 0 14px #ffffff, 0 0 24px #ff5722;
+  animation: circuitPulseStream 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.spark-1 { height: 42px; animation-delay: 0s; }
+.spark-2 { height: 56px; animation-delay: 1.3s; }
+.spark-3 { height: 35px; animation-delay: 2.6s; }
+
+@keyframes circuitPulseStream {
+  0% { top: -60px; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Bilateral Category Branch Rows - Compact Gap */
+.circuit-branch-row {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 34px;
+}
+
+.circuit-branch-row:last-child {
+  margin-bottom: 5px;
+}
+
+/* Left Branch: Content right-aligned toward center spine */
+.branch-left {
+  justify-content: flex-start;
+}
+
+.branch-left .branch-content {
+  width: calc(50% - 25px);
+  text-align: right;
+  padding-right: 24px;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Right Branch: Content left-aligned toward center spine */
+.branch-right {
+  justify-content: flex-end;
+}
+
+.branch-right .branch-content {
+  width: calc(50% - 25px);
+  text-align: left;
+  padding-left: 24px;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Connector Trace Lines */
+.branch-left .branch-trace {
+  position: absolute;
+  right: calc(50% - 2px);
+  top: 13px;
+  width: 36px;
+  height: 2px;
+  background: #ff5722;
+  box-shadow: 0 0 8px #ff5722;
+  transform: translateX(100%);
+  z-index: 1;
+}
+
+.branch-right .branch-trace {
+  position: absolute;
+  left: calc(50% - 2px);
+  top: 13px;
+  width: 36px;
+  height: 2px;
+  background: #ff5722;
+  box-shadow: 0 0 8px #ff5722;
+  z-index: 1;
+}
+
+/* Circular Pin Joint on Spine */
+.spine-pin {
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #ff5722;
+  box-shadow: 0 0 12px #ff5722, 0 0 24px rgba(255, 87, 34, 0.65);
+  z-index: 4;
+  animation: pinBreathing 3s ease-in-out infinite alternate;
+}
+
+@keyframes pinBreathing {
+  0% { transform: translateX(-50%) scale(0.9); box-shadow: 0 0 8px #ff5722; }
+  100% { transform: translateX(-50%) scale(1.15); box-shadow: 0 0 15px #ff5722, 0 0 26px rgba(255, 87, 34, 0.7); }
+}
+
+/* Category Header: Clean Title Without Numbers or 'NODE_' - Compact Margins */
+.category-header-title {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 1.5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+  transition: color 0.3s ease;
+}
+
+.category-header-title:hover {
+  color: #ff8a65;
+}
+
+.category-comment-prefix {
+  color: #ff5722;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+/* Technology Logos Shelf - Compact Gap */
+.tech-logos-shelf {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+.branch-left .tech-logos-shelf {
+  justify-content: flex-end;
+}
+
+.branch-right .tech-logos-shelf {
+  justify-content: flex-start;
+}
+
+/* Pure Skill Item (Zero cards, Zero boxes, Zero borders) */
+.pure-skill-item {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pure-skill-item:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+/* Pure Icon Graphic with Radiant Brand Drop-shadow */
+.pure-skill-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.pure-skill-icon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 5px var(--brand-glow, rgba(255, 87, 34, 0.4)));
+  transition: filter 0.25s ease;
+}
+
+.pure-skill-item:hover .pure-skill-icon svg {
+  filter: drop-shadow(0 0 12px var(--brand-glow, #ff5722)) drop-shadow(0 0 20px var(--brand-glow, #ff5722));
+}
+
+/* Skill Name Typography */
+.pure-skill-name {
+  font-family: var(--font-family-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  margin-top: 1px;
+}
+
+.pure-skill-item:hover .pure-skill-name {
+  color: #ffffff;
+  text-shadow: 0 0 8px var(--brand-glow, rgba(255, 87, 34, 0.6));
+}
+
+/* Mobile Responsiveness (<768px): Single Spine Flow */
+@media (max-width: 768px) {
+  .circuit-bus-spine {
+    left: 20px;
+    transform: none;
+  }
+  .spine-pin {
+    left: 20px;
+    transform: translate(-50%, 0);
+  }
+  .circuit-branch-row {
+    justify-content: flex-start !important;
+    margin-bottom: 26px;
+  }
+  .circuit-branch-row .branch-content {
+    width: calc(100% - 40px) !important;
+    margin-left: 40px !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+  }
+  .branch-left .tech-logos-shelf {
+    justify-content: flex-start !important;
+  }
+  .branch-left .branch-trace,
+  .branch-right .branch-trace {
+    left: 20px !important;
+    right: auto !important;
+    width: 28px !important;
+    transform: none !important;
+  }
+  .tech-logos-shelf {
+    gap: 12px;
+  }
+}
+
 /* Reduced Motion Accessibility Compliance */
 @media (prefers-reduced-motion: reduce) {
+  .circuit-spark,
+  .spine-pin,
   .skill-icon-wrapper,
   .gemini-ambient-glow,
   .gemini-sparkle-spin,
@@ -447,7 +718,9 @@ body.theme-light .skill-item:focus-visible .skill-name {
   }
   
   .skill-item,
+  .pure-skill-item,
   .skill-name,
+  .pure-skill-name,
   .skill-icon-halo,
   .gemini-filter-pill {
     transition: none !important;
@@ -456,13 +729,15 @@ body.theme-light .skill-item:focus-visible .skill-name {
   .skill-item:hover .skill-icon-wrapper,
   .skill-item:focus-visible .skill-icon-wrapper,
   .skill-item:hover .skill-icon-halo,
-  .skill-item:focus-visible .skill-icon-halo {
+  .skill-item:focus-visible .skill-icon-halo,
+  .pure-skill-item:hover .pure-skill-icon svg {
     transform: none !important;
     filter: none !important;
   }
 
   .skill-item:hover .skill-name,
-  .skill-item:focus-visible .skill-name {
+  .skill-item:focus-visible .skill-name,
+  .pure-skill-item:hover .pure-skill-name {
     transform: none !important;
   }
 }

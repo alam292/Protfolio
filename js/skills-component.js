@@ -257,10 +257,17 @@
     });
   }
 
+  // Helper to extract clean category display title without numbers or 'NODE_' prefix
+  function getCategoryDisplayName(cat) {
+    if (!cat || !cat.name) return '';
+    let name = cat.name.replace(/node_/i, '').trim();
+    return name.toUpperCase();
+  }
+
   // Interactive Category Filter Handler
   function filterSkillsCategory(categoryId) {
     if (typeof document === 'undefined') return;
-    const categoryEls = document.querySelectorAll('.skill-category');
+    const categoryEls = document.querySelectorAll('.circuit-branch-row, .skill-category');
     const filterBtns = document.querySelectorAll('.gemini-filter-pill');
 
     filterBtns.forEach(btn => {
@@ -297,24 +304,12 @@
 
     const { sectionTag, title, subtitle, categories } = skillsData;
 
-    // Minimalist Category Filter Navigation
-    const filterPillsHtml = `
-      <div class="gemini-filter-container" role="tablist" aria-label="Filter technologies by category">
-        <button type="button" class="gemini-filter-pill active" data-filter="all" onclick="window.filterSkillsCategory('all')" role="tab" aria-selected="true">
-          <span class="gemini-filter-dot"></span>
-          <span>All Stack (30)</span>
-        </button>
-        ${categories.map(c => `
-          <button type="button" class="gemini-filter-pill" data-filter="${c.id}" onclick="window.filterSkillsCategory('${c.id}')" role="tab" aria-selected="false">
-            <span>${c.name}</span>
-          </button>
-        `).join('')}
-      </div>
-    `;
-
+    // Bilateral Circuit Branches Generation (No cards, No numbers, No 'NODE_')
     const categoriesHtml = categories.map((cat, catIdx) => {
       const skillsList = cat.skills || cat.items || [];
-      const categoryNum = String(catIdx + 1).padStart(2, '0');
+      const isLeft = catIdx % 2 === 0;
+      const branchClass = isLeft ? 'branch-left' : 'branch-right';
+      const cleanName = getCategoryDisplayName(cat);
 
       const itemsHtml = skillsList.map((skill, itemIdx) => {
         const iconEntry = getSkillIconEntry(skill.icon, skill.name);
@@ -322,32 +317,34 @@
 
         return `
           <div 
-            class="skill-item" 
+            class="skill-item pure-skill-item" 
             role="listitem" 
             tabindex="0"
             aria-label="${skill.name}"
             style="--brand-glow: ${iconEntry.glowColor}; --brand-color: ${iconEntry.brandColor}; --float-delay: ${floatDelay}s;"
           >
             <div class="skill-icon-halo" aria-hidden="true"></div>
-            <div class="skill-icon-wrapper" aria-hidden="true">
+            <div class="skill-icon-wrapper pure-skill-icon" aria-hidden="true">
               ${iconEntry.svg}
             </div>
-            <span class="skill-name">${skill.name}</span>
+            <span class="skill-name pure-skill-name">${skill.name}</span>
           </div>
         `;
       }).join('');
 
       return `
-        <div class="skill-category" role="region" aria-label="${cat.name}" data-category-id="${cat.id}">
-          <div class="skill-category-header">
-            <span class="skill-category-badge">${categoryNum}</span>
-            <h3 class="skill-category-title">${cat.name}</h3>
-            <div class="skill-category-divider" aria-hidden="true">
-              <span class="gemini-laser-pulse"></span>
+        <div class="skill-category circuit-branch-row ${branchClass}" role="region" aria-label="${cat.name}" data-category-id="${cat.id}">
+          <div class="spine-pin" aria-hidden="true"></div>
+          <div class="branch-trace" aria-hidden="true"></div>
+          <div class="branch-content">
+            <div class="skill-category-header">
+              <h3 class="category-header-title skill-category-title">
+                <span class="category-comment-prefix">//</span> ${cleanName}
+              </h3>
             </div>
-          </div>
-          <div class="skills-category-grid" role="list">
-            ${itemsHtml}
+            <div class="skills-category-grid tech-logos-shelf" role="list">
+              ${itemsHtml}
+            </div>
           </div>
         </div>
       `;
@@ -364,18 +361,21 @@
         </div>
 
         <div class="skills-header">
-          <div class="gemini-ai-badge">
-            <span class="gemini-sparkle-spin">${GEMINI_SPARKLE_SVG}</span>
-            <span>GEMINI-AUGMENTED TECHNOLOGY STACK</span>
-          </div>
           <h2 class="section-tag" id="skills-title">${sectionTag || 'TECHNICAL ARSENAL'}</h2>
           ${title ? `<h3 class="section-heading">${title}</h3>` : ''}
           ${subtitle ? `<p class="section-subtitle">${subtitle}</p>` : ''}
-          ${filterPillsHtml}
         </div>
 
-        <div class="skills-categories-container">
-          ${categoriesHtml}
+        <!-- Central Neon Orange Circuit Bus Architecture -->
+        <div class="circuit-bus-container">
+          <div class="circuit-bus-spine" aria-hidden="true">
+            <div class="circuit-spark spark-1"></div>
+            <div class="circuit-spark spark-2"></div>
+            <div class="circuit-spark spark-3"></div>
+          </div>
+          <div class="skills-categories-container">
+            ${categoriesHtml}
+          </div>
         </div>
       </div>
     `;
@@ -400,7 +400,7 @@
       });
     };
 
-    // Component 2: SkillItem (Zero cards, zero boxes, zero borders, pure icon + animated name)
+    // Component 2: SkillItem (Zero cards, zero boxes, zero borders, pure icon + name)
     const SkillItem = function (props) {
       const { skill, index } = props;
       const entry = getSkillIconEntry(skill.icon, skill.name);
@@ -415,56 +415,69 @@
       return createElement(
         'div',
         {
-          className: 'skill-item',
+          className: 'skill-item pure-skill-item',
           role: 'listitem',
           tabIndex: 0,
           'aria-label': skill.name,
           style: styleObj
         },
+        createElement('div', { className: 'skill-icon-halo', 'aria-hidden': 'true' }),
         createElement(
           'div',
-          { className: 'skill-icon-wrapper', 'aria-hidden': 'true' },
+          { className: 'skill-icon-wrapper pure-skill-icon', 'aria-hidden': 'true' },
           createElement(SkillIcon, { icon: skill.icon, name: skill.name })
         ),
-        createElement('span', { className: 'skill-name' }, skill.name)
+        createElement('span', { className: 'skill-name pure-skill-name' }, skill.name)
       );
     };
 
-    // Component 3: SkillCategory (Category-wise dynamic grouping)
+    // Component 3: SkillCategory (Bilateral Branching Node without numbers or 'NODE_')
     const SkillCategory = function (props) {
       const { category, categoryIndex } = props;
       const skillsList = category.skills || category.items || [];
-      const categoryNum = String(categoryIndex).padStart(2, '0');
+      const isLeft = (categoryIndex - 1) % 2 === 0;
+      const branchClass = isLeft ? 'branch-left' : 'branch-right';
+      const cleanName = getCategoryDisplayName(category);
 
       return createElement(
         'div',
         {
-          className: 'skill-category',
+          className: `skill-category circuit-branch-row ${branchClass}`,
           role: 'region',
-          'aria-label': category.name
+          'aria-label': category.name,
+          'data-category-id': category.id
         },
+        createElement('div', { className: 'spine-pin', 'aria-hidden': 'true' }),
+        createElement('div', { className: 'branch-trace', 'aria-hidden': 'true' }),
         createElement(
           'div',
-          { className: 'skill-category-header' },
-          createElement('span', { className: 'skill-category-badge' }, categoryNum),
-          createElement('h3', { className: 'skill-category-title' }, category.name),
-          createElement('div', { className: 'skill-category-divider', 'aria-hidden': 'true' })
-        ),
-        createElement(
-          'div',
-          { className: 'skills-category-grid', role: 'list' },
-          skillsList.map((skill, idx) =>
-            createElement(SkillItem, {
-              key: skill.name || idx,
-              skill: skill,
-              index: idx
-            })
+          { className: 'branch-content' },
+          createElement(
+            'div',
+            { className: 'skill-category-header' },
+            createElement(
+              'h3',
+              { className: 'category-header-title skill-category-title' },
+              createElement('span', { className: 'category-comment-prefix' }, '// '),
+              cleanName
+            )
+          ),
+          createElement(
+            'div',
+            { className: 'skills-category-grid tech-logos-shelf', role: 'list' },
+            skillsList.map((skill, idx) =>
+              createElement(SkillItem, {
+                key: skill.name || idx,
+                skill: skill,
+                index: idx
+              })
+            )
           )
         )
       );
     };
 
-    // Component 4: SkillsSection (Root showcase component)
+    // Component 4: SkillsSection (Root showcase component with glowing central spine)
     const SkillsSection = function (props) {
       const { data } = props;
       if (!data || !Array.isArray(data.categories)) return null;
@@ -476,6 +489,14 @@
         { className: 'skills-showcase-container' },
         createElement(
           'div',
+          { className: 'gemini-skills-ambient', 'aria-hidden': 'true' },
+          createElement('div', { className: 'gemini-ambient-glow gemini-glow-1' }),
+          createElement('div', { className: 'gemini-ambient-glow gemini-glow-2' }),
+          createElement('div', { className: 'gemini-ambient-glow gemini-glow-3' }),
+          createElement('div', { className: 'gemini-interactive-spotlight' })
+        ),
+        createElement(
+          'div',
           { className: 'skills-header' },
           createElement('h2', { className: 'section-tag', id: 'skills-title' }, sectionTag || 'TECHNICAL ARSENAL'),
           title ? createElement('h3', { className: 'section-heading' }, title) : null,
@@ -483,13 +504,24 @@
         ),
         createElement(
           'div',
-          { className: 'skills-categories-container' },
-          categories.map((category, idx) =>
-            createElement(SkillCategory, {
-              key: category.id || category.name || idx,
-              category: category,
-              categoryIndex: idx + 1
-            })
+          { className: 'circuit-bus-container' },
+          createElement(
+            'div',
+            { className: 'circuit-bus-spine', 'aria-hidden': 'true' },
+            createElement('div', { className: 'circuit-spark spark-1' }),
+            createElement('div', { className: 'circuit-spark spark-2' }),
+            createElement('div', { className: 'circuit-spark spark-3' })
+          ),
+          createElement(
+            'div',
+            { className: 'skills-categories-container' },
+            categories.map((category, idx) =>
+              createElement(SkillCategory, {
+                key: category.id || category.name || idx,
+                category: category,
+                categoryIndex: idx + 1
+              })
+            )
           )
         )
       );
