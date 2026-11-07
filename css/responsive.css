@@ -146,30 +146,58 @@
    3. Mobile Landscape & Phablet (481px - 767px)
    ========================================================================== */
 @media (max-width: 767px) {
+  /* Safe Area Insets & Modern Viewport Navigation */
   .navbar {
-    padding: 12px var(--section-padding-x);
+    padding-top: max(12px, calc(var(--safe-top) + 6px));
+    padding-bottom: 12px;
+    padding-left: max(var(--section-padding-x), var(--safe-left));
+    padding-right: max(var(--section-padding-x), var(--safe-right));
     min-height: 56px;
   }
 
   .navbar.scrolled {
-    padding: 10px var(--section-padding-x);
+    padding-top: max(10px, calc(var(--safe-top) + 4px));
+    padding-bottom: 10px;
   }
 
   .navbar-left {
     gap: var(--space-2);
   }
 
+  /* Accessible Touch Target for Mobile Hamburger (Min 44x44px) */
   .mobile-toggle {
-    padding: 8px 9px;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-toggle span {
     width: 20px;
   }
 
+  /* Universal Mobile Input Sizing: Prevents iOS Safari Forced Auto-Zoom */
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="password"],
+  textarea,
+  select,
+  .form-input,
+  .form-textarea {
+    font-size: 16px !important;
+  }
+
+  .form-input {
+    min-height: 46px;
+  }
+
   .btn-touch {
-    padding: 7px 10px 7px 16px;
+    padding: 8px 12px 8px 16px;
     font-size: var(--font-size-xs);
+    min-height: 42px;
   }
 
   .btn-icon-circle {
@@ -198,6 +226,30 @@
     gap: var(--space-4);
   }
 
+  /* Certificates Carousel Touch Target Optimization */
+  .cert-carousel-row {
+    position: relative;
+    width: 100%;
+    padding: 0;
+  }
+
+  .cert-nav-arrow {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    z-index: 12;
+  }
+
+  /* Skills & Bus Overflow Safety */
+  .skills-section-wrapper {
+    overflow-x: hidden;
+  }
+
+  .circuit-bus-spine {
+    left: 16px;
+  }
+
   .timeline-item {
     padding-left: 48px;
   }
@@ -210,10 +262,12 @@
     left: 7px;
   }
 
+  /* Footer with Safe-Area Bottom Inset */
   .footer {
     flex-direction: column;
     gap: var(--space-4);
     text-align: center;
+    padding-bottom: max(28px, calc(var(--safe-bottom) + 20px));
   }
 
   .footer-left {
@@ -222,6 +276,64 @@
 
   .footer-right {
     justify-content: center;
+  }
+
+  /* Floating Back To Top button with Safe Area */
+  .back-to-top {
+    bottom: max(20px, calc(var(--safe-bottom) + 16px));
+    right: max(16px, calc(var(--safe-right) + 12px));
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   3.5 Phablets & Mobile Mid-Range (< 640px)
+   ========================================================================== */
+@media (max-width: 640px) {
+  /* Projects Section: Collapse Bilateral Spine for maximum readability */
+  .projects-pipeline {
+    padding: 0 4px;
+  }
+
+  .projects-edge-spine,
+  .project-vertex,
+  .project-stem-connector {
+    display: none;
+  }
+
+  .project-entry {
+    padding-bottom: 28px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .project-preview-frame {
+    border-radius: var(--radius-lg);
+  }
+
+  .project-actions-row {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .project-actions-row .btn-touch,
+  .project-actions-row .btn-project-code {
+    flex: 1;
+    min-height: 44px;
+    justify-content: center;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+  }
+
+  .skills-category-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 14px 10px;
   }
 }
 
@@ -236,6 +348,7 @@
 
   .navbar {
     padding: 12px 14px;
+    padding-top: max(12px, calc(var(--safe-top) + 6px));
   }
 
   /* Compact Navbar Actions: Hide verbose button text */
@@ -250,8 +363,12 @@
   .btn-nav-upload {
     padding: 8px;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
@@ -286,7 +403,9 @@
   .hero-btn-resume,
   .hero-btn-contact {
     width: 100%;
+    min-height: 48px;
     justify-content: center;
+    font-size: 0.95rem;
   }
 
   .hero-social-links {
@@ -297,17 +416,19 @@
 
   .hero-showcase-window {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
+    margin: 0 auto;
   }
 
   .hero-bento-metrics {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     margin-top: var(--space-6);
     padding-top: var(--space-6);
   }
 
   .brands-wrapper {
-    padding: var(--space-5) var(--space-5);
+    padding: var(--space-5) var(--space-4);
   }
 
   .brands-title {
@@ -315,13 +436,14 @@
   }
 
   .brands-list {
-    gap: var(--space-4);
+    gap: var(--space-3);
     justify-content: space-between;
     width: 100%;
+    flex-wrap: wrap;
   }
 
   .brand-item {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     gap: 6px;
   }
 
@@ -336,34 +458,6 @@
 
   .stat-card {
     padding: var(--space-5);
-  }
-
-  .projects-pipeline {
-    padding: 14px 6px 14px 28px;
-  }
-
-  .projects-edge-spine {
-    left: 8px;
-  }
-
-  .project-vertex {
-    left: -28px;
-  }
-
-  .project-stem-connector {
-    width: 10px;
-    left: 18px;
-  }
-
-  .project-actions-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .btn-touch,
-  .btn-project-code {
-    width: 100%;
-    justify-content: center;
   }
 
   .timeline-meta {
@@ -401,10 +495,44 @@
     border-radius: 16px;
   }
 
-  .back-to-top {
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
+  .contact-form-actions .btn-touch {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+}
+
+/* ==========================================================================
+   5. Ultra-Small Screens (< 360px - e.g., Foldables Outer Display, iPhone SE 1st)
+   ========================================================================== */
+@media (max-width: 360px) {
+  :root {
+    --section-padding-x: 12px;
+  }
+
+  .hero-name-title {
+    font-size: clamp(1.75rem, 8vw, 2.1rem);
+  }
+
+  .hero-bento-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .project-actions-row {
+    flex-direction: column;
+  }
+
+  .project-actions-row .btn-touch,
+  .project-actions-row .btn-project-code {
+    width: 100%;
+  }
+
+  .logo-text {
+    font-size: 1rem;
+  }
+
+  .brands-list {
+    flex-direction: column;
+    gap: var(--space-2);
   }
 }

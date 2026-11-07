@@ -93,8 +93,14 @@
   /* Layout Containers & Spacing */
   --container-max-width: 1360px;
   --container-narrow-width: 880px;
-  --section-padding-x: clamp(18px, 4vw, 56px);
-  --section-padding-y: clamp(70px, 9vh, 120px);
+  --section-padding-x: clamp(16px, 4vw, 56px);
+  --section-padding-y: clamp(56px, 8vh, 120px);
+
+  /* Mobile Safe Area Insets (iOS Notch & Dynamic Island / Android Nav Bar) */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
 
   /* Border Radii */
   --radius-xs: 6px;

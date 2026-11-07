@@ -661,6 +661,18 @@
   .form-row-2 {
     grid-template-columns: 1fr;
   }
+
+  /* Prevent iOS zoom & enhance touch target */
+  .form-input,
+  .form-textarea {
+    font-size: 16px;
+    min-height: 46px;
+    padding: 10px 14px;
+  }
+
+  .input-container .form-input {
+    padding-left: 42px;
+  }
 }
 
 @media (max-width: 560px) {
