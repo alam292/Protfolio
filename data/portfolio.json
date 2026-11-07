@@ -28,34 +28,34 @@
   },
   "stats": [
     {
-      "value": "2+",
-      "suffix": "Years",
-      "label": "Engineering Experience",
-      "description": "Building full-stack web applications and robust backend architectures"
+      "value": "1,000+",
+      "suffix": "Records",
+      "label": "Datasets Analyzed",
+      "description": "Healthcare patient records and banking loan risk portfolios"
     },
     {
-      "value": "15+",
-      "suffix": "APIs",
-      "label": "REST Endpoints Built",
-      "description": "Designed high-speed FastAPI and Django REST services with zero downtime"
+      "value": "2",
+      "suffix": "Projects",
+      "label": "Analytics Systems",
+      "description": "Healthcare Disease Analysis & Bank Loan Prediction dashboards"
     },
     {
-      "value": "3+",
-      "suffix": "Systems",
-      "label": "Full-Stack Products",
-      "description": "Production-grade SaaS, management dashboards, and developer tools"
+      "value": "6+",
+      "suffix": "Tools",
+      "label": "BI & Analytics Stack",
+      "description": "Power BI, DAX, SQL, MySQL, Python, Pandas, Advanced Excel"
     },
     {
-      "value": "99.9%",
-      "suffix": "Uptime",
-      "label": "Cloud Reliability",
-      "description": "Ensuring high availability, reliability, and smooth database operations"
+      "value": "85%",
+      "suffix": "Score",
+      "label": "IIT Bombay Certified",
+      "description": "Python Programming & Computational Analysis (Spoken Tutorial)"
     }
   ],
   "about": {
     "sectionTag": "WHO I AM",
     "terminalCommand": "whoami",
-    "lead": "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.",
+    "lead": "I am a Data Analyst Trainee and Power BI Developer with hands-on training at Naresh i Technologies and practical project experience in SQL, Python, Advanced Excel, and Power BI. Skilled in data cleaning, ETL, EDA, DAX, Power Query, and dashboard development to generate actionable, data-driven insights.",
     "highlights": [
       {
         "icon": "zap",
@@ -82,29 +82,29 @@
       {
         "id": "identity",
         "tag": "01. IDENTITY & CRAFT",
-        "title": "Full-Stack Software Developer",
-        "content": "Specializing in end-to-end web engineering, integrating responsive React frontends with high-throughput FastAPI and Django backends. Driven by clean code architecture, modular design, and reliable CRUD workflows.",
+        "title": "Data Analyst & Power BI Developer",
+        "content": "Specializing in end-to-end data analytics pipelines, exploratory data analysis, interactive Power BI dashboards, and database querying with SQL and Python. Driven by clean data modeling and actionable business insights.",
         "icon": "terminal"
       },
       {
         "id": "journey",
         "tag": "02. THE JOURNEY",
-        "title": "From Core Engineering to Scalable Web Systems",
-        "content": "With an engineering foundation in Electronics & Communications, I transitioned into software development, mastering data structures, algorithms, relational database modeling, and scalable modern web stacks.",
+        "title": "From Core Engineering to Data Intelligence",
+        "content": "With an engineering foundation in Electronics & Communications, I specialized in data analytics at Naresh i Technologies, mastering relational database modeling in SQL, statistical computing in Python, and business reporting.",
         "icon": "git-branch"
       },
       {
         "id": "goals",
         "tag": "03. TRACK RECORD & IMPACT",
-        "title": "Production Deployment & API Integration",
-        "content": "Engineered enterprise management dashboards, deployed cloud-hosted web applications, and integrated complex third-party APIs to deliver seamless user experiences and operational automation.",
+        "title": "Healthcare & Banking Insights",
+        "content": "Analyzed 1,000+ complex healthcare and loan records to uncover trends, identify risk patterns, and deliver data-driven decision metrics through intuitive dashboards.",
         "icon": "zap"
       },
       {
         "id": "philosophy",
         "tag": "04. PASSION & STANDARDS",
-        "title": "Performance, Reliability & Clean Schemas",
-        "content": "I advocate for structured object-oriented programming, normalized relational schemas with PostgreSQL and SQLAlchemy, rigorous API contract testing in Postman, and responsive, accessible interfaces.",
+        "title": "Data Accuracy & Visual Storytelling",
+        "content": "I advocate for clean ETL data transformations, validated relational schemas in MySQL, robust DAX calculations, and clear KPI visual storytelling for stakeholders.",
         "icon": "shield"
       }
     ]

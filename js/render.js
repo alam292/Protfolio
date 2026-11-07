@@ -48,6 +48,37 @@ class PortfolioRenderer {
     }
   }
 
+  checkSectionEnabled(sectionId, dataObject) {
+    const sectionEl = document.getElementById(sectionId);
+    if (!sectionEl) return false;
+
+    // Check if explicitly disabled or empty
+    const isDisabled = dataObject?.disabled === true || dataObject?.enabled === false;
+    let isEmpty = false;
+    if (dataObject) {
+      if (Array.isArray(dataObject.items) && dataObject.items.length === 0) isEmpty = true;
+      if (Array.isArray(dataObject.roles) && dataObject.roles.length === 0) isEmpty = true;
+      if (Array.isArray(dataObject.degrees) && dataObject.degrees.length === 0) isEmpty = true;
+      if (Array.isArray(dataObject.categories) && dataObject.categories.length === 0) isEmpty = true;
+    }
+
+    if (isDisabled || isEmpty) {
+      sectionEl.style.display = 'none';
+      document.querySelectorAll(`a[href="#${sectionId}"]`).forEach(link => {
+        const parentLi = link.closest('li') || link;
+        parentLi.style.display = 'none';
+      });
+      return false;
+    } else {
+      sectionEl.style.display = '';
+      document.querySelectorAll(`a[href="#${sectionId}"]`).forEach(link => {
+        const parentLi = link.closest('li') || link;
+        parentLi.style.display = '';
+      });
+      return true;
+    }
+  }
+
   renderAll() {
     if (!this.data) return;
 
@@ -347,12 +378,15 @@ class PortfolioRenderer {
 
   // 2. About Me Section (Concise High-Signal Bio + Borderless Open Layout, No Card View)
   renderAbout() {
+    if (!this.checkSectionEnabled('about', this.data.about)) return;
+
     const mount = document.getElementById('aboutMount');
     if (!mount) return;
 
     const { about, stats, profile } = this.data;
 
-    const statsHtml = stats.map(s => `
+    const showStats = about.showStats !== false && Array.isArray(stats) && stats.length > 0;
+    const statsHtml = showStats ? stats.map(s => `
       <div class="stat-card stat-item-open">
         <div class="stat-value-row">
           <span class="stat-number">${s.value}</span>
@@ -361,13 +395,13 @@ class PortfolioRenderer {
         <div class="stat-label">${s.label}</div>
         <div class="stat-sublabel">${s.description}</div>
       </div>
-    `).join('');
+    `).join('') : '';
 
     const highlights = about.highlights || [
-      { icon: 'zap', title: 'High-Speed APIs', detail: 'FastAPI & Django REST' },
-      { icon: 'code', title: 'Modern Frontends', detail: 'React, Next.js & UI/UX' },
-      { icon: 'database', title: 'Relational Schemas', detail: 'PostgreSQL & SQLAlchemy' },
-      { icon: 'shield', title: 'Production Ready', detail: 'Tested & Cloud Deployed' }
+      { icon: 'zap', title: 'Actionable Insights', detail: 'Power BI & DAX Dashboards' },
+      { icon: 'code', title: 'Python Analytics', detail: 'Pandas, NumPy & EDA' },
+      { icon: 'database', title: 'Database Querying', detail: 'SQL, MySQL & ETL' },
+      { icon: 'shield', title: 'Business Reports', detail: 'Advanced Excel & Tableau' }
     ];
 
     const highlightsHtml = highlights.map(h => `
@@ -380,8 +414,13 @@ class PortfolioRenderer {
       </div>
     `).join('');
 
+    let bioLead = about.lead || `I am a ${profile.title || 'Data Analyst'} skilled in data analysis, dashboard development, and business intelligence.`;
+    if (profile.title && bioLead.includes(profile.title)) {
+      bioLead = bioLead.replace(profile.title, `<strong class="text-glow-accent">${profile.title}</strong>`);
+    }
+
     mount.innerHTML = `
-      <h2 class="section-tag" id="about-title">${about.sectionTag}</h2>
+      <h2 class="section-tag" id="about-title">${about.sectionTag || 'WHO I AM'}</h2>
 
       <div class="about-grid about-open-layout">
         <!-- Biography Story (Borderless Open Layout - No Card View) -->
@@ -400,7 +439,7 @@ class PortfolioRenderer {
           </div>
 
           <p class="about-bio-lead">
-            I am a <strong class="text-glow-accent">Full-Stack Software Developer</strong> specializing in high-throughput backend APIs with <span class="tech-tag">FastAPI &amp; Django</span>, paired with responsive, clean frontends in <span class="tech-tag">React &amp; Next.js</span>. Focused on robust database schemas, clean architecture, and reliable production deployment.
+            ${bioLead}
           </p>
 
           <div class="about-highlights-list">
@@ -420,16 +459,19 @@ class PortfolioRenderer {
           </div>
         </div>
 
+        ${showStats ? `
         <!-- KPI Metrics (Typographic Open Layout - No Card Boxes) -->
         <div class="about-stats-grid about-stats-open">
           ${statsHtml}
-        </div>
+        </div>` : ''}
       </div>
     `;
   }
 
   // 3. Technical Skills Section (Modern Animated Technology Showcase)
   renderSkills() {
+    if (!this.checkSectionEnabled('skills', this.data.skills)) return;
+
     const mount = document.getElementById('skillsMount');
     if (!mount) return;
 
@@ -481,6 +523,8 @@ class PortfolioRenderer {
 
   // 4. Featured Projects Section (Bilateral Engineering Pipeline Form)
   renderProjects() {
+    if (!this.checkSectionEnabled('projects', this.data.projects)) return;
+
     const mount = document.getElementById('projectsMount');
     if (!mount) return;
 
@@ -639,6 +683,8 @@ class PortfolioRenderer {
 
   // 5. Work Experience Section
   renderExperience() {
+    if (!this.checkSectionEnabled('experience', this.data.experience)) return;
+
     const mount = document.getElementById('experienceMount');
     if (!mount) return;
 
@@ -692,6 +738,8 @@ class PortfolioRenderer {
 
   // 6. Education Section (Academic Graph Pipeline Form)
   renderEducation() {
+    if (!this.checkSectionEnabled('education', this.data.education)) return;
+
     const mount = document.getElementById('educationMount');
     if (!mount) return;
 
@@ -917,6 +965,8 @@ class PortfolioRenderer {
   }
 
   renderCertifications() {
+    if (!this.checkSectionEnabled('certificates', this.data.certifications)) return;
+
     const mount = document.getElementById('certificatesMount');
     if (!mount) return;
 
@@ -1152,6 +1202,8 @@ class PortfolioRenderer {
 
   // 8. Contact Section (Animated Form & Channels)
   renderContact() {
+    if (!this.checkSectionEnabled('contact', this.data.contact)) return;
+
     const mount = document.getElementById('contactMount');
     if (!mount) return;
 
