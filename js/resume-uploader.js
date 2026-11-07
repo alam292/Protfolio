@@ -340,7 +340,12 @@ class ResumeUploader {
 
       clearInterval(progressTimer);
 
-      const result = await response.json();
+      let result;
+      try {
+        result = await response.json();
+      } catch (jsonErr) {
+        throw new Error(`Server error (${response.status || 'No Response'}). Please try again in a few moments.`);
+      }
 
       if (!response.ok || !result.success) {
         throw new Error(result.error || `Upload failed with status ${response.status}`);
@@ -524,7 +529,12 @@ class ResumeUploader {
           })
         });
 
-        const result = await response.json();
+        let result;
+        try {
+          result = await response.json();
+        } catch (_) {
+          throw new Error(`Publish failed: Server returned HTTP ${response.status}`);
+        }
 
         if (!response.ok || !result.success) {
           throw new Error(result.error || `Publish failed with status ${response.status}`);
@@ -680,7 +690,12 @@ class ResumeUploader {
           body: JSON.stringify({ filename, pin: pin || '' })
         });
 
-        const result = await response.json();
+        let result;
+        try {
+          result = await response.json();
+        } catch (_) {
+          throw new Error(`Rollback failed: Server returned HTTP ${response.status}`);
+        }
 
         if (!response.ok || !result.success) {
           throw new Error(result.error || `Rollback failed with status ${response.status}`);
