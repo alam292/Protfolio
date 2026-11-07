@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const {
   handleResumeUpload,
+  handlePublishPortfolio,
   handleGetPortfolio,
   handleListBackups
 } = require('./server/resume-controller');
@@ -32,6 +33,7 @@ app.use(express.json());
 
 // API Endpoints
 app.post('/api/upload-resume', handleResumeUpload);
+app.post('/api/publish-portfolio', handlePublishPortfolio);
 app.get('/api/portfolio', handleGetPortfolio);
 app.get('/api/backups', handleListBackups);
 

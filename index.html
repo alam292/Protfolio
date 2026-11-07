@@ -447,8 +447,8 @@
       <!-- Status Banner -->
       <div class="upload-status-banner" id="uploadStatusBanner" role="alert" aria-live="assertive"></div>
 
-      <!-- Modal Actions -->
-      <div class="upload-modal-actions">
+      <!-- Modal Actions (Upload Phase) -->
+      <div class="upload-modal-actions" id="uploadModalActions">
         <button type="button" class="btn-upload-cancel" id="btnUploadCancel">Cancel</button>
         <button type="button" class="btn-upload-submit" id="btnUploadSubmit" disabled>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -459,6 +459,98 @@
           </svg>
           <span>Analyze &amp; Sync Portfolio</span>
         </button>
+      </div>
+
+      <!-- Review & Confirm Container (Phase 3) -->
+      <div class="upload-review-container" id="uploadReviewContainer" style="display: none;">
+        <div class="review-header">
+          <div class="review-badge">
+            <span class="status-pulse-dot" aria-hidden="true"></span>
+            <span>Review &amp; Confirm</span>
+          </div>
+          <h4 class="review-title">AI Extraction Complete</h4>
+          <p class="review-intro">Please review the detected changes before committing them live to your portfolio.</p>
+        </div>
+
+        <div class="review-cards-grid">
+          <!-- Card 1: Profile & Title -->
+          <div class="review-metric-card" id="reviewCardProfile">
+            <div class="review-metric-header">
+              <span class="review-card-icon" aria-hidden="true">👤</span>
+              <span class="review-card-title">Profile Info</span>
+            </div>
+            <div class="review-card-body" id="reviewProfileContent">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Card 2: Skills Showcase -->
+          <div class="review-metric-card" id="reviewCardSkills">
+            <div class="review-metric-header">
+              <span class="review-card-icon" aria-hidden="true">🛠️</span>
+              <span class="review-card-title">Skills Showcase</span>
+            </div>
+            <div class="review-card-body" id="reviewSkillsContent">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Card 3: Who Am I Highlights -->
+          <div class="review-metric-card" id="reviewCardAbout">
+            <div class="review-metric-header">
+              <span class="review-card-icon" aria-hidden="true">⚡</span>
+              <span class="review-card-title">Who Am I Highlights</span>
+            </div>
+            <div class="review-card-body" id="reviewAboutContent">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Card 4: Experience & Projects -->
+          <div class="review-metric-card" id="reviewCardExperience">
+            <div class="review-metric-header">
+              <span class="review-card-icon" aria-hidden="true">💼</span>
+              <span class="review-card-title">Experience &amp; Projects</span>
+            </div>
+            <div class="review-card-body" id="reviewExperienceContent">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Raw JSON / Diff Accordion -->
+        <div class="review-json-accordion">
+          <button type="button" class="btn-toggle-diff-json" id="btnToggleDiffJson" aria-expanded="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <span id="btnToggleDiffJsonText">Preview Structured JSON Data</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="accordion-arrow" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="review-json-drawer" id="reviewJsonDrawer" style="display: none;">
+            <pre class="review-json-pre" id="reviewJsonPre"></pre>
+          </div>
+        </div>
+
+        <!-- Review Action Buttons -->
+        <div class="upload-review-actions">
+          <button type="button" class="btn-review-discard" id="btnReviewDiscard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="1 4 1 10 7 10"></polyline>
+              <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+            <span>Discard &amp; Re-upload</span>
+          </button>
+          <button type="button" class="btn-review-publish" id="btnConfirmPublish">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Confirm &amp; Publish Live</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>

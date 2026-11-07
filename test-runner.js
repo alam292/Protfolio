@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { app } = require('./server');
 const { extractRawText, fallbackRuleBasedParser } = require('./server/parse-resume');
+const { computePortfolioDiff } = require('./server/resume-controller');
 
 let passed = 0;
 let failed = 0;
@@ -63,6 +64,10 @@ async function runTests() {
   assert(html.includes('id="resumeFileInput"'), 'File input present: #resumeFileInput');
   assert(html.includes('id="uploadProgressBarFill"'), 'Progress bar element present: #uploadProgressBarFill');
   assert(html.includes('btn-nav-upload'), 'Navbar upload trigger button present');
+  assert(html.includes('id="uploadReviewContainer"'), 'Review modal container present: #uploadReviewContainer');
+  assert(html.includes('id="btnConfirmPublish"'), 'Confirm & Publish button present: #btnConfirmPublish');
+  assert(html.includes('id="btnReviewDiscard"'), 'Discard & Re-upload button present: #btnReviewDiscard');
+  assert(html.includes('id="btnToggleDiffJson"'), 'Toggle JSON diff button present: #btnToggleDiffJson');
   assert(html.includes('js/resume-uploader.js'), 'Resume uploader script included in index.html');
   const mainCss = fs.readFileSync('css/main.css', 'utf8');
   assert(mainCss.includes('components/upload-modal.css'), 'upload-modal.css imported in main.css');
@@ -297,6 +302,113 @@ async function runTests() {
   assert(navJs.includes('drawerBackdrop'), 'Navigation controller binds backdrop overlay');
   assert(navJs.includes('drawerCloseBtn'), 'Navigation controller binds close button');
   assert(navJs.includes('aria-expanded'), 'Accessibility aria-expanded handled in drawer toggle');
+
+  console.log('\n=== SUITE 11: PHASE 3 REVIEW & CONFIRM STEP (DIFF & TWO-STEP PUBLISH) ===');
+  // 1. Test computePortfolioDiff logic
+  const mockOld = {
+    profile: { name: 'Matloob', title: 'Developer', email: 'old@dev.com', summary: 'Old bio' },
+    about: { highlights: [{ title: 'Projects', stat: '10+' }] },
+    skills: { categories: [{ name: 'Languages', skills: [{ name: 'Python' }] }] },
+    experience: { roles: [{ title: 'Dev', company: 'Company A' }] },
+    projects: { items: [{ title: 'App A' }] }
+  };
+  const mockNew = {
+    profile: { name: 'Md Matloob Alam', title: 'Senior Software Developer', email: 'old@dev.com', summary: 'Updated modern bio' },
+    about: { highlights: [{ title: 'Projects', stat: '15+' }] },
+    skills: { categories: [{ name: 'Languages', skills: [{ name: 'Python' }, { name: 'TypeScript' }] }] },
+    experience: { roles: [{ title: 'Dev', company: 'Company A' }, { title: 'Lead', company: 'Company B' }] },
+    projects: { items: [{ title: 'App A' }] }
+  };
+  const diffResult = computePortfolioDiff(mockOld, mockNew);
+  assert(diffResult.hasChanges === true, 'Diff engine detects overall changes');
+  assert(diffResult.profile.name && diffResult.profile.name.new === 'Md Matloob Alam', 'Diff engine accurately captures new name');
+  assert(diffResult.profile.title && diffResult.profile.title.new === 'Senior Software Developer', 'Diff engine accurately captures new title');
+  assert(Array.isArray(diffResult.skills.added) && diffResult.skills.added.includes('TypeScript'), 'Diff engine identifies newly added skill');
+  assert(diffResult.about.highlightsChanged === true, 'Diff engine flags highlight modifications');
+  assert(diffResult.experience.newCount === 2 && diffResult.experience.oldCount === 1, 'Diff engine computes experience count delta');
+
+  // 2. Test Preview API (POST /api/upload-resume?preview=true)
+  const previewServer = await new Promise((resolve) => {
+    const s = app.listen(0, () => resolve(s));
+  });
+  const previewPort = previewServer.address().port;
+  const previewBaseUrl = `http://localhost:${previewPort}`;
+
+  const originalDiskPortfolio = fs.readFileSync('data/portfolio.json', 'utf8');
+
+  const previewBoundary = '----WebKitFormBoundaryPreview' + Date.now();
+  const previewPdfBuf = fs.readFileSync('assets/Md_Matloob_Alam_Software_Developer_Resume.pdf');
+  const previewHeader = Buffer.from(
+    `--${previewBoundary}\r\n` +
+    `Content-Disposition: form-data; name="resume"; filename="Resume_Preview_Test.pdf"\r\n` +
+    `Content-Type: application/pdf\r\n\r\n`
+  );
+  const previewFooter = Buffer.from(`\r\n--${previewBoundary}--\r\n`);
+  const previewBody = Buffer.concat([previewHeader, previewPdfBuf, previewFooter]);
+
+  const previewRes = await new Promise((resolve) => {
+    const req = http.request(previewBaseUrl + '/api/upload-resume?preview=true', {
+      method: 'POST',
+      headers: {
+        'Content-Type': `multipart/form-data; boundary=${previewBoundary}`,
+        'Content-Length': previewBody.length
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          resolve({ status: res.statusCode, json: JSON.parse(data) });
+        } catch (e) {
+          resolve({ status: res.statusCode, error: data });
+        }
+      });
+    });
+    req.write(previewBody);
+    req.end();
+  });
+
+  assert(previewRes.status === 200, `POST /api/upload-resume?preview=true returned HTTP 200 (Got ${previewRes.status})`);
+  assert(previewRes.json?.preview === true, 'Preview API returned preview: true');
+  assert(previewRes.json?.diff !== undefined, 'Preview API returned structured diff summary');
+  assert(previewRes.json?.data !== undefined, 'Preview API returned staged portfolio data');
+  const postPreviewDiskPortfolio = fs.readFileSync('data/portfolio.json', 'utf8');
+  assert(postPreviewDiskPortfolio === originalDiskPortfolio, 'Preview mode does NOT overwrite portfolio.json on disk');
+
+  // 3. Test Publish API (POST /api/publish-portfolio)
+  const publishRes = await new Promise((resolve) => {
+    const postPayload = JSON.stringify({
+      data: previewRes.json?.data,
+      resumeFilename: previewRes.json?.resumeFilename
+    });
+    const req = http.request(previewBaseUrl + '/api/publish-portfolio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(postPayload)
+      }
+    }, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try {
+          resolve({ status: res.statusCode, json: JSON.parse(data) });
+        } catch (e) {
+          resolve({ status: res.statusCode, error: data });
+        }
+      });
+    });
+    req.write(postPayload);
+    req.end();
+  });
+
+  assert(publishRes.status === 200, `POST /api/publish-portfolio returned HTTP 200 (Got ${publishRes.status})`);
+  assert(publishRes.json?.success === true, 'Publish API returned success: true');
+  assert(publishRes.json?.backup && fs.existsSync(publishRes.json.backup), 'Publish API created automated backup on disk');
+
+  // Restore disk portfolio to original
+  fs.writeFileSync('data/portfolio.json', originalDiskPortfolio, 'utf8');
+  previewServer.close();
 
   console.log('\n======================================================');
   console.log(`TOTAL CHECKS: ${passed + failed} | PASSED: ${passed} | FAILED: ${failed}`);
