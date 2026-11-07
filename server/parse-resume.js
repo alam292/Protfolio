@@ -335,7 +335,7 @@ ${rawText}
   const fetchTimeout = setTimeout(() => controller.abort(), 6000);
 
   // 1. Primary: Direct REST call with official models (fast, reliable, native JSON mode)
-  const modelsToTry = ['gemini-3.8-flash', 'gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+  const modelsToTry = ['gemini-3.8-flash', 'gemini-2.5-flash'];
   let restSucceeded = false;
 
   for (const model of modelsToTry) {
@@ -358,6 +358,10 @@ ${rawText}
         break;
       } else if (data.error) {
         console.warn(`[AI Parser] REST call model ${model} error:`, data.error.message || JSON.stringify(data.error));
+        // Quota exceeded is key-level, break immediately to fallback
+        if (data.error.code === 429 || (data.error.message && /quota|rate limit/i.test(data.error.message))) {
+          break;
+        }
       }
     } catch (restErr) {
       console.warn(`[AI Parser] REST call ${model} failed:`, restErr.message);
@@ -431,11 +435,17 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
 
   // 1. Extract Name & Email & Links
   const headerLines = sectionMap['HEADER'] || [];
-  if (headerLines.length > 0) {
-    const potentialName = headerLines[0];
-    if (potentialName.length < 50 && !potentialName.includes('@') && !potentialName.includes('http')) {
-      result.profile.name = potentialName;
-      result.profile.shortName = potentialName.split(' ')[0] || potentialName;
+  const nameBlacklist = /^(curriculum vitae|resume|cv|biodata|bio-data|personal details|profile|portfolio|contact details)$/i;
+  for (const line of headerLines) {
+    const trimmed = (line || '').trim();
+    if (!trimmed) continue;
+    if (nameBlacklist.test(trimmed)) continue;
+    if (trimmed.includes('@') || trimmed.includes('http') || trimmed.includes('github') || trimmed.includes('linkedin')) continue;
+    if (/^\+?\d[\d\s\-().]{8,}$/.test(trimmed)) continue; // phone numbers only
+    if (trimmed.length > 2 && trimmed.length < 50) {
+      result.profile.name = trimmed;
+      result.profile.shortName = trimmed.split(' ')[0] || trimmed;
+      break;
     }
   }
 
