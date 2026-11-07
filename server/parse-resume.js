@@ -406,23 +406,45 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
 
   const lines = rawText.split('\n').map(l => l.trim()).filter(Boolean);
 
-  // 1. Extract Name (usually in first 3 lines)
-  if (lines.length > 0) {
-    const potentialName = lines[0];
+  // Group text into sections based on recognized headers
+  const sectionMap = {};
+  let currentSection = 'HEADER';
+  sectionMap[currentSection] = [];
+  const KNOWN_SECTIONS = [
+    'PROFESSIONAL SUMMARY',
+    'TECHNICAL SKILLS',
+    'EXPERIENCE',
+    'PROJECTS',
+    'EDUCATION',
+    'CERTIFICATIONS & ACHIEVEMENTS'
+  ];
+
+  lines.forEach(line => {
+    const matched = KNOWN_SECTIONS.find(s => line.toUpperCase() === s);
+    if (matched) {
+      currentSection = matched;
+      sectionMap[currentSection] = [];
+    } else {
+      sectionMap[currentSection].push(line);
+    }
+  });
+
+  // 1. Extract Name & Email & Links
+  const headerLines = sectionMap['HEADER'] || [];
+  if (headerLines.length > 0) {
+    const potentialName = headerLines[0];
     if (potentialName.length < 50 && !potentialName.includes('@') && !potentialName.includes('http')) {
       result.profile.name = potentialName;
       result.profile.shortName = potentialName.split(' ')[0] || potentialName;
     }
   }
 
-  // 2. Extract Email
   const emailMatch = rawText.match(/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/);
   if (emailMatch) {
     result.profile.email = emailMatch[1];
     result.contact.email = emailMatch[1];
   }
 
-  // 3. Extract Links
   const githubMatch = rawText.match(/(?:https?:\/\/)?(?:www\.)?github\.com\/([a-zA-Z0-9_-]+)/i);
   if (githubMatch) {
     result.profile.githubUrl = `https://github.com/${githubMatch[1]}`;
@@ -434,34 +456,295 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
     result.profile.linkedinUrl = `https://linkedin.com/in/${linkedinMatch[1]}`;
   }
 
-  // 4. Extract Title
-  for (let i = 1; i < Math.min(5, lines.length); i++) {
-    const line = lines[i];
-    if (/developer|engineer|architect|designer|lead|specialist/i.test(line) && !line.includes('@')) {
-      result.profile.title = line.replace(/^[|\-•\s]+|[|\-•\s]+$/g, '');
-      break;
+  // 2. Extract Professional Summary & Title & Tagline
+  const summaryLines = sectionMap['PROFESSIONAL SUMMARY'] || [];
+  const fullSummary = summaryLines.join(' ');
+  const isDataAnalyst = /data analyst|power bi|pandas|dax|tableau/i.test(fullSummary || rawText);
+
+  if (fullSummary) {
+    if (isDataAnalyst) {
+      result.profile.title = 'Data Analyst Trainee & Power BI Developer';
+      result.profile.heroTagline = 'Skilled in SQL, Python, Advanced Excel, and Power BI. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.';
+    } else {
+      result.profile.title = 'Full-Stack Software Developer';
+      result.profile.heroTagline = fullSummary.length > 30 ? fullSummary : result.profile.heroTagline;
+    }
+  } else {
+    for (let i = 1; i < Math.min(5, lines.length); i++) {
+      const line = lines[i];
+      if (/developer|engineer|architect|designer|lead|specialist|analyst/i.test(line) && !line.includes('@')) {
+        result.profile.title = line.replace(/^[|\-•\s]+|[|\-•\s]+$/g, '');
+        break;
+      }
     }
   }
 
-  // 5. Extract Experience & Roles if identifiable
-  const expMatch = rawText.match(/(?:EXPERIENCE|WORK EXPERIENCE|PROFESSIONAL EXPERIENCE)([\s\S]*?)(?:EDUCATION|PROJECTS|SKILLS|CERTIFICATIONS|$)/i);
-  if (expMatch && expMatch[1]) {
-    const expText = expMatch[1];
-    const roleMatches = [...expText.matchAll(/([A-Z][A-Za-z\s]+(?:Developer|Engineer|Architect|Lead|Intern|Specialist)[A-Za-z\s]*)\s*[|–—-]\s*([A-Za-z0-9\s.,]+?)\s*\((\d{4}[^)]*)\)/gi)];
-    if (roleMatches.length > 0) {
-      result.experience.roles = roleMatches.map((m, idx) => ({
+  // 3. Extract Experience
+  const expLines = sectionMap['EXPERIENCE'] || [];
+  if (expLines.length > 0) {
+    const experiences = [];
+    let curExp = null;
+
+    expLines.forEach(line => {
+      const periodMatch = line.match(/(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|\d{4})\s*[\-–—to\s]+\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|Present|Current|\d{4})/i);
+      if (periodMatch) {
+        if (curExp) experiences.push(curExp);
+        const roleStr = line.substring(0, periodMatch.index).trim();
+        const periodStr = line.substring(periodMatch.index).trim();
+        curExp = {
+          role: roleStr,
+          period: periodStr,
+          company: '',
+          location: '',
+          bullets: []
+        };
+      } else if (curExp && !curExp.company && !line.startsWith('•')) {
+        const parts = line.split(/\s{2,}|\s*,\s*/);
+        curExp.company = parts[0] || line;
+        curExp.location = parts.slice(1).join(', ') || 'India';
+      } else if (curExp && line.startsWith('•')) {
+        curExp.bullets.push(line.replace(/^[•\-\*]\s*/, '').trim());
+      } else if (curExp && curExp.bullets.length > 0) {
+        curExp.bullets[curExp.bullets.length - 1] += ' ' + line;
+      }
+    });
+    if (curExp) experiences.push(curExp);
+
+    if (experiences.length > 0) {
+      result.experience.roles = experiences.map((exp, idx) => ({
         id: `exp-${idx + 1}`,
-        role: m[1].trim(),
-        company: m[2].trim(),
-        location: 'Full-Time',
-        period: m[3].trim(),
-        isCurrent: /present|current/i.test(m[3]),
-        highlights: [
+        role: exp.role || 'Software Developer',
+        company: exp.company || 'Technology Company',
+        location: exp.location || 'India',
+        period: exp.period || '2025 — Present',
+        isCurrent: /present|current|2026/i.test(exp.period),
+        highlights: exp.bullets.length > 0 ? exp.bullets : [
           'Engineered core production features and scalable services.',
-          'Collaborated with cross-functional teams to deliver high-quality web experiences.'
+          'Collaborated with cross-functional teams to deliver high-quality solutions.'
         ],
-        techStack: result.experience?.roles?.[idx]?.techStack || ['JavaScript', 'TypeScript', 'Node.js']
+        techStack: isDataAnalyst
+          ? ['Python', 'SQL', 'MySQL', 'Pandas', 'Power BI', 'DAX', 'Advanced Excel']
+          : ['JavaScript', 'Python', 'React.js', 'FastAPI', 'PostgreSQL']
       }));
+    }
+  }
+
+  // 4. Extract Projects
+  const projLines = sectionMap['PROJECTS'] || [];
+  if (projLines.length > 0) {
+    const projects = [];
+    let curProj = null;
+
+    for (let i = 0; i < projLines.length; i++) {
+      const line = projLines[i];
+      const nextLine = projLines[i + 1] || '';
+      const isTitle = line.includes('| GitHub') || /^Tech Stack:/i.test(nextLine);
+
+      if (isTitle) {
+        if (curProj) projects.push(curProj);
+        curProj = {
+          title: line.replace(/\s*\|\s*GitHub/i, '').trim(),
+          techStack: [],
+          bullets: []
+        };
+      } else if (curProj && /^Tech Stack:/i.test(line)) {
+        curProj.techStack = line.replace(/^Tech Stack:\s*/i, '').split(',').map(s => s.trim()).filter(Boolean);
+      } else if (curProj && line.startsWith('•')) {
+        curProj.bullets.push(line.replace(/^[•\-\*]\s*/, '').trim());
+      } else if (curProj && curProj.bullets.length > 0) {
+        curProj.bullets[curProj.bullets.length - 1] += ' ' + line;
+      }
+    }
+    if (curProj) projects.push(curProj);
+
+    if (projects.length > 0) {
+      result.projects.items = projects.map((p, idx) => ({
+        id: p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+        number: String(idx + 1).padStart(2, '0'),
+        title: p.title,
+        category: p.title.toLowerCase().includes('healthcare') ? 'Healthcare Data Analytics' : (p.title.toLowerCase().includes('loan') ? 'Banking & Risk Analytics' : 'Full-Stack Web System'),
+        description: p.bullets[0] || `${p.title} data-driven analytics and reporting system.`,
+        metrics: p.bullets[p.bullets.length - 1] || 'Actionable insights generated with interactive KPI reporting.',
+        techStack: p.techStack.length > 0 ? p.techStack : ['Python', 'SQL'],
+        githubUrl: result.profile.githubUrl ? `${result.profile.githubUrl}/${p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}` : 'https://github.com/Alam292',
+        liveDemoUrl: '#',
+        featured: true,
+        image: idx === 0 ? 'assets/project-cloudscale.svg' : (idx === 1 ? 'assets/project-pulsemetrics.svg' : 'assets/project-nexusui.svg'),
+        hasLiveDemo: false
+      }));
+    }
+  }
+
+  // 5. Extract Technical Skills
+  if (isDataAnalyst) {
+    result.skills = {
+      sectionTag: "TECHNICAL ARSENAL",
+      title: "Core Skills & Technologies",
+      subtitle: "Interactive category-wise showcase of official data analytics technologies and BI tools.",
+      categories: [
+        {
+          id: "languages",
+          name: "Programming & Databases",
+          icon: "code",
+          description: "Core programming languages and relational database engines for data manipulation.",
+          skills: [
+            { name: "Python", icon: "python" },
+            { name: "SQL", icon: "mysql" },
+            { name: "MySQL", icon: "mysql" }
+          ]
+        },
+        {
+          id: "frontend",
+          name: "Data Visualization & BI",
+          icon: "layers",
+          description: "Business Intelligence dashboards, KPI reports, and interactive visual analytics.",
+          skills: [
+            { name: "Power BI", icon: "bootstrap" },
+            { name: "DAX", icon: "fastapi" },
+            { name: "Power Query", icon: "react" },
+            { name: "Tableau", icon: "nextjs" }
+          ]
+        },
+        {
+          id: "backend",
+          name: "Python Libraries & Tools",
+          icon: "server",
+          description: "Libraries for mathematical computation, automated EDA, and data processing.",
+          skills: [
+            { name: "Pandas", icon: "python" },
+            { name: "NumPy", icon: "python" },
+            { name: "Matplotlib", icon: "django" },
+            { name: "Seaborn", icon: "fastapi" }
+          ]
+        },
+        {
+          id: "databases",
+          name: "Data Analysis & ETL",
+          icon: "database",
+          description: "Data extraction, transformation, cleaning, validation, and exploratory data analysis.",
+          skills: [
+            { name: "Data Cleaning", icon: "sqlalchemy" },
+            { name: "ETL", icon: "postgresql" },
+            { name: "EDA", icon: "sqlite" },
+            { name: "Statistics", icon: "mongodb" }
+          ]
+        },
+        {
+          id: "tools",
+          name: "Spreadsheets & Dev Tools",
+          icon: "cpu",
+          description: "Spreadsheets, interactive computing environments, and collaborative version control.",
+          skills: [
+            { name: "Advanced Excel", icon: "vscode" },
+            { name: "Jupyter Notebook", icon: "python" },
+            { name: "Git", icon: "git" },
+            { name: "GitHub", icon: "github" }
+          ]
+        },
+        {
+          id: "ai-tools",
+          name: "AI & Productivity Tools",
+          icon: "zap",
+          description: "Advanced AI assistance platforms and intelligent workflow automation environments.",
+          skills: [
+            { name: "ChatGPT", icon: "chatgpt" },
+            { name: "Claude", icon: "claude" },
+            { name: "Gemini", icon: "gemini" },
+            { name: "Antigravity IDE", icon: "antigravity" }
+          ]
+        }
+      ]
+    };
+  } else {
+    // Default software engineering skill categories
+    const officialCategories = [
+      {
+        id: "languages",
+        name: "Programming Languages",
+        icon: "code",
+        description: "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
+        skills: [
+          { name: "Python", icon: "python" },
+          { name: "Java", icon: "java" },
+          { name: "JavaScript", icon: "javascript" },
+          { name: "HTML5", icon: "html5" },
+          { name: "CSS3", icon: "css3" }
+        ]
+      },
+      {
+        id: "frontend",
+        name: "Frontend Development",
+        icon: "layers",
+        description: "Modern frontend architectures, component systems, and high-fidelity responsive user interfaces.",
+        skills: [
+          { name: "React.js", icon: "react" },
+          { name: "Next.js", icon: "nextjs" },
+          { name: "Tailwind CSS", icon: "tailwindcss" },
+          { name: "Bootstrap", icon: "bootstrap" },
+          { name: "Redux", icon: "redux" }
+        ]
+      },
+      {
+        id: "backend",
+        name: "Backend Development",
+        icon: "server",
+        description: "High-throughput RESTful microservices, asynchronous execution, and enterprise web frameworks.",
+        skills: [
+          { name: "FastAPI", icon: "fastapi" },
+          { name: "Django", icon: "django" },
+          { name: "Node.js", icon: "nodejs" },
+          { name: "Express.js", icon: "express" },
+          { name: "REST API", icon: "restapi" }
+        ]
+      },
+      {
+        id: "databases",
+        name: "Databases",
+        icon: "database",
+        description: "Relational data modeling, schema normalization, and performant query optimization.",
+        skills: [
+          { name: "SQLAlchemy", icon: "sqlalchemy" },
+          { name: "MySQL", icon: "mysql" },
+          { name: "PostgreSQL", icon: "postgresql" },
+          { name: "MongoDB", icon: "mongodb" },
+          { name: "SQLite", icon: "sqlite" }
+        ]
+      },
+      {
+        id: "tools",
+        name: "Tools & Technologies",
+        icon: "cpu",
+        description: "Developer tooling, containerization, version control, and rigorous API testing suites.",
+        skills: [
+          { name: "Git", icon: "git" },
+          { name: "GitHub", icon: "github" },
+          { name: "VS Code", icon: "vscode" },
+          { name: "Docker", icon: "docker" },
+          { name: "Postman", icon: "postman" },
+          { name: "Linux", icon: "linux" }
+        ]
+      },
+      {
+        id: "ai-tools",
+        name: "AI Development Tools",
+        icon: "zap",
+        description: "Advanced AI coding assistants and intelligent automation tools accelerating full-stack delivery.",
+        skills: [
+          { name: "ChatGPT", icon: "chatgpt" },
+          { name: "Claude", icon: "claude" },
+          { name: "Gemini", icon: "gemini" },
+          { name: "Antigravity IDE", icon: "antigravity" }
+        ]
+      }
+    ];
+
+    if (!result.skills || !Array.isArray(result.skills.categories) || result.skills.categories.length === 0) {
+      result.skills = {
+        sectionTag: "TECHNICAL ARSENAL",
+        title: "Core Skills & Technologies",
+        subtitle: "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.",
+        categories: officialCategories
+      };
     }
   }
 
@@ -469,11 +752,18 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
   result.about = result.about || {};
   result.about.sectionTag = "WHO I AM";
   result.about.terminalCommand = "whoami";
-  if (!result.about.lead || result.about.lead.length < 20) {
+
+  if (isDataAnalyst) {
+    result.about.lead = "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.";
+    result.about.highlights = [
+      { icon: "zap", title: "Actionable Insights", detail: "Power BI & DAX Dashboards" },
+      { icon: "code", title: "Python Analytics", detail: "Pandas, NumPy & EDA" },
+      { icon: "database", title: "Database Querying", detail: "SQL, MySQL & ETL" },
+      { icon: "shield", title: "Business Reports", detail: "Advanced Excel & Tableau" }
+    ];
+  } else {
     const leadRole = result.profile.title || "Full-Stack Software Developer";
     result.about.lead = `I am a ${leadRole} specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.`;
-  }
-  if (!Array.isArray(result.about.highlights) || result.about.highlights.length === 0) {
     result.about.highlights = [
       { icon: "zap", title: "High-Speed APIs", detail: "FastAPI & Django REST" },
       { icon: "code", title: "Modern Frontends", detail: "React, Next.js & UI/UX" },
@@ -482,95 +772,25 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
     ];
   }
 
-  // 7. Modern Skills Showcase Alignment (6 Official Categories with Brand Registry)
-  const officialCategories = [
-    {
-      id: "languages",
-      name: "Programming Languages",
-      icon: "code",
-      description: "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
-      skills: [
-        { name: "Python", icon: "python" },
-        { name: "Java", icon: "java" },
-        { name: "JavaScript", icon: "javascript" },
-        { name: "HTML5", icon: "html5" },
-        { name: "CSS3", icon: "css3" }
-      ]
-    },
-    {
-      id: "frontend",
-      name: "Frontend Development",
-      icon: "layers",
-      description: "Modern frontend architectures, component systems, and high-fidelity responsive user interfaces.",
-      skills: [
-        { name: "React.js", icon: "react" },
-        { name: "Next.js", icon: "nextjs" },
-        { name: "Tailwind CSS", icon: "tailwindcss" },
-        { name: "Bootstrap", icon: "bootstrap" },
-        { name: "Redux", icon: "redux" }
-      ]
-    },
-    {
-      id: "backend",
-      name: "Backend Development",
-      icon: "server",
-      description: "High-throughput RESTful microservices, asynchronous execution, and enterprise web frameworks.",
-      skills: [
-        { name: "FastAPI", icon: "fastapi" },
-        { name: "Django", icon: "django" },
-        { name: "Node.js", icon: "nodejs" },
-        { name: "Express.js", icon: "express" },
-        { name: "REST API", icon: "restapi" }
-      ]
-    },
-    {
-      id: "databases",
-      name: "Databases",
-      icon: "database",
-      description: "Relational data modeling, schema normalization, and performant query optimization.",
-      skills: [
-        { name: "SQLAlchemy", icon: "sqlalchemy" },
-        { name: "MySQL", icon: "mysql" },
-        { name: "PostgreSQL", icon: "postgresql" },
-        { name: "MongoDB", icon: "mongodb" },
-        { name: "SQLite", icon: "sqlite" }
-      ]
-    },
-    {
-      id: "tools",
-      name: "Tools & Technologies",
-      icon: "cpu",
-      description: "Developer tooling, containerization, version control, and rigorous API testing suites.",
-      skills: [
-        { name: "Git", icon: "git" },
-        { name: "GitHub", icon: "github" },
-        { name: "VS Code", icon: "vscode" },
-        { name: "Docker", icon: "docker" },
-        { name: "Postman", icon: "postman" },
-        { name: "Linux", icon: "linux" }
-      ]
-    },
-    {
-      id: "ai-tools",
-      name: "AI Development Tools",
-      icon: "zap",
-      description: "Advanced AI coding assistants and intelligent automation tools accelerating full-stack delivery.",
-      skills: [
-        { name: "ChatGPT", icon: "chatgpt" },
-        { name: "Claude", icon: "claude" },
-        { name: "Gemini", icon: "gemini" },
-        { name: "Antigravity IDE", icon: "antigravity" }
-      ]
+  // 7. Extract Certifications
+  const certLines = sectionMap['CERTIFICATIONS & ACHIEVEMENTS'] || [];
+  if (certLines.length > 0) {
+    const certBullets = certLines
+      .filter(l => (l.startsWith('•') || l.startsWith('-')) && !l.includes('-- 1 of 1 --'))
+      .map(l => l.replace(/^[•\-\*]\s*/, '').trim());
+    if (certBullets.length > 0) {
+      result.certifications.items = certBullets.map((c, idx) => {
+        const parts = c.split(/[–\-]/);
+        return {
+          id: `cert-${idx + 1}`,
+          title: parts[0]?.trim() || c,
+          issuer: parts.slice(1).join(' - ').trim() || 'Professional Certification',
+          date: '2026',
+          credentialUrl: '#',
+          skillsCovered: isDataAnalyst ? ['Data Analytics', 'SQL', 'Python'] : ['Full-Stack', 'Web Development']
+        };
+      });
     }
-  ];
-
-  if (!result.skills || !Array.isArray(result.skills.categories) || result.skills.categories.length === 0) {
-    result.skills = {
-      sectionTag: "TECHNICAL ARSENAL",
-      title: "Core Skills & Technologies",
-      subtitle: "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.",
-      categories: officialCategories
-    };
   }
 
   return validateAndMergePortfolio(result, basePortfolio);

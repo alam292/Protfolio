@@ -2,18 +2,18 @@
   "profile": {
     "name": "MD MATLOOB ALAM",
     "shortName": "MD",
-    "title": "Software Developer | Full-Stack Python & React Specialist",
-    "heroTagline": "Specializing in developing responsive web applications, robust RESTful APIs, and scalable backend services with React, Next.js, FastAPI, and Django. Turning complex requirements into clean, production-ready code.",
+    "title": "Data Analyst Trainee & Power BI Developer",
+    "heroTagline": "Skilled in SQL, Python, Advanced Excel, and Power BI. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.",
     "status": "Available for opportunities",
     "statusSubtitle": "Full-time & High-Impact Software Engineering Roles",
-    "email": "mdmatloobgaya@gmail.com",
+    "email": "mdmatloobalam292@gmail.com",
     "fallbackEmail": "mdmatloobgaya@gmail.com",
     "portfolioUrl": "https://matloob.dev",
-    "githubUrl": "https://github.com/mdmatloob",
-    "githubUser": "mdmatloob",
-    "linkedinUrl": "https://linkedin.com/in/mdmatloob",
-    "resumeUrl": "assets/Md_Matloob_Alam_Software_Developer_Resume.pdf",
-    "resumeFilename": "Md_Matloob_Alam_Software_Developer_Resume.pdf",
+    "githubUrl": "https://github.com/Alam292",
+    "githubUser": "Alam292",
+    "linkedinUrl": "https://linkedin.com/in/md-matloob-alam-016408229",
+    "resumeUrl": "assets/MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf",
+    "resumeFilename": "MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf",
     "avatarUrl": "assets/profile-matloob-transparent.png",
     "location": {
       "city": "New Delhi",
@@ -55,27 +55,27 @@
   "about": {
     "sectionTag": "WHO I AM",
     "terminalCommand": "whoami",
-    "lead": "I am a Full-Stack Software Developer specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.",
+    "lead": "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.",
     "highlights": [
       {
         "icon": "zap",
-        "title": "High-Speed APIs",
-        "detail": "FastAPI & Django REST"
+        "title": "Actionable Insights",
+        "detail": "Power BI & DAX Dashboards"
       },
       {
         "icon": "code",
-        "title": "Modern Frontends",
-        "detail": "React, Next.js & UI/UX"
+        "title": "Python Analytics",
+        "detail": "Pandas, NumPy & EDA"
       },
       {
         "icon": "database",
-        "title": "Relational Schemas",
-        "detail": "PostgreSQL & SQLAlchemy"
+        "title": "Database Querying",
+        "detail": "SQL, MySQL & ETL"
       },
       {
         "icon": "shield",
-        "title": "Production Ready",
-        "detail": "Tested & Cloud Deployed"
+        "title": "Business Reports",
+        "detail": "Advanced Excel & Tableau"
       }
     ],
     "pillars": [
@@ -112,240 +112,114 @@
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",
     "title": "Core Skills & Technologies",
-    "subtitle": "Interactive category-wise showcase of official technologies and tools powering scalable web systems and AI applications.",
+    "subtitle": "Interactive category-wise showcase of official data analytics technologies and BI tools.",
     "categories": [
       {
         "id": "languages",
-        "name": "Programming Languages",
+        "name": "Programming & Databases",
         "icon": "code",
-        "description": "Core programming languages utilized for full-stack engineering, robust typing, and high-performance algorithms.",
+        "description": "Core programming languages and relational database engines for data manipulation.",
         "skills": [
           {
             "name": "Python",
             "icon": "python"
           },
           {
-            "name": "Java",
-            "icon": "java"
+            "name": "SQL",
+            "icon": "mysql"
           },
           {
-            "name": "JavaScript",
-            "icon": "javascript"
-          },
-          {
-            "name": "HTML5",
-            "icon": "html5"
-          },
-          {
-            "name": "CSS3",
-            "icon": "css3"
-          }
-        ],
-        "items": [
-          {
-            "name": "Python",
-            "icon": "python"
-          },
-          {
-            "name": "Java",
-            "icon": "java"
-          },
-          {
-            "name": "JavaScript",
-            "icon": "javascript"
-          },
-          {
-            "name": "HTML5",
-            "icon": "html5"
-          },
-          {
-            "name": "CSS3",
-            "icon": "css3"
+            "name": "MySQL",
+            "icon": "mysql"
           }
         ]
       },
       {
         "id": "frontend",
-        "name": "Frontend Development",
+        "name": "Data Visualization & BI",
         "icon": "layers",
-        "description": "Modern reactive UI libraries, SSR frameworks, and utility-first styling architectures.",
+        "description": "Business Intelligence dashboards, KPI reports, and interactive visual analytics.",
         "skills": [
           {
-            "name": "React.js",
-            "icon": "react"
-          },
-          {
-            "name": "Next.js",
-            "icon": "nextjs"
-          },
-          {
-            "name": "Tailwind CSS",
-            "icon": "tailwindcss"
-          },
-          {
-            "name": "Bootstrap",
+            "name": "Power BI",
             "icon": "bootstrap"
           },
           {
-            "name": "Redux",
-            "icon": "redux"
-          }
-        ],
-        "items": [
+            "name": "DAX",
+            "icon": "fastapi"
+          },
           {
-            "name": "React.js",
+            "name": "Power Query",
             "icon": "react"
           },
           {
-            "name": "Next.js",
+            "name": "Tableau",
             "icon": "nextjs"
-          },
-          {
-            "name": "Tailwind CSS",
-            "icon": "tailwindcss"
-          },
-          {
-            "name": "Bootstrap",
-            "icon": "bootstrap"
-          },
-          {
-            "name": "Redux",
-            "icon": "redux"
           }
         ]
       },
       {
         "id": "backend",
-        "name": "Backend Development",
+        "name": "Python Libraries & Tools",
         "icon": "server",
-        "description": "High-throughput asynchronous frameworks, RESTful web services, and database ORMs.",
+        "description": "Libraries for mathematical computation, automated EDA, and data processing.",
         "skills": [
           {
-            "name": "FastAPI",
-            "icon": "fastapi"
+            "name": "Pandas",
+            "icon": "python"
           },
           {
-            "name": "Django",
+            "name": "NumPy",
+            "icon": "python"
+          },
+          {
+            "name": "Matplotlib",
             "icon": "django"
           },
           {
-            "name": "Node.js",
-            "icon": "nodejs"
-          },
-          {
-            "name": "Express.js",
-            "icon": "express"
-          },
-          {
-            "name": "REST API",
-            "icon": "restapi"
-          },
-          {
-            "name": "SQLAlchemy",
-            "icon": "sqlalchemy"
-          }
-        ],
-        "items": [
-          {
-            "name": "FastAPI",
+            "name": "Seaborn",
             "icon": "fastapi"
-          },
-          {
-            "name": "Django",
-            "icon": "django"
-          },
-          {
-            "name": "Node.js",
-            "icon": "nodejs"
-          },
-          {
-            "name": "Express.js",
-            "icon": "express"
-          },
-          {
-            "name": "REST API",
-            "icon": "restapi"
-          },
-          {
-            "name": "SQLAlchemy",
-            "icon": "sqlalchemy"
           }
         ]
       },
       {
         "id": "databases",
-        "name": "Databases",
+        "name": "Data Analysis & ETL",
         "icon": "database",
-        "description": "Relational, document, and embedded databases with normalized schema design and query optimization.",
+        "description": "Data extraction, transformation, cleaning, validation, and exploratory data analysis.",
         "skills": [
           {
-            "name": "MySQL",
-            "icon": "mysql"
+            "name": "Data Cleaning",
+            "icon": "sqlalchemy"
           },
           {
-            "name": "PostgreSQL",
+            "name": "ETL",
             "icon": "postgresql"
           },
           {
-            "name": "MongoDB",
-            "icon": "mongodb"
-          },
-          {
-            "name": "SQLite",
+            "name": "EDA",
             "icon": "sqlite"
-          }
-        ],
-        "items": [
-          {
-            "name": "MySQL",
-            "icon": "mysql"
           },
           {
-            "name": "PostgreSQL",
-            "icon": "postgresql"
-          },
-          {
-            "name": "MongoDB",
+            "name": "Statistics",
             "icon": "mongodb"
-          },
-          {
-            "name": "SQLite",
-            "icon": "sqlite"
           }
         ]
       },
       {
         "id": "tools",
-        "name": "Tools & Technologies",
+        "name": "Spreadsheets & Dev Tools",
         "icon": "cpu",
-        "description": "Enterprise developer tooling, containerization, collaborative version control, and API testing suites.",
+        "description": "Spreadsheets, interactive computing environments, and collaborative version control.",
         "skills": [
           {
-            "name": "Git",
-            "icon": "git"
-          },
-          {
-            "name": "GitHub",
-            "icon": "github"
-          },
-          {
-            "name": "VS Code",
+            "name": "Advanced Excel",
             "icon": "vscode"
           },
           {
-            "name": "Docker",
-            "icon": "docker"
+            "name": "Jupyter Notebook",
+            "icon": "python"
           },
-          {
-            "name": "Postman",
-            "icon": "postman"
-          },
-          {
-            "name": "Linux",
-            "icon": "linux"
-          }
-        ],
-        "items": [
           {
             "name": "Git",
             "icon": "git"
@@ -353,49 +227,15 @@
           {
             "name": "GitHub",
             "icon": "github"
-          },
-          {
-            "name": "VS Code",
-            "icon": "vscode"
-          },
-          {
-            "name": "Docker",
-            "icon": "docker"
-          },
-          {
-            "name": "Postman",
-            "icon": "postman"
-          },
-          {
-            "name": "Linux",
-            "icon": "linux"
           }
         ]
       },
       {
         "id": "ai-tools",
-        "name": "AI Development Tools",
+        "name": "AI & Productivity Tools",
         "icon": "zap",
-        "description": "Next-generation generative AI platforms, frontier models, and autonomous coding environments.",
+        "description": "Advanced AI assistance platforms and intelligent workflow automation environments.",
         "skills": [
-          {
-            "name": "ChatGPT",
-            "icon": "chatgpt"
-          },
-          {
-            "name": "Claude",
-            "icon": "claude"
-          },
-          {
-            "name": "Gemini",
-            "icon": "gemini"
-          },
-          {
-            "name": "Antigravity IDE",
-            "icon": "antigravity"
-          }
-        ],
-        "items": [
           {
             "name": "ChatGPT",
             "icon": "chatgpt"
@@ -422,66 +262,51 @@
     "subtitle": "Production-tested web applications, full-stack systems, and developer productivity tools.",
     "items": [
       {
-        "id": "hospital-management-system",
+        "id": "healthcare-disease-analysis",
         "number": "01",
-        "title": "Hospital Management System",
-        "category": "Full-Stack Healthcare Operations",
-        "description": "Engineered a hospital management platform designed to streamline patient registration, medical personnel management, and appointment scheduling. Integrated robust backend services to orchestrate doctor availability and patient histories through a unified interface.",
-        "metrics": "Streamlined patient intake and booking workflows with real-time appointment status tracking.",
+        "title": "Healthcare Disease Analysis",
+        "category": "Healthcare Data Analytics",
+        "description": "Analyzed 1,000+ healthcare records using SQL (MySQL), Python, and Pandas in Jupyter Notebook to identify disease trends and patient risk patterns.",
+        "metrics": "Built an interactive Power BI dashboard with DAX measures and KPI reports, using data storytelling to present trends for data-driven reporting.",
         "techStack": [
-          "React.js",
-          "FastAPI",
-          "PostgreSQL",
-          "SQLAlchemy",
-          "REST APIs",
-          "Tailwind CSS"
+          "Python",
+          "SQL",
+          "MySQL",
+          "Pandas",
+          "Jupyter Notebook",
+          "Power Query",
+          "Power BI",
+          "DAX"
         ],
-        "githubUrl": "https://github.com/mdmatloob/hospital-management-system",
-        "liveDemoUrl": "https://hospital.matloob.dev",
+        "githubUrl": "https://github.com/Alam292/healthcare-disease-analysis",
+        "liveDemoUrl": "#",
         "featured": true,
         "image": "assets/project-cloudscale.svg",
-        "hasLiveDemo": true
+        "hasLiveDemo": false
       },
       {
-        "id": "hotel-management-system",
+        "id": "bank-loan-approval-prediction",
         "number": "02",
-        "title": "Hotel Management System",
-        "category": "Enterprise Hospitality & Booking",
-        "description": "Developed a full-stack hospitality system managing room inventories, guest profiles, and dynamic reservation lifecycles. Built scalable FastAPI REST endpoints handling guest registration, real-time booking updates, and cancellations backed by relational persistence.",
-        "metrics": "Engineered responsive dashboard with live room availability search and booking tracking.",
+        "title": "Bank Loan Approval & Prediction",
+        "category": "Banking & Risk Analytics",
+        "description": "Analyzed 1,000+ loan records to identify borrower characteristics, loan performance, repayment trends, and risk patterns.",
+        "metrics": "Developed an interactive Power BI dashboard with DAX KPIs to monitor loan performance and present insights that support business reporting.",
         "techStack": [
-          "React.js",
-          "FastAPI",
-          "PostgreSQL",
-          "SQLAlchemy",
           "Python",
-          "Bootstrap"
+          "SQL",
+          "MySQL",
+          "Pandas",
+          "NumPy",
+          "Jupyter Notebook",
+          "Power Query",
+          "Power BI",
+          "DAX"
         ],
-        "githubUrl": "https://github.com/mdmatloob/hotel-management-system",
-        "liveDemoUrl": "https://hotel.matloob.dev",
+        "githubUrl": "https://github.com/Alam292/bank-loan-approval-prediction",
+        "liveDemoUrl": "#",
         "featured": true,
         "image": "assets/project-pulsemetrics.svg",
-        "hasLiveDemo": true
-      },
-      {
-        "id": "github-profile-readme-generator",
-        "number": "03",
-        "title": "GitHub Profile README Generator",
-        "category": "Developer Productivity & Web App",
-        "description": "Engineered an interactive web application that automates the generation of customized GitHub profile README files. Implemented dynamic form controls, real-time live Markdown parsing, and a one-click copy workflow to simplify developer portfolio creation.",
-        "metrics": "Zero-dependency client-side generator with instant Markdown compilation and responsive UI.",
-        "techStack": [
-          "React.js",
-          "JavaScript (ES6+)",
-          "HTML5",
-          "CSS3",
-          "Tailwind CSS"
-        ],
-        "githubUrl": "https://github.com/mdmatloob/github-profile-readme-generator",
-        "liveDemoUrl": "https://readme-generator.matloob.dev",
-        "featured": true,
-        "image": "assets/project-nexusui.svg",
-        "hasLiveDemo": true
+        "hasLiveDemo": false
       }
     ]
   },
@@ -492,26 +317,24 @@
     "roles": [
       {
         "id": "exp-1",
-        "role": "Software Developer",
-        "company": "NICS Technology",
-        "location": "Noida, Uttar Pradesh, India",
-        "period": "June 2025 — Present",
+        "role": "Data Analytics Trainee",
+        "company": "Naresh i Technologies Hyderabad",
+        "location": "Telangana",
+        "period": "Jan 2026 – June 2026",
         "isCurrent": true,
         "highlights": [
-          "Develop and maintain modern web applications, implementing production features while improving application functionality, runtime performance, and user satisfaction.",
-          "Architect and integrate RESTful APIs and backend services with interactive frontend interfaces, facilitating smooth asynchronous data communication and workflow execution.",
-          "Deploy and maintain enterprise web applications on cloud platforms, securing high application availability, operational resilience, and scalable traffic handling.",
-          "Integrate third-party APIs and specialized external microservices to broaden product functionality and deliver intuitive end-user experiences."
+          "Completed hands-on training in SQL, Python, Advanced Excel, and Power BI, applying data analytics techniques to practical datasets and business problems.",
+          "Developed interactive Power BI dashboards using DAX measures and functions to monitor business KPIs and analyze performance trends.",
+          "Applied Python, Pandas, NumPy, SQL, MySQL, and Power Query for data cleaning, data transformation, exploratory data analysis (EDA), and insight generation."
         ],
         "techStack": [
           "Python",
-          "JavaScript",
-          "React.js",
-          "Next.js",
-          "FastAPI",
-          "Django",
-          "PostgreSQL",
-          "REST APIs"
+          "SQL",
+          "MySQL",
+          "Pandas",
+          "Power BI",
+          "DAX",
+          "Advanced Excel"
         ]
       }
     ]
@@ -603,74 +426,40 @@
     ],
     "items": [
       {
-        "id": "cert-iit-bombay-java",
-        "category": "technical",
-        "title": "Java Training Certification",
-        "issuer": "Spoken Tutorial Project, IIT Bombay",
-        "period": "2024",
-        "issueDate": "May 6th 2024",
-        "credentialId": "3140257TJZ",
-        "verificationUrl": "https://spoken-tutorial.org",
-        "badge": "Score: 85.00% · 4 Credits",
-        "image": "assets/certificates/cert-java-iit-bombay.jpg",
-        "emblem": "java",
-        "description": "Completed comprehensive Java test organized at Saharsa College of Engineering with course material and remote online examination invigilated by Spoken Tutorial Project, IIT Bombay."
+        "id": "cert-1",
+        "title": "Data Analyst",
+        "issuer": "Naresh i Technologies, Hyderabad",
+        "date": "2026",
+        "credentialUrl": "#",
+        "skillsCovered": [
+          "Data Analytics",
+          "SQL",
+          "Python"
+        ]
       },
       {
-        "id": "cert-hackerrank-python",
-        "category": "technical",
-        "title": "Python (Basic) Skill Certification",
-        "issuer": "HackerRank Skill Certification",
-        "period": "2026",
-        "issueDate": "03 Feb, 2026",
-        "credentialId": "OBC250A5E1AF",
-        "verificationUrl": "https://www.hackerrank.com/certificates/obc250a5e1af",
-        "badge": "HackerRank Certified",
-        "image": "assets/certificates/cert-python-hackerrank.jpg",
-        "emblem": "python",
-        "description": "Passed the rigorous HackerRank skill certification test validating problem solving in Python, data structures, functional modules, and algorithmic scripting."
+        "id": "cert-2",
+        "title": "Python Certification",
+        "issuer": "Spoken Tutorial, IIT Bombay | Score: 85% | Credits: 4",
+        "date": "2026",
+        "credentialUrl": "#",
+        "skillsCovered": [
+          "Data Analytics",
+          "SQL",
+          "Python"
+        ]
       },
       {
-        "id": "cert-iit-roorkee-python",
-        "category": "technical",
-        "title": "Fundamentals of Python for ML & Web",
-        "issuer": "iHUB DivyaSampark, IIT Roorkee",
-        "period": "2023",
-        "issueDate": "15 Nov 2023",
-        "credentialId": "TIHBDST4544",
-        "verificationUrl": "https://tih.iitr.ac.in",
-        "badge": "Grade A · 40 hrs Immersion",
-        "image": "assets/certificates/cert-python-iit-roorkee.jpg",
-        "emblem": "iitr",
-        "description": "40-hour intensive skill development program on Fundamentals of Python for Machine Learning, Data Science & Web Development by IIT Roorkee & DST, Govt. of India."
-      },
-      {
-        "id": "cert-nareshit-hackfest",
-        "category": "achievements",
-        "title": "HackFest 2026 - Project Awaz-E-Awam",
-        "issuer": "Naresh i Technologies",
-        "period": "2026",
-        "issueDate": "Edition 2026",
-        "credentialId": "NIT-HACKFEST-2026",
-        "verificationUrl": "https://nareshit.com",
-        "badge": "Exemplary Submission",
-        "image": "assets/certificates/cert-hackfest-nareshit.jpg",
-        "emblem": "hackfest",
-        "description": "Conferred in acknowledgment of the completion and exemplary submission of the community-driven tech platform project Awaz-E-Awam for NareshIT HackFest 2026."
-      },
-      {
-        "id": "cert-deloitte-forage",
-        "category": "technical",
-        "title": "Deloitte Technology Job Simulation",
-        "issuer": "Deloitte (via Forage)",
-        "period": "2025",
-        "issueDate": "July 15th, 2025",
-        "credentialId": "SE3xfRvJEuNjBqX9K",
-        "verificationUrl": "https://www.theforage.com/simulations/deloitte",
-        "badge": "Coding & Development",
-        "image": "assets/certificates/cert-deloitte-job-simulation.png",
-        "emblem": "deloitte",
-        "description": "Completed practical engineering tasks in software development, architectural problem solving, and enterprise system design simulation under Deloitte."
+        "id": "cert-3",
+        "title": "HackerRank",
+        "issuer": "3 - Star Badge in SQL and Python",
+        "date": "2026",
+        "credentialUrl": "#",
+        "skillsCovered": [
+          "Data Analytics",
+          "SQL",
+          "Python"
+        ]
       }
     ]
   },
@@ -680,7 +469,7 @@
     "subtitle": "",
     "infoCardTitle": "Contact Information",
     "infoCardDescription": "Feel free to reach out via email or through social platforms. I typically respond within 24 hours.",
-    "email": "mdmatloobgaya@gmail.com",
+    "email": "mdmatloobalam292@gmail.com",
     "availability": "Full-time • Freelance Projects",
     "locationDisplay": "India • Available Worldwide (Remote)",
     "secondaryEmail": "mdmatloobgaya@gmail.com",
