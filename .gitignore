@@ -14,6 +14,7 @@ uploads/*
 
 # Temporary test files
 assets/Test_Resume.pdf
+assets/Direct_Test.pdf
 
 # OS generated files
 .DS_Store

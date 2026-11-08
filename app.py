@@ -21,6 +21,7 @@ from dotenv import load_dotenv
 
 from server_py.resume_parser import extract_raw_text, structure_resume_with_ai, validate_and_merge_portfolio
 from server_py.diff_engine import compute_portfolio_diff
+from server_py.github_sync import is_github_sync_configured, sync_portfolio_to_github
 
 # Load environment configuration (.env)
 load_dotenv()
@@ -115,7 +116,8 @@ async def health_check():
         "status": "ok",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "runtime": "Python FastAPI",
-        "gemini_configured": bool(gemini_key)
+        "gemini_configured": bool(gemini_key),
+        "github_sync_configured": is_github_sync_configured()
     }
 
 
@@ -312,12 +314,16 @@ async def upload_resume(
         json.dump(structured_data, f, indent=2, ensure_ascii=False)
     temp_path.replace(PORTFOLIO_PATH)
 
+    # Cloud Persistence: Sync to GitHub if configured
+    sync_result = sync_portfolio_to_github(structured_data, asset_dest)
+
     return {
         "success": True,
         "message": "Resume parsed and portfolio updated successfully!",
         "backup": backup_path,
         "extractedCharacters": len(raw_text),
         "diff": diff_summary,
+        "sync": sync_result,
         "data": structured_data
     }
 
@@ -379,10 +385,15 @@ async def publish_portfolio(request: Request, payload: PublishPortfolioRequest):
         json.dump(finalized_data, f, indent=2, ensure_ascii=False)
     temp_path.replace(PORTFOLIO_PATH)
 
+    # Cloud Persistence: Sync to GitHub if configured
+    resume_path = asset_dest if (payload.resumeFilename and asset_dest.exists()) else None
+    sync_result = sync_portfolio_to_github(finalized_data, resume_path)
+
     return {
         "success": True,
         "message": "Portfolio successfully published live!",
         "backup": backup_path,
+        "sync": sync_result,
         "data": finalized_data
     }
 
