@@ -4,8 +4,7 @@ Defines schema tables for Portfolio content, version rollbacks, contact inquirie
 """
 
 from datetime import datetime, timezone
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, JSON, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, JSON
 from server_py.database import Base
 
 
@@ -111,73 +110,3 @@ class AuditLog(Base):
             "details": self.details,
             "createdAt": self.created_at.isoformat() + "Z" if self.created_at else None
         }
-
-
-class User(Base):
-    """
-    User Account Table.
-    Supports both Google OAuth identification and bcrypt password authentication.
-    """
-    __tablename__ = "users"
-
-    id = Column(Integer, primary_key=True, index=True)
-    google_sub = Column(String(255), unique=True, index=True, nullable=True)  # Linked Google Sub ID
-    email = Column(String(255), unique=True, index=True, nullable=False)
-    password_hash = Column(String(255), nullable=True)                       # Bcrypt hash (NULL until set)
-    name = Column(String(255), nullable=True)
-    avatar_url = Column(String(1024), nullable=True)
-    role = Column(String(50), default="admin")                               # Role: 'admin' / 'user'
-    is_verified = Column(Boolean, default=False)                             # Verified via OTP
-    created_at = Column(DateTime, default=utc_now)
-    last_login = Column(DateTime, nullable=True)
-
-    otps = relationship("EmailOTP", back_populates="user", cascade="all, delete-orphan")
-
-    def has_password(self) -> bool:
-        return self.password_hash is not None
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "email": self.email,
-            "name": self.name,
-            "avatarUrl": self.avatar_url,
-            "role": self.role,
-            "isVerified": self.is_verified,
-            "hasPassword": self.has_password(),
-            "createdAt": self.created_at.isoformat() + "Z" if self.created_at else None,
-            "lastLogin": self.last_login.isoformat() + "Z" if self.last_login else None
-        }
-
-
-class EmailOTP(Base):
-    """
-    OTP Verifications Table.
-    Handles 'signup' OTP and 'password_reset' OTP securely.
-    """
-    __tablename__ = "email_otps"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
-    otp_hash = Column(String(255), nullable=False)                            # SHA-256 salted hash
-    token = Column(String(255), unique=True, index=True, nullable=False)      # temp_token or reset_token (UUID4)
-    purpose = Column(String(32), default="signup")                            # 'signup' or 'password_reset'
-    attempts_count = Column(Integer, default=0)                               # Max 3 attempts
-    is_used = Column(Boolean, default=False)
-    expires_at = Column(DateTime, nullable=False)                            # 5 minutes validity
-    created_at = Column(DateTime, default=utc_now)
-
-    user = relationship("User", back_populates="otps")
-
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "userId": self.user_id,
-            "token": self.token,
-            "purpose": self.purpose,
-            "attemptsCount": self.attempts_count,
-            "isUsed": self.is_used,
-            "expiresAt": self.expires_at.isoformat() + "Z" if self.expires_at else None,
-            "createdAt": self.created_at.isoformat() + "Z" if self.created_at else None
-        }
-

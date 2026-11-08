@@ -45,7 +45,6 @@
 
   <!-- Master Design System Stylesheets -->
   <link rel="stylesheet" href="css/main.css?v=2.2">
-  <link rel="stylesheet" href="css/auth-modal.css?v=2.0">
 
   <!-- JSON-LD Structured Data Schema for SEO -->
   <script type="application/ld+json">
@@ -122,9 +121,6 @@
 
     <!-- Header Actions (Contact CTA, Resume trigger) -->
     <div class="nav-actions">
-      <!-- User Authentication / Sign-In Trigger -->
-      <div id="navAuthContainer"></div>
-
       <!-- AI Resume Upload / Update Trigger -->
       <button type="button" class="btn-nav-upload btn-open-resume-modal" data-action="open-resume-modal"
         aria-label="Upload resume to auto-sync portfolio" title="AI Resume Auto-Sync">
@@ -231,9 +227,6 @@
     </nav>
 
     <div class="mobile-drawer-footer">
-      <!-- Mobile Drawer Authentication Trigger -->
-      <div id="drawerAuthContainer" style="width: 100%; margin-bottom: 0.65rem;"></div>
-
       <button type="button" class="btn-touch btn-drawer-resume btn-open-resume-modal" data-action="open-resume-modal"
         style="width: 100%; justify-content: center; margin-bottom: 0.65rem; background: rgba(255, 87, 34, 0.12); border-color: rgba(255, 87, 34, 0.35); color: #ff8a65;">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -621,228 +614,6 @@
     </div>
   </div>
 
-  <!-- ========================================================================= -->
-  <!-- Folioblox Dual-Engine Authentication Modal (Google Identity + Bcrypt)     -->
-  <!-- ========================================================================= -->
-  <div class="auth-modal-overlay" id="authModalOverlay" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
-    <div class="auth-modal-card">
-      <div class="auth-modal-accent"></div>
-      <button type="button" class="auth-modal-close" id="authModalClose" aria-label="Close authentication modal">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-
-      <div class="auth-modal-header">
-        <div class="auth-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
-          Identity Guard
-        </div>
-        <h3 class="auth-modal-title" id="authModalTitle">Welcome to Folioblox</h3>
-        <p class="auth-modal-desc" id="authModalDesc">Sign in to access portfolio editing &amp; management.</p>
-      </div>
-
-      <div class="auth-modal-body">
-        <!-- In-Modal Alert Banner -->
-        <div class="auth-alert" id="authAlertBanner" role="alert"></div>
-
-        <!-- VIEW 1: Dual Login (Google + Email) -->
-        <div class="auth-view active" id="viewLogin">
-          <!-- Google 1-Click Action -->
-          <button type="button" class="btn-google-auth" id="btnGoogleAuth">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-            </svg>
-            Continue with Google
-          </button>
-
-          <div class="auth-divider">
-            <span>OR CONTINUE WITH EMAIL</span>
-          </div>
-
-          <form id="formEmailLogin" autocomplete="on">
-            <div class="auth-group">
-              <label class="auth-label" for="inputEmail">Email Address</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </span>
-                <input type="email" id="inputEmail" class="auth-input" placeholder="you@domain.com" required autocomplete="email" />
-              </div>
-            </div>
-
-            <div class="auth-group">
-              <label class="auth-label" for="inputPassword">Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                </span>
-                <input type="password" id="inputPassword" class="auth-input" placeholder="••••••••" required autocomplete="current-password" />
-                <button type="button" class="auth-password-toggle" data-target="inputPassword" aria-label="Toggle password visibility">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="auth-extra-row">
-              <a class="auth-link" id="linkForgotPassword">Forgot Password?</a>
-            </div>
-
-            <button type="submit" class="btn-auth-primary">
-              <span>Sign In to Dashboard</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </button>
-          </form>
-        </div>
-
-        <!-- VIEW 2: 6-Digit OTP Verification -->
-        <div class="auth-view" id="viewOtp">
-          <p class="auth-modal-desc" style="text-align: center; margin-bottom: 12px;">
-            A 6-digit verification code has been dispatched to <strong id="otpEmailNotice">user@gmail.com</strong>
-          </p>
-
-          <form id="formVerifyOTP">
-            <div class="otp-container">
-              <div class="otp-boxes">
-                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit" autocomplete="one-time-code" />
-                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit" />
-                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit" />
-                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit" />
-                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit" />
-                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit" />
-              </div>
-
-              <div class="otp-resend-row">
-                <span id="otpTimerSpan">Resend in 00:60</span>
-                <button type="button" class="btn-resend-otp" id="btnResendOTP" disabled>Resend Code</button>
-              </div>
-            </div>
-
-            <button type="submit" class="btn-auth-primary">
-              <span>Verify &amp; Continue</span>
-            </button>
-            <div style="text-align: center; margin-top: 14px;">
-              <a class="auth-link" data-action="back-to-login">← Back to Sign In</a>
-            </div>
-          </form>
-        </div>
-
-        <!-- VIEW 3: Create Account Password -->
-        <div class="auth-view" id="viewSetPassword">
-          <p class="auth-modal-desc" style="text-align: center; margin-bottom: 14px;">
-            Google Account Verified: <strong id="setupEmailBadge">creator@domain.com</strong>.<br>Create a password to enable direct email sign-in.
-          </p>
-
-          <form id="formSetPassword">
-            <div class="auth-group">
-              <label class="auth-label" for="inputNewPassword">Create Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                </span>
-                <input type="password" id="inputNewPassword" class="auth-input" placeholder="At least 6 characters" required autocomplete="new-password" />
-                <button type="button" class="auth-password-toggle" data-target="inputNewPassword" aria-label="Toggle password visibility">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                </button>
-              </div>
-              <div class="password-meter-wrap">
-                <div class="password-meter-bars">
-                  <div class="meter-bar"></div>
-                  <div class="meter-bar"></div>
-                  <div class="meter-bar"></div>
-                  <div class="meter-bar"></div>
-                </div>
-                <div class="password-meter-label" id="passwordMeterLabel">Strength: Enter password</div>
-              </div>
-            </div>
-
-            <div class="auth-group">
-              <label class="auth-label" for="inputConfirmPassword">Confirm Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                </span>
-                <input type="password" id="inputConfirmPassword" class="auth-input" placeholder="Repeat your password" required autocomplete="new-password" />
-              </div>
-            </div>
-
-            <button type="submit" class="btn-auth-primary">
-              <span>Finish Setup &amp; Sign In</span>
-            </button>
-          </form>
-        </div>
-
-        <!-- VIEW 4: Forgot Password Request -->
-        <div class="auth-view" id="viewForgotPasswordRequest">
-          <p class="auth-modal-desc" style="text-align: center; margin-bottom: 14px;">
-            Enter your registered email address and we will dispatch a 6-digit recovery code.
-          </p>
-
-          <form id="formForgotPasswordRequest">
-            <div class="auth-group">
-              <label class="auth-label" for="inputForgotEmail">Email Address</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                </span>
-                <input type="email" id="inputForgotEmail" class="auth-input" placeholder="you@domain.com" required />
-              </div>
-            </div>
-
-            <button type="submit" class="btn-auth-primary">
-              <span>Send Reset Code</span>
-            </button>
-            <div style="text-align: center; margin-top: 14px;">
-              <a class="auth-link" data-action="back-to-login">← Back to Sign In</a>
-            </div>
-          </form>
-        </div>
-
-        <!-- VIEW 5: Forgot Password Reset -->
-        <div class="auth-view" id="viewForgotPasswordReset">
-          <p class="auth-modal-desc" style="text-align: center; margin-bottom: 14px;">
-            Enter the 6-digit reset code sent to <strong id="resetEmailNotice">your email</strong> and your new password.
-          </p>
-
-          <form id="formForgotPasswordReset">
-            <div class="auth-group">
-              <label class="auth-label" for="inputResetOTP">6-Digit Reset Code</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                </span>
-                <input type="text" id="inputResetOTP" class="auth-input" maxlength="6" placeholder="123456" style="letter-spacing: 4px; font-family: 'JetBrains Mono', monospace;" required />
-              </div>
-            </div>
-
-            <div class="auth-group">
-              <label class="auth-label" for="inputResetNewPassword">New Password</label>
-              <div class="auth-input-wrap">
-                <span class="auth-input-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-1.5 1.5L4 19l-2 3 3-2 13.5-13.5z"></path></svg>
-                </span>
-                <input type="password" id="inputResetNewPassword" class="auth-input" placeholder="New secure password" required />
-              </div>
-            </div>
-
-            <button type="submit" class="btn-auth-primary">
-              <span>Update Password &amp; Log In</span>
-            </button>
-            <div style="text-align: center; margin-top: 14px;">
-              <a class="auth-link" data-action="back-to-login">← Back to Sign In</a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- React 18 & ReactDOM for Dynamic Component Rendering -->
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin
@@ -864,7 +635,6 @@
   <script src="js/navigation.js"></script>
   <script src="js/animations.js?v=2.4"></script>
   <script src="js/form.js"></script>
-  <script src="js/auth.js?v=1.0"></script>
   <script src="js/main.js"></script>
 </body>
 

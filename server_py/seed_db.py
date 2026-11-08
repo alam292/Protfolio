@@ -18,7 +18,7 @@ if str(ROOT_DIR) not in sys.path:
 from sqlalchemy.orm import Session
 from server_py.config import PORTFOLIO_PATH, BACKUPS_DIR
 from server_py.database import engine, Base, SessionLocal
-from server_py.models import Portfolio, PortfolioVersion, ContactMessage, AuditLog, User, EmailOTP
+from server_py.models import Portfolio, PortfolioVersion, ContactMessage, AuditLog
 
 logger = logging.getLogger("folioblox.seed")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")

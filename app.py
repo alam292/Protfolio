@@ -14,7 +14,7 @@ from typing import Optional, Dict, Any
 
 from fastapi import FastAPI, Request, Response, UploadFile, File, Query, Form, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse, RedirectResponse
+from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 
 from server_py.config import (
     ROOT_DIR,
@@ -40,8 +40,6 @@ from server_py.controller import (
     save_contact_message,
     list_contact_messages
 )
-from server_py.auth_routes import router as auth_router
-from server_py.auth_security import extract_token_from_request, decode_jwt_token
 
 
 @asynccontextmanager
@@ -74,9 +72,6 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "x-admin-pin"]
 )
-
-# Mount Authentication REST Router
-app.include_router(auth_router, prefix="/api/auth")
 
 MIME_TYPES = {
     ".html": "text/html; charset=utf-8",
@@ -133,44 +128,12 @@ async def get_backups():
     }
 
 
-def is_request_authorized(request: Request, pin: Optional[str] = None) -> bool:
-    """
-    Dual-layer Authorization Guard:
-    1. Returns True if valid JWT session cookie or Bearer token is present
-    2. Returns True if valid Admin PIN is provided
-    3. Returns True if ADMIN_UPLOAD_PIN is not configured
-    """
-    # 1. Check JWT session cookie or Authorization header
-    token = extract_token_from_request(request)
-    if token:
-        payload = decode_jwt_token(token)
-        if payload and payload.get("token_type") == "session":
-            return True
-
-    # 2. Check Admin PIN
-    if pin and verify_admin_pin(pin):
-        return True
-
-    # 3. If ADMIN_UPLOAD_PIN is not configured
-    if not ADMIN_UPLOAD_PIN:
-        return True
-
-    return False
-
-
-@app.api_route("/api/verify-pin", methods=["GET", "POST"])
+@app.post("/api/verify-pin")
 async def verify_pin(
     request: Request,
     x_admin_pin: Optional[str] = Header(None)
 ):
-    """Verify 4-digit Admin PIN or active JWT session."""
-    # 1. Check JWT session first
-    token = extract_token_from_request(request)
-    if token:
-        payload = decode_jwt_token(token)
-        if payload and payload.get("token_type") == "session":
-            return {"success": True, "required": True, "valid": True, "method": "session"}
-
+    """Verify 4-digit Admin PIN."""
     provided_pin = x_admin_pin
     if not provided_pin:
         try:
@@ -184,20 +147,18 @@ async def verify_pin(
         provided_pin = request.query_params.get("pin")
 
     if not ADMIN_UPLOAD_PIN:
-        return {"success": True, "required": False, "valid": True, "method": "none"}
+        return {"success": True, "required": False, "valid": True}
 
     is_valid = verify_admin_pin(provided_pin)
     return {
         "success": True,
         "required": True,
-        "valid": is_valid,
-        "method": "pin"
+        "valid": is_valid
     }
 
 
 @app.post("/api/upload-resume")
 async def upload_resume(
-    request: Request,
     resume: UploadFile = File(...),
     preview: Optional[str] = Query(None),
     x_admin_pin: Optional[str] = Header(None)
@@ -287,12 +248,12 @@ async def upload_resume(
             }
         )
 
-    # Direct publish flow (non-preview): requires Session or Admin PIN
+    # Direct publish flow (non-preview)
     pin = x_admin_pin
-    if not is_request_authorized(request, pin):
+    if not verify_admin_pin(pin):
         return JSONResponse(
             status_code=401,
-            content={"success": False, "error": "Unauthorized: Valid session cookie or Admin PIN required."}
+            content={"success": False, "error": "Unauthorized: Invalid or missing Admin Security PIN."}
         )
 
     asset_dest = ASSETS_DIR / sanitized_name
@@ -328,17 +289,10 @@ async def publish_live(
         body = {}
 
     pin = x_admin_pin or body.get("pin") or request.query_params.get("pin")
-
-    if not is_request_authorized(request, pin):
-        return JSONResponse(
-            status_code=401,
-            content={"success": False, "error": "Unauthorized: Valid session cookie or Admin PIN required."}
-        )
-
     data = body.get("data")
     resume_filename = body.get("resumeFilename")
 
-    success, status_code, response_data = publish_portfolio(data, resume_filename, pin or ADMIN_UPLOAD_PIN)
+    success, status_code, response_data = publish_portfolio(data, resume_filename, pin)
     return JSONResponse(status_code=status_code, content=response_data)
 
 
@@ -354,16 +308,9 @@ async def restore_snapshot(
         body = {}
 
     pin = x_admin_pin or body.get("pin") or request.query_params.get("pin")
-
-    if not is_request_authorized(request, pin):
-        return JSONResponse(
-            status_code=401,
-            content={"success": False, "error": "Unauthorized: Valid session cookie or Admin PIN required."}
-        )
-
     filename = body.get("filename")
 
-    success, status_code, response_data = restore_backup(filename, pin or ADMIN_UPLOAD_PIN)
+    success, status_code, response_data = restore_backup(filename, pin)
     return JSONResponse(status_code=status_code, content=response_data)
 
 
@@ -403,44 +350,11 @@ async def get_admin_contact_messages(
     pin: Optional[str] = Query(None)
 ):
     """
-    Retrieve stored contact inquiries (Protected by active Session or Admin PIN).
+    Retrieve stored contact inquiries (Protected by Admin PIN).
     """
     provided_pin = x_admin_pin or pin
-    if not is_request_authorized(request, provided_pin):
-        return JSONResponse(
-            status_code=401,
-            content={"success": False, "error": "Unauthorized: Valid session cookie or Admin PIN required."}
-        )
-
-    success, status_code, response_data = list_contact_messages(pin=provided_pin or ADMIN_UPLOAD_PIN)
+    success, status_code, response_data = list_contact_messages(pin=provided_pin)
     return JSONResponse(status_code=status_code, content=response_data)
-
-
-# ============================================================================
-# CMS SPLIT-SCREEN DASHBOARD & ADMIN GUARD
-# ============================================================================
-
-@app.get("/admin")
-@app.get("/admin/dashboard")
-async def admin_dashboard(request: Request):
-    """
-    Split-Screen Form Editor CMS.
-    Checks authenticated session; redirects to login if unauthenticated.
-    """
-    token = extract_token_from_request(request)
-    if token:
-        payload = decode_jwt_token(token)
-        if payload and payload.get("token_type") == "session":
-            dashboard_file = ROOT_DIR / "admin-dashboard.html"
-            if dashboard_file.exists():
-                return FileResponse(
-                    dashboard_file,
-                    media_type="text/html; charset=utf-8",
-                    headers={"Cache-Control": "no-cache, no-store, must-revalidate"}
-                )
-
-    # Redirect unauthenticated users with query parameter
-    return RedirectResponse(url="/?login=required", status_code=302)
 
 
 # ============================================================================
