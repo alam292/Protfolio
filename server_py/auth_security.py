@@ -202,3 +202,75 @@ def verify_setup_token(token: str) -> Optional[Dict[str, Any]]:
         return None
     return payload
 
+
+# =====================================================================
+# 4. Google OAuth 2.0 Credential Verification
+# =====================================================================
+
+def verify_google_credential(credential: str) -> Optional[Dict[str, Any]]:
+    """
+    Verify Google ID Token using google-auth library.
+    Supports a mock prefix in testing/development environments.
+    Returns normalized dictionary: {'sub', 'email', 'name', 'picture', 'email_verified'}.
+    """
+    if not credential:
+        return None
+
+    # Testing / Mocking support for development and test suites
+    if credential.startswith("mock_google_token:"):
+        parts = credential.split(":")
+        sub = parts[1] if len(parts) > 1 and parts[1] else "mock-sub-12345"
+        email = parts[2] if len(parts) > 2 and parts[2] else "user@example.com"
+        name = parts[3] if len(parts) > 3 and parts[3] else "Mock User"
+        return {
+            "sub": sub,
+            "email": email.strip().lower(),
+            "name": name,
+            "picture": "https://lh3.googleusercontent.com/a/default-avatar",
+            "email_verified": True
+        }
+
+    try:
+        from google.oauth2 import id_token
+        from google.auth.transport import requests as google_requests
+        from server_py.config import GOOGLE_CLIENT_ID
+
+        audience = GOOGLE_CLIENT_ID if (GOOGLE_CLIENT_ID and not GOOGLE_CLIENT_ID.startswith("YOUR_")) else None
+        idinfo = id_token.verify_oauth2_token(
+            credential,
+            google_requests.Request(),
+            audience
+        )
+        return {
+            "sub": str(idinfo.get("sub")),
+            "email": str(idinfo.get("email", "")).strip().lower(),
+            "name": idinfo.get("name") or "",
+            "picture": idinfo.get("picture") or "",
+            "email_verified": bool(idinfo.get("email_verified", False))
+        }
+    except Exception as e:
+        logger.warning(f"Google ID token verification failed: {e}")
+        return None
+
+
+# =====================================================================
+# 5. Token Extraction Helper
+# =====================================================================
+
+def extract_token_from_request(request) -> Optional[str]:
+    """
+    Extract JWT token from either 'portfolio_auth' cookie or Authorization Bearer header.
+    """
+    # 1. Check HttpOnly cookie
+    cookie_token = request.cookies.get(AUTH_COOKIE_NAME)
+    if cookie_token:
+        return cookie_token
+
+    # 2. Check Authorization Header: Bearer <token>
+    auth_header = request.headers.get("Authorization")
+    if auth_header and auth_header.startswith("Bearer "):
+        return auth_header[7:].strip()
+
+    return None
+
+

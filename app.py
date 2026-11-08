@@ -40,6 +40,7 @@ from server_py.controller import (
     save_contact_message,
     list_contact_messages
 )
+from server_py.auth_routes import router as auth_router
 
 
 @asynccontextmanager
@@ -72,6 +73,9 @@ app.add_middleware(
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization", "x-admin-pin"]
 )
+
+# Mount Authentication REST Router
+app.include_router(auth_router, prefix="/api/auth")
 
 MIME_TYPES = {
     ".html": "text/html; charset=utf-8",
