@@ -19,3 +19,10 @@ assets/Test_Resume.pdf
 .DS_Store
 Thumbs.db
 
+# Python bytecode & environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+
