@@ -57,9 +57,9 @@ async function structureResumeWithAI(rawText, basePortfolio = {}) {
 
   if (apiKey && apiKey !== 'YOUR_GEMINI_API_KEY_HERE') {
     try {
-      // Impose a strict 8-second global timeout for AI processing
+      // Impose a 12-second global timeout for AI processing
       const timeoutPromise = new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('AI processing timed out after 8s')), 8000);
+        setTimeout(() => reject(new Error('AI processing timed out after 12s')), 12000);
       });
       return await Promise.race([
         callGeminiAI(rawText, basePortfolio, apiKey),
@@ -332,10 +332,16 @@ ${rawText}
 
   let responseText = '';
   const controller = new AbortController();
-  const fetchTimeout = setTimeout(() => controller.abort(), 6000);
+  const fetchTimeout = setTimeout(() => controller.abort(), 10000);
 
   // 1. Primary: Direct REST call with official models (fast, reliable, native JSON mode)
-  const modelsToTry = ['gemini-3.8-flash', 'gemini-2.5-flash'];
+  // Cascade from lightest high-speed model to flagship
+  const modelsToTry = [
+    'gemini-3.5-flash-lite',
+    'gemini-3.5-flash',
+    'gemini-3.8-flash',
+    'gemini-flash-latest'
+  ];
   let restSucceeded = false;
 
   for (const model of modelsToTry) {
@@ -355,17 +361,16 @@ ${rawText}
       if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
         responseText = data.candidates[0].content.parts[0].text;
         restSucceeded = true;
+        console.log(`[AI Parser] Successfully parsed resume using model: ${model}`);
         break;
       } else if (data.error) {
-        console.warn(`[AI Parser] REST call model ${model} error:`, data.error.message || JSON.stringify(data.error));
-        // Quota exceeded is key-level, break immediately to fallback
-        if (data.error.code === 429 || (data.error.message && /quota|rate limit/i.test(data.error.message))) {
-          break;
-        }
+        console.warn(`[AI Parser] Model ${model} returned error:`, data.error.message || JSON.stringify(data.error));
+        // Continue cascade to next candidate model
+        continue;
       }
     } catch (restErr) {
       console.warn(`[AI Parser] REST call ${model} failed:`, restErr.message);
-      break;
+      continue;
     }
   }
   clearTimeout(fetchTimeout);
@@ -414,20 +419,23 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
   const sectionMap = {};
   let currentSection = 'HEADER';
   sectionMap[currentSection] = [];
-  const KNOWN_SECTIONS = [
-    'PROFESSIONAL SUMMARY',
-    'TECHNICAL SKILLS',
-    'EXPERIENCE',
-    'PROJECTS',
-    'EDUCATION',
-    'CERTIFICATIONS & ACHIEVEMENTS'
-  ];
+
+  function matchKnownSection(line) {
+    const clean = line.replace(/^[#*\-•\s]+|[#*\-•:\s]+$/g, '').trim().toUpperCase();
+    if (/^(?:PROFESSIONAL\s+SUMMARY|SUMMARY|PROFILE|ABOUT\s+ME|OBJECTIVE|OVERVIEW)$/i.test(clean)) return 'PROFESSIONAL SUMMARY';
+    if (/^(?:TECHNICAL\s+SKILLS|SKILLS|CORE\s+COMPETENCIES|TECHNOLOGIES|SKILLS\s*&\s*TOOLS)$/i.test(clean)) return 'TECHNICAL SKILLS';
+    if (/^(?:WORK\s+EXPERIENCE|EXPERIENCE|EMPLOYMENT\s+HISTORY|CAREER\s+HISTORY|PROFESSIONAL\s+EXPERIENCE)$/i.test(clean)) return 'EXPERIENCE';
+    if (/^(?:PROJECTS|FEATURED\s+PROJECTS|ACADEMIC\s+PROJECTS|PERSONAL\s+PROJECTS|KEY\s+PROJECTS)$/i.test(clean)) return 'PROJECTS';
+    if (/^(?:EDUCATION|ACADEMIC\s+BACKGROUND|ACADEMICS|QUALIFICATIONS|EDUCATION\s*&\s*TRAINING)$/i.test(clean)) return 'EDUCATION';
+    if (/^(?:CERTIFICATIONS|ACHIEVEMENTS|CERTIFICATES|AWARDS\s*&\s*ACHIEVEMENTS|CERTIFICATIONS\s*&\s*ACHIEVEMENTS)$/i.test(clean)) return 'CERTIFICATIONS & ACHIEVEMENTS';
+    return null;
+  }
 
   lines.forEach(line => {
-    const matched = KNOWN_SECTIONS.find(s => line.toUpperCase() === s);
+    const matched = matchKnownSection(line);
     if (matched) {
       currentSection = matched;
-      sectionMap[currentSection] = [];
+      if (!sectionMap[currentSection]) sectionMap[currentSection] = [];
     } else {
       sectionMap[currentSection].push(line);
     }
@@ -548,7 +556,9 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
     for (let i = 0; i < projLines.length; i++) {
       const line = projLines[i];
       const nextLine = projLines[i + 1] || '';
-      const isTitle = line.includes('| GitHub') || /^Tech Stack:/i.test(nextLine);
+      const isTitle = line.includes('| GitHub') || 
+        /^Tech Stack:/i.test(nextLine) || 
+        (!line.startsWith('•') && !line.startsWith('-') && !line.startsWith('*') && !/^Tech Stack:/i.test(line) && line.length < 75 && line.length > 3 && (nextLine.startsWith('•') || nextLine.startsWith('-') || nextLine.startsWith('*') || /^Tech Stack:/i.test(nextLine)));
 
       if (isTitle) {
         if (curProj) projects.push(curProj);

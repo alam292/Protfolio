@@ -106,10 +106,10 @@ RAW RESUME TEXT:
 """
 
     models_to_try = [
+        "gemini-3.5-flash-lite",
+        "gemini-3.5-flash",
         "gemini-3.8-flash",
-        "gemini-2.5-flash",
-        "gemini-2.0-flash",
-        "gemini-1.5-flash"
+        "gemini-flash-latest"
     ]
 
     last_error = None
@@ -126,7 +126,7 @@ RAW RESUME TEXT:
             }
         }
         try:
-            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=8)
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=12)
             if res.status_code == 200:
                 data = res.json()
                 text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
