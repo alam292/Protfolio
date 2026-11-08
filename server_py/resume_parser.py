@@ -605,17 +605,32 @@ Return ONLY the raw JSON object. Do not wrap in markdown or backticks."""
     try:
         from google import genai
         client = genai.Client(api_key=gemini_key)
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt,
-        )
+        
+        # Try primary model gemini-3.5-flash, fallback to gemini-3.5-flash-lite if overloaded
+        response = None
+        for model_name in ["gemini-3.5-flash", "gemini-3.5-flash-lite"]:
+            try:
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                )
+                if response and response.text:
+                    logger.info(f"[Resume Parser] Successfully parsed resume via Gemini API model '{model_name}'.")
+                    break
+            except Exception as model_err:
+                logger.warning(f"[Resume Parser] Model {model_name} failed: {model_err}")
+                continue
+
+        if not response or not response.text:
+            raise RuntimeError("All Gemini models failed to generate response text.")
+
         response_text = response.text.strip()
         # Clean potential markdown fences
         if response_text.startswith("```"):
             response_text = re.sub(r"^```[a-zA-Z]*\n?", "", response_text)
             response_text = re.sub(r"\n?```$", "", response_text)
         parsed_json = json.loads(response_text)
-        logger.info("[Resume Parser] Successfully parsed resume via Gemini API.")
+        print(f"[Resume Parser] Google Gemini AI parsed resume successfully!")
         return validate_and_merge_portfolio(parsed_json, base_portfolio)
 
     except Exception as e:
