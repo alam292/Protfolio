@@ -174,3 +174,4 @@ def sync_portfolio_to_github(
         "branch": cfg["branch"],
         "items": results
     }
+
