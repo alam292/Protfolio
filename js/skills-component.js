@@ -169,43 +169,6 @@
       svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><defs><linearGradient id="antiGravGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF5722"/><stop offset="50%" stop-color="#6366F1"/><stop offset="100%" stop-color="#38BDF8"/></linearGradient></defs><circle cx="64" cy="64" r="54" fill="none" stroke="url(#antiGravGrad)" stroke-width="4.5" stroke-dasharray="14 10"/><ellipse cx="64" cy="64" rx="46" ry="18" fill="none" stroke="#6366F1" stroke-width="3.5" transform="rotate(-30 64 64)"/><ellipse cx="64" cy="64" rx="46" ry="18" fill="none" stroke="#FF5722" stroke-width="3.5" transform="rotate(30 64 64)"/><polygon points="64,26 84,64 64,102 44,64" fill="url(#antiGravGrad)"/><circle cx="64" cy="64" r="8" fill="#FFFFFF"/></svg>`
     },
 
-    // 7. Data Analytics & Business Intelligence
-    powerbi: {
-      brandColor: '#F2C811',
-      glowColor: 'rgba(242, 200, 17, 0.6)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#201F1E"/><rect x="22" y="60" width="18" height="46" rx="4" fill="#F2C811" opacity="0.6"/><rect x="46" y="44" width="18" height="62" rx="4" fill="#F2C811" opacity="0.85"/><rect x="70" y="24" width="18" height="82" rx="4" fill="#F2C811"/><rect x="94" y="50" width="18" height="56" rx="4" fill="#F2C811" opacity="0.7"/></svg>`
-    },
-    tableau: {
-      brandColor: '#E97627',
-      glowColor: 'rgba(233, 118, 39, 0.6)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#1C2128"/><path fill="#E97627" d="M60 14h8v24h-8zm0 76h8v24h-8zm-38-38h24v8H22zm76 0h24v8H98z"/><path fill="#5A88AC" d="M37 32h6v17h-6zm48 0h6v17h-6zM37 79h6v17h-6zm48 0h6v17h-6z"/><path fill="#E97627" d="M62 46h4v36h-4zm-16 16h36v4H46z"/></svg>`
-    },
-    excel: {
-      brandColor: '#107C41',
-      glowColor: 'rgba(16, 124, 65, 0.6)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#107C41"/><rect x="48" y="24" width="60" height="80" rx="6" fill="#185ABD"/><path fill="#33C481" d="M48 24h60v80H48z"/><path fill="#FFFFFF" d="M60 40h36v8H60zm0 16h36v8H60zm0 16h36v8H60zm0 16h36v8H60z" opacity="0.6"/><rect x="18" y="34" width="48" height="60" rx="8" fill="#107C41" stroke="#33C481" stroke-width="2"/><text x="42" y="74" fill="#FFFFFF" font-size="34" font-weight="900" text-anchor="middle" font-family="sans-serif">X</text></svg>`
-    },
-    pandas: {
-      brandColor: '#150458',
-      glowColor: 'rgba(21, 4, 88, 0.7)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#0A0E1A"/><rect x="28" y="24" width="16" height="80" rx="8" fill="#150458" stroke="#E70488" stroke-width="3"/><rect x="56" y="38" width="16" height="52" rx="8" fill="#FFD43B"/><rect x="84" y="24" width="16" height="80" rx="8" fill="#4B8BBE"/></svg>`
-    },
-    numpy: {
-      brandColor: '#4DABCF',
-      glowColor: 'rgba(77, 171, 207, 0.6)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#013243"/><path fill="#4DABCF" d="M32 30h16v68H32zm48 0h16v68H80z"/><path fill="#4DABCF" d="M46 30l36 68h-16L30 30z"/></svg>`
-    },
-    sql: {
-      brandColor: '#00758F',
-      glowColor: 'rgba(0, 117, 143, 0.65)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#0D1F2D"/><ellipse cx="64" cy="34" rx="38" ry="14" fill="#00758F"/><path fill="#00758F" d="M26 34v26c0 7.7 17 14 38 14s38-6.3 38-14V34z" opacity="0.85"/><path fill="#00758F" d="M26 60v26c0 7.7 17 14 38 14s38-6.3 38-14V60z" opacity="0.7"/><path fill="#00758F" d="M26 86v18c0 7.7 17 14 38 14s38-6.3 38-14V86z" opacity="0.55"/></svg>`
-    },
-    jupyter: {
-      brandColor: '#F37626',
-      glowColor: 'rgba(243, 118, 38, 0.6)',
-      svg: `<svg viewBox="0 0 128 128" width="100%" height="100%" aria-hidden="true"><rect width="128" height="128" rx="20" fill="#1C1E24"/><ellipse cx="64" cy="34" rx="42" ry="14" fill="#F37626"/><ellipse cx="64" cy="94" rx="42" ry="14" fill="#F37626"/><circle cx="98" cy="24" r="6" fill="#9E9E9E"/><circle cx="30" cy="104" r="6" fill="#9E9E9E"/><circle cx="96" cy="102" r="8" fill="#4B8BBE"/></svg>`
-    },
-
     // Generic Elegant Tech Chip Fallback
     fallback: {
       brandColor: '#6366F1',
@@ -266,23 +229,7 @@
         anthropic: 'claude',
         gemini: 'gemini',
         antigravity: 'antigravity',
-        antigravityide: 'antigravity',
-        powerbi: 'powerbi',
-        powerquery: 'powerbi',
-        dax: 'powerbi',
-        tableau: 'tableau',
-        excel: 'excel',
-        advancedexcel: 'excel',
-        pandas: 'pandas',
-        numpy: 'numpy',
-        matplotlib: 'python',
-        seaborn: 'python',
-        sql: 'sql',
-        etl: 'sql',
-        eda: 'pandas',
-        statistics: 'numpy',
-        jupyter: 'jupyter',
-        jupyternotebook: 'jupyter'
+        antigravityide: 'antigravity'
       };
       if (keyMap[cleanName] && SKILLS_ICONS_REGISTRY[keyMap[cleanName]]) {
         return SKILLS_ICONS_REGISTRY[keyMap[cleanName]];

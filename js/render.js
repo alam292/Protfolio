@@ -52,22 +52,15 @@ class PortfolioRenderer {
     const sectionEl = document.getElementById(sectionId);
     if (!sectionEl) return false;
 
-    // Check if explicitly disabled, missing, or empty
-    if (!dataObject) {
-      sectionEl.style.display = 'none';
-      document.querySelectorAll(`a[href="#${sectionId}"]`).forEach(link => {
-        const parentLi = link.closest('li') || link;
-        parentLi.style.display = 'none';
-      });
-      return false;
-    }
-
+    // Check if explicitly disabled or empty
     const isDisabled = dataObject?.disabled === true || dataObject?.enabled === false;
     let isEmpty = false;
-    if (Array.isArray(dataObject.items) && dataObject.items.length === 0) isEmpty = true;
-    if (Array.isArray(dataObject.roles) && dataObject.roles.length === 0) isEmpty = true;
-    if (Array.isArray(dataObject.degrees) && dataObject.degrees.length === 0) isEmpty = true;
-    if (Array.isArray(dataObject.categories) && dataObject.categories.length === 0) isEmpty = true;
+    if (dataObject) {
+      if (Array.isArray(dataObject.items) && dataObject.items.length === 0) isEmpty = true;
+      if (Array.isArray(dataObject.roles) && dataObject.roles.length === 0) isEmpty = true;
+      if (Array.isArray(dataObject.degrees) && dataObject.degrees.length === 0) isEmpty = true;
+      if (Array.isArray(dataObject.categories) && dataObject.categories.length === 0) isEmpty = true;
+    }
 
     if (isDisabled || isEmpty) {
       sectionEl.style.display = 'none';
@@ -86,28 +79,9 @@ class PortfolioRenderer {
     }
   }
 
-  // Dynamic Header Logo & Document Title Sync
-  renderHeaderLogo() {
-    if (!this.data || !this.data.profile) return;
-    const { name, shortName, title } = this.data.profile;
-    if (name) {
-      document.title = `${name} — ${title || 'Portfolio'}`;
-      const initial = (shortName || name).trim().charAt(0).toUpperCase();
-      const displayName = shortName || name.trim().split(/\s+/)[0] || 'Portfolio';
-
-      document.querySelectorAll('.logo-badge').forEach(el => {
-        el.textContent = initial;
-      });
-      document.querySelectorAll('.logo-text, .drawer-brand-text').forEach(el => {
-        el.innerHTML = `${displayName}<span class="logo-text-accent">.dev</span>`;
-      });
-    }
-  }
-
   renderAll() {
     if (!this.data) return;
 
-    this.renderHeaderLogo();
     this.renderHero();
     this.renderAbout();
     this.renderSkills();
@@ -352,8 +326,8 @@ class PortfolioRenderer {
           <!-- 4. Hero CTA Actions (Download Resume, Contact Me & Socials) -->
           <div class="hero-actions-group">
             <a 
-              href="${profile.resumeUrl || 'assets/Md_Matloob_Alam_Software_Developer_Resume.pdf'}" 
-              download="${profile.resumeFilename || 'Resume.pdf'}" 
+              href="${profile.resumeUrl}" 
+              download="${profile.resumeFilename}" 
               class="hero-btn-resume" 
               id="heroResumeBtn"
               aria-label="Download ${profile.name}'s verified resume (PDF)"
@@ -376,28 +350,21 @@ class PortfolioRenderer {
 
             <!-- Social Links -->
             <div class="hero-social-links" aria-label="Social Profiles">
-              ${profile.githubUrl ? `
               <a href="${profile.githubUrl}" target="_blank" rel="noopener noreferrer" class="hero-social-icon" aria-label="GitHub Profile" title="GitHub">
                 ${this.getIconSvg('github')}
-              </a>` : ''}
-              ${profile.linkedinUrl ? `
+              </a>
               <a href="${profile.linkedinUrl}" target="_blank" rel="noopener noreferrer" class="hero-social-icon" aria-label="LinkedIn Profile" title="LinkedIn">
                 ${this.getIconSvg('linkedin')}
-              </a>` : ''}
-              ${profile.twitterUrl ? `
-              <a href="${profile.twitterUrl}" target="_blank" rel="noopener noreferrer" class="hero-social-icon" aria-label="Twitter Profile" title="Twitter">
-                ${this.getIconSvg('twitter')}
-              </a>` : ''}
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      ${metricsHtml ? `
       <!-- Hero Bottom Row: Dynamic Bento Metrics Strip -->
       <div class="hero-bento-metrics">
         ${metricsHtml}
-      </div>` : ''}
+      </div>
     `;
 
     // Initialize 3D Parallax & Motion Controls
@@ -452,10 +419,6 @@ class PortfolioRenderer {
       bioLead = bioLead.replace(profile.title, `<strong class="text-glow-accent">${profile.title}</strong>`);
     }
 
-    const hasProjects = Array.isArray(this.data.projects?.items) && this.data.projects.items.length > 0 && this.data.projects.disabled !== true;
-    const actionBtnTarget = hasProjects ? '#projects' : '#contact';
-    const actionBtnText = hasProjects ? 'Explore My Work' : 'Get in Touch';
-
     mount.innerHTML = `
       <h2 class="section-tag" id="about-title">${about.sectionTag || 'WHO I AM'}</h2>
 
@@ -484,8 +447,8 @@ class PortfolioRenderer {
           </div>
 
           <div class="about-action-row">
-            <a href="${actionBtnTarget}" class="btn-touch btn-touch-orange">
-              <span>${actionBtnText}</span>
+            <a href="#projects" class="btn-touch btn-touch-orange">
+              <span>Explore My Work</span>
               <span class="btn-icon-circle" aria-hidden="true">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -705,8 +668,8 @@ class PortfolioRenderer {
       <div class="projects-pipeline-wrap">
         <div class="projects-pipeline" role="region" aria-label="Featured Engineering Projects Pipeline">
           <div class="projects-sys-header" aria-hidden="true">
-            <span class="projects-sys-tag">${projects.pipelineTag || 'ENGINEERING_PIPELINE_PROJECTS'}</span>
-            <span class="projects-sys-coords">SYS_AXIS: PRODUCTION_BUILDS (${projects.items.length} ACTIVE) <span class="projects-sys-sep">&bull;</span> VERIFIED_CODEBASES</span>
+            <span class="projects-sys-tag">ENGINEERING_PIPELINE_PROJECTS</span>
+            <span class="projects-sys-coords">SYS_AXIS: PRODUCTION_BUILDS (2024 — 2026) <span class="projects-sys-sep">&bull;</span> VERIFIED_CODEBASES</span>
           </div>
 
           <div class="projects-network">
@@ -727,12 +690,12 @@ class PortfolioRenderer {
 
     const { experience } = this.data;
 
-    const timelineHtml = (experience.roles || []).map(r => {
-      const bulletsHtml = (r.highlights || []).map(h => `
+    const timelineHtml = experience.roles.map(r => {
+      const bulletsHtml = r.highlights.map(h => `
         <li class="timeline-bullet">${h}</li>
       `).join('');
 
-      const stackHtml = (r.techStack || []).map(t => `<span class="tech-tag">${t}</span>`).join('');
+      const stackHtml = r.techStack.map(t => `<span class="tech-tag">${t}</span>`).join('');
 
       return `
         <div class="timeline-item">
@@ -743,7 +706,8 @@ class PortfolioRenderer {
                 <h3 class="timeline-role">${r.role}</h3>
                 <div class="timeline-company-row">
                   <span class="timeline-company">${r.company}</span>
-                  ${r.location ? `<span class="timeline-divider">&bull;</span><span class="timeline-duration">${r.location}</span>` : ''}
+                  <span class="timeline-divider">&bull;</span>
+                  <span class="timeline-duration">${r.location}</span>
                 </div>
               </div>
               <div class="timeline-status-badge">${r.period}</div>
@@ -762,7 +726,7 @@ class PortfolioRenderer {
     }).join('');
 
     mount.innerHTML = `
-      <h2 class="section-tag" id="experience-title">${experience.sectionTag || 'CAREER TRAJECTORY'}</h2>
+      <h2 class="section-tag" id="experience-title">${experience.sectionTag}</h2>
       ${experience.subtitle ? `<p class="section-subtitle">${experience.subtitle}</p>` : ''}
 
       <div class="experience-timeline">
@@ -781,11 +745,6 @@ class PortfolioRenderer {
 
     const { education } = this.data;
     if (!education || !Array.isArray(education.degrees)) return;
-
-    const allYears = (education.degrees || []).map(d => (d.period || '').match(/\d{4}/g) || []).flat().filter(Boolean);
-    const minYear = allYears.length ? Math.min(...allYears.map(Number)) : 2018;
-    const maxYear = allYears.length ? Math.max(...allYears.map(Number)) : 2026;
-    const axisCoords = `AXIS: CHRONOLOGICAL_MILESTONES (${minYear} — ${maxYear})`;
 
     const nodesHtml = education.degrees.map((deg, index) => {
       // Coursework / subjects as minimal inline text
@@ -843,20 +802,7 @@ class PortfolioRenderer {
 
       const isLeft = index % 2 === 0;
       const sideClass = isLeft ? 'graph-node-entry--left' : 'graph-node-entry--right';
-
-      let tagLabel = deg.tag;
-      if (!tagLabel) {
-        const degLower = (deg.degree || '').toLowerCase();
-        if (degLower.includes('master') || degLower.includes('mca') || degLower.includes('m.tech') || degLower.includes('m.s')) {
-          tagLabel = 'POST GRADUATE';
-        } else if (degLower.includes('bachelor') || degLower.includes('btech') || degLower.includes('b.tech') || degLower.includes('bca') || degLower.includes('bsc')) {
-          tagLabel = 'GRADUATE';
-        } else if (degLower.includes('intermediate') || degLower.includes('12th') || degLower.includes('secondary') || degLower.includes('diploma')) {
-          tagLabel = 'HIGHER SECONDARY';
-        } else {
-          tagLabel = `MILESTONE ${String(index + 1).padStart(2, '0')}`;
-        }
-      }
+      const tagLabel = index === 0 ? 'GRADUATE' : 'HIGHER SECONDARY';
 
       return `
         <div class="graph-node-entry ${sideClass}" data-node="${isLeft ? 'left' : 'right'}">
@@ -897,8 +843,8 @@ class PortfolioRenderer {
       <div class="academic-graph-wrap">
         <div class="academic-graph" role="region" aria-label="Academic Progression Graph">
           <div class="graph-sys-header" aria-hidden="true">
-            <span class="graph-sys-tag">${education.pipelineTag || 'ACADEMIC_GRAPH_PIPELINE'}</span>
-            <span class="graph-sys-coords">${axisCoords}</span>
+            <span class="graph-sys-tag">ACADEMIC_GRAPH_PIPELINE</span>
+            <span class="graph-sys-coords">AXIS: CHRONOLOGICAL_MILESTONES (2018 — 2024)</span>
           </div>
 
           <div class="graph-network">
@@ -1029,40 +975,13 @@ class PortfolioRenderer {
     this.certTotalSlides = items.length;
     this.certCurrentSlide = 0;
 
-    const slidesHtml = items.map((c, idx) => {
-      let mediaContent = '';
-      if (c.image && c.image !== 'undefined' && c.image !== '#') {
-        mediaContent = `
-          <div class="cert-image-display" data-full-img="${c.image}" title="Click to view full certificate">
-            <img src="${c.image}" alt="${c.title}" class="cert-showcase-img" loading="lazy" />
-          </div>
-        `;
-      } else {
-        const emblemType = c.emblem || (c.title?.toLowerCase().includes('google') ? 'google' : (c.title?.toLowerCase().includes('hacker') ? 'hackerrank' : 'gold'));
-        mediaContent = `
-          <div class="cert-image-display cert-card-display-fallback" title="${c.title}">
-            <div class="cert-card-visual-fallback">
-              ${this.getCertRosetteSvg(emblemType)}
-              <div class="cert-fallback-meta">
-                <span class="cert-fallback-badge">${c.badge || 'VERIFIED CREDENTIAL'}</span>
-                <h3 class="cert-fallback-title">${c.title}</h3>
-                <div class="cert-fallback-issuer">${c.issuer || 'Professional Organization'}${c.date || c.period ? ` &bull; ${c.date || c.period}` : ''}</div>
-                ${Array.isArray(c.skillsCovered) && c.skillsCovered.length > 0 ? `
-                <div class="cert-fallback-skills">
-                  ${c.skillsCovered.map(s => `<span class="tech-tag">${s}</span>`).join('')}
-                </div>` : ''}
-              </div>
-            </div>
-          </div>
-        `;
-      }
-
-      return `
-        <div class="cert-slide-item ${idx === 0 ? 'active' : ''}" data-index="${idx}">
-          ${mediaContent}
+    const slidesHtml = items.map((c, idx) => `
+      <div class="cert-slide-item ${idx === 0 ? 'active' : ''}" data-index="${idx}">
+        <div class="cert-image-display" data-full-img="${c.image}" title="Click to view full certificate">
+          <img src="${c.image}" alt="${c.title}" class="cert-showcase-img" loading="lazy" />
         </div>
-      `;
-    }).join('');
+      </div>
+    `).join('');
 
     const dotsHtml = items.map((_, idx) => `
       <button 
@@ -1080,7 +999,7 @@ class PortfolioRenderer {
         <div class="cert-header-block">
           <h2 class="cert-pill-tag" id="certificates-title">
             <span class="cert-pill-dot" aria-hidden="true"></span>
-            <span>${certifications.sectionTag || 'VALIDATED MASTERY'}</span>
+            <span>${certifications.sectionTag}</span>
           </h2>
           ${certifications.subtitle ? `<p class="cert-main-subtitle">${certifications.subtitle}</p>` : ''}
         </div>
@@ -1291,22 +1210,22 @@ class PortfolioRenderer {
     const { contact, profile } = this.data;
 
     // Social Profiles - Modern Circular Icon Buttons (Ref. Image Style)
-    const socialIconsHtml = (contact.social || []).map(s => `
+    const socialIconsHtml = contact.social.map(s => `
       <a 
         href="${s.url}" 
         target="_blank" 
         rel="noopener noreferrer" 
         class="contact-social-circle-btn" 
-        data-platform="${(s.platform || '').toLowerCase()}" 
-        aria-label="${profile.name}'s ${s.platform} (${s.handle || ''})"
-        title="${s.platform}: ${s.handle || ''}"
+        data-platform="${s.platform.toLowerCase()}" 
+        aria-label="${profile.name}'s ${s.platform} (${s.handle})"
+        title="${s.platform}: ${s.handle}"
       >
-        ${this.getIconSvg(s.icon || 'globe')}
+        ${this.getIconSvg(s.icon)}
       </a>
     `).join('');
 
     mount.innerHTML = `
-      <h2 class="section-tag" id="contact-title">${contact.sectionTag || 'GET IN TOUCH'}</h2>
+      <h2 class="section-tag" id="contact-title">${contact.sectionTag}</h2>
       ${contact.subtitle ? `<p class="section-subtitle">${contact.subtitle}</p>` : ''}
 
       <div class="contact-master-container">
@@ -1323,7 +1242,6 @@ class PortfolioRenderer {
 
               <!-- Contact Items List -->
               <div class="contact-items-list">
-                ${contact.email ? `
                 <!-- 1. Email -->
                 <div class="contact-info-item">
                   <div class="info-icon-circle" aria-hidden="true">
@@ -1352,9 +1270,8 @@ class PortfolioRenderer {
                       </button>
                     </div>
                   </div>
-                </div>` : ''}
+                </div>
 
-                ${contact.availability ? `
                 <!-- 2. Availability -->
                 <div class="contact-info-item">
                   <div class="info-icon-circle" aria-hidden="true">
@@ -1364,11 +1281,10 @@ class PortfolioRenderer {
                   </div>
                   <div class="info-item-content">
                     <span class="info-item-label">AVAILABILITY</span>
-                    <span class="info-item-value">${contact.availability}</span>
+                    <span class="info-item-value">${contact.availability || 'Full-time • Freelance Projects'}</span>
                   </div>
-                </div>` : ''}
+                </div>
 
-                ${(contact.locationDisplay || (profile.location && `${profile.location.city}, ${profile.location.country}`)) ? `
                 <!-- 3. Location -->
                 <div class="contact-info-item">
                   <div class="info-icon-circle" aria-hidden="true">
@@ -1379,16 +1295,15 @@ class PortfolioRenderer {
                   </div>
                   <div class="info-item-content">
                     <span class="info-item-label">LOCATION</span>
-                    <span class="info-item-value">${contact.locationDisplay || `${profile.location.city}, ${profile.location.country}`}</span>
+                    <span class="info-item-value">${contact.locationDisplay || 'India • Available Worldwide (Remote)'}</span>
                   </div>
-                </div>` : ''}
+                </div>
               </div>
 
-              ${socialIconsHtml ? `
               <!-- Social Media Icon Buttons (Ref. Image Style) -->
               <div class="contact-social-dock" role="list">
                 ${socialIconsHtml}
-              </div>` : ''}
+              </div>
             </div>
           </div>
 

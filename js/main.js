@@ -38,8 +38,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (heroResumeBtn) {
     heroResumeBtn.addEventListener('click', () => {
       if (form && typeof form.showToast === 'function') {
-        const candidateName = renderer?.data?.profile?.name || 'Verified Candidate';
-        form.showToast(`Initiating download for ${candidateName}'s Resume (PDF)...`);
+        form.showToast("Initiating download for Md MatlooB Alam's Resume (PDF)...");
       }
     });
   }
