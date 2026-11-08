@@ -316,7 +316,7 @@ class ResumeUploader {
         if (current < 45) {
           this.updateProgress(45, 'Extracting text and metadata...');
         } else if (current < 75) {
-          this.updateProgress(75, 'Transforming with Google Gemini AI...');
+          this.updateProgress(75, 'Structuring portfolio sections and technical skills...');
         } else if (current < 90) {
           this.updateProgress(90, 'Validating schema and computing diff...');
         }

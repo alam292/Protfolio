@@ -45,8 +45,7 @@ app.get('/api/backups', handleListBackups);
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'ok',
-    timestamp: new Date().toISOString(),
-    geminiKeyConfigured: Boolean(process.env.GEMINI_API_KEY && process.env.GEMINI_API_KEY !== 'YOUR_GEMINI_API_KEY_HERE')
+    timestamp: new Date().toISOString()
   });
 });
 
