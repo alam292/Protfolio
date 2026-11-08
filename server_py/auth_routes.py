@@ -721,3 +721,4 @@ def logout(
         "status": "logged_out",
         "message": "Logged out successfully."
     }
+

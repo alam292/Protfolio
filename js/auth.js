@@ -38,6 +38,13 @@
     bindEvents();
     initGoogleIdentity();
     await checkSession();
+
+    // Check if redirected from /admin with ?login=required
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('login') === 'required' || urlParams.get('auth') === 'required') {
+      openModal('login');
+      showAlert('Please sign in to access the portfolio editor.', 'error');
+    }
   }
 
   function cacheDOMElements() {
@@ -665,7 +672,10 @@
       <div class="nav-auth-user" id="btnNavUserMenu" title="Signed in as ${user.name || user.email}">
         <img class="nav-auth-avatar" src="${user.avatarUrl || 'https://lh3.googleusercontent.com/a/default-avatar'}" alt="Avatar" />
         <span class="nav-auth-name">${user.name || user.email.split('@')[0]}</span>
-        <button type="button" class="btn-resend-otp" id="btnLogoutTrigger" style="margin-left: 4px;" title="Logout">
+        <a href="/admin" style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 12px; background: rgba(0, 240, 255, 0.15); border: 1px solid rgba(0, 240, 255, 0.4); color: #00f0ff; text-decoration: none; font-size: 11px; font-weight: 700; margin-left: 4px;" title="Open Split-Screen CMS">
+          CMS
+        </a>
+        <button type="button" class="btn-resend-otp" id="btnLogoutTrigger" style="margin-left: 6px;" title="Logout">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
         </button>
       </div>
