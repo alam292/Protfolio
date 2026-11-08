@@ -79,6 +79,11 @@ class NavigationController {
       if (isOpen) {
         const firstLink = this.mobileDrawer.querySelector('a');
         if (firstLink) firstLink.focus();
+      } else {
+        // Return focus to toggle button for WCAG accessibility
+        if (document.activeElement && this.mobileDrawer.contains(document.activeElement)) {
+          this.mobileToggle.focus();
+        }
       }
     };
 
@@ -99,13 +104,56 @@ class NavigationController {
       link.addEventListener('click', () => toggleDrawer(true));
     });
 
-    // Close on Escape key press
+    // Keyboard accessibility: Escape to close and Tab focus trap
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && this.mobileDrawer.classList.contains('open')) {
+      if (!this.mobileDrawer.classList.contains('open')) return;
+
+      if (e.key === 'Escape') {
         toggleDrawer(true);
         this.mobileToggle.focus();
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        const focusableElements = this.mobileDrawer.querySelectorAll('a[href], button:not([disabled])');
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement || !this.mobileDrawer.contains(document.activeElement)) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     });
+
+    // Touch gesture: Swipe left to close drawer
+    let touchStartX = 0;
+    let touchStartY = 0;
+    this.mobileDrawer.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    this.mobileDrawer.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchStartX - touchEndX;
+      const diffY = Math.abs(touchStartY - touchEndY);
+
+      // If swiped left by > 50px and not a vertical scroll
+      if (diffX > 50 && diffY < 60) {
+        toggleDrawer(true);
+      }
+    }, { passive: true });
 
     // Close on backdrop click (fallback)
     this.mobileDrawer.addEventListener('click', (e) => {
@@ -139,8 +187,10 @@ class NavigationController {
           const href = link.getAttribute('href');
           if (href === `#${id}`) {
             link.classList.add('active');
+            link.setAttribute('aria-current', 'page');
           } else {
             link.classList.remove('active');
+            link.removeAttribute('aria-current');
           }
         });
       }

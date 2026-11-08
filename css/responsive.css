@@ -147,12 +147,12 @@
    ========================================================================== */
 @media (max-width: 767px) {
   .navbar {
-    padding: 12px var(--section-padding-x);
+    padding: max(12px, env(safe-area-inset-top, 12px)) var(--section-padding-x) 12px;
     min-height: 56px;
   }
 
   .navbar.scrolled {
-    padding: 10px var(--section-padding-x);
+    padding: max(10px, env(safe-area-inset-top, 10px)) var(--section-padding-x) 10px;
   }
 
   .navbar-left {
@@ -160,7 +160,12 @@
   }
 
   .mobile-toggle {
-    padding: 8px 9px;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .mobile-toggle span {
@@ -235,7 +240,7 @@
   }
 
   .navbar {
-    padding: 12px 14px;
+    padding: max(12px, env(safe-area-inset-top, 12px)) 14px 12px;
   }
 
   /* Compact Navbar Actions: Hide verbose button text */
@@ -248,10 +253,14 @@
   }
 
   .btn-nav-upload {
-    padding: 8px;
+    padding: 0;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
   }
 

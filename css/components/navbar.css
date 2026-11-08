@@ -131,16 +131,25 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-sm);
   padding: 10px 11px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   flex-direction: column;
   gap: 5px;
   z-index: calc(var(--z-drawer) + 10);
-  transition: border-color var(--transition-fast), background var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
 }
 
 .mobile-toggle:hover {
   border-color: var(--accent-orange);
   background: var(--accent-orange-subtle);
+}
+
+.mobile-toggle:active {
+  transform: scale(0.95);
 }
 
 .mobile-toggle span {
