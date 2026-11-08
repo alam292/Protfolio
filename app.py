@@ -5,17 +5,22 @@ health status, admin security PIN verification, and version history.
 """
 
 import os
+import re
 import json
+import shutil
 from pathlib import Path
 from datetime import datetime, timezone
-from typing import Optional
+from typing import Optional, Dict, Any
 
-from fastapi import FastAPI, Request, HTTPException, status
+from fastapi import FastAPI, Request, HTTPException, status, UploadFile, File, Form, Query
 from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
+
+from server_py.resume_parser import extract_raw_text, structure_resume_with_ai, validate_and_merge_portfolio
+from server_py.diff_engine import compute_portfolio_diff
 
 # Load environment configuration (.env)
 load_dotenv()
@@ -53,6 +58,34 @@ app.add_middleware(
 # Pydantic Schemas for Request Validation
 class VerifyPinRequest(BaseModel):
     pin: Optional[str] = None
+
+
+class PublishPortfolioRequest(BaseModel):
+    data: Dict[str, Any]
+    resumeFilename: Optional[str] = None
+    pin: Optional[str] = None
+
+
+class RestoreBackupRequest(BaseModel):
+    filename: str
+    pin: Optional[str] = None
+
+
+# Helper: Create Timestamped Backup Snapshot
+def create_portfolio_backup() -> Optional[str]:
+    """Creates a timestamped backup snapshot of data/portfolio.json."""
+    if not PORTFOLIO_PATH.exists():
+        return None
+    timestamp = datetime.now(timezone.utc).isoformat().replace(":", "-").replace(".", "-")
+    backup_filename = f"portfolio-{timestamp}.json"
+    backup_filepath = BACKUPS_DIR / backup_filename
+    try:
+        with open(PORTFOLIO_PATH, "r", encoding="utf-8") as src, open(backup_filepath, "w", encoding="utf-8") as dst:
+            dst.write(src.read())
+        return f"data/backups/{backup_filename}"
+    except Exception as e:
+        print(f"[Backup Error] {e}")
+        return None
 
 
 # Helper: Admin PIN Validation
@@ -161,6 +194,249 @@ async def verify_pin(request: Request, payload: Optional[VerifyPinRequest] = Non
         "success": True,
         "required": True,
         "valid": valid
+    }
+
+
+@app.post("/api/upload-resume")
+async def upload_resume(
+    request: Request,
+    resume: UploadFile = File(...),
+    preview: Optional[bool] = Query(None),
+    preview_form: Optional[bool] = Form(None, alias="preview")
+):
+    """
+    Handles PDF/DOCX resume file upload.
+    In preview mode (?preview=true), extracts text and returns staged diff without saving.
+    In direct mode, validates admin PIN, extracts text, creates backup, and atomically publishes.
+    """
+    if not resume:
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": 'No resume file provided. Please attach a PDF or DOCX file under field "resume".'}
+        )
+
+    original_name = resume.filename or "Resume.pdf"
+    ext = Path(original_name).suffix.lower()
+    allowed_exts = [".pdf", ".docx", ".doc", ".txt"]
+    if ext not in allowed_exts:
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": f"Invalid file type: {ext}. Only PDF and DOCX files are supported."}
+        )
+
+    # Read uploaded bytes with size validation (10MB limit)
+    file_bytes = await resume.read()
+    if len(file_bytes) > 10 * 1024 * 1024:
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": "File size exceeds 10MB limit. Please upload a smaller file."}
+        )
+
+    sanitized_name = re.sub(r"[^a-zA-Z0-9._-]", "_", original_name)
+    timestamp = int(datetime.now().timestamp() * 1000)
+    stem = Path(sanitized_name).stem
+    saved_filename = f"{stem}_{timestamp}{ext}"
+
+    # 1. Save uploaded file to uploads directory for permanent archive
+    upload_dest = UPLOADS_DIR / saved_filename
+    with open(upload_dest, "wb") as f:
+        f.write(file_bytes)
+
+    # Determine preview flag
+    is_preview = (preview is True) or (preview_form is True) or (request.query_params.get("preview", "").lower() == "true")
+
+    # 2. Baseline portfolio
+    base_portfolio = {}
+    if PORTFOLIO_PATH.exists():
+        try:
+            with open(PORTFOLIO_PATH, "r", encoding="utf-8") as f:
+                base_portfolio = json.load(f)
+        except Exception as e:
+            print(f"[JSON Warning] {e}")
+
+    # 3. In-memory text extraction
+    try:
+        raw_text = extract_raw_text(file_bytes, ext)
+    except Exception as e:
+        return JSONResponse(
+            status_code=422,
+            content={"success": False, "error": f"Failed to extract text from document: {str(e)}"}
+        )
+
+    if not raw_text or len(raw_text.strip()) < 30:
+        return JSONResponse(
+            status_code=422,
+            content={"success": False, "error": "Could not extract meaningful text from the uploaded document. Ensure it is not an image-only scan."}
+        )
+
+    # 4. AI / Deterministic Fallback transformation
+    structured_data = structure_resume_with_ai(raw_text, base_portfolio)
+
+    # 5. Update resume links in profile
+    structured_data.setdefault("profile", {})
+    structured_data["profile"]["resumeUrl"] = f"assets/{sanitized_name}"
+    structured_data["profile"]["resumeFilename"] = sanitized_name
+
+    # 6. Diff calculation
+    diff_summary = compute_portfolio_diff(base_portfolio, structured_data)
+
+    if is_preview:
+        return {
+            "success": True,
+            "preview": True,
+            "message": "Resume analyzed successfully. Review changes before publishing.",
+            "diff": diff_summary,
+            "data": structured_data,
+            "extractedCharacters": len(raw_text),
+            "resumeFilename": sanitized_name,
+            "uploadedFile": saved_filename
+        }
+
+    # Non-preview direct publish: Admin PIN check
+    if not check_admin_pin(request):
+        return JSONResponse(
+            status_code=401,
+            content={"success": False, "error": "Unauthorized: Invalid or missing Admin Security PIN."}
+        )
+
+    # Copy to assets/
+    asset_dest = ASSETS_DIR / sanitized_name
+    with open(asset_dest, "wb") as f:
+        f.write(file_bytes)
+
+    backup_path = create_portfolio_backup()
+
+    # Atomic write to data/portfolio.json
+    temp_path = PORTFOLIO_PATH.with_suffix(".tmp")
+    with open(temp_path, "w", encoding="utf-8") as f:
+        json.dump(structured_data, f, indent=2, ensure_ascii=False)
+    temp_path.replace(PORTFOLIO_PATH)
+
+    return {
+        "success": True,
+        "message": "Resume parsed and portfolio updated successfully!",
+        "backup": backup_path,
+        "extractedCharacters": len(raw_text),
+        "diff": diff_summary,
+        "data": structured_data
+    }
+
+
+@app.post("/api/publish-portfolio")
+async def publish_portfolio(request: Request, payload: PublishPortfolioRequest):
+    """
+    Atomically commits and publishes staged portfolio data approved by user.
+    Requires Admin PIN if configured.
+    """
+    if not check_admin_pin(request, payload.pin):
+        return JSONResponse(
+            status_code=401,
+            content={"success": False, "error": "Unauthorized: Invalid or missing Admin Security PIN."}
+        )
+
+    if not payload.data or not isinstance(payload.data, dict):
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": "Invalid portfolio data payload provided."}
+        )
+
+    base_portfolio = {}
+    if PORTFOLIO_PATH.exists():
+        try:
+            with open(PORTFOLIO_PATH, "r", encoding="utf-8") as f:
+                base_portfolio = json.load(f)
+        except Exception as e:
+            print(f"[JSON Warning] {e}")
+
+    finalized_data = validate_and_merge_portfolio(payload.data, base_portfolio)
+
+    # Synchronize asset if resumeFilename provided
+    if payload.resumeFilename:
+        sanitized_name = re.sub(r"[^a-zA-Z0-9._-]", "_", payload.resumeFilename)
+        asset_dest = ASSETS_DIR / sanitized_name
+        stem = Path(sanitized_name).stem
+
+        if not asset_dest.exists() and UPLOADS_DIR.exists():
+            matched_files = sorted(
+                list(UPLOADS_DIR.glob(f"{stem}_*")),
+                key=lambda p: p.stat().st_mtime,
+                reverse=True
+            )
+            if matched_files:
+                shutil.copy2(matched_files[0], asset_dest)
+                print(f"[Publish Engine] Copied uploaded asset to: assets/{sanitized_name}")
+
+        finalized_data.setdefault("profile", {})
+        finalized_data["profile"]["resumeUrl"] = f"assets/{sanitized_name}"
+        finalized_data["profile"]["resumeFilename"] = sanitized_name
+
+    # Create safety backup snapshot
+    backup_path = create_portfolio_backup()
+
+    # Atomically write to data/portfolio.json
+    temp_path = PORTFOLIO_PATH.with_suffix(".tmp")
+    with open(temp_path, "w", encoding="utf-8") as f:
+        json.dump(finalized_data, f, indent=2, ensure_ascii=False)
+    temp_path.replace(PORTFOLIO_PATH)
+
+    return {
+        "success": True,
+        "message": "Portfolio successfully published live!",
+        "backup": backup_path,
+        "data": finalized_data
+    }
+
+
+@app.post("/api/restore-backup")
+async def restore_backup(request: Request, payload: RestoreBackupRequest):
+    """
+    Atomically rolls back portfolio.json to a specified historical backup snapshot.
+    Requires Admin PIN if configured.
+    """
+    if not check_admin_pin(request, payload.pin):
+        return JSONResponse(
+            status_code=401,
+            content={"success": False, "error": "Unauthorized: Invalid or missing Admin Security PIN."}
+        )
+
+    filename = payload.filename
+    if not filename or ".." in filename or "/" in filename or "\\" in filename or not filename.endswith(".json"):
+        return JSONResponse(
+            status_code=400,
+            content={"success": False, "error": "Invalid backup filename format."}
+        )
+
+    backup_file = BACKUPS_DIR / Path(filename).name
+    if not backup_file.exists():
+        return JSONResponse(
+            status_code=404,
+            content={"success": False, "error": f'Selected backup "{filename}" does not exist.'}
+        )
+
+    try:
+        with open(backup_file, "r", encoding="utf-8") as f:
+            parsed_backup = json.load(f)
+    except Exception as e:
+        return JSONResponse(
+            status_code=422,
+            content={"success": False, "error": f"Backup file contains corrupted JSON: {str(e)}"}
+        )
+
+    # 1. Create a safety snapshot of current live state BEFORE overwriting
+    safety_snapshot = create_portfolio_backup()
+
+    # 2. Atomically write the restored backup into data/portfolio.json
+    temp_path = PORTFOLIO_PATH.with_suffix(".tmp")
+    with open(temp_path, "w", encoding="utf-8") as f:
+        json.dump(parsed_backup, f, indent=2, ensure_ascii=False)
+    temp_path.replace(PORTFOLIO_PATH)
+
+    return {
+        "success": True,
+        "message": f"Portfolio successfully rolled back to snapshot: {backup_file.name}",
+        "restoredFilename": backup_file.name,
+        "safetyBackup": safety_snapshot,
+        "data": parsed_backup
     }
 
 
