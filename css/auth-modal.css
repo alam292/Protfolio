@@ -1,0 +1,508 @@
+/* ==========================================================================
+   FOLIOBLOX DUAL-ENGINE AUTHENTICATION MODAL STYLES (css/auth-modal.css)
+   Ultra-modern glassmorphic design system with cyan (#00f0ff) & amber accents
+   ========================================================================== */
+
+/* Modal Backdrop Overlay */
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 6, 12, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+  padding: 16px;
+}
+
+.auth-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Glassmorphic Modal Dialog */
+.auth-modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: linear-gradient(145deg, rgba(17, 24, 39, 0.95) 0%, rgba(11, 15, 25, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7),
+              0 0 30px -5px rgba(0, 240, 255, 0.12);
+  overflow: hidden;
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.auth-modal-overlay.active .auth-modal-card {
+  transform: scale(1) translateY(0);
+}
+
+/* Top Radiant Cyber Gradient Bar */
+.auth-modal-accent {
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(90deg, #00f0ff 0%, #3b82f6 50%, #8b5cf6 100%);
+}
+
+/* Close Action Button */
+.auth-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.auth-modal-close:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Modal Header Content */
+.auth-modal-header {
+  padding: 28px 28px 12px 28px;
+  text-align: center;
+}
+
+.auth-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.auth-modal-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  letter-spacing: -0.3px;
+}
+
+.auth-modal-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.auth-modal-desc strong {
+  color: #00f0ff;
+}
+
+/* Modal Body */
+.auth-modal-body {
+  padding: 16px 28px 28px 28px;
+}
+
+/* Views Container */
+.auth-view {
+  display: none;
+}
+
+.auth-view.active {
+  display: block;
+  animation: authFadeIn 0.3s ease forwards;
+}
+
+@keyframes authFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Google 1-Click Action Button */
+.btn-google-auth {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #1f2937;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn-google-auth:hover {
+  background: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 240, 255, 0.2);
+}
+
+.btn-google-auth svg {
+  flex-shrink: 0;
+}
+
+/* Sleek Divider Line */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.auth-divider span {
+  padding: 0 12px;
+}
+
+/* Form Groups & Inputs */
+.auth-group {
+  margin-bottom: 16px;
+}
+
+.auth-label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 14px;
+  color: #64748b;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 12px 14px 12px 42px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.auth-input:focus {
+  border-color: #00f0ff;
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.15);
+}
+
+.auth-password-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.auth-password-toggle:hover {
+  color: #00f0ff;
+}
+
+/* Extra Actions (Forgot Password link) */
+.auth-extra-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -6px;
+  margin-bottom: 18px;
+}
+
+.auth-link {
+  font-size: 12px;
+  color: #00f0ff;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  cursor: pointer;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+  color: #38bdf8;
+}
+
+/* Primary Action Button */
+.btn-auth-primary {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
+  color: #0b0f19;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-auth-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 240, 255, 0.45);
+  background: linear-gradient(135deg, #38bdf8 0%, #60a5fa 100%);
+}
+
+.btn-auth-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ==========================================================================
+   6-Digit OTP Box Grid
+   ========================================================================== */
+.otp-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 18px 0;
+}
+
+.otp-boxes {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.otp-digit {
+  width: 48px;
+  height: 56px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+  color: #00f0ff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: all 0.2s ease;
+  caret-color: #00f0ff;
+}
+
+.otp-digit:focus {
+  border-color: #00f0ff;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2), 0 0 15px rgba(0, 240, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.otp-digit.filled {
+  border-color: rgba(0, 240, 255, 0.6);
+  background: rgba(0, 240, 255, 0.05);
+}
+
+.otp-resend-row {
+  margin-top: 16px;
+  font-size: 12px;
+  color: #94a3b8;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-resend-otp {
+  background: none;
+  border: none;
+  color: #00f0ff;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-size: 12px;
+}
+
+.btn-resend-otp:disabled {
+  color: #64748b;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Password Strength Meter
+   ========================================================================== */
+.password-meter-wrap {
+  margin-top: 8px;
+}
+
+.password-meter-bars {
+  display: flex;
+  gap: 4px;
+  height: 4px;
+  margin-bottom: 6px;
+}
+
+.meter-bar {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  transition: background-color 0.25s ease;
+}
+
+.meter-bar.active-weak { background: #ef4444; }
+.meter-bar.active-medium { background: #f59e0b; }
+.meter-bar.active-strong { background: #10b981; }
+.meter-bar.active-ultra { background: #00f0ff; }
+
+.password-meter-label {
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   Alert / Toast Banner inside Modal
+   ========================================================================== */
+.auth-alert {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 16px;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.4;
+}
+
+.auth-alert.error {
+  display: flex;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #fca5a5;
+}
+
+.auth-alert.success {
+  display: flex;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #6ee7b7;
+}
+
+/* User Profile Badge in Nav */
+.nav-auth-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px 4px 4px;
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-auth-user:hover {
+  border-color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+
+.nav-auth-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(0, 240, 255, 0.4);
+}
+
+.nav-auth-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .auth-modal-card {
+    max-width: 100%;
+    border-radius: 16px;
+  }
+  .otp-digit {
+    width: 38px;
+    height: 48px;
+    font-size: 20px;
+  }
+  .auth-modal-header {
+    padding: 24px 20px 8px 20px;
+  }
+  .auth-modal-body {
+    padding: 12px 20px 24px 20px;
+  }
+}
