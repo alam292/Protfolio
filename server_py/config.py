@@ -14,12 +14,26 @@ BACKUPS_DIR = DATA_DIR / "backups"
 UPLOADS_DIR = ROOT_DIR / "uploads"
 ASSETS_DIR = ROOT_DIR / "assets"
 
-# Load .env file
-load_dotenv(ROOT_DIR / ".env")
+# Load .env file with override support
+load_dotenv(ROOT_DIR / ".env", override=True)
+
+
+def get_gemini_api_key() -> str:
+    """
+    Retrieve sanitized Gemini API key from environment with fallback to GOOGLE_API_KEY.
+    Strips surrounding quotes and whitespace, and ignores placeholders.
+    """
+    raw_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY") or ""
+    # Strip quotes, whitespace, and newlines
+    cleaned = raw_key.strip(" \t\r\n\"'")
+    if not cleaned or cleaned == "YOUR_GEMINI_API_KEY_HERE":
+        return ""
+    return cleaned
+
 
 # Environment configurations
 ADMIN_UPLOAD_PIN = os.getenv("ADMIN_UPLOAD_PIN", "1234").strip()
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+GEMINI_API_KEY = get_gemini_api_key()
 PORT = int(os.getenv("PORT", 8000))
 DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 SQLITE_PATH = DATA_DIR / "portfolio.db"

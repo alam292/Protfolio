@@ -15,7 +15,7 @@ try:
 except ImportError:
     docx = None
 
-from .config import GEMINI_API_KEY
+from .config import GEMINI_API_KEY, get_gemini_api_key
 
 
 def extract_raw_text(buffer: bytes, ext: str) -> str:
@@ -62,7 +62,7 @@ def structure_resume_with_ai(raw_text: str, base_portfolio: Dict[str, Any]) -> D
     Transform raw resume text into structured portfolio.json data using Gemini AI
     with fallback to deterministic rule parser.
     """
-    api_key = GEMINI_API_KEY.strip() if GEMINI_API_KEY else ""
+    api_key = get_gemini_api_key() or (GEMINI_API_KEY.strip() if GEMINI_API_KEY else "")
 
     if api_key and api_key != "YOUR_GEMINI_API_KEY_HERE":
         try:
@@ -105,11 +105,12 @@ RAW RESUME TEXT:
 {raw_text[:12000]}
 """
 
+    # Proven reliable cascade for Google Generative AI (ultra-fast flash-lite first)
     models_to_try = [
         "gemini-3.5-flash-lite",
         "gemini-3.5-flash",
-        "gemini-3.8-flash",
-        "gemini-flash-latest"
+        "gemini-flash-latest",
+        "gemini-3.8-flash"
     ]
 
     last_error = None
@@ -126,7 +127,7 @@ RAW RESUME TEXT:
             }
         }
         try:
-            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=12)
+            res = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
             if res.status_code == 200:
                 data = res.json()
                 text = data["candidates"][0]["content"]["parts"][0]["text"].strip()

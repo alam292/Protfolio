@@ -23,7 +23,8 @@ from server_py.config import (
     ASSETS_DIR,
     BACKUPS_DIR,
     ADMIN_UPLOAD_PIN,
-    GEMINI_API_KEY
+    GEMINI_API_KEY,
+    get_gemini_api_key
 )
 from server_py.database import check_db_connection
 from server_py.seed_db import seed_initial_data
@@ -99,11 +100,14 @@ MIME_TYPES = {
 async def health_check():
     """Server health status, database connectivity and AI key check."""
     db_health = check_db_connection()
+    current_key = get_gemini_api_key()
+    masked_key = f"{current_key[:6]}...{current_key[-4:]}" if len(current_key) > 10 else None
     return {
         "status": "ok",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "database": db_health,
-        "geminiKeyConfigured": bool(GEMINI_API_KEY and GEMINI_API_KEY != "YOUR_GEMINI_API_KEY_HERE")
+        "geminiKeyConfigured": bool(current_key),
+        "geminiKeyPrefix": masked_key
     }
 
 
