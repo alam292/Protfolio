@@ -772,9 +772,12 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
   result.about = result.about || {};
   result.about.sectionTag = "WHO I AM";
   result.about.terminalCommand = "whoami";
+  result.about.status = result.profile?.status || "Available for opportunities";
+
+  const extractedLead = fullSummary && fullSummary.trim().length > 30 ? fullSummary.trim() : null;
 
   if (isDataAnalyst) {
-    result.about.lead = "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.";
+    result.about.lead = extractedLead || "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.";
     result.about.highlights = [
       { icon: "zap", title: "Actionable Insights", detail: "Power BI & DAX Dashboards" },
       { icon: "code", title: "Python Analytics", detail: "Pandas, NumPy & EDA" },
@@ -783,7 +786,7 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
     ];
   } else {
     const leadRole = result.profile.title || "Full-Stack Software Developer";
-    result.about.lead = `I am a ${leadRole} specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.`;
+    result.about.lead = extractedLead || `I am a ${leadRole} specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.`;
     result.about.highlights = [
       { icon: "zap", title: "High-Speed APIs", detail: "FastAPI & Django REST" },
       { icon: "code", title: "Modern Frontends", detail: "React, Next.js & UI/UX" },
@@ -791,6 +794,26 @@ function fallbackRuleBasedParser(rawText, basePortfolio = {}) {
       { icon: "shield", title: "Production Ready", detail: "Tested & Cloud Deployed" }
     ];
   }
+
+  // Inherit or populate dynamic pillars, quickInfo, and actions
+  const baseAbout = (basePortfolio && basePortfolio.about) || {};
+  if (baseAbout.pillars) {
+    result.about.pillars = baseAbout.pillars;
+  }
+  if (baseAbout.quickInfo) {
+    result.about.quickInfo = baseAbout.quickInfo;
+  } else {
+    result.about.quickInfo = [
+      { label: "Role", value: result.profile.title || "Specialist", icon: "user" },
+      { label: "Location", value: "New Delhi, India", icon: "map-pin" },
+      { label: "Notice", value: "Immediate Joiner", icon: "briefcase" }
+    ];
+  }
+  if (baseAbout.actions) {
+    result.about.actions = baseAbout.actions;
+  }
+  result.about.showStats = true;
+  result.about.showPillars = true;
 
   // 7. Extract Certifications
   const certLines = sectionMap['CERTIFICATIONS & ACHIEVEMENTS'] || [];

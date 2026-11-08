@@ -55,27 +55,28 @@
   "about": {
     "sectionTag": "WHO I AM",
     "terminalCommand": "whoami",
-    "lead": "I am a Data Analyst Trainee & Power BI Developer specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment.",
+    "status": "Available for opportunities",
+    "lead": "I am a Data Analyst Trainee & Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights.",
     "highlights": [
       {
         "icon": "zap",
-        "title": "High-Speed APIs",
-        "detail": "FastAPI & Django REST"
+        "title": "Actionable Insights",
+        "detail": "Power BI & DAX Dashboards"
       },
       {
         "icon": "code",
-        "title": "Modern Frontends",
-        "detail": "React, Next.js & UI/UX"
+        "title": "Python Analytics",
+        "detail": "Pandas, NumPy & EDA"
       },
       {
         "icon": "database",
-        "title": "Relational Schemas",
-        "detail": "PostgreSQL & SQLAlchemy"
+        "title": "Database Querying",
+        "detail": "SQL, MySQL & ETL"
       },
       {
         "icon": "shield",
-        "title": "Production Ready",
-        "detail": "Tested & Cloud Deployed"
+        "title": "Business Reports",
+        "detail": "Advanced Excel & Tableau"
       }
     ],
     "pillars": [
@@ -107,7 +108,46 @@
         "content": "I advocate for clean ETL data transformations, validated relational schemas in MySQL, robust DAX calculations, and clear KPI visual storytelling for stakeholders.",
         "icon": "shield"
       }
-    ]
+    ],
+    "quickInfo": [
+      {
+        "label": "Role",
+        "value": "Data Analyst Trainee",
+        "icon": "user"
+      },
+      {
+        "label": "Focus",
+        "value": "Power BI & Python Analytics",
+        "icon": "zap"
+      },
+      {
+        "label": "Location",
+        "value": "New Delhi, India",
+        "icon": "map-pin"
+      },
+      {
+        "label": "Notice",
+        "value": "Immediate Joiner",
+        "icon": "briefcase"
+      }
+    ],
+    "actions": [
+      {
+        "text": "Explore My Work",
+        "href": "#projects",
+        "style": "primary",
+        "icon": "arrow-right"
+      },
+      {
+        "text": "Download Resume",
+        "href": "assets/Md_Matloob_Alam.pdf",
+        "style": "secondary",
+        "icon": "download",
+        "download": true
+      }
+    ],
+    "showStats": true,
+    "showPillars": true
   },
   "skills": {
     "sectionTag": "TECHNICAL ARSENAL",

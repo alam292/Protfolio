@@ -166,7 +166,12 @@ class PortfolioRenderer {
       "map-pin": `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>`,
       send: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>`,
       user: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`,
-      external: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`
+      external: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>`,
+      download: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>`,
+      "arrow-right": `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`,
+      briefcase: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>`,
+      "file-text": `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>`,
+      award: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>`
     };
     return icons[type] || icons.code;
   }
@@ -437,33 +442,43 @@ class PortfolioRenderer {
     // No-op: visual block removed
   }
 
-  // 2. About Me Section (Concise High-Signal Bio + Borderless Open Layout, No Card View)
+  // 2. About Me Section (Fully Dynamic - High-Signal Bio, Dynamic Pillars, Quick Info, CTAs & Metrics)
   renderAbout() {
-    if (!this.checkSectionEnabled('about', this.data.about)) return;
+    const about = this.data.about || {};
+    if (!this.checkSectionEnabled('about', about)) return;
 
     const mount = document.getElementById('aboutMount');
     if (!mount) return;
 
-    const { about, stats, profile } = this.data;
+    const { profile = {} } = this.data;
+    const stats = (about.stats && Array.isArray(about.stats) && about.stats.length > 0)
+      ? about.stats
+      : (this.data.stats || []);
 
     const showStats = about.showStats !== false && Array.isArray(stats) && stats.length > 0;
+    const sectionTag = about.sectionTag || 'WHO I AM';
+    const terminalCommand = about.terminalCommand || 'whoami';
+    const statusText = (about.status !== undefined && about.status !== null) ? about.status : (profile.status || '');
+
     const statsHtml = showStats ? stats.map(s => `
       <div class="stat-card stat-item-open">
         <div class="stat-value-row">
           <span class="stat-number">${s.value}</span>
-          <span class="stat-suffix">${s.suffix}</span>
+          <span class="stat-suffix">${s.suffix || ''}</span>
         </div>
-        <div class="stat-label">${s.label}</div>
-        <div class="stat-sublabel">${s.description}</div>
+        <div class="stat-label">${s.label || ''}</div>
+        <div class="stat-sublabel">${s.description || ''}</div>
       </div>
     `).join('') : '';
 
-    const highlights = about.highlights || [
-      { icon: 'zap', title: 'Actionable Insights', detail: 'Power BI & DAX Dashboards' },
-      { icon: 'code', title: 'Python Analytics', detail: 'Pandas, NumPy & EDA' },
-      { icon: 'database', title: 'Database Querying', detail: 'SQL, MySQL & ETL' },
-      { icon: 'shield', title: 'Business Reports', detail: 'Advanced Excel & Tableau' }
-    ];
+    const highlights = (Array.isArray(about.highlights) && about.highlights.length > 0)
+      ? about.highlights
+      : [
+        { icon: 'zap', title: 'Actionable Insights', detail: 'Power BI & DAX Dashboards' },
+        { icon: 'code', title: 'Python Analytics', detail: 'Pandas, NumPy & EDA' },
+        { icon: 'database', title: 'Database Querying', detail: 'SQL, MySQL & ETL' },
+        { icon: 'shield', title: 'Business Reports', detail: 'Advanced Excel & Tableau' }
+      ];
 
     const highlightsHtml = highlights.map(h => `
       <div class="about-highlight-item">
@@ -475,31 +490,111 @@ class PortfolioRenderer {
       </div>
     `).join('');
 
-    let bioLead = about.lead || `I am a ${profile.title || 'Data Analyst'} skilled in data analysis, dashboard development, and business intelligence.`;
-    if (profile.title && bioLead.includes(profile.title)) {
+    // Dynamic bio lead with markdown asterisks and profile.title support
+    let rawBio = about.lead || (profile.heroTagline || `I am a ${profile.title || 'Data Analyst'} skilled in data analysis, dashboard development, and business intelligence.`);
+    let bioLead = rawBio.replace(/\*\*(.*?)\*\*/g, '<strong class="text-glow-accent">$1</strong>');
+    if (!rawBio.includes('**') && profile.title && bioLead.includes(profile.title)) {
       bioLead = bioLead.replace(profile.title, `<strong class="text-glow-accent">${profile.title}</strong>`);
     }
 
-    const hasProjects = Array.isArray(this.data.projects?.items) && this.data.projects.items.length > 0 && this.data.projects.disabled !== true;
-    const actionBtnTarget = hasProjects ? '#projects' : '#contact';
-    const actionBtnText = hasProjects ? 'Explore My Work' : 'Get in Touch';
+    // Extended paragraphs
+    const paragraphsHtml = (Array.isArray(about.paragraphs) && about.paragraphs.length > 0)
+      ? about.paragraphs.map(p => {
+          const formatted = p.replace(/\*\*(.*?)\*\*/g, '<strong class="text-glow-accent">$1</strong>');
+          return `<p class="about-bio-paragraph">${formatted}</p>`;
+        }).join('')
+      : '';
+
+    // Quick info tags (Role, Location, Focus, Availability)
+    const quickInfoList = Array.isArray(about.quickInfo) && about.quickInfo.length > 0 ? about.quickInfo : [];
+    const quickInfoHtml = quickInfoList.length > 0 ? `
+      <div class="about-quick-info-grid" aria-label="Quick Facts">
+        ${quickInfoList.map(item => `
+          <div class="about-quick-info-chip">
+            ${item.icon ? `<span class="chip-icon" aria-hidden="true">${this.getIconSvg(item.icon)}</span>` : ''}
+            <span class="chip-label">${item.label}:</span>
+            <span class="chip-value">${item.value}</span>
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    // Dynamic Pillars (Identity, Journey, Track Record, Philosophy)
+    const showPillars = about.showPillars !== false && Array.isArray(about.pillars) && about.pillars.length > 0;
+    const pillarsHtml = showPillars ? `
+      <div class="about-pillars-container">
+        <div class="about-pillars-grid">
+          ${about.pillars.map(p => `
+            <div class="about-pillar-card" id="pillar-${p.id || 'card'}">
+              <div class="pillar-tag">${p.tag || ''}</div>
+              <h4 class="pillar-title">${p.title || ''}</h4>
+              <p class="pillar-content">${p.content || ''}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : '';
+
+    // Dynamic Action CTAs (Primary & Secondary Buttons)
+    let actionsHtml = '';
+    if (Array.isArray(about.actions) && about.actions.length > 0) {
+      actionsHtml = about.actions.map(action => {
+        const isPrimary = action.style === 'primary' || !action.style;
+        const btnClass = isPrimary ? 'btn-touch btn-touch-orange' : 'btn-touch btn-touch-secondary';
+        const iconSvg = action.icon ? this.getIconSvg(action.icon) : (isPrimary ? `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        ` : this.getIconSvg('download'));
+        const downloadAttr = action.download ? 'download' : '';
+        return `
+          <a href="${action.href || '#'}" class="${btnClass}" ${downloadAttr}>
+            <span>${action.text}</span>
+            <span class="btn-icon-circle" aria-hidden="true">${iconSvg}</span>
+          </a>
+        `;
+      }).join('');
+    } else {
+      const hasProjects = Array.isArray(this.data.projects?.items) && this.data.projects.items.length > 0 && this.data.projects.disabled !== true;
+      const actionBtnTarget = hasProjects ? '#projects' : '#contact';
+      const actionBtnText = hasProjects ? 'Explore My Work' : 'Get in Touch';
+      const resumeBtn = profile.resumeUrl ? `
+        <a href="${profile.resumeUrl}" class="btn-touch btn-touch-secondary" download>
+          <span>Download Resume</span>
+          <span class="btn-icon-circle" aria-hidden="true">${this.getIconSvg('download')}</span>
+        </a>
+      ` : '';
+      actionsHtml = `
+        <a href="${actionBtnTarget}" class="btn-touch btn-touch-orange">
+          <span>${actionBtnText}</span>
+          <span class="btn-icon-circle" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </a>
+        ${resumeBtn}
+      `;
+    }
 
     mount.innerHTML = `
-      <h2 class="section-tag" id="about-title">${about.sectionTag || 'WHO I AM'}</h2>
+      <h2 class="section-tag" id="about-title">${sectionTag}</h2>
 
-      <div class="about-grid about-open-layout">
+      <div class="about-grid about-open-layout ${showStats ? '' : 'no-stats'}">
         <!-- Biography Story (Borderless Open Layout - No Card View) -->
         <div class="about-story-card about-open-story">
           <div class="about-meta-row">
             <div class="about-terminal-tag" aria-label="Terminal identity">
               <span class="terminal-prompt">$</span>
-              <span class="terminal-cmd">${about.terminalCommand || 'whoami'}</span>
+              <span class="terminal-cmd">${terminalCommand}</span>
             </div>
 
-            ${profile.status ? `
+            ${statusText ? `
             <div class="status-indicator status-indicator-inline">
               <span class="status-dot" aria-hidden="true"></span>
-              <span class="status-text">${profile.status}</span>
+              <span class="status-text">${statusText}</span>
             </div>` : ''}
           </div>
 
@@ -507,20 +602,18 @@ class PortfolioRenderer {
             ${bioLead}
           </p>
 
+          ${paragraphsHtml}
+
+          ${quickInfoHtml}
+
           <div class="about-highlights-list">
             ${highlightsHtml}
           </div>
 
+          ${pillarsHtml}
+
           <div class="about-action-row">
-            <a href="${actionBtnTarget}" class="btn-touch btn-touch-orange">
-              <span>${actionBtnText}</span>
-              <span class="btn-icon-circle" aria-hidden="true">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
-            </a>
+            ${actionsHtml}
           </div>
         </div>
 
@@ -531,6 +624,7 @@ class PortfolioRenderer {
         </div>` : ''}
       </div>
     `;
+  }
   }
 
   // 3. Technical Skills Section (Modern Animated Technology Showcase)

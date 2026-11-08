@@ -543,9 +543,12 @@ def fallback_rule_based_parser(raw_text: str, base_portfolio: Dict[str, Any]) ->
     # 8. Who Am I Revamp Schema Alignment
     result["about"]["sectionTag"] = "WHO I AM"
     result["about"]["terminalCommand"] = "whoami"
+    result["about"]["status"] = result["profile"].get("status") or "Available for opportunities"
+
+    extracted_lead = full_summary.strip() if full_summary and len(full_summary.strip()) > 30 else None
 
     if is_data_analyst:
-        result["about"]["lead"] = "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights."
+        result["about"]["lead"] = extracted_lead or "I am a Data Analyst Trainee and Power BI Developer skilled in data cleaning, ETL, EDA, DAX, Power Query, and interactive dashboard development. Experienced in analyzing healthcare and banking datasets to identify trends and generate actionable, data-driven insights."
         result["about"]["highlights"] = [
             {"icon": "zap", "title": "Actionable Insights", "detail": "Power BI & DAX Dashboards"},
             {"icon": "code", "title": "Python Analytics", "detail": "Pandas, NumPy & EDA"},
@@ -554,13 +557,30 @@ def fallback_rule_based_parser(raw_text: str, base_portfolio: Dict[str, Any]) ->
         ]
     else:
         role_label = result["profile"].get("title", "Full-Stack Software Developer")
-        result["about"]["lead"] = f"I am a {role_label} specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment."
+        result["about"]["lead"] = extracted_lead or f"I am a {role_label} specializing in high-throughput backend APIs with FastAPI & Django, paired with responsive, clean frontends in React & Next.js. Focused on robust database schemas, clean architecture, and reliable production deployment."
         result["about"]["highlights"] = [
             {"icon": "zap", "title": "High-Speed APIs", "detail": "FastAPI & Django REST"},
             {"icon": "code", "title": "Modern Frontends", "detail": "React, Next.js & UI/UX"},
             {"icon": "database", "title": "Relational Schemas", "detail": "PostgreSQL & SQLAlchemy"},
             {"icon": "shield", "title": "Production Ready", "detail": "Tested & Cloud Deployed"}
         ]
+
+    # Inherit or populate dynamic pillars, quickInfo, and actions
+    base_about = base_portfolio.get("about", {}) if isinstance(base_portfolio, dict) else {}
+    if base_about.get("pillars"):
+        result["about"]["pillars"] = base_about["pillars"]
+    if base_about.get("quickInfo"):
+        result["about"]["quickInfo"] = base_about["quickInfo"]
+    else:
+        result["about"]["quickInfo"] = [
+            {"label": "Role", "value": result["profile"].get("title", "Specialist"), "icon": "user"},
+            {"label": "Location", "value": "New Delhi, India", "icon": "map-pin"},
+            {"label": "Notice", "value": "Immediate Joiner", "icon": "briefcase"}
+        ]
+    if base_about.get("actions"):
+        result["about"]["actions"] = base_about["actions"]
+    result["about"]["showStats"] = True
+    result["about"]["showPillars"] = True
 
     # 9. Extract Certifications
     cert_lines = section_map.get("CERTIFICATIONS & ACHIEVEMENTS", [])

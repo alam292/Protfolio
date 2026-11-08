@@ -13,6 +13,11 @@
   position: relative;
 }
 
+.about-grid.about-open-layout.no-stats {
+  grid-template-columns: 1fr;
+  max-width: 960px;
+}
+
 /* ==========================================================================
    Left Column: Open Narrative (No Card Box)
    ========================================================================== */
@@ -103,6 +108,61 @@
   text-shadow: 0 0 16px rgba(255, 87, 34, 0.35);
 }
 
+/* Extended Bio Paragraphs */
+.about-bio-paragraph {
+  font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+  color: #9ca3af;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Dynamic Quick Info Badges / Facts */
+.about-quick-info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.about-quick-info-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  color: #e5e7eb;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.about-quick-info-chip:hover {
+  background: rgba(255, 87, 34, 0.08);
+  border-color: rgba(255, 87, 34, 0.3);
+}
+
+.about-quick-info-chip .chip-label {
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.about-quick-info-chip .chip-value {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.about-quick-info-chip .chip-icon {
+  display: flex;
+  align-items: center;
+  color: var(--accent-orange);
+}
+
+.about-quick-info-chip .chip-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
 .tech-tag {
   display: inline-block;
   padding: 1px 8px;
@@ -174,6 +234,61 @@
   color: var(--text-secondary);
   font-weight: 500;
   line-height: 1.25;
+}
+
+/* Dynamic Pillars (Narrative & Standards Micro-Cards) */
+.about-pillars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.about-pillar-card {
+  position: relative;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  transition: transform var(--transition-smooth), border-color var(--transition-smooth), box-shadow var(--transition-smooth), background var(--transition-smooth);
+}
+
+.about-pillar-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 87, 34, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(255, 87, 34, 0.12);
+}
+
+.pillar-tag {
+  display: inline-block;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+.pillar-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.pillar-content {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  line-height: 1.55;
+  margin: 0;
 }
 
 /* Action Buttons Row */
@@ -268,6 +383,20 @@
 @media (max-width: 640px) {
   .about-highlights-list {
     grid-template-columns: 1fr;
+  }
+
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-quick-info-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .about-quick-info-chip {
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .about-stats-grid.about-stats-open {

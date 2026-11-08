@@ -161,11 +161,24 @@ def compute_portfolio_diff(old_data: Dict[str, Any] = None, new_data: Dict[str, 
     # Skills diff
     def extract_skills(data: Dict[str, Any]) -> list:
         skills = []
-        for cat in data.get("skills", {}).get("categories", []):
-            for s in (cat.get("skills") or cat.get("items") or []):
-                name = s.get("name") if isinstance(s, dict) else s
+        skills_obj = data.get("skills", {})
+        if isinstance(skills_obj, list):
+            for s in skills_obj:
+                name = s.get("name") if isinstance(s, dict) else str(s)
                 if name:
                     skills.append(name)
+            return skills
+        if isinstance(skills_obj, dict):
+            categories = skills_obj.get("categories", [])
+            if isinstance(categories, list):
+                for cat in categories:
+                    if isinstance(cat, dict):
+                        for s in (cat.get("skills") or cat.get("items") or []):
+                            name = s.get("name") if isinstance(s, dict) else str(s)
+                            if name:
+                                skills.append(name)
+                    elif isinstance(cat, str):
+                        skills.append(cat)
         return skills
 
     old_skills = extract_skills(old_data)
@@ -174,12 +187,18 @@ def compute_portfolio_diff(old_data: Dict[str, Any] = None, new_data: Dict[str, 
     added_skills = [s for s in new_skills if s not in old_skills]
     removed_skills = [s for s in old_skills if s not in new_skills]
 
+    cats_count = 0
+    if isinstance(new_data.get("skills"), dict):
+        cats_count = len(new_data.get("skills", {}).get("categories", []))
+    elif isinstance(new_data.get("skills"), list):
+        cats_count = len(new_data.get("skills", []))
+
     diff["skills"] = {
         "added": added_skills,
         "removed": removed_skills,
         "totalOld": len(old_skills),
         "totalNew": len(new_skills),
-        "categoriesCount": len(new_data.get("skills", {}).get("categories", []))
+        "categoriesCount": cats_count
     }
     if added_skills or removed_skills or len(old_skills) != len(new_skills):
         diff["hasChanges"] = True
@@ -197,41 +216,73 @@ def compute_portfolio_diff(old_data: Dict[str, Any] = None, new_data: Dict[str, 
         diff["hasChanges"] = True
 
     # Experience
-    old_roles = old_data.get("experience", {}).get("roles", [])
-    new_roles = new_data.get("experience", {}).get("roles", [])
+    def extract_roles(data):
+        exp = data.get("experience", {})
+        if isinstance(exp, list):
+            return exp
+        if isinstance(exp, dict):
+            return exp.get("roles", [])
+        return []
+
+    old_roles = extract_roles(old_data)
+    new_roles = extract_roles(new_data)
     diff["experience"] = {
         "oldCount": len(old_roles),
         "newCount": len(new_roles),
-        "roles": [f"{r.get('role') or r.get('title') or 'Role'} @ {r.get('company', 'Company')}" for r in new_roles]
+        "roles": [f"{r.get('role') or r.get('title') or 'Role'} @ {r.get('company', 'Company')}" if isinstance(r, dict) else str(r) for r in new_roles]
     }
     if len(old_roles) != len(new_roles):
         diff["hasChanges"] = True
 
     # Projects
-    old_proj = old_data.get("projects", {}).get("items", [])
-    new_proj = new_data.get("projects", {}).get("items", [])
+    def extract_projects(data):
+        proj = data.get("projects", {})
+        if isinstance(proj, list):
+            return proj
+        if isinstance(proj, dict):
+            return proj.get("items", [])
+        return []
+
+    old_proj = extract_projects(old_data)
+    new_proj = extract_projects(new_data)
     diff["projects"] = {
         "oldCount": len(old_proj),
         "newCount": len(new_proj),
-        "titles": [p.get("title") or p.get("name") or "Project" for p in new_proj]
+        "titles": [p.get("title") or p.get("name") or "Project" if isinstance(p, dict) else str(p) for p in new_proj]
     }
     if len(old_proj) != len(new_proj):
         diff["hasChanges"] = True
 
     # Education
-    old_edu = old_data.get("education", {}).get("degrees", [])
-    new_edu = new_data.get("education", {}).get("degrees", [])
+    def extract_education(data):
+        edu = data.get("education", {})
+        if isinstance(edu, list):
+            return edu
+        if isinstance(edu, dict):
+            return edu.get("degrees", [])
+        return []
+
+    old_edu = extract_education(old_data)
+    new_edu = extract_education(new_data)
     diff["education"] = {
         "oldCount": len(old_edu),
         "newCount": len(new_edu),
-        "degrees": [f"{d.get('degree', 'Degree')} - {d.get('institution', 'Institution')}" for d in new_edu]
+        "degrees": [f"{d.get('degree', 'Degree')} - {d.get('institution', 'Institution')}" if isinstance(d, dict) else str(d) for d in new_edu]
     }
     if len(old_edu) != len(new_edu):
         diff["hasChanges"] = True
 
     # Certifications
-    old_cert = old_data.get("certifications", {}).get("items", [])
-    new_cert = new_data.get("certifications", {}).get("items", [])
+    def extract_certifications(data):
+        cert = data.get("certifications", {})
+        if isinstance(cert, list):
+            return cert
+        if isinstance(cert, dict):
+            return cert.get("items", [])
+        return []
+
+    old_cert = extract_certifications(old_data)
+    new_cert = extract_certifications(new_data)
     diff["certifications"] = {
         "oldCount": len(old_cert),
         "newCount": len(new_cert)
