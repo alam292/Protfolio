@@ -1,12 +1,10 @@
 {
   "profile": {
     "name": "MD MATLOOB ALAM",
-    "title": "Data Analyst Trainee & Power BI Developer",
-    "email": "mdmatloobalam292@gmail.com",
+    "title": "Software Developer",
+    "tagline": "Passionate coder",
     "status": "Available for opportunities",
-    "avatarUrl": "assets/profile-matloob-transparent.png",
-    "resumeUrl": "assets/MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf",
-    "resumeFilename": "MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf"
+    "avatarUrl": "assets/profile-matloob-transparent.png"
   },
   "stats": [
     {
