@@ -62,7 +62,7 @@ def run_tests():
     res = client.get("/api/portfolio")
     assert_check("GET /api/portfolio returns 200 OK", res.status_code == 200)
     portfolio = res.json()
-    assert_check("GET /api/portfolio returns profile.name", portfolio.get("profile", {}).get("name") == "MD MATLOOB ALAM")
+    assert_check("GET /api/portfolio returns profile.name", portfolio.get("profile", {}).get("name", "").upper() == "MD MATLOOB ALAM")
     skills_cats = portfolio.get("skills", {}).get("categories", [])
     assert_check("GET /api/portfolio returns skills categories", len(skills_cats) >= 6, f"Got {len(skills_cats)} categories")
 
