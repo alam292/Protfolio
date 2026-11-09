@@ -1,10 +1,17 @@
 {
   "profile": {
     "name": "MD MATLOOB ALAM",
+    "shortName": "Md Matloob",
     "title": "Software Developer",
-    "tagline": "Passionate coder",
+    "heroTagline": "Software Developer specializing in full-stack web applications, Python, React, and FastAPI.",
+    "email": "mdmatloobgaya@gmail.com",
+    "githubUrl": "https://github.com/mdmatloobalam",
+    "githubUser": "mdmatloobalam",
+    "linkedinUrl": "https://linkedin.com/in/mdmatloobalam",
     "status": "Available for opportunities",
-    "avatarUrl": "assets/profile-matloob-transparent.png"
+    "avatarUrl": "assets/profile-matloob-transparent.png",
+    "resumeUrl": "assets/Direct_Test.pdf",
+    "resumeFilename": "Direct_Test.pdf"
   },
   "stats": [
     {
@@ -35,27 +42,27 @@
   "about": {
     "sectionTag": "WHO I AM",
     "terminalCommand": "whoami",
-    "lead": "Software Developer with hands-on experience in frontend and backend web application development. Skilled in Python, JavaScript, React, Next.js, Django, FastAPI, REST APIs, CRUD operations, and relational databases. Experienced in developing responsive web applications, integrating APIs, implementing backend functionality, debugging, and improving application performance and usability.",
+    "lead": "Software Developer with hands-on experience in frontend and backend web application development. Skilled in building responsive interfaces, integrating RESTful APIs, and developing robust backend systems with Python, React, Next.js, and FastAPI.",
     "highlights": [
       {
-        "icon": "code",
-        "title": "Frontend Development",
-        "detail": "React.js, Next.js, Bootstrap, Tailwind CSS"
+        "icon": "zap",
+        "title": "Full-Stack Development",
+        "detail": "Building modern responsive interfaces and REST APIs using React and FastAPI"
       },
       {
-        "icon": "server",
+        "icon": "code",
         "title": "Backend Engineering",
-        "detail": "FastAPI, Django, REST APIs, Python"
+        "detail": "Implementing robust CRUD services, API design, and OOPS architecture in Python"
       },
       {
         "icon": "database",
         "title": "Database Architecture",
-        "detail": "PostgreSQL, MySQL, SQLAlchemy ORM"
+        "detail": "Relational data modeling with PostgreSQL, MySQL, and SQLAlchemy ORM"
       },
       {
-        "icon": "zap",
-        "title": "Core Engineering",
-        "detail": "OOPS, DSA, CRUD Operations, System Optimization"
+        "icon": "shield",
+        "title": "Application Deployment",
+        "detail": "Deploying scalable web applications with focus on usability and performance"
       }
     ]
   },
@@ -100,11 +107,19 @@
           },
           {
             "name": "Tailwind CSS",
-            "icon": "tailwindcss"
+            "icon": "tailwind"
           },
           {
             "name": "Bootstrap",
             "icon": "bootstrap"
+          },
+          {
+            "name": "HTML5",
+            "icon": "html"
+          },
+          {
+            "name": "CSS3",
+            "icon": "css"
           }
         ]
       },
@@ -163,16 +178,16 @@
             "icon": "github"
           },
           {
+            "name": "Postman",
+            "icon": "postman"
+          },
+          {
             "name": "VS Code",
             "icon": "vscode"
           },
           {
             "name": "Jupyter Notebook",
             "icon": "jupyter"
-          },
-          {
-            "name": "Postman",
-            "icon": "postman"
           }
         ]
       },
@@ -183,12 +198,8 @@
         "description": "AI assistants and models",
         "skills": [
           {
-            "name": "ChatGPT",
-            "icon": "chatgpt"
-          },
-          {
-            "name": "GitHub Copilot",
-            "icon": "copilot"
+            "name": "Google Crowdsource",
+            "icon": "google"
           }
         ]
       }
@@ -200,16 +211,16 @@
         "id": "hospital-management-system",
         "number": "01",
         "title": "Hospital Management System",
-        "category": "Healthcare Tech",
-        "description": "Full-stack hospital management application designed to streamline patient registration, doctor management, and appointment scheduling with an interactive monitoring dashboard.",
-        "metrics": "Streamlined patient & doctor management with real-time status tracking",
+        "category": "Full-Stack Development",
+        "description": "Comprehensive hospital management solution streamlining patient registration, doctor management, and appointment scheduling.",
+        "metrics": "Centralized patient record management & automated availability tracking",
         "techStack": [
           "React.js",
           "FastAPI",
           "PostgreSQL",
           "SQLAlchemy"
         ],
-        "githubUrl": "https://github.com",
+        "githubUrl": "https://github.com/mdmatloobalam/hospital-management-system",
         "liveDemoUrl": "#",
         "featured": true,
         "image": "assets/project-hospital.svg",
@@ -219,35 +230,35 @@
         "id": "hotel-management-system",
         "number": "02",
         "title": "Hotel Management System",
-        "category": "Management Systems",
-        "description": "Full-stack system for managing hotel room availability, guest registration, bookings, and cancellations with a responsive search dashboard.",
-        "metrics": "Automated reservation management and real-time room availability",
+        "category": "Full-Stack Development",
+        "description": "Full-stack application designed to manage room availability, guest information, and real-time reservation processing.",
+        "metrics": "Automated room status management & instant booking APIs",
         "techStack": [
           "React.js",
           "FastAPI",
           "PostgreSQL",
           "SQLAlchemy"
         ],
-        "githubUrl": "https://github.com",
+        "githubUrl": "https://github.com/mdmatloobalam/hotel-management-system",
         "liveDemoUrl": "#",
         "featured": true,
         "image": "assets/project-hotel.svg",
         "hasLiveDemo": false
       },
       {
-        "id": "github-readme-generator",
+        "id": "github-profile-readme-generator",
         "number": "03",
         "title": "GitHub Profile README Generator",
-        "category": "Developer Tools",
-        "description": "Interactive web application for creating personalized GitHub profile README content featuring user inputs and live Markdown previews.",
-        "metrics": "Simplified custom markdown profile generation flow",
+        "category": "Frontend Tool",
+        "description": "Interactive web generator providing customized GitHub profile README content with real-time Markdown preview workflows.",
+        "metrics": "Simplified custom profile layout generation",
         "techStack": [
           "React.js",
           "JavaScript",
           "HTML",
           "CSS"
         ],
-        "githubUrl": "https://github.com",
+        "githubUrl": "https://github.com/mdmatloobalam/github-readme-generator",
         "liveDemoUrl": "#",
         "featured": false,
         "image": "assets/project-readme.svg",
@@ -256,20 +267,17 @@
     ]
   },
   "experience": {
-    "sectionTag": "CAREER TRAJECTORY",
-    "title": "Work Experience",
-    "subtitle": "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems.",
     "roles": [
       {
         "id": "exp-1",
         "role": "Software Developer",
         "company": "NICS Technology",
         "location": "Noida, Uttar Pradesh",
-        "period": "June 2025 – Present",
+        "period": "June 2024 – Present",
         "isCurrent": true,
         "highlights": [
           "Developed and maintained web applications, implementing new features and improving application functionality, performance, and usability.",
-          "Integrated REST APIs and backend services with frontend interfaces to enable seamless data communication and application workflows.",
+          "Integrated REST APIs and backend services with frontend interfaces to enable seamless data communication and workflows.",
           "Deployed and maintained web applications on cloud platforms, supporting application availability, reliability, and scalability.",
           "Integrated third-party APIs and external services to extend application capabilities and improve overall user experience."
         ],
@@ -277,12 +285,14 @@
           "Python",
           "JavaScript",
           "React.js",
-          "FastAPI",
           "REST APIs",
           "Cloud Platforms"
         ]
       }
-    ]
+    ],
+    "sectionTag": "CAREER TRAJECTORY",
+    "title": "Work Experience",
+    "subtitle": "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems."
   },
   "education": {
     "sectionTag": "ACADEMIC TIMELINE",
@@ -352,9 +362,6 @@
     ]
   },
   "certifications": {
-    "sectionTag": "VALIDATED MASTERY",
-    "title": "Certifications & Achievements",
-    "subtitle": "Verified industry credentials, competitive milestones, and technical specializations",
     "items": [
       {
         "id": "cert-1",
@@ -362,11 +369,11 @@
         "issuer": "Spoken Tutorial, IIT Bombay",
         "date": "2024",
         "credentialUrl": "#",
-        "image": "assets/certificates/cert-java-iit-bombay.jpg",
         "skillsCovered": [
           "Python",
-          "Programming Logic"
-        ]
+          "Problem Solving"
+        ],
+        "image": "assets/certificates/cert-java-iit-bombay.jpg"
       },
       {
         "id": "cert-2",
@@ -374,12 +381,12 @@
         "issuer": "HackerRank",
         "date": "2024",
         "credentialUrl": "#",
-        "image": "assets/certificates/cert-python-hackerrank.jpg",
         "skillsCovered": [
           "SQL",
           "Python",
-          "Problem Solving"
-        ]
+          "Database Queries"
+        ],
+        "image": "assets/certificates/cert-python-hackerrank.jpg"
       },
       {
         "id": "cert-3",
@@ -387,13 +394,16 @@
         "issuer": "Crowdsource by Google",
         "date": "2024",
         "credentialUrl": "#",
-        "image": "assets/certificates/cert-deloitte-job-simulation.png",
         "skillsCovered": [
-          "Community Learning",
-          "AI Data Annotation"
-        ]
+          "AI Data Contribution",
+          "Community Leadership"
+        ],
+        "image": "assets/certificates/cert-deloitte-job-simulation.png"
       }
-    ]
+    ],
+    "sectionTag": "VALIDATED MASTERY",
+    "title": "Certifications & Achievements",
+    "subtitle": "Verified industry credentials, competitive milestones, and technical specializations"
   },
   "contact": {
     "sectionTag": "GET IN TOUCH",
