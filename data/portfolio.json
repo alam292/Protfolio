@@ -1,42 +1,37 @@
 {
   "profile": {
     "name": "MD MATLOOB ALAM",
-    "shortName": "Matloob",
-    "title": "Software Developer",
-    "heroTagline": "Software Developer with hands-on experience in full-stack web application development using Python, React, Next.js, Django, and FastAPI.",
-    "email": "mdmatloobgaya@gmail.com",
-    "githubUrl": "https://github.com",
-    "githubUser": "mdmatloob",
-    "linkedinUrl": "https://linkedin.com",
+    "title": "Data Analyst Trainee & Power BI Developer",
+    "email": "mdmatloobalam292@gmail.com",
     "status": "Available for opportunities",
     "avatarUrl": "assets/profile-matloob-transparent.png",
-    "resumeUrl": "assets/Md_Matloob_Alam_Software_Developer_Resume.pdf",
-    "resumeFilename": "Md_Matloob_Alam_Software_Developer_Resume.pdf"
+    "resumeUrl": "assets/MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf",
+    "resumeFilename": "MD_MATLOOB_ALAM_Data_Analyst_Resume.pdf"
   },
   "stats": [
     {
-      "value": "1,000+",
-      "suffix": "Records",
-      "label": "Datasets Analyzed",
-      "description": "Healthcare patient records and banking loan risk portfolios"
+      "value": "2+",
+      "suffix": "Years",
+      "label": "Engineering Experience",
+      "description": "Building full-stack web applications and robust architectures"
     },
     {
-      "value": "2",
-      "suffix": "Projects",
-      "label": "Analytics Systems",
-      "description": "Healthcare Disease Analysis & Bank Loan Prediction dashboards"
+      "value": "15+",
+      "suffix": "APIs",
+      "label": "REST Endpoints Built",
+      "description": "Designed high-speed FastAPI and Django REST services"
     },
     {
-      "value": "6+",
-      "suffix": "Tools",
-      "label": "BI & Analytics Stack",
-      "description": "Power BI, DAX, SQL, MySQL, Python, Pandas, Advanced Excel"
+      "value": "3+",
+      "suffix": "Systems",
+      "label": "Full-Stack Products",
+      "description": "Production-grade web apps, management dashboards, and tools"
     },
     {
-      "value": "85%",
-      "suffix": "Score",
-      "label": "IIT Bombay Certified",
-      "description": "Python Programming & Computational Analysis (Spoken Tutorial)"
+      "value": "99.9%",
+      "suffix": "Uptime",
+      "label": "Cloud Reliability",
+      "description": "High availability, smooth operations and database performance"
     }
   ],
   "about": {
@@ -263,6 +258,9 @@
     ]
   },
   "experience": {
+    "sectionTag": "CAREER TRAJECTORY",
+    "title": "Work Experience",
+    "subtitle": "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems.",
     "roles": [
       {
         "id": "exp-1",
@@ -356,6 +354,9 @@
     ]
   },
   "certifications": {
+    "sectionTag": "VALIDATED MASTERY",
+    "title": "Certifications & Achievements",
+    "subtitle": "Verified industry credentials, competitive milestones, and technical specializations",
     "items": [
       {
         "id": "cert-1",
@@ -363,6 +364,7 @@
         "issuer": "Spoken Tutorial, IIT Bombay",
         "date": "2024",
         "credentialUrl": "#",
+        "image": "assets/certificates/cert-java-iit-bombay.jpg",
         "skillsCovered": [
           "Python",
           "Programming Logic"
@@ -374,6 +376,7 @@
         "issuer": "HackerRank",
         "date": "2024",
         "credentialUrl": "#",
+        "image": "assets/certificates/cert-python-hackerrank.jpg",
         "skillsCovered": [
           "SQL",
           "Python",
@@ -386,6 +389,7 @@
         "issuer": "Crowdsource by Google",
         "date": "2024",
         "credentialUrl": "#",
+        "image": "assets/certificates/cert-deloitte-job-simulation.png",
         "skillsCovered": [
           "Community Learning",
           "AI Data Annotation"
