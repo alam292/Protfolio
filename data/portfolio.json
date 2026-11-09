@@ -1,10 +1,17 @@
 {
   "profile": {
-    "name": "MD MATLOOB ALAM",
+    "name": "Md Matloob Alam",
+    "shortName": "Matloob",
     "title": "Software Developer",
-    "tagline": "Passionate coder",
+    "heroTagline": "Software Developer specialized in building responsive web applications, RESTful APIs, and backend services.",
+    "email": "mdmatloobgaya@gmail.com",
+    "githubUrl": "https://github.com/mdmatloobgaya",
+    "githubUser": "mdmatloobgaya",
+    "linkedinUrl": "https://linkedin.com/in/mdmatloobalam",
     "status": "Available for opportunities",
-    "avatarUrl": "assets/profile-matloob-transparent.png"
+    "avatarUrl": "assets/profile-matloob-transparent.png",
+    "resumeUrl": "assets/Direct_Test.pdf",
+    "resumeFilename": "Direct_Test.pdf"
   },
   "stats": [
     {
@@ -35,27 +42,27 @@
   "about": {
     "sectionTag": "WHO I AM",
     "terminalCommand": "whoami",
-    "lead": "Software Developer skilled in Python, JavaScript, React, Next.js, Django, FastAPI, REST APIs, CRUD operations, and relational databases.",
+    "lead": "Full-stack Software Developer with hands-on experience building modern, scalable web applications. Proficient in Python, JavaScript, React, FastAPI, Django, and PostgreSQL, focusing on intuitive frontend UI and robust backend architecture.",
     "highlights": [
       {
-        "icon": "zap",
+        "icon": "code",
         "title": "Full-Stack Development",
-        "detail": "Building responsive web applications using React.js, Next.js, Django, and FastAPI."
+        "detail": "Building web apps using React, Next.js, FastAPI, and Django"
       },
       {
-        "icon": "code",
-        "title": "API Integration",
-        "detail": "Developing and integrating REST APIs and backend services for seamless data workflows."
+        "icon": "zap",
+        "title": "API Engineering",
+        "detail": "Designing REST APIs, CRUD operations, and external system integrations"
       },
       {
         "icon": "database",
-        "title": "Database Management",
-        "detail": "Working with PostgreSQL, MySQL, and SQLAlchemy ORM for efficient data storage."
+        "title": "Database Architecture",
+        "detail": "Relational schema management using PostgreSQL, MySQL, and SQLAlchemy"
       },
       {
         "icon": "shield",
-        "title": "Problem Solving",
-        "detail": "Strong foundation in OOPs, DSA, and debugging to optimize application performance."
+        "title": "Core Engineering",
+        "detail": "Solid understanding of OOPS, DSA, debugging, and clean code principles"
       }
     ]
   },
@@ -80,7 +87,7 @@
           },
           {
             "name": "SQL",
-            "icon": "postgresql"
+            "icon": "sql"
           }
         ]
       },
@@ -88,7 +95,7 @@
         "id": "frontend",
         "name": "Frontend Development",
         "icon": "layers",
-        "description": "UI & Frontend tools",
+        "description": "UI & Frontend frameworks",
         "skills": [
           {
             "name": "React.js",
@@ -99,12 +106,20 @@
             "icon": "nextjs"
           },
           {
+            "name": "Tailwind CSS",
+            "icon": "tailwindcss"
+          },
+          {
             "name": "Bootstrap",
             "icon": "bootstrap"
           },
           {
-            "name": "Tailwind CSS",
-            "icon": "tailwind"
+            "name": "HTML5",
+            "icon": "html5"
+          },
+          {
+            "name": "CSS3",
+            "icon": "css3"
           }
         ]
       },
@@ -124,7 +139,11 @@
           },
           {
             "name": "REST APIs",
-            "icon": "server"
+            "icon": "api"
+          },
+          {
+            "name": "SQLAlchemy",
+            "icon": "python"
           }
         ]
       },
@@ -141,10 +160,6 @@
           {
             "name": "MySQL",
             "icon": "mysql"
-          },
-          {
-            "name": "SQLAlchemy",
-            "icon": "database"
           }
         ]
       },
@@ -152,7 +167,7 @@
         "id": "tools",
         "name": "Tools & Technologies",
         "icon": "cpu",
-        "description": "Developer tooling",
+        "description": "Developer tooling & environment",
         "skills": [
           {
             "name": "Git",
@@ -163,12 +178,16 @@
             "icon": "github"
           },
           {
-            "name": "VS Code",
-            "icon": "code"
+            "name": "Postman",
+            "icon": "postman"
           },
           {
-            "name": "Postman",
-            "icon": "cpu"
+            "name": "VS Code",
+            "icon": "vscode"
+          },
+          {
+            "name": "Jupyter Notebook",
+            "icon": "jupyter"
           }
         ]
       },
@@ -176,11 +195,15 @@
         "id": "ai-tools",
         "name": "AI Development Tools",
         "icon": "zap",
-        "description": "AI assistants and models",
+        "description": "AI assistants and tools",
         "skills": [
           {
-            "name": "Jupyter Notebook",
-            "icon": "python"
+            "name": "ChatGPT",
+            "icon": "chatgpt"
+          },
+          {
+            "name": "Gemini",
+            "icon": "gemini"
           }
         ]
       }
@@ -192,57 +215,57 @@
         "id": "hospital-management-system",
         "number": "01",
         "title": "Hospital Management System",
-        "category": "Healthcare",
-        "description": "Developed a hospital management application to streamline patient registration, doctor management, and appointment scheduling.",
-        "metrics": "Streamlined patient records and appointment tracking",
+        "category": "Full-Stack Web App",
+        "description": "A comprehensive hospital management platform designed to streamline patient registration, doctor availability, appointment scheduling, and hospital operational records.",
+        "metrics": "Streamlined patient registration & appointment scheduling",
         "techStack": [
           "React.js",
           "FastAPI",
           "PostgreSQL",
           "SQLAlchemy"
         ],
-        "githubUrl": "#",
+        "githubUrl": "https://github.com/mdmatloobgaya/hospital-management-system",
         "liveDemoUrl": "#",
         "featured": true,
-        "image": "assets/project-cloudscale.svg",
-        "hasLiveDemo": false
-      },
-      {
-        "id": "github-profile-readme-generator",
-        "number": "02",
-        "title": "GitHub Profile README Generator",
-        "category": "Developer Tool",
-        "description": "Developed a web application concept for creating personalized GitHub profile README content from user-provided details.",
-        "metrics": "Simplified GitHub profile customization with markdown preview",
-        "techStack": [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React.js"
-        ],
-        "githubUrl": "#",
-        "liveDemoUrl": "#",
-        "featured": true,
-        "image": "assets/project-cloudscale.svg",
+        "image": "assets/project-hospital.svg",
         "hasLiveDemo": false
       },
       {
         "id": "hotel-management-system",
-        "number": "03",
+        "number": "02",
         "title": "Hotel Management System",
-        "category": "Hospitality",
-        "description": "Developed a full-stack Hotel Management System to manage hotel rooms, guest information, and reservations with robust backend APIs.",
-        "metrics": "Full CRUD functionality for room and reservation management",
+        "category": "Full-Stack Web App",
+        "description": "A full-stack hotel management platform enabling automated room allocation, guest registration, reservation management, and interactive booking analytics.",
+        "metrics": "Automated room booking & guest reservation management",
         "techStack": [
           "React.js",
           "FastAPI",
           "PostgreSQL",
           "SQLAlchemy"
         ],
-        "githubUrl": "#",
+        "githubUrl": "https://github.com/mdmatloobgaya/hotel-management-system",
         "liveDemoUrl": "#",
         "featured": true,
-        "image": "assets/project-cloudscale.svg",
+        "image": "assets/project-hotel.svg",
+        "hasLiveDemo": false
+      },
+      {
+        "id": "github-profile-readme-generator",
+        "number": "03",
+        "title": "GitHub Profile README Generator",
+        "category": "Frontend Application",
+        "description": "Interactive web application for customizing and generating personalized Markdown profile README files for developer GitHub accounts.",
+        "metrics": "Simplified Markdown README customization with real-time preview",
+        "techStack": [
+          "React.js",
+          "JavaScript",
+          "HTML",
+          "CSS"
+        ],
+        "githubUrl": "https://github.com/mdmatloobgaya/github-readme-generator",
+        "liveDemoUrl": "#",
+        "featured": false,
+        "image": "assets/project-readme.svg",
         "hasLiveDemo": false
       }
     ]
@@ -251,23 +274,25 @@
     "roles": [
       {
         "id": "exp-1",
-        "role": "Software Developer",
+        "role": "Software Development Engineer",
         "company": "NICS Technology",
         "location": "Noida, Uttar Pradesh",
         "period": "June 2025 — Present",
         "isCurrent": true,
         "highlights": [
-          "Developed and maintained web applications, implementing new features and improving application functionality, performance, and usability.",
-          "Integrated REST APIs and backend services with frontend interfaces to enable seamless data communication and application workflows.",
-          "Deployed and maintained web applications on cloud platforms, supporting application availability, reliability, and scalability.",
-          "Integrated third-party APIs and external services to extend application capabilities and improve overall user experience."
+          "Developed and maintained web applications, implementing new features and enhancing overall application performance and usability.",
+          "Integrated REST APIs and backend services with frontend interfaces to support data communication workflows.",
+          "Deployed and maintained web applications on cloud platforms, ensuring high availability, reliability, and scalability.",
+          "Integrated third-party APIs and external services to extend platform functionality and improve user experience."
         ],
         "techStack": [
           "Python",
           "JavaScript",
           "React.js",
           "FastAPI",
-          "REST APIs"
+          "REST APIs",
+          "Git",
+          "Cloud Platforms"
         ]
       }
     ]
@@ -348,18 +373,32 @@
         "date": "2024",
         "credentialUrl": "#",
         "skillsCovered": [
-          "Python"
+          "Python",
+          "Data Structures",
+          "Programming Fundamentals"
         ]
       },
       {
         "id": "cert-2",
-        "title": "3-Star Badge in SQL and Python",
+        "title": "3-Star Badge in SQL & Python",
         "issuer": "HackerRank",
         "date": "2024",
         "credentialUrl": "#",
         "skillsCovered": [
           "SQL",
-          "Python"
+          "Python",
+          "Problem Solving"
+        ]
+      },
+      {
+        "id": "cert-3",
+        "title": "Google Crowdsource Learning Community Program",
+        "issuer": "Crowdsource by Google",
+        "date": "2024",
+        "credentialUrl": "#",
+        "skillsCovered": [
+          "Community Collaboration",
+          "AI Data Annotation"
         ]
       }
     ]
