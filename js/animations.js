@@ -232,7 +232,8 @@ class AnimationsController {
       opacity: 0,
       stagger: 0.08,
       duration: 0.8,
-      ease: 'power2.out'
+      ease: 'power2.out',
+      clearProps: 'transform,opacity'
     });
   }
 
@@ -377,7 +378,8 @@ class AnimationsController {
       opacity: 0,
       stagger: 0.15,
       duration: 0.85,
-      ease: 'power2.out'
+      ease: 'power2.out',
+      clearProps: 'transform,opacity'
     });
   }
 

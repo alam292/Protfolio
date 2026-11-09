@@ -31,7 +31,7 @@ class PortfolioRenderer {
 
   async init() {
     try {
-      const response = await fetch(this.dataPath);
+      const response = await fetch(`${this.dataPath}?t=${Date.now()}`, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error(`Failed to load ${this.dataPath}: status ${response.status}`);
       }
