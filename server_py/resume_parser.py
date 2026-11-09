@@ -661,13 +661,23 @@ def validate_and_merge_portfolio(incoming: Dict[str, Any], base: Dict[str, Any] 
         final_data["profile"]["avatarUrl"] = base.get("profile", {}).get("avatarUrl", "assets/profile-avatar.svg")
 
     # 2. Stats
+    is_dev = "developer" in (final_data["profile"].get("title", "")).lower() or "engineer" in (final_data["profile"].get("title", "")).lower()
+    dev_stats = [
+        {"value": "2+", "suffix": "Years", "label": "Engineering Experience", "description": "Building full-stack web applications and robust architectures"},
+        {"value": "15+", "suffix": "APIs", "label": "REST Endpoints Built", "description": "Designed high-speed FastAPI and Django REST services"},
+        {"value": "3+", "suffix": "Systems", "label": "Full-Stack Products", "description": "Production-grade web apps, management dashboards, and tools"},
+        {"value": "99.9%", "suffix": "Uptime", "label": "Cloud Reliability", "description": "High availability, smooth operations and database performance"}
+    ]
+    data_stats = [
+        {"value": "1,000+", "suffix": "Records", "label": "Datasets Analyzed", "description": "Healthcare patient records and banking loan risk portfolios"},
+        {"value": "2", "suffix": "Projects", "label": "Analytics Systems", "description": "Healthcare Disease Analysis & Bank Loan Prediction dashboards"},
+        {"value": "6+", "suffix": "Tools", "label": "BI & Analytics Stack", "description": "Power BI, DAX, SQL, MySQL, Python, Pandas, Advanced Excel"},
+        {"value": "85%", "suffix": "Score", "label": "IIT Bombay Certified", "description": "Python Programming & Computational Analysis (Spoken Tutorial)"}
+    ]
     if not isinstance(final_data.get("stats"), list) or not final_data["stats"]:
-        final_data["stats"] = base.get("stats", [
-            {"value": "2+", "suffix": "Years", "label": "Engineering Experience", "description": "Building full-stack web applications and robust architectures"},
-            {"value": "15+", "suffix": "APIs", "label": "REST Endpoints Built", "description": "Designed high-speed FastAPI and Django REST services"},
-            {"value": "3+", "suffix": "Systems", "label": "Full-Stack Products", "description": "Production-grade SaaS and management dashboards"},
-            {"value": "99.9%", "suffix": "Uptime", "label": "Cloud Reliability", "description": "High availability, smooth operations and reliability"}
-        ])
+        final_data["stats"] = dev_stats if is_dev else data_stats
+    elif is_dev and any("dataset" in str(s.get("label", "")).lower() for s in final_data["stats"]):
+        final_data["stats"] = dev_stats
 
     # 3. Who Am I (About)
     final_data["about"] = final_data.get("about", {}) or {}
@@ -723,18 +733,40 @@ def validate_and_merge_portfolio(incoming: Dict[str, Any], base: Dict[str, Any] 
 
     # 6. Experience
     final_data["experience"] = final_data.get("experience", {}) or {}
+    final_data["experience"]["sectionTag"] = final_data["experience"].get("sectionTag") or base.get("experience", {}).get("sectionTag") or "CAREER TRAJECTORY"
+    final_data["experience"]["title"] = final_data["experience"].get("title") or base.get("experience", {}).get("title") or "Work Experience"
+    final_data["experience"]["subtitle"] = final_data["experience"].get("subtitle") or base.get("experience", {}).get("subtitle") or "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems."
     if not isinstance(final_data["experience"].get("roles"), list) or not final_data["experience"]["roles"]:
-        final_data["experience"] = base.get("experience", final_data["experience"])
+        final_data["experience"]["roles"] = base.get("experience", {}).get("roles", [])
 
     # 7. Education
     final_data["education"] = final_data.get("education", {}) or {}
+    final_data["education"]["sectionTag"] = final_data["education"].get("sectionTag") or base.get("education", {}).get("sectionTag") or "ACADEMIC TIMELINE"
+    final_data["education"]["title"] = final_data["education"].get("title") or base.get("education", {}).get("title") or "Education & Academic Foundations"
+    final_data["education"]["subtitle"] = final_data["education"].get("subtitle") or base.get("education", {}).get("subtitle") or "Chronological progression of engineering fundamentals, computer science coursework, and academic milestones."
     if not isinstance(final_data["education"].get("degrees"), list) or not final_data["education"]["degrees"]:
-        final_data["education"] = base.get("education", final_data["education"])
+        final_data["education"]["degrees"] = base.get("education", {}).get("degrees", [])
 
     # 8. Certifications
     final_data["certifications"] = final_data.get("certifications", {}) or {}
+    final_data["certifications"]["sectionTag"] = final_data["certifications"].get("sectionTag") or base.get("certifications", {}).get("sectionTag") or "VALIDATED MASTERY"
+    final_data["certifications"]["title"] = final_data["certifications"].get("title") or base.get("certifications", {}).get("title") or "Certifications & Achievements"
+    final_data["certifications"]["subtitle"] = final_data["certifications"].get("subtitle") or base.get("certifications", {}).get("subtitle") or "Verified industry credentials, competitive milestones, and technical specializations"
     if not isinstance(final_data["certifications"].get("items"), list) or not final_data["certifications"]["items"]:
-        final_data["certifications"] = base.get("certifications", final_data["certifications"])
+        final_data["certifications"]["items"] = base.get("certifications", {}).get("items", [])
+    else:
+        default_images = [
+            "assets/certificates/cert-java-iit-bombay.jpg",
+            "assets/certificates/cert-python-hackerrank.jpg",
+            "assets/certificates/cert-deloitte-job-simulation.png"
+        ]
+        base_items = base.get("certifications", {}).get("items", [])
+        for idx, item in enumerate(final_data["certifications"]["items"]):
+            if not item.get("image"):
+                if idx < len(base_items) and base_items[idx].get("image"):
+                    item["image"] = base_items[idx]["image"]
+                else:
+                    item["image"] = default_images[idx % len(default_images)]
 
     # 9. Contact
     final_data["contact"] = final_data.get("contact", {}) or {}

@@ -726,7 +726,7 @@ class PortfolioRenderer {
     }).join('');
 
     mount.innerHTML = `
-      <h2 class="section-tag" id="experience-title">${experience.sectionTag}</h2>
+      <h2 class="section-tag" id="experience-title">${experience.sectionTag || 'CAREER TRAJECTORY'}</h2>
       ${experience.subtitle ? `<p class="section-subtitle">${experience.subtitle}</p>` : ''}
 
       <div class="experience-timeline">
@@ -975,13 +975,16 @@ class PortfolioRenderer {
     this.certTotalSlides = items.length;
     this.certCurrentSlide = 0;
 
-    const slidesHtml = items.map((c, idx) => `
+    const slidesHtml = items.map((c, idx) => {
+      const certImg = c.image || 'assets/certificates/cert-python-hackerrank.jpg';
+      return `
       <div class="cert-slide-item ${idx === 0 ? 'active' : ''}" data-index="${idx}">
-        <div class="cert-image-display" data-full-img="${c.image}" title="Click to view full certificate">
-          <img src="${c.image}" alt="${c.title}" class="cert-showcase-img" loading="lazy" />
+        <div class="cert-image-display" data-full-img="${certImg}" title="Click to view full certificate">
+          <img src="${certImg}" alt="${c.title || 'Certificate'}" class="cert-showcase-img" loading="lazy" />
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
 
     const dotsHtml = items.map((_, idx) => `
       <button 
@@ -999,7 +1002,7 @@ class PortfolioRenderer {
         <div class="cert-header-block">
           <h2 class="cert-pill-tag" id="certificates-title">
             <span class="cert-pill-dot" aria-hidden="true"></span>
-            <span>${certifications.sectionTag}</span>
+            <span>${certifications.sectionTag || 'VALIDATED MASTERY'}</span>
           </h2>
           ${certifications.subtitle ? `<p class="cert-main-subtitle">${certifications.subtitle}</p>` : ''}
         </div>
@@ -1225,7 +1228,7 @@ class PortfolioRenderer {
     `).join('');
 
     mount.innerHTML = `
-      <h2 class="section-tag" id="contact-title">${contact.sectionTag}</h2>
+      <h2 class="section-tag" id="contact-title">${contact.sectionTag || 'GET IN TOUCH'}</h2>
       ${contact.subtitle ? `<p class="section-subtitle">${contact.subtitle}</p>` : ''}
 
       <div class="contact-master-container">

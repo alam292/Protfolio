@@ -267,6 +267,9 @@
     ]
   },
   "experience": {
+    "sectionTag": "CAREER TRAJECTORY",
+    "title": "Work Experience",
+    "subtitle": "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems.",
     "roles": [
       {
         "id": "exp-1",
@@ -362,6 +365,9 @@
     ]
   },
   "certifications": {
+    "sectionTag": "VALIDATED MASTERY",
+    "title": "Certifications & Achievements",
+    "subtitle": "Verified industry credentials, competitive milestones, and technical specializations",
     "items": [
       {
         "id": "cert-1",
@@ -369,6 +375,7 @@
         "issuer": "Spoken Tutorial, IIT Bombay",
         "date": "2024",
         "credentialUrl": "#",
+        "image": "assets/certificates/cert-java-iit-bombay.jpg",
         "skillsCovered": [
           "Python",
           "Problem Solving"
@@ -381,6 +388,7 @@
         "issuer": "HackerRank",
         "date": "2024",
         "credentialUrl": "#",
+        "image": "assets/certificates/cert-python-hackerrank.jpg",
         "skillsCovered": [
           "SQL",
           "Python",
@@ -394,6 +402,7 @@
         "issuer": "Crowdsource by Google",
         "date": "2024",
         "credentialUrl": "#",
+        "image": "assets/certificates/cert-deloitte-job-simulation.png",
         "skillsCovered": [
           "AI Data Contribution",
           "Community Leadership"

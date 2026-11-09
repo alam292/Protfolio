@@ -482,13 +482,24 @@ function validateAndMergePortfolio(incoming, base = {}) {
   if (!finalData.profile.avatarUrl) finalData.profile.avatarUrl = base.profile?.avatarUrl || 'assets/profile-avatar.svg';
 
   // Stats check
+  const isDev = (finalData.profile.title || '').toLowerCase().includes('developer') || (finalData.profile.title || '').toLowerCase().includes('engineer');
+  const devStats = [
+    { value: "2+", suffix: "Years", label: "Engineering Experience", description: "Building full-stack web applications and robust architectures" },
+    { value: "15+", suffix: "APIs", label: "REST Endpoints Built", description: "Designed high-speed FastAPI and Django REST services" },
+    { value: "3+", suffix: "Systems", label: "Full-Stack Products", description: "Production-grade SaaS and management dashboards" },
+    { value: "99.9%", suffix: "Uptime", label: "Cloud Reliability", description: "High availability, smooth operations and reliability" }
+  ];
+  const dataStats = [
+    { value: "1,000+", suffix: "Records", label: "Datasets Analyzed", description: "Healthcare patient records and banking loan risk portfolios" },
+    { value: "2", suffix: "Projects", label: "Analytics Systems", description: "Healthcare Disease Analysis & Bank Loan Prediction dashboards" },
+    { value: "6+", suffix: "Tools", label: "BI & Analytics Stack", description: "Power BI, DAX, SQL, MySQL, Python, Pandas, Advanced Excel" },
+    { value: "85%", suffix: "Score", label: "IIT Bombay Certified", description: "Python Programming & Computational Analysis (Spoken Tutorial)" }
+  ];
+
   if (!Array.isArray(finalData.stats) || finalData.stats.length === 0) {
-    finalData.stats = base.stats || [
-      { value: "2+", suffix: "Years", label: "Engineering Experience", description: "Building full-stack web applications and robust architectures" },
-      { value: "15+", suffix: "APIs", label: "REST Endpoints Built", description: "Designed high-speed FastAPI and Django REST services" },
-      { value: "3+", suffix: "Systems", label: "Full-Stack Products", description: "Production-grade SaaS and management dashboards" },
-      { value: "99.9%", suffix: "Uptime", label: "Cloud Reliability", description: "High availability, smooth operations and reliability" }
-    ];
+    finalData.stats = isDev ? devStats : dataStats;
+  } else if (isDev && finalData.stats.some(s => String(s.label || '').toLowerCase().includes('dataset'))) {
+    finalData.stats = devStats;
   }
 
   // Who Am I (About) sanity check
@@ -545,20 +556,45 @@ function validateAndMergePortfolio(incoming, base = {}) {
 
   // Experience sanity check
   finalData.experience = finalData.experience || {};
+  finalData.experience.sectionTag = finalData.experience.sectionTag || base.experience?.sectionTag || "CAREER TRAJECTORY";
+  finalData.experience.title = finalData.experience.title || base.experience?.title || "Work Experience";
+  finalData.experience.subtitle = finalData.experience.subtitle || base.experience?.subtitle || "Track record of engineering high-performance web applications, integrating APIs, and deploying cloud systems.";
   if (!Array.isArray(finalData.experience.roles) || finalData.experience.roles.length === 0) {
-    finalData.experience = base.experience;
+    finalData.experience.roles = base.experience?.roles || [];
   }
 
   // Education sanity check
   finalData.education = finalData.education || {};
+  finalData.education.sectionTag = finalData.education.sectionTag || base.education?.sectionTag || "ACADEMIC TIMELINE";
+  finalData.education.title = finalData.education.title || base.education?.title || "Education & Academic Foundations";
+  finalData.education.subtitle = finalData.education.subtitle || base.education?.subtitle || "Chronological progression of engineering fundamentals, computer science coursework, and academic milestones.";
   if (!Array.isArray(finalData.education.degrees) || finalData.education.degrees.length === 0) {
-    finalData.education = base.education;
+    finalData.education.degrees = base.education?.degrees || [];
   }
 
   // Certifications sanity check
   finalData.certifications = finalData.certifications || {};
+  finalData.certifications.sectionTag = finalData.certifications.sectionTag || base.certifications?.sectionTag || "VALIDATED MASTERY";
+  finalData.certifications.title = finalData.certifications.title || base.certifications?.title || "Certifications & Achievements";
+  finalData.certifications.subtitle = finalData.certifications.subtitle || base.certifications?.subtitle || "Verified industry credentials, competitive milestones, and technical specializations";
   if (!Array.isArray(finalData.certifications.items) || finalData.certifications.items.length === 0) {
-    finalData.certifications = base.certifications;
+    finalData.certifications.items = base.certifications?.items || [];
+  } else {
+    const defaultImages = [
+      "assets/certificates/cert-java-iit-bombay.jpg",
+      "assets/certificates/cert-python-hackerrank.jpg",
+      "assets/certificates/cert-deloitte-job-simulation.png"
+    ];
+    const baseItems = base.certifications?.items || [];
+    finalData.certifications.items.forEach((item, idx) => {
+      if (!item.image) {
+        if (idx < baseItems.length && baseItems[idx].image) {
+          item.image = baseItems[idx].image;
+        } else {
+          item.image = defaultImages[idx % defaultImages.length];
+        }
+      }
+    });
   }
 
   // Contact sanity check
